@@ -295,7 +295,8 @@ message GroupOwnerTransferredTips{
   GroupInfo group = 1;
   GroupMemberFullInfo opUser = 2;
   GroupMemberFullInfo newGroupOwner = 3;
-  int64 operationTime = 4;
+  string oldGroupOwner = 4;
+  int64 operationTime = 5;
 }
 
 
