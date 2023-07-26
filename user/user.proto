@@ -169,6 +169,33 @@ message subscribeOrCancelUsersStatusResp{
   map<string, int64> status = 1;
 }
 
+message getUserStatusReq {
+  repeated string userIDs = 1;
+}
+
+message getUserStatusResp{
+  repeated OnlineStatus status = 1;
+  message OnlineStatus {
+    string userID = 1;
+    int64 onlineStatus = 2;
+    int64 platform = 3;
+  }
+}
+
+
+
+message setUserStatusReq{
+  repeated OnlineStatus status = 1;
+  message OnlineStatus {
+    string userID = 1;
+    int64 onlineStatus = 2;
+    int64 platform = 3;
+  }
+}
+
+message setUserStatusResp {
+}
+
 
 
 service user {
@@ -192,5 +219,9 @@ service user {
   rpc userRegisterCount(userRegisterCountReq)returns(userRegisterCountResp);
   //Subscribe or unsubscribe user presence
   rpc subscribeOrCancelUsersStatus(subscribeOrCancelUsersStatusReq)returns(subscribeOrCancelUsersStatusResp);
+  //Get user online status
+  rpc getUserStatus(getUserStatusReq)returns(getUserStatusResp);
+  //The gateway synchronizes the online status of users in redis
+  rpc setUserStatus(setUserStatusReq)returns(setUserStatusResp);
 }
 
