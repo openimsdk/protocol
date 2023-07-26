@@ -349,7 +349,8 @@ message getGroupUsersReqApplicationListReq {
 }
 
 message getGroupUsersReqApplicationListResp {
-
+  int64 total = 1;
+  repeated sdkws.GroupRequest groupRequests = 2;
 }
 
 service group{
