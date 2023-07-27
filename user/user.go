@@ -172,3 +172,13 @@ func (x *SubscribeOrCancelUsersStatusReq) Check() error {
 	}
 	return nil
 }
+
+func (x *GetUserStatusReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("UserID is empty")
+	}
+	if x.UserIDs == nil {
+		return errors.New("user-list is empty")
+	}
+	return nil
+}
