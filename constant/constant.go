@@ -361,3 +361,9 @@ const OpenIMCommonConfigKey = "OpenIMServerConfig"
 const CallbackCommand = "command"
 
 const BatchNum = 100
+
+//Subscribe to user constants
+const (
+	SubscriberUser = 1
+	Unsubscribe    = 2
+)
