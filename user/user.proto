@@ -198,8 +198,9 @@ message onlineUserCountReq{
 }
 
 message onlineUserCountResp{
-  int64 total=1;
-  map <string,int64>count=2;
+  int64 onlineCount=1;
+  int64 offlineCount=2;
+  map <string,int64>count=3;
 }
 
 service user {
