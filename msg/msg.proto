@@ -281,6 +281,26 @@ message batchSendMessageReq{
 message batchSendMessageResp{
 }
 
+message msgSingleCountReq{
+  int64 start=1;
+  int64 end=2;
+}
+
+message msgSingleCountResp{
+  map <string,int64> count=1;
+  int64 total=2;
+}
+
+message msgGroupCountReq{
+  int64 start=1;
+  int64 end=2;
+}
+
+message msgGroupCountResp{
+  map <string,int64> count=1;
+  int64 total=2;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns(sdkws.GetMaxSeqResp);
@@ -316,4 +336,7 @@ service msg {
 
   rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
   rpc GetActiveGroup(GetActiveGroupReq) returns(GetActiveGroupResp);
+
+  rpc MsgSingleCount(msgSingleCountReq) returns(msgSingleCountResp);
+  rpc MsgGroupCount(msgGroupCountReq)returns (msgGroupCountResp);
 }
