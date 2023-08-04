@@ -192,7 +192,16 @@ message setUserStatusReq{
 message setUserStatusResp {
 }
 
+message onlineUserCountReq{
+  int64 start=1;
+  int64 end=2;
+}
 
+message onlineUserCountResp{
+  int64 onlineCount=1;
+  int64 offlineCount=2;
+  map <string,int64>count=3;
+}
 
 service user {
   //Get the specified user information full field
@@ -219,5 +228,7 @@ service user {
   rpc getUserStatus(getUserStatusReq)returns(getUserStatusResp);
   //The gateway synchronizes the online status of users in redis
   rpc setUserStatus(setUserStatusReq)returns(setUserStatusResp);
+
+  rpc onlineUserCount(onlineUserCountReq)returns(onlineUserCountResp);
 }
 
