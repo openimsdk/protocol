@@ -429,6 +429,7 @@ message UserStatusChangeTips {
   string fromUserID = 1;
   string toUserID = 2;
   int32 status = 3;
+  int32 platformID = 4;
 }
 
 //////////////////////conversation/////////////////////
