@@ -182,6 +182,7 @@ message GetConversationMaxSeqResp {
 
 message GetConversationsHasReadAndMaxSeqReq {
   string userID = 1;
+  repeated string conversationIDs = 2;
 }
 
 message Seqs {
