@@ -286,6 +286,7 @@ message GetServerTimeReq{
 }
 message GetServerTimeResp{
   int64 serverTime=1;
+
 }
 
 service msg {
