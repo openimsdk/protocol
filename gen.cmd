@@ -3,7 +3,7 @@ protoc --go_out=plugins=grpc:./conversation --go_opt=module=github.com/OpenIMSDK
 protoc --go_out=plugins=grpc:./errinfo --go_opt=module=github.com/OpenIMSDK/protocol/errinfo errinfo/errinfo.proto
 protoc --go_out=plugins=grpc:./friend --go_opt=module=github.com/OpenIMSDK/protocol/friend friend/friend.proto
 protoc --go_out=plugins=grpc:./group --go_opt=module=github.com/OpenIMSDK/protocol/group group/group.proto
-protoc --go_out=plugins=grpc:./msg --go_opt=module=github.com/OpenIMSDK/protocol/msg msg/msg.proto
+protoc --go_out=plugins=grpc:./msg --go_opt=module=github.com/OpenIMSDK/protocol/msg msg/msgv3.proto
 protoc --go_out=plugins=grpc:./msggateway --go_opt=module=github.com/OpenIMSDK/protocol/msggateway msggateway/msggateway.proto
 protoc --go_out=plugins=grpc:./push --go_opt=module=github.com/OpenIMSDK/protocol/push push/push.proto
 protoc --go_out=plugins=grpc:./sdkws --go_opt=module=github.com/OpenIMSDK/protocol/sdkws sdkws/sdkws.proto
