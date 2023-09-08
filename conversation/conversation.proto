@@ -156,6 +156,15 @@ message GetConversationsByConversationIDResp {
   repeated Conversation conversations = 1;
 }
 
+message GetConversationNeedOfflinePushUserIDsReq {
+  string conversationID = 1;
+  repeated string ownerUserIDs = 2;
+}
+
+message GetConversationNeedOfflinePushUserIDsResp {
+  repeated string userIDs = 1;
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
   rpc GetAllConversations(GetAllConversationsReq)returns(GetAllConversationsResp);
@@ -169,4 +178,5 @@ service conversation {
   rpc SetConversations(SetConversationsReq) returns(SetConversationsResp);
   rpc GetUserConversationIDsHash(GetUserConversationIDsHashReq) returns(GetUserConversationIDsHashResp);
   rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns(GetConversationsByConversationIDResp);
+  rpc GetConversationNeedOfflinePushUserIDs(GetConversationNeedOfflinePushUserIDsReq) returns(GetConversationNeedOfflinePushUserIDsResp);
 }
