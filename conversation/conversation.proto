@@ -56,7 +56,7 @@ message ConversationReq{
 }
 
 message SetConversationReq{
-  Conversation conversation = 1; 
+  Conversation conversation = 1;
 }
 
 message SetConversationResp{
@@ -156,12 +156,12 @@ message GetConversationsByConversationIDResp {
   repeated Conversation conversations = 1;
 }
 
-message GetConversationNeedOfflinePushUserIDsReq {
+message GetConversationNotOfflinePushUserIDsReq {
   string conversationID = 1;
-  repeated string ownerUserIDs = 2;
+  repeated string userIDs = 2;
 }
 
-message GetConversationNeedOfflinePushUserIDsResp {
+message GetConversationNotOfflinePushUserIDsResp {
   repeated string userIDs = 1;
 }
 
@@ -178,5 +178,5 @@ service conversation {
   rpc SetConversations(SetConversationsReq) returns(SetConversationsResp);
   rpc GetUserConversationIDsHash(GetUserConversationIDsHashReq) returns(GetUserConversationIDsHashResp);
   rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns(GetConversationsByConversationIDResp);
-  rpc GetConversationNeedOfflinePushUserIDs(GetConversationNeedOfflinePushUserIDsReq) returns(GetConversationNeedOfflinePushUserIDsResp);
+  rpc GetConversationNotOfflinePushUserIDs(GetConversationNotOfflinePushUserIDsReq) returns(GetConversationNotOfflinePushUserIDsResp);
 }
