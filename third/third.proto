@@ -126,6 +126,21 @@ message SetAppBadgeReq {
 message SetAppBadgeResp {
 }
 
+message fileURL{
+  string filename = 1;
+  string URL = 2;
+}
+message UploadLogsReq{
+  int32 platform = 1;
+  repeated fileURL fileURLs = 2;
+  string systemType = 3;
+  string version = 5;
+  string ex = 4;
+}
+
+message UploadLogsResp{
+}
+
 service third {
   rpc PartLimit(PartLimitReq) returns(PartLimitResp);
   rpc PartSize(PartSizeReq) returns(PartSizeResp);
@@ -136,6 +151,7 @@ service third {
 
   rpc FcmUpdateToken(FcmUpdateTokenReq) returns(FcmUpdateTokenResp);
   rpc SetAppBadge(SetAppBadgeReq) returns(SetAppBadgeResp);
+  rpc UploadLogs(UploadLogsReq) returns (UploadLogsResp);
 }
 
 
