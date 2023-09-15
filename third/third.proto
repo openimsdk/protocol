@@ -14,6 +14,7 @@
 
 syntax = "proto3";
 package OpenIMServer.third;
+import "sdkws/sdkws.proto";
 option go_package = "github.com/OpenIMSDK/protocol/third";
 
 message KeyValues {
@@ -141,6 +142,39 @@ message UploadLogsReq{
 message UploadLogsResp{
 }
 
+message DeleteLogsReq{
+  repeated string logIDs = 1;
+}
+
+message DeleteLogsResp{
+}
+
+message SearchLogsReq{
+  string keyword = 1;
+  int64 startTime = 2;
+  int64 endTime = 3;
+  sdkws.RequestPagination pagination = 4;
+}
+
+
+message LogInfo{
+  string userID=1;
+  int32 platform=2;
+  string url=3;
+  int64 createTime=4;
+  string nickname=5;
+  string logID=6;
+  string filename=7;
+  string systemType=8;
+  string ex=9;
+  string version=10;
+}
+
+message SearchLogsResp{
+  repeated LogInfo LogsInfos = 1;
+  uint32 total = 2;
+}
+
 service third {
   rpc PartLimit(PartLimitReq) returns(PartLimitResp);
   rpc PartSize(PartSizeReq) returns(PartSizeResp);
@@ -151,7 +185,10 @@ service third {
 
   rpc FcmUpdateToken(FcmUpdateTokenReq) returns(FcmUpdateTokenResp);
   rpc SetAppBadge(SetAppBadgeReq) returns(SetAppBadgeResp);
+  //日志
   rpc UploadLogs(UploadLogsReq) returns (UploadLogsResp);
+  rpc DeleteLogs(DeleteLogsReq) returns (DeleteLogsResp);
+  rpc SearchLogs(SearchLogsReq) returns (SearchLogsResp);
 }
 
 
