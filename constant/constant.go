@@ -213,6 +213,7 @@ const (
 	CallbackOnlinePushCommand                            = "callbackOnlinePushCommand"
 	CallbackSuperGroupOnlinePushCommand                  = "callbackSuperGroupOnlinePushCommand"
 	CallbackBeforeAddFriendCommand                       = "callbackBeforeAddFriendCommand"
+	CallbackBeforeUpdateUserInfoCommand                  = "callbackBeforeUpdateUserInfoCommand"
 	CallbackBeforeCreateGroupCommand                     = "callbackBeforeCreateGroupCommand"
 	CallbackBeforeMemberJoinGroupCommand                 = "callbackBeforeMemberJoinGroupCommand"
 	CallbackBeforeSetGroupMemberInfoCommand              = "CallbackBeforeSetGroupMemberInfoCommand"
