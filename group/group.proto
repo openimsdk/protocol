@@ -99,6 +99,7 @@ message GroupApplicationResponseResp{
 
 message QuitGroupReq{
   string groupID = 1;
+  string userID = 2;
 }
 message QuitGroupResp{
 }
