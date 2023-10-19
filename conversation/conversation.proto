@@ -100,6 +100,8 @@ message GetRecvMsgNotNotifyUserIDsResp {
 message CreateSingleChatConversationsReq {
   string recvID = 1;
   string sendID = 2;
+  string conversationID = 3;
+  int32 conversationType = 4;
 }
 
 message CreateSingleChatConversationsResp {
