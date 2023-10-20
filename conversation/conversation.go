@@ -16,6 +16,7 @@ package conversation
 
 import (
 	"errors"
+	"github.com/OpenIMSDK/protocol/constant"
 )
 
 func (x *ConversationReq) Check() error {
@@ -145,6 +146,12 @@ func (x *SetConversationsReq) Check() error {
 	}
 	if x.Conversation == nil {
 		return errors.New("conversation is empty")
+	}
+	if x.Conversation.ConversationType == constant.SingleChatType && x.Conversation.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Conversation.ConversationType == constant.SuperGroupChatType && x.Conversation.GroupID == "" {
+		return errors.New("groupID is empty")
 	}
 	return nil
 }
