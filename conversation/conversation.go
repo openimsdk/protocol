@@ -147,6 +147,9 @@ func (x *SetConversationsReq) Check() error {
 	if x.Conversation == nil {
 		return errors.New("conversation is empty")
 	}
+	if x.Conversation.ConversationType == 0 {
+		return errors.New("conversationType is invalid")
+	}
 	if x.Conversation.ConversationType == constant.SingleChatType && x.Conversation.UserID == "" {
 		return errors.New("userID is empty")
 	}
