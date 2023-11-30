@@ -27,3 +27,10 @@ func (x *MsgData) Check() error {
 	}
 	return nil
 }
+
+func (x *GetMaxSeqReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
