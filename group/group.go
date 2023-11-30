@@ -350,3 +350,21 @@ func (x *GetGroupMemberCacheReq) Check() error {
 	}
 	return nil
 }
+func (x *GetGroupUsersReqApplicationListReq) Check() error {
+	if x.GroupID == "" {
+		return errors.New("GroupID is empty")
+	}
+	if x.UserIDs == nil {
+		return errors.New("UserID is empty")
+	}
+	return nil
+}
+func (x *GroupCreateCountReq) Check() error {
+	if x.Start <= 0 {
+		return errors.New("start is invalid")
+	}
+	if x.End <= 0 {
+		return errors.New("end is invalid")
+	}
+	return nil
+}
