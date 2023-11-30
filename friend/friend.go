@@ -77,7 +77,7 @@ func (x *AddBlackReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.BlackUserID == "" {
-		return errors.New("BlackUserID is empty")
+		return errors.New("blackUserID is empty")
 	}
 	return nil
 }
@@ -87,7 +87,7 @@ func (x *RemoveBlackReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.BlackUserID == "" {
-		return errors.New("BlackUserID is empty")
+		return errors.New("blackUserID is empty")
 	}
 	return nil
 }
