@@ -113,6 +113,20 @@ message MarkConversationAsReadReq {
 message MarkConversationAsReadResp {
 }
 
+message GetConversationsUnreadSeqReq{
+  string userID = 1;
+  repeated string conversationIDs = 2;
+}
+
+message GetConversationsUnreadSeqResp{
+  map<string,unreadSeqs>seqs=1;
+}
+
+message unreadSeqs {
+  int64 maxSeq = 1;
+  int64 unreadSeq = 2;
+}
+
 message SetConversationHasReadSeqReq {
   string conversationID = 1;
   string userID = 2;
@@ -318,11 +332,11 @@ service msg {
   // mark as read
   rpc MarkMsgsAsRead(MarkMsgsAsReadReq) returns(MarkMsgsAsReadResp);
   rpc MarkConversationAsRead(MarkConversationAsReadReq) returns(MarkConversationAsReadResp);
+  rpc GetConversationsUnreadSeq(GetConversationsUnreadSeqReq)returns(GetConversationsUnreadSeqResp);
   rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns(SetConversationHasReadSeqResp);
-  
   rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns(GetConversationsHasReadAndMaxSeqResp);
-
   rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
   rpc GetActiveGroup(GetActiveGroupReq) returns(GetActiveGroupResp);
   rpc GetServerTime(GetServerTimeReq) returns(GetServerTimeResp);
 }
+

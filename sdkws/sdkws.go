@@ -34,3 +34,10 @@ func (x *GetMaxSeqReq) Check() error {
 	}
 	return nil
 }
+
+func (x *PullMessageBySeqsReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
