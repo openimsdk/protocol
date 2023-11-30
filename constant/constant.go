@@ -89,9 +89,9 @@ const (
 	GroupInfoSetAnnouncementNotification     = 1519
 	GroupInfoSetNameNotification             = 1520
 
-	SignalingNotificationBegin = 1600
-	SignalingNotification      = 1601
-	SignalingNotificationEnd   = 1649
+	//SignalingNotificationBegin = 1600
+	//SignalingNotification      = 1601
+	//SignalingNotificationEnd   = 1649
 
 	SuperGroupNotificationBegin  = 1650
 	SuperGroupUpdateNotification = 1651
