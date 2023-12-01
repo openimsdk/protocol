@@ -194,3 +194,9 @@ func (x *GetSubscribeUsersStatusReq) Check() error {
 	}
 	return nil
 }
+func (x *RemoveUserReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("UserID is empty")
+	}
+	return nil
+}
