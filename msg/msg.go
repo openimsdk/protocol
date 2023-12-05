@@ -242,7 +242,7 @@ func (x *DeleteMsgPhysicalBySeqReq) Check() error {
 	return nil
 }
 
-func (x *GetConversationsUnreadSeqAndMaxSeqReq) Check() error {
+func (x *GetConversationListReq) Check() error {
 	if x.UserID == "" {
 		return errors.New("userID is empty")
 	}
