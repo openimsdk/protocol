@@ -203,13 +203,6 @@ message setUserStatusReq{
 message setUserStatusResp {
 }
 
-message removeUserReq{
-  string userID = 1;
-}
-message removeUserResp{
-}
-
-
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -238,6 +231,5 @@ service user {
   //The gateway synchronizes the online status of users in redis
   rpc setUserStatus(setUserStatusReq)returns(setUserStatusResp);
   //remove user
-  rpc removeUser(removeUserReq)returns(removeUserResp);
 }
 
