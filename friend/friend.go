@@ -77,7 +77,7 @@ func (x *AddBlackReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.BlackUserID == "" {
-		return errors.New("BlackUserID is empty")
+		return errors.New("blackUserID is empty")
 	}
 	return nil
 }
@@ -87,7 +87,7 @@ func (x *RemoveBlackReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.BlackUserID == "" {
-		return errors.New("BlackUserID is empty")
+		return errors.New("blackUserID is empty")
 	}
 	return nil
 }
@@ -171,6 +171,33 @@ func (x *GetPaginationFriendsApplyFromReq) Check() error {
 func (x *GetFriendIDsReq) Check() error {
 	if x.UserID == "" {
 		return errors.New("userID is empty")
+	}
+	return nil
+}
+func (x *GetDesignatedFriendsApplyReq) Check() error {
+	if x.FromUserID == "" {
+		return errors.New("ownerUserID is empty")
+	}
+	if x.ToUserID == "" {
+		return errors.New("ownerUserID is empty")
+	}
+	return nil
+}
+func (x *PinFriendsReq) Check() error {
+	if x.OwnerUserID == "" {
+		return errors.New("ownerUserID is empty")
+	}
+	if x.FriendUserIDs == nil {
+		return errors.New("ownerUserID is empty")
+	}
+	return nil
+}
+func (x *GetSpecifiedFriendsInfoReq) Check() error {
+	if x.OwnerUserID == "" {
+		return errors.New("ownerUserID is empty")
+	}
+	if x.UserIDList == nil {
+		return errors.New("ownerUserID is empty")
 	}
 	return nil
 }

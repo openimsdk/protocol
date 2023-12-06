@@ -72,7 +72,6 @@ func (x *SetConversationReq) Check() error {
 	}
 	return nil
 }
-
 func (x *SetRecvMsgOptReq) Check() error {
 	if x.OwnerUserID == "" {
 		return errors.New("OwnerUserID is empty")
@@ -185,6 +184,19 @@ func (x *GetUserStatusReq) Check() error {
 	}
 	if len(x.UserIDs) > constant.MaxUsersStatusList {
 		return errors.New("user-list is Limit Exceeded")
+	}
+	return nil
+}
+
+func (x *GetSubscribeUsersStatusReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("UserID is empty")
+	}
+	return nil
+}
+func (x *RemoveUserReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("UserID is empty")
 	}
 	return nil
 }
