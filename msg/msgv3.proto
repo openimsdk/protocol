@@ -134,9 +134,9 @@ message MsgInfo{
   string serverMsgID = 1;
   string clientMsgID = 2;
   int32 sessionType=3;
-  string sendID=4;
-  string recvID=5;
-  string showName=6;
+  string senderID=4;
+  string recverID=5;
+  string senderName=6;
   string faceURL=7;
   string groupID=8;
   string groupName=9;
