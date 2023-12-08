@@ -194,3 +194,55 @@ func (x *GetSubscribeUsersStatusReq) Check() error {
 	}
 	return nil
 }
+
+func (x *ProcessUserCommandAddReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	if x.Value == "" {
+		return errors.New("value is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandDeleteReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandUpdateReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	if x.Value == "" {
+		return errors.New("value is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandGetReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	return nil
+}
