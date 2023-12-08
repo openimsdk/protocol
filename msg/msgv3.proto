@@ -134,16 +134,19 @@ message MsgInfo{
   string serverMsgID = 1;
   string clientMsgID = 2;
   int32 sessionType=3;
-  string senderID=4;
-  string showName=5;
-  string faceURL=6;
-  string groupID=7;
-  string groupAtType=8;
-  uint32 groupMemberCount=9;
-  int64 LatestMsgRecvTime=10;
-  int32 msgFrom = 11;
-  int32 contentType = 12;
-  string content = 13;
+  string sendID=4;
+  string recvID=5;
+  string senderName=6;
+  string faceURL=7;
+  string groupID=8;
+  string groupName=9;
+  string groupFaceURL=10;
+  int32 groupType=11;
+  uint32 groupMemberCount=12;
+  int64 LatestMsgRecvTime=13;
+  int32 msgFrom = 14;
+  int32 contentType = 15;
+  string content = 16;
 }
 
 message SetConversationHasReadSeqReq {
