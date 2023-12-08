@@ -138,7 +138,7 @@ message MsgInfo{
   string showName=5;
   string faceURL=6;
   string groupID=7;
-  string groupType=8;
+  int32 groupType=8;
   uint32 groupMemberCount=9;
   int64 LatestMsgRecvTime=10;
   int32 msgFrom = 11;
