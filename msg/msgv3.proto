@@ -119,44 +119,31 @@ message GetConversationListReq{
 }
 
 message GetConversationListResp{
-  repeated conversationElems conversations=2;
+  repeated ConversationElem conversationElems=1;
 }
 
-message conversationElems{
-  map<string,conversationContext> conversationElem=1;
+message ConversationElem {
+  string conversationID=1;
+  int32 recvMsgOpt=2;
+  int64 unreadCount = 3;
+  MsgInfo msgInfo=4;
+  bool IsPinned=5;
 }
 
-message conversationContext {
-  int64 unreadCount = 2;
-  conversationInfo chatLogs=1;
-}
-
-message conversationInfo{
+message MsgInfo{
   string serverMsgID = 1;
   string clientMsgID = 2;
-  int32 sessionType = 3;
-  string sendID = 4;
-  string recvID=5;
-  int32 senderPlatformID = 6;
-  string senderNickname = 7;
-  string senderFaceURL = 8;
-  string groupID = 9;
-  string groupName = 10;
-  string groupFaceURL=11;
-  int32 groupType=12;
-  uint32 groupMemberCount=13;
-  sdkws.OfflinePushInfo offlinePushInfo = 14;
-  repeated string atUserIDList = 15;
-  string attachedInfo = 16;
-  int32 msgFrom = 17;
-  int32 contentType = 18;
-  string content = 19;
-  int32 status = 20;
-  int64 sendTime = 21;
-  int64 createTime = 22;
-  bool isPinned=23;
-  int64 seq=24;
-  string ex = 25;
+  int32 sessionType=3;
+  string senderID=4;
+  string showName=5;
+  string faceURL=6;
+  string groupID=7;
+  string groupAtType=8;
+  uint32 groupMemberCount=9;
+  int64 LatestMsgRecvTime=10;
+  int32 msgFrom = 11;
+  int32 contentType = 12;
+  string content = 13;
 }
 
 message SetConversationHasReadSeqReq {
