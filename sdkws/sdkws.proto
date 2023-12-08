@@ -92,7 +92,7 @@ message FriendInfo{
   int32 addSource = 5;
   string operatorUserID = 6;
   string ex = 7;
-  OpenIMServer.protobuf.BoolValue isPinned = 8;
+  bool isPinned = 8;
 }
 
 message BlackInfo{
