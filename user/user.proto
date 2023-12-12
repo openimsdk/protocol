@@ -243,8 +243,14 @@ message CommandInfo {
   string value = 2;
 }
 
+message CommandInfoResp {
+  string uuid = 1;
+  int64 createTime = 2;
+  string value = 3;
+}
+
 message processUserCommandGetResp {
-  map<string,CommandInfo> uuid_value = 1;
+  repeated CommandInfoResp KVArray = 1;
 }
 
 service user {
