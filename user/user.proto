@@ -16,7 +16,6 @@ syntax = "proto3";
 package OpenIMServer.user;
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/OpenIMSDK/protocol/user";
 
@@ -240,7 +239,7 @@ message processUserCommandGetReq {
 }
 
 message CommandInfo {
-  google.protobuf.Timestamp time = 1;
+  int64 time = 1;
   string value = 2;
 }
 
