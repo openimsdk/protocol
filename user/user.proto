@@ -16,6 +16,7 @@ syntax = "proto3";
 package OpenIMServer.user;
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
+
 option go_package = "github.com/OpenIMSDK/protocol/user";
 
 message getAllUserIDReq{
@@ -217,7 +218,6 @@ message processUserCommandDeleteReq {
   string userID = 1;
   int32 type = 2;
   string uuid = 3;
-  string value = 4;
 }
 
 message processUserCommandDeleteResp {
@@ -238,8 +238,14 @@ message processUserCommandGetReq {
   int32 type = 2;
 }
 
+message CommandInfoResp {
+  string uuid = 1;
+  int64 createTime = 2;
+  string value = 3;
+}
+
 message processUserCommandGetResp {
-  map<string,string> uuid_value = 1;
+  repeated CommandInfoResp KVArray = 1;
 }
 
 service user {
