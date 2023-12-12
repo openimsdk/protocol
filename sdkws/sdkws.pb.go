@@ -4749,6 +4749,77 @@ func (*SetAppBackgroundStatusResp) Descriptor() ([]byte, []int) {
 	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{63}
 }
 
+type ProcessUserCommand struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserID string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	Type   int32  `protobuf:"varint,2,opt,name=type,proto3" json:"type"`
+	Uuid   string `protobuf:"bytes,3,opt,name=uuid,proto3" json:"uuid"`
+	Value  string `protobuf:"bytes,4,opt,name=value,proto3" json:"value"`
+}
+
+func (x *ProcessUserCommand) Reset() {
+	*x = ProcessUserCommand{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sdkws_sdkws_proto_msgTypes[64]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ProcessUserCommand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ProcessUserCommand) ProtoMessage() {}
+
+func (x *ProcessUserCommand) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[64]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ProcessUserCommand.ProtoReflect.Descriptor instead.
+func (*ProcessUserCommand) Descriptor() ([]byte, []int) {
+	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{64}
+}
+
+func (x *ProcessUserCommand) GetUserID() string {
+	if x != nil {
+		return x.UserID
+	}
+	return ""
+}
+
+func (x *ProcessUserCommand) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *ProcessUserCommand) GetUuid() string {
+	if x != nil {
+		return x.Uuid
+	}
+	return ""
+}
+
+func (x *ProcessUserCommand) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
 type RequestPagination struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -4761,7 +4832,7 @@ type RequestPagination struct {
 func (x *RequestPagination) Reset() {
 	*x = RequestPagination{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_sdkws_sdkws_proto_msgTypes[64]
+		mi := &file_sdkws_sdkws_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4774,7 +4845,7 @@ func (x *RequestPagination) String() string {
 func (*RequestPagination) ProtoMessage() {}
 
 func (x *RequestPagination) ProtoReflect() protoreflect.Message {
-	mi := &file_sdkws_sdkws_proto_msgTypes[64]
+	mi := &file_sdkws_sdkws_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4787,7 +4858,7 @@ func (x *RequestPagination) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestPagination.ProtoReflect.Descriptor instead.
 func (*RequestPagination) Descriptor() ([]byte, []int) {
-	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{64}
+	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *RequestPagination) GetPageNumber() int32 {
@@ -5613,19 +5684,25 @@ var file_sdkws_sdkws_proto_rawDesc = []byte{
 	0x61, 0x63, 0x6b, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52,
 	0x0c, 0x69, 0x73, 0x42, 0x61, 0x63, 0x6b, 0x67, 0x72, 0x6f, 0x75, 0x6e, 0x64, 0x22, 0x1c, 0x0a,
 	0x1a, 0x53, 0x65, 0x74, 0x41, 0x70, 0x70, 0x42, 0x61, 0x63, 0x6b, 0x67, 0x72, 0x6f, 0x75, 0x6e,
-	0x64, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x22, 0x53, 0x0a, 0x11, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x12, 0x1e, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72,
-	0x12, 0x1e, 0x0a, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72,
-	0x2a, 0x30, 0x0a, 0x09, 0x50, 0x75, 0x6c, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x10, 0x0a,
-	0x0c, 0x50, 0x75, 0x6c, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x73, 0x63, 0x10, 0x00, 0x12,
-	0x11, 0x0a, 0x0d, 0x50, 0x75, 0x6c, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x44, 0x65, 0x73, 0x63,
-	0x10, 0x01, 0x42, 0x25, 0x5a, 0x23, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x4f, 0x70, 0x65, 0x6e, 0x49, 0x4d, 0x53, 0x44, 0x4b, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x63, 0x6f, 0x6c, 0x2f, 0x73, 0x64, 0x6b, 0x77, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x64, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x22, 0x6a, 0x0a, 0x12, 0x50,
+	0x72, 0x6f, 0x63, 0x65, 0x73, 0x73, 0x55, 0x73, 0x65, 0x72, 0x43, 0x6f, 0x6d, 0x6d, 0x61, 0x6e,
+	0x64, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x44, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a,
+	0x04, 0x75, 0x75, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x75, 0x75, 0x69,
+	0x64, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x53, 0x0a, 0x11, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1e, 0x0a, 0x0a,
+	0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x0a, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1e, 0x0a, 0x0a,
+	0x73, 0x68, 0x6f, 0x77, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x0a, 0x73, 0x68, 0x6f, 0x77, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x2a, 0x30, 0x0a, 0x09,
+	0x50, 0x75, 0x6c, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x12, 0x10, 0x0a, 0x0c, 0x50, 0x75, 0x6c,
+	0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x41, 0x73, 0x63, 0x10, 0x00, 0x12, 0x11, 0x0a, 0x0d, 0x50,
+	0x75, 0x6c, 0x6c, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x44, 0x65, 0x73, 0x63, 0x10, 0x01, 0x42, 0x25,
+	0x5a, 0x23, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x4f, 0x70, 0x65,
+	0x6e, 0x49, 0x4d, 0x53, 0x44, 0x4b, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x63, 0x6f, 0x6c, 0x2f,
+	0x73, 0x64, 0x6b, 0x77, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -5641,7 +5718,7 @@ func file_sdkws_sdkws_proto_rawDescGZIP() []byte {
 }
 
 var file_sdkws_sdkws_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_sdkws_sdkws_proto_msgTypes = make([]protoimpl.MessageInfo, 72)
+var file_sdkws_sdkws_proto_msgTypes = make([]protoimpl.MessageInfo, 73)
 var file_sdkws_sdkws_proto_goTypes = []interface{}{
 	(PullOrder)(0),                        // 0: OpenIMServer.sdkws.PullOrder
 	(*GroupInfo)(nil),                     // 1: OpenIMServer.sdkws.GroupInfo
@@ -5708,22 +5785,23 @@ var file_sdkws_sdkws_proto_goTypes = []interface{}{
 	(*MarkAsReadTips)(nil),                // 62: OpenIMServer.sdkws.MarkAsReadTips
 	(*SetAppBackgroundStatusReq)(nil),     // 63: OpenIMServer.sdkws.SetAppBackgroundStatusReq
 	(*SetAppBackgroundStatusResp)(nil),    // 64: OpenIMServer.sdkws.SetAppBackgroundStatusResp
-	(*RequestPagination)(nil),             // 65: OpenIMServer.sdkws.RequestPagination
-	nil,                                   // 66: OpenIMServer.sdkws.PullMessageBySeqsResp.MsgsEntry
-	nil,                                   // 67: OpenIMServer.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
-	nil,                                   // 68: OpenIMServer.sdkws.GetMaxSeqResp.MaxSeqsEntry
-	nil,                                   // 69: OpenIMServer.sdkws.GetMaxSeqResp.MinSeqsEntry
-	nil,                                   // 70: OpenIMServer.sdkws.MsgData.OptionsEntry
-	nil,                                   // 71: OpenIMServer.sdkws.PushMessages.MsgsEntry
-	nil,                                   // 72: OpenIMServer.sdkws.PushMessages.NotificationMsgsEntry
-	(*wrapperspb.StringValue)(nil),        // 73: OpenIMServer.protobuf.StringValue
-	(*wrapperspb.Int32Value)(nil),         // 74: OpenIMServer.protobuf.Int32Value
+	(*ProcessUserCommand)(nil),            // 65: OpenIMServer.sdkws.ProcessUserCommand
+	(*RequestPagination)(nil),             // 66: OpenIMServer.sdkws.RequestPagination
+	nil,                                   // 67: OpenIMServer.sdkws.PullMessageBySeqsResp.MsgsEntry
+	nil,                                   // 68: OpenIMServer.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
+	nil,                                   // 69: OpenIMServer.sdkws.GetMaxSeqResp.MaxSeqsEntry
+	nil,                                   // 70: OpenIMServer.sdkws.GetMaxSeqResp.MinSeqsEntry
+	nil,                                   // 71: OpenIMServer.sdkws.MsgData.OptionsEntry
+	nil,                                   // 72: OpenIMServer.sdkws.PushMessages.MsgsEntry
+	nil,                                   // 73: OpenIMServer.sdkws.PushMessages.NotificationMsgsEntry
+	(*wrapperspb.StringValue)(nil),        // 74: OpenIMServer.protobuf.StringValue
+	(*wrapperspb.Int32Value)(nil),         // 75: OpenIMServer.protobuf.Int32Value
 }
 var file_sdkws_sdkws_proto_depIdxs = []int32{
-	73, // 0: OpenIMServer.sdkws.GroupInfoForSet.ex:type_name -> OpenIMServer.protobuf.StringValue
-	74, // 1: OpenIMServer.sdkws.GroupInfoForSet.needVerification:type_name -> OpenIMServer.protobuf.Int32Value
-	74, // 2: OpenIMServer.sdkws.GroupInfoForSet.lookMemberInfo:type_name -> OpenIMServer.protobuf.Int32Value
-	74, // 3: OpenIMServer.sdkws.GroupInfoForSet.applyMemberFriend:type_name -> OpenIMServer.protobuf.Int32Value
+	74, // 0: OpenIMServer.sdkws.GroupInfoForSet.ex:type_name -> OpenIMServer.protobuf.StringValue
+	75, // 1: OpenIMServer.sdkws.GroupInfoForSet.needVerification:type_name -> OpenIMServer.protobuf.Int32Value
+	75, // 2: OpenIMServer.sdkws.GroupInfoForSet.lookMemberInfo:type_name -> OpenIMServer.protobuf.Int32Value
+	75, // 3: OpenIMServer.sdkws.GroupInfoForSet.applyMemberFriend:type_name -> OpenIMServer.protobuf.Int32Value
 	5,  // 4: OpenIMServer.sdkws.FriendInfo.friendUser:type_name -> OpenIMServer.sdkws.UserInfo
 	4,  // 5: OpenIMServer.sdkws.BlackInfo.blackUserInfo:type_name -> OpenIMServer.sdkws.PublicUserInfo
 	4,  // 6: OpenIMServer.sdkws.GroupRequest.userInfo:type_name -> OpenIMServer.sdkws.PublicUserInfo
@@ -5731,14 +5809,14 @@ var file_sdkws_sdkws_proto_depIdxs = []int32{
 	11, // 8: OpenIMServer.sdkws.PullMessageBySeqsReq.seqRanges:type_name -> OpenIMServer.sdkws.SeqRange
 	0,  // 9: OpenIMServer.sdkws.PullMessageBySeqsReq.order:type_name -> OpenIMServer.sdkws.PullOrder
 	17, // 10: OpenIMServer.sdkws.PullMsgs.Msgs:type_name -> OpenIMServer.sdkws.MsgData
-	66, // 11: OpenIMServer.sdkws.PullMessageBySeqsResp.msgs:type_name -> OpenIMServer.sdkws.PullMessageBySeqsResp.MsgsEntry
-	67, // 12: OpenIMServer.sdkws.PullMessageBySeqsResp.notificationMsgs:type_name -> OpenIMServer.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
-	68, // 13: OpenIMServer.sdkws.GetMaxSeqResp.maxSeqs:type_name -> OpenIMServer.sdkws.GetMaxSeqResp.MaxSeqsEntry
-	69, // 14: OpenIMServer.sdkws.GetMaxSeqResp.minSeqs:type_name -> OpenIMServer.sdkws.GetMaxSeqResp.MinSeqsEntry
-	70, // 15: OpenIMServer.sdkws.MsgData.options:type_name -> OpenIMServer.sdkws.MsgData.OptionsEntry
+	67, // 11: OpenIMServer.sdkws.PullMessageBySeqsResp.msgs:type_name -> OpenIMServer.sdkws.PullMessageBySeqsResp.MsgsEntry
+	68, // 12: OpenIMServer.sdkws.PullMessageBySeqsResp.notificationMsgs:type_name -> OpenIMServer.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry
+	69, // 13: OpenIMServer.sdkws.GetMaxSeqResp.maxSeqs:type_name -> OpenIMServer.sdkws.GetMaxSeqResp.MaxSeqsEntry
+	70, // 14: OpenIMServer.sdkws.GetMaxSeqResp.minSeqs:type_name -> OpenIMServer.sdkws.GetMaxSeqResp.MinSeqsEntry
+	71, // 15: OpenIMServer.sdkws.MsgData.options:type_name -> OpenIMServer.sdkws.MsgData.OptionsEntry
 	19, // 16: OpenIMServer.sdkws.MsgData.offlinePushInfo:type_name -> OpenIMServer.sdkws.OfflinePushInfo
-	71, // 17: OpenIMServer.sdkws.PushMessages.msgs:type_name -> OpenIMServer.sdkws.PushMessages.MsgsEntry
-	72, // 18: OpenIMServer.sdkws.PushMessages.notificationMsgs:type_name -> OpenIMServer.sdkws.PushMessages.NotificationMsgsEntry
+	72, // 17: OpenIMServer.sdkws.PushMessages.msgs:type_name -> OpenIMServer.sdkws.PushMessages.MsgsEntry
+	73, // 18: OpenIMServer.sdkws.PushMessages.notificationMsgs:type_name -> OpenIMServer.sdkws.PushMessages.NotificationMsgsEntry
 	1,  // 19: OpenIMServer.sdkws.GroupCreatedTips.group:type_name -> OpenIMServer.sdkws.GroupInfo
 	3,  // 20: OpenIMServer.sdkws.GroupCreatedTips.opUser:type_name -> OpenIMServer.sdkws.GroupMemberFullInfo
 	3,  // 21: OpenIMServer.sdkws.GroupCreatedTips.memberList:type_name -> OpenIMServer.sdkws.GroupMemberFullInfo
@@ -6579,6 +6657,18 @@ func file_sdkws_sdkws_proto_init() {
 			}
 		}
 		file_sdkws_sdkws_proto_msgTypes[64].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProcessUserCommand); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_sdkws_sdkws_proto_msgTypes[65].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RequestPagination); i {
 			case 0:
 				return &v.state
@@ -6597,7 +6687,7 @@ func file_sdkws_sdkws_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_sdkws_sdkws_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   72,
+			NumMessages:   73,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

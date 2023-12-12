@@ -524,7 +524,12 @@ message SetAppBackgroundStatusReq {
 
 message SetAppBackgroundStatusResp {
 }
-
+message ProcessUserCommand{
+  string userID = 1;
+  int32 type = 2;
+  string uuid = 3;
+  string value = 4;
+}
 
 message RequestPagination {
   int32 pageNumber = 1;
