@@ -16,6 +16,7 @@ syntax = "proto3";
 package OpenIMServer.user;
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
+
 option go_package = "github.com/OpenIMSDK/protocol/user";
 
 message getAllUserIDReq{
@@ -203,6 +204,50 @@ message setUserStatusReq{
 message setUserStatusResp {
 }
 
+message processUserCommandAddReq {
+  string userID = 1;
+  int32 type = 2;
+  string uuid = 3;
+  string value = 4;
+}
+
+message processUserCommandAddResp {
+}
+
+message processUserCommandDeleteReq {
+  string userID = 1;
+  int32 type = 2;
+  string uuid = 3;
+}
+
+message processUserCommandDeleteResp {
+}
+
+message processUserCommandUpdateReq {
+  string userID = 1;
+  int32 type = 2;
+  string uuid = 3;
+  string value = 4;
+}
+
+message processUserCommandUpdateResp {
+}
+
+message processUserCommandGetReq {
+  string userID = 1;
+  int32 type = 2;
+}
+
+message CommandInfoResp {
+  string uuid = 1;
+  int64 createTime = 2;
+  string value = 3;
+}
+
+message processUserCommandGetResp {
+  repeated CommandInfoResp KVArray = 1;
+}
+
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -230,6 +275,13 @@ service user {
   rpc getUserStatus(getUserStatusReq)returns(getUserStatusResp);
   //The gateway synchronizes the online status of users in redis
   rpc setUserStatus(setUserStatusReq)returns(setUserStatusResp);
-  //remove user
+  //add a general function for add
+  rpc processUserCommandAdd(processUserCommandAddReq)returns(processUserCommandAddResp);
+  //add a general function for update
+  rpc processUserCommandUpdate(processUserCommandUpdateReq)returns(processUserCommandUpdateResp);
+  //add a general function for delete
+  rpc processUserCommandDelete(processUserCommandDeleteReq)returns(processUserCommandDeleteResp);
+  //add a general function for get
+  rpc processUserCommandGet(processUserCommandGetReq)returns(processUserCommandGetResp);
 }
 

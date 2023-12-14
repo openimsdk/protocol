@@ -179,7 +179,7 @@ func (x *GetDesignatedFriendsApplyReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.ToUserID == "" {
-		return errors.New("ownerUserID is empty")
+		return errors.New("toUserID is empty")
 	}
 	return nil
 }
@@ -188,7 +188,7 @@ func (x *PinFriendsReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.FriendUserIDs == nil {
-		return errors.New("ownerUserID is empty")
+		return errors.New("friendUserIDs is empty")
 	}
 	return nil
 }
@@ -197,7 +197,7 @@ func (x *GetSpecifiedFriendsInfoReq) Check() error {
 		return errors.New("ownerUserID is empty")
 	}
 	if x.UserIDList == nil {
-		return errors.New("ownerUserID is empty")
+		return errors.New("userIDList is empty")
 	}
 	return nil
 }
