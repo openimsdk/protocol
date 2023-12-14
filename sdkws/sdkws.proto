@@ -527,8 +527,9 @@ message SetAppBackgroundStatusResp {
 message ProcessUserCommand{
   string userID = 1;
   int32 type = 2;
-  string uuid = 3;
-  string value = 4;
+  int64 createTime = 3;
+  string uuid = 4;
+  string value = 5;
 }
 
 message RequestPagination {

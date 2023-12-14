@@ -239,9 +239,11 @@ message processUserCommandGetReq {
 }
 
 message CommandInfoResp {
-  string uuid = 1;
+
+  int32 type = 1;
   int64 createTime = 2;
-  string value = 3;
+  string uuid = 3;
+  string value = 4;
 }
 
 message processUserCommandGetResp {
