@@ -17,8 +17,8 @@ package group
 import "errors"
 
 func (x *CreateGroupReq) Check() error {
-	if x.MemberUserIDs == nil {
-		return errors.New("memberUserIDS is empty")
+	if x.MemberUserIDs == nil && x.AdminUserIDs == nil {
+		return errors.New("memberUserIDS and adminUserIDs are empty")
 	}
 	if x.GroupInfo == nil {
 		return errors.New("groupInfo is empty")
@@ -34,7 +34,7 @@ func (x *CreateGroupReq) Check() error {
 
 func (x *GetGroupsInfoReq) Check() error {
 	if x.GroupIDs == nil {
-		return errors.New("GroupIDs")
+		return errors.New("GroupIDs is empty")
 	}
 	return nil
 }
@@ -347,6 +347,24 @@ func (x *GetGroupMemberCacheReq) Check() error {
 	}
 	if x.GroupMemberID == "" {
 		return errors.New("GroupMemberID is empty")
+	}
+	return nil
+}
+func (x *GetGroupUsersReqApplicationListReq) Check() error {
+	if x.GroupID == "" {
+		return errors.New("GroupID is empty")
+	}
+	if x.UserIDs == nil {
+		return errors.New("UserID is empty")
+	}
+	return nil
+}
+func (x *GroupCreateCountReq) Check() error {
+	if x.Start <= 0 {
+		return errors.New("start is invalid")
+	}
+	if x.End <= 0 {
+		return errors.New("end is invalid")
 	}
 	return nil
 }

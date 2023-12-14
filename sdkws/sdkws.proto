@@ -92,6 +92,7 @@ message FriendInfo{
   int32 addSource = 5;
   string operatorUserID = 6;
   string ex = 7;
+  bool isPinned = 8;
 }
 
 message BlackInfo{
@@ -420,6 +421,10 @@ message BlackDeletedTips{
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
 }
+message PinFriendTips{
+  string userID = 1;
+  repeated FriendInfo updateFriends = 2;
+}
 //////////////////////user/////////////////////
 message UserInfoUpdatedTips{
   string userID = 1;
@@ -519,7 +524,12 @@ message SetAppBackgroundStatusReq {
 
 message SetAppBackgroundStatusResp {
 }
-
+message ProcessUserCommand{
+  string userID = 1;
+  int32 type = 2;
+  string uuid = 3;
+  string value = 4;
+}
 
 message RequestPagination {
   int32 pageNumber = 1;

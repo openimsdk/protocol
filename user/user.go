@@ -72,7 +72,6 @@ func (x *SetConversationReq) Check() error {
 	}
 	return nil
 }
-
 func (x *SetRecvMsgOptReq) Check() error {
 	if x.OwnerUserID == "" {
 		return errors.New("OwnerUserID is empty")
@@ -185,6 +184,65 @@ func (x *GetUserStatusReq) Check() error {
 	}
 	if len(x.UserIDs) > constant.MaxUsersStatusList {
 		return errors.New("user-list is Limit Exceeded")
+	}
+	return nil
+}
+
+func (x *GetSubscribeUsersStatusReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("UserID is empty")
+	}
+	return nil
+}
+
+func (x *ProcessUserCommandAddReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	if x.Value == "" {
+		return errors.New("value is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandDeleteReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandUpdateReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
+	}
+	if x.Uuid == "" {
+		return errors.New("UUID is empty")
+	}
+	if x.Value == "" {
+		return errors.New("value is empty")
+	}
+	return nil
+}
+func (x *ProcessUserCommandGetReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	if x.Type == 0 {
+		return errors.New("type is not specified")
 	}
 	return nil
 }
