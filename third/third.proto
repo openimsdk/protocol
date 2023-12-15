@@ -109,6 +109,32 @@ message AccessURLResp {
   int64 expireTime = 2;
 }
 
+message InitiateFormDataReq {
+  string name = 1;
+  int64 size = 2;
+  string contentType = 3;
+  string group = 4;
+  int64 millisecond = 5;
+  bool absolute = 6;
+}
+
+message InitiateFormDataResp {
+  string id = 1;
+  string url = 2;
+  string file = 3;
+  repeated KeyValues header = 4;
+  map<string, string> formData = 5;
+  int64 expires = 6;
+}
+
+message CompleteFormDataReq {
+  string id = 1;
+}
+
+message CompleteFormDataResp {
+  string url = 1;
+}
+
 message FcmUpdateTokenReq {
   int32 platformID = 1;
   string fcmToken = 2;
@@ -158,22 +184,24 @@ message SearchLogsReq{
 
 
 message LogInfo{
-  string userID=1;
-  int32 platform=2;
-  string url=3;
-  int64 createTime=4;
-  string nickname=5;
-  string logID=6;
-  string filename=7;
-  string systemType=8;
-  string ex=9;
-  string version=10;
+  string userID = 1;
+  int32 platform = 2;
+  string url = 3;
+  int64 createTime = 4;
+  string nickname = 5;
+  string logID = 6;
+  string filename = 7;
+  string systemType = 8;
+  string ex = 9;
+  string version = 10;
 }
 
 message SearchLogsResp{
   repeated LogInfo logsInfos = 1;
   uint32 total = 2;
 }
+
+
 
 service third {
   rpc PartLimit(PartLimitReq) returns(PartLimitResp);
@@ -182,6 +210,9 @@ service third {
   rpc AuthSign(AuthSignReq) returns(AuthSignResp);
   rpc CompleteMultipartUpload(CompleteMultipartUploadReq) returns(CompleteMultipartUploadResp);
   rpc AccessURL(AccessURLReq) returns(AccessURLResp);
+  rpc InitiateFormData(InitiateFormDataReq) returns(InitiateFormDataResp);
+  rpc CompleteFormData(CompleteFormDataReq) returns(CompleteFormDataResp);
+
 
   rpc FcmUpdateToken(FcmUpdateTokenReq) returns(FcmUpdateTokenResp);
   rpc SetAppBadge(SetAppBadgeReq) returns(SetAppBadgeResp);
