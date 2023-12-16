@@ -113,42 +113,6 @@ message MarkConversationAsReadReq {
 message MarkConversationAsReadResp {
 }
 
-message GetConversationListReq{
-  string userID = 1;
-  repeated string conversationIDs = 2;
-}
-
-message GetConversationListResp{
-  repeated ConversationElem conversationElems=1;
-}
-
-message ConversationElem {
-  string conversationID=1;
-  int32 recvMsgOpt=2;
-  int64 unreadCount = 3;
-  MsgInfo msgInfo=4;
-  bool IsPinned=5;
-}
-
-message MsgInfo{
-  string serverMsgID = 1;
-  string clientMsgID = 2;
-  int32 sessionType=3;
-  string sendID=4;
-  string recvID=5;
-  string senderName=6;
-  string faceURL=7;
-  string groupID=8;
-  string groupName=9;
-  string groupFaceURL=10;
-  int32 groupType=11;
-  uint32 groupMemberCount=12;
-  int64 LatestMsgRecvTime=13;
-  int32 msgFrom = 14;
-  int32 contentType = 15;
-  string content = 16;
-}
-
 message SetConversationHasReadSeqReq {
   string conversationID = 1;
   string userID = 2;
@@ -355,8 +319,6 @@ service msg {
   rpc MarkMsgsAsRead(MarkMsgsAsReadReq) returns(MarkMsgsAsReadResp);
   rpc MarkConversationAsRead(MarkConversationAsReadReq) returns(MarkConversationAsReadResp);
   rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns(SetConversationHasReadSeqResp);
-
-  rpc GetConversationList(GetConversationListReq)returns(GetConversationListResp);
 
   rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns(GetConversationsHasReadAndMaxSeqResp);
   rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
