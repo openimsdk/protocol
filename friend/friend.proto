@@ -79,6 +79,7 @@ message getDesignatedFriendsResp{
 message addBlackReq{
   string ownerUserID = 1;
   string blackUserID = 2;
+  string ex = 3;
 }
 message addBlackResp{
 }
