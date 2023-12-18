@@ -78,7 +78,7 @@ message UserInfo{
   string userID = 1;
   string nickname = 2;
   string faceURL = 3;
-  string ex = 4;
+  OpenIMServer.protobuf.StringValue ex = 4;
   int64 createTime = 5;
   int32 appMangerLevel = 6;
   int32 globalRecvMsgOpt = 7;
