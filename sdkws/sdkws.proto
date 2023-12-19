@@ -84,6 +84,16 @@ message UserInfo{
   int32 globalRecvMsgOpt = 7;
 }
 
+message UserInfoWithEx{
+  string userID = 1;
+  string nickname = 2;
+  string faceURL = 3;
+  OpenIMServer.protobuf.StringValue ex = 4;
+  int64 createTime = 5;
+  int32 appMangerLevel = 6;
+  int32 globalRecvMsgOpt = 7;
+}
+
 message FriendInfo{
   string ownerUserID = 1;
   string remark = 2;
