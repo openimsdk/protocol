@@ -52,7 +52,11 @@ message updateUserInfoReq{
 }
 message updateUserInfoResp{
 }
-
+message updateUserInfoExReq{
+  sdkws.UserInfoWithEx userInfo = 1;
+}
+message updateUserInfoExResp{
+}
 message setGlobalRecvMessageOptReq{
   string userID = 1;
   int32 globalRecvMsgOpt = 3;
