@@ -259,7 +259,7 @@ service user {
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
   //update user information
   rpc updateUserInfo(updateUserInfoReq) returns(updateUserInfoResp);
-  rpc updateUserInfoEx(updateUserInfoReq) returns(updateUserInfoResp);
+  rpc updateUserInfoEx(updateUserInfoExReq) returns(updateUserInfoExResp);
   //Set user message receiving options
   rpc setGlobalRecvMessageOpt(setGlobalRecvMessageOptReq) returns(setGlobalRecvMessageOptResp);
   //Get the user message receiving option If not found, no error will be returned
