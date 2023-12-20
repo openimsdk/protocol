@@ -183,7 +183,7 @@ func (x *GetDesignatedFriendsApplyReq) Check() error {
 	}
 	return nil
 }
-func (x *PinFriendsReq) Check() error {
+func (x *UpdateFriendsReq) Check() error {
 	if x.OwnerUserID == "" {
 		return errors.New("ownerUserID is empty")
 	}
