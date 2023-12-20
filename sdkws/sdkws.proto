@@ -429,7 +429,7 @@ message BlackDeletedTips{
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
 }
-message PinFriendTips{
+message UpdateFriendTips{
   string userID = 1;
   repeated FriendInfo updateFriends = 2;
 }
