@@ -1398,9 +1398,11 @@ type PinFriendsReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OwnerUserID   string                `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
-	FriendUserIDs []string              `protobuf:"bytes,2,rep,name=friendUserIDs,proto3" json:"friendUserIDs"`
-	IsPinned      *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=isPinned,proto3" json:"isPinned"`
+	OwnerUserID   string                  `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
+	FriendUserIDs []string                `protobuf:"bytes,2,rep,name=friendUserIDs,proto3" json:"friendUserIDs"`
+	IsPinned      *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=isPinned,proto3" json:"isPinned"`
+	Remark        *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=remark,proto3" json:"remark"`
+	Ex            *wrapperspb.StringValue `protobuf:"bytes,5,opt,name=ex,proto3" json:"ex"`
 }
 
 func (x *PinFriendsReq) Reset() {
@@ -1452,6 +1454,20 @@ func (x *PinFriendsReq) GetFriendUserIDs() []string {
 func (x *PinFriendsReq) GetIsPinned() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.IsPinned
+	}
+	return nil
+}
+
+func (x *PinFriendsReq) GetRemark() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Remark
+	}
+	return nil
+}
+
+func (x *PinFriendsReq) GetEx() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Ex
 	}
 	return nil
 }
@@ -2110,7 +2126,7 @@ var file_friend_friend_proto_rawDesc = []byte{
 	0x09, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x09, 0x68, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x4d, 0x73, 0x67, 0x22, 0x18, 0x0a, 0x16, 0x72,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x64, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x41, 0x70, 0x70, 0x6c,
-	0x79, 0x52, 0x65, 0x73, 0x70, 0x22, 0x95, 0x01, 0x0a, 0x0d, 0x70, 0x69, 0x6e, 0x46, 0x72, 0x69,
+	0x79, 0x52, 0x65, 0x73, 0x70, 0x22, 0x85, 0x02, 0x0a, 0x0d, 0x70, 0x69, 0x6e, 0x46, 0x72, 0x69,
 	0x65, 0x6e, 0x64, 0x73, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x6f, 0x77, 0x6e, 0x65, 0x72,
 	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6f, 0x77,
 	0x6e, 0x65, 0x72, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x12, 0x24, 0x0a, 0x0d, 0x66, 0x72, 0x69,
@@ -2119,7 +2135,14 @@ var file_friend_friend_proto_rawDesc = []byte{
 	0x3c, 0x0a, 0x08, 0x69, 0x73, 0x50, 0x69, 0x6e, 0x6e, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x20, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x49, 0x4d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x42, 0x6f, 0x6f, 0x6c, 0x56, 0x61,
-	0x6c, 0x75, 0x65, 0x52, 0x08, 0x69, 0x73, 0x50, 0x69, 0x6e, 0x6e, 0x65, 0x64, 0x22, 0x10, 0x0a,
+	0x6c, 0x75, 0x65, 0x52, 0x08, 0x69, 0x73, 0x50, 0x69, 0x6e, 0x6e, 0x65, 0x64, 0x12, 0x3a, 0x0a,
+	0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e,
+	0x4f, 0x70, 0x65, 0x6e, 0x49, 0x4d, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75,
+	0x65, 0x52, 0x06, 0x72, 0x65, 0x6d, 0x61, 0x72, 0x6b, 0x12, 0x32, 0x0a, 0x02, 0x65, 0x78, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x4f, 0x70, 0x65, 0x6e, 0x49, 0x4d, 0x53, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74,
+	0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x02, 0x65, 0x78, 0x22, 0x10, 0x0a,
 	0x0e, 0x70, 0x69, 0x6e, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x73, 0x52, 0x65, 0x73, 0x70, 0x22,
 	0x72, 0x0a, 0x12, 0x73, 0x65, 0x74, 0x46, 0x72, 0x69, 0x65, 0x6e, 0x64, 0x52, 0x65, 0x6d, 0x61,
 	0x72, 0x6b, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x6f, 0x77, 0x6e, 0x65, 0x72, 0x55, 0x73,
@@ -2359,7 +2382,8 @@ var file_friend_friend_proto_goTypes = []interface{}{
 	(*sdkws.FriendRequest)(nil),               // 39: OpenIMServer.sdkws.FriendRequest
 	(*sdkws.BlackInfo)(nil),                   // 40: OpenIMServer.sdkws.BlackInfo
 	(*wrapperspb.BoolValue)(nil),              // 41: OpenIMServer.protobuf.BoolValue
-	(*sdkws.UserInfo)(nil),                    // 42: OpenIMServer.sdkws.UserInfo
+	(*wrapperspb.StringValue)(nil),            // 42: OpenIMServer.protobuf.StringValue
+	(*sdkws.UserInfo)(nil),                    // 43: OpenIMServer.sdkws.UserInfo
 }
 var file_friend_friend_proto_depIdxs = []int32{
 	37, // 0: OpenIMServer.friend.getPaginationFriendsReq.pagination:type_name -> OpenIMServer.sdkws.RequestPagination
@@ -2371,53 +2395,55 @@ var file_friend_friend_proto_depIdxs = []int32{
 	37, // 6: OpenIMServer.friend.getPaginationBlacksReq.pagination:type_name -> OpenIMServer.sdkws.RequestPagination
 	40, // 7: OpenIMServer.friend.getPaginationBlacksResp.blacks:type_name -> OpenIMServer.sdkws.BlackInfo
 	41, // 8: OpenIMServer.friend.pinFriendsReq.isPinned:type_name -> OpenIMServer.protobuf.BoolValue
-	37, // 9: OpenIMServer.friend.getPaginationFriendsApplyFromReq.pagination:type_name -> OpenIMServer.sdkws.RequestPagination
-	39, // 10: OpenIMServer.friend.getPaginationFriendsApplyFromResp.friendRequests:type_name -> OpenIMServer.sdkws.FriendRequest
-	42, // 11: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.userInfo:type_name -> OpenIMServer.sdkws.UserInfo
-	38, // 12: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.friendInfo:type_name -> OpenIMServer.sdkws.FriendInfo
-	40, // 13: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.blackInfo:type_name -> OpenIMServer.sdkws.BlackInfo
-	35, // 14: OpenIMServer.friend.getSpecifiedFriendsInfoResp.infos:type_name -> OpenIMServer.friend.getSpecifiedFriendsInfoInfo
-	2,  // 15: OpenIMServer.friend.friend.applyToAddFriend:input_type -> OpenIMServer.friend.applyToAddFriendReq
-	6,  // 16: OpenIMServer.friend.friend.getPaginationFriendsApplyTo:input_type -> OpenIMServer.friend.getPaginationFriendsApplyToReq
-	30, // 17: OpenIMServer.friend.friend.getPaginationFriendsApplyFrom:input_type -> OpenIMServer.friend.getPaginationFriendsApplyFromReq
-	8,  // 18: OpenIMServer.friend.friend.getDesignatedFriendsApply:input_type -> OpenIMServer.friend.getDesignatedFriendsApplyReq
-	12, // 19: OpenIMServer.friend.friend.addBlack:input_type -> OpenIMServer.friend.addBlackReq
-	14, // 20: OpenIMServer.friend.friend.removeBlack:input_type -> OpenIMServer.friend.removeBlackReq
-	18, // 21: OpenIMServer.friend.friend.isFriend:input_type -> OpenIMServer.friend.isFriendReq
-	20, // 22: OpenIMServer.friend.friend.isBlack:input_type -> OpenIMServer.friend.isBlackReq
-	16, // 23: OpenIMServer.friend.friend.getPaginationBlacks:input_type -> OpenIMServer.friend.getPaginationBlacksReq
-	22, // 24: OpenIMServer.friend.friend.deleteFriend:input_type -> OpenIMServer.friend.deleteFriendReq
-	24, // 25: OpenIMServer.friend.friend.respondFriendApply:input_type -> OpenIMServer.friend.respondFriendApplyReq
-	26, // 26: OpenIMServer.friend.friend.pinFriends:input_type -> OpenIMServer.friend.pinFriendsReq
-	28, // 27: OpenIMServer.friend.friend.setFriendRemark:input_type -> OpenIMServer.friend.setFriendRemarkReq
-	4,  // 28: OpenIMServer.friend.friend.importFriends:input_type -> OpenIMServer.friend.importFriendReq
-	10, // 29: OpenIMServer.friend.friend.getDesignatedFriends:input_type -> OpenIMServer.friend.getDesignatedFriendsReq
-	0,  // 30: OpenIMServer.friend.friend.getPaginationFriends:input_type -> OpenIMServer.friend.getPaginationFriendsReq
-	32, // 31: OpenIMServer.friend.friend.getFriendIDs:input_type -> OpenIMServer.friend.getFriendIDsReq
-	34, // 32: OpenIMServer.friend.friend.GetSpecifiedFriendsInfo:input_type -> OpenIMServer.friend.getSpecifiedFriendsInfoReq
-	3,  // 33: OpenIMServer.friend.friend.applyToAddFriend:output_type -> OpenIMServer.friend.applyToAddFriendResp
-	7,  // 34: OpenIMServer.friend.friend.getPaginationFriendsApplyTo:output_type -> OpenIMServer.friend.getPaginationFriendsApplyToResp
-	31, // 35: OpenIMServer.friend.friend.getPaginationFriendsApplyFrom:output_type -> OpenIMServer.friend.getPaginationFriendsApplyFromResp
-	9,  // 36: OpenIMServer.friend.friend.getDesignatedFriendsApply:output_type -> OpenIMServer.friend.getDesignatedFriendsApplyResp
-	13, // 37: OpenIMServer.friend.friend.addBlack:output_type -> OpenIMServer.friend.addBlackResp
-	15, // 38: OpenIMServer.friend.friend.removeBlack:output_type -> OpenIMServer.friend.removeBlackResp
-	19, // 39: OpenIMServer.friend.friend.isFriend:output_type -> OpenIMServer.friend.isFriendResp
-	21, // 40: OpenIMServer.friend.friend.isBlack:output_type -> OpenIMServer.friend.isBlackResp
-	17, // 41: OpenIMServer.friend.friend.getPaginationBlacks:output_type -> OpenIMServer.friend.getPaginationBlacksResp
-	23, // 42: OpenIMServer.friend.friend.deleteFriend:output_type -> OpenIMServer.friend.deleteFriendResp
-	25, // 43: OpenIMServer.friend.friend.respondFriendApply:output_type -> OpenIMServer.friend.respondFriendApplyResp
-	27, // 44: OpenIMServer.friend.friend.pinFriends:output_type -> OpenIMServer.friend.pinFriendsResp
-	29, // 45: OpenIMServer.friend.friend.setFriendRemark:output_type -> OpenIMServer.friend.setFriendRemarkResp
-	5,  // 46: OpenIMServer.friend.friend.importFriends:output_type -> OpenIMServer.friend.importFriendResp
-	11, // 47: OpenIMServer.friend.friend.getDesignatedFriends:output_type -> OpenIMServer.friend.getDesignatedFriendsResp
-	1,  // 48: OpenIMServer.friend.friend.getPaginationFriends:output_type -> OpenIMServer.friend.getPaginationFriendsResp
-	33, // 49: OpenIMServer.friend.friend.getFriendIDs:output_type -> OpenIMServer.friend.getFriendIDsResp
-	36, // 50: OpenIMServer.friend.friend.GetSpecifiedFriendsInfo:output_type -> OpenIMServer.friend.getSpecifiedFriendsInfoResp
-	33, // [33:51] is the sub-list for method output_type
-	15, // [15:33] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	42, // 9: OpenIMServer.friend.pinFriendsReq.remark:type_name -> OpenIMServer.protobuf.StringValue
+	42, // 10: OpenIMServer.friend.pinFriendsReq.ex:type_name -> OpenIMServer.protobuf.StringValue
+	37, // 11: OpenIMServer.friend.getPaginationFriendsApplyFromReq.pagination:type_name -> OpenIMServer.sdkws.RequestPagination
+	39, // 12: OpenIMServer.friend.getPaginationFriendsApplyFromResp.friendRequests:type_name -> OpenIMServer.sdkws.FriendRequest
+	43, // 13: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.userInfo:type_name -> OpenIMServer.sdkws.UserInfo
+	38, // 14: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.friendInfo:type_name -> OpenIMServer.sdkws.FriendInfo
+	40, // 15: OpenIMServer.friend.getSpecifiedFriendsInfoInfo.blackInfo:type_name -> OpenIMServer.sdkws.BlackInfo
+	35, // 16: OpenIMServer.friend.getSpecifiedFriendsInfoResp.infos:type_name -> OpenIMServer.friend.getSpecifiedFriendsInfoInfo
+	2,  // 17: OpenIMServer.friend.friend.applyToAddFriend:input_type -> OpenIMServer.friend.applyToAddFriendReq
+	6,  // 18: OpenIMServer.friend.friend.getPaginationFriendsApplyTo:input_type -> OpenIMServer.friend.getPaginationFriendsApplyToReq
+	30, // 19: OpenIMServer.friend.friend.getPaginationFriendsApplyFrom:input_type -> OpenIMServer.friend.getPaginationFriendsApplyFromReq
+	8,  // 20: OpenIMServer.friend.friend.getDesignatedFriendsApply:input_type -> OpenIMServer.friend.getDesignatedFriendsApplyReq
+	12, // 21: OpenIMServer.friend.friend.addBlack:input_type -> OpenIMServer.friend.addBlackReq
+	14, // 22: OpenIMServer.friend.friend.removeBlack:input_type -> OpenIMServer.friend.removeBlackReq
+	18, // 23: OpenIMServer.friend.friend.isFriend:input_type -> OpenIMServer.friend.isFriendReq
+	20, // 24: OpenIMServer.friend.friend.isBlack:input_type -> OpenIMServer.friend.isBlackReq
+	16, // 25: OpenIMServer.friend.friend.getPaginationBlacks:input_type -> OpenIMServer.friend.getPaginationBlacksReq
+	22, // 26: OpenIMServer.friend.friend.deleteFriend:input_type -> OpenIMServer.friend.deleteFriendReq
+	24, // 27: OpenIMServer.friend.friend.respondFriendApply:input_type -> OpenIMServer.friend.respondFriendApplyReq
+	26, // 28: OpenIMServer.friend.friend.pinFriends:input_type -> OpenIMServer.friend.pinFriendsReq
+	28, // 29: OpenIMServer.friend.friend.setFriendRemark:input_type -> OpenIMServer.friend.setFriendRemarkReq
+	4,  // 30: OpenIMServer.friend.friend.importFriends:input_type -> OpenIMServer.friend.importFriendReq
+	10, // 31: OpenIMServer.friend.friend.getDesignatedFriends:input_type -> OpenIMServer.friend.getDesignatedFriendsReq
+	0,  // 32: OpenIMServer.friend.friend.getPaginationFriends:input_type -> OpenIMServer.friend.getPaginationFriendsReq
+	32, // 33: OpenIMServer.friend.friend.getFriendIDs:input_type -> OpenIMServer.friend.getFriendIDsReq
+	34, // 34: OpenIMServer.friend.friend.GetSpecifiedFriendsInfo:input_type -> OpenIMServer.friend.getSpecifiedFriendsInfoReq
+	3,  // 35: OpenIMServer.friend.friend.applyToAddFriend:output_type -> OpenIMServer.friend.applyToAddFriendResp
+	7,  // 36: OpenIMServer.friend.friend.getPaginationFriendsApplyTo:output_type -> OpenIMServer.friend.getPaginationFriendsApplyToResp
+	31, // 37: OpenIMServer.friend.friend.getPaginationFriendsApplyFrom:output_type -> OpenIMServer.friend.getPaginationFriendsApplyFromResp
+	9,  // 38: OpenIMServer.friend.friend.getDesignatedFriendsApply:output_type -> OpenIMServer.friend.getDesignatedFriendsApplyResp
+	13, // 39: OpenIMServer.friend.friend.addBlack:output_type -> OpenIMServer.friend.addBlackResp
+	15, // 40: OpenIMServer.friend.friend.removeBlack:output_type -> OpenIMServer.friend.removeBlackResp
+	19, // 41: OpenIMServer.friend.friend.isFriend:output_type -> OpenIMServer.friend.isFriendResp
+	21, // 42: OpenIMServer.friend.friend.isBlack:output_type -> OpenIMServer.friend.isBlackResp
+	17, // 43: OpenIMServer.friend.friend.getPaginationBlacks:output_type -> OpenIMServer.friend.getPaginationBlacksResp
+	23, // 44: OpenIMServer.friend.friend.deleteFriend:output_type -> OpenIMServer.friend.deleteFriendResp
+	25, // 45: OpenIMServer.friend.friend.respondFriendApply:output_type -> OpenIMServer.friend.respondFriendApplyResp
+	27, // 46: OpenIMServer.friend.friend.pinFriends:output_type -> OpenIMServer.friend.pinFriendsResp
+	29, // 47: OpenIMServer.friend.friend.setFriendRemark:output_type -> OpenIMServer.friend.setFriendRemarkResp
+	5,  // 48: OpenIMServer.friend.friend.importFriends:output_type -> OpenIMServer.friend.importFriendResp
+	11, // 49: OpenIMServer.friend.friend.getDesignatedFriends:output_type -> OpenIMServer.friend.getDesignatedFriendsResp
+	1,  // 50: OpenIMServer.friend.friend.getPaginationFriends:output_type -> OpenIMServer.friend.getPaginationFriendsResp
+	33, // 51: OpenIMServer.friend.friend.getFriendIDs:output_type -> OpenIMServer.friend.getFriendIDsResp
+	36, // 52: OpenIMServer.friend.friend.GetSpecifiedFriendsInfo:output_type -> OpenIMServer.friend.getSpecifiedFriendsInfoResp
+	35, // [35:53] is the sub-list for method output_type
+	17, // [17:35] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_friend_friend_proto_init() }

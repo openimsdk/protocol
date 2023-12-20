@@ -143,6 +143,8 @@ message pinFriendsReq{
   string ownerUserID = 1;
   repeated string friendUserIDs = 2;
   OpenIMServer.protobuf.BoolValue isPinned = 3;
+  OpenIMServer.protobuf.StringValue remark = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
 message pinFriendsResp{
 
