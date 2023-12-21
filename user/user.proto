@@ -52,7 +52,11 @@ message updateUserInfoReq{
 }
 message updateUserInfoResp{
 }
-
+message updateUserInfoExReq{
+  sdkws.UserInfoWithEx userInfo = 1;
+}
+message updateUserInfoExResp{
+}
 message setGlobalRecvMessageOptReq{
   string userID = 1;
   int32 globalRecvMsgOpt = 3;
@@ -255,6 +259,7 @@ service user {
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
   //update user information
   rpc updateUserInfo(updateUserInfoReq) returns(updateUserInfoResp);
+  rpc updateUserInfoEx(updateUserInfoExReq) returns(updateUserInfoExResp);
   //Set user message receiving options
   rpc setGlobalRecvMessageOpt(setGlobalRecvMessageOptReq) returns(setGlobalRecvMessageOptResp);
   //Get the user message receiving option If not found, no error will be returned

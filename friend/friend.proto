@@ -139,12 +139,14 @@ message respondFriendApplyReq{
 message respondFriendApplyResp{
 }
 
-message pinFriendsReq{
+message updateFriendsReq{
   string ownerUserID = 1;
   repeated string friendUserIDs = 2;
   OpenIMServer.protobuf.BoolValue isPinned = 3;
+  OpenIMServer.protobuf.StringValue remark = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
-message pinFriendsResp{
+message updateFriendsResp{
 
 }
 
@@ -212,7 +214,7 @@ service friend{
   //对好友申请响应（同意或拒绝）
   rpc respondFriendApply(respondFriendApplyReq) returns(respondFriendApplyResp);
   //星标好友
-  rpc pinFriends(pinFriendsReq) returns(pinFriendsResp);
+  rpc updateFriends(updateFriendsReq) returns(updateFriendsResp);
   //设置好友备注
   rpc setFriendRemark(setFriendRemarkReq) returns(setFriendRemarkResp);
   //导入好友关系
