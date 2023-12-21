@@ -142,6 +142,12 @@ func (x *UserRegisterReq) Check() error {
 	if x.Users == nil {
 		return errors.New("Users is empty")
 	}
+	for _, u := range x.Users {
+		if u.Nickname == "" {
+			return errors.New("User name is empty")
+		}
+	}
+
 	return nil
 }
 
