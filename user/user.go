@@ -140,7 +140,7 @@ func (x *GetPaginationUsersReq) Check() error {
 
 func (x *UserRegisterReq) Check() error {
 	if x.Users == nil {
-		return errors.New("Users is empty")
+		return errors.New("Users are empty")
 	}
 	for _, u := range x.Users {
 		if u.Nickname == "" {
