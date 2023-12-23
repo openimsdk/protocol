@@ -197,6 +197,41 @@ message GetConversationMaxSeqResp {
   int64 maxSeq = 1;
 }
 
+message GetConversationListReq{
+  string userID = 1;
+  repeated string conversationIDs = 2;
+}
+
+message GetConversationListResp{
+  repeated ConversationElem conversationElems=1;
+}
+
+message ConversationElem {
+  string conversationID=1;
+  int32 recvMsgOpt=2;
+  int64 unreadCount = 3;
+  MsgInfo msgInfo=4;
+  bool IsPinned=5;
+}
+
+message MsgInfo{
+  string serverMsgID = 1;
+  string clientMsgID = 2;
+  int32 sessionType=3;
+  string sendID=4;
+  string recvID=5;
+  string senderName=6;
+  string faceURL=7;
+  string groupID=8;
+  string groupName=9;
+  string groupFaceURL=10;
+  int32 groupType=11;
+  uint32 groupMemberCount=12;
+  int64 LatestMsgRecvTime=13;
+  int32 msgFrom = 14;
+  int32 contentType = 15;
+  string content = 16;
+}
 
 message GetConversationsHasReadAndMaxSeqReq {
   string userID = 1;
@@ -314,6 +349,7 @@ service msg {
   rpc GetHasReadSeqs(seqsInfoReq)returns(seqsInfoResp);
   rpc GetMsgByConversationIDs(GetMsgByConversationIDsReq)returns(GetMsgByConversationIDsResp);
   rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns(GetConversationMaxSeqResp);
+  rpc GetConversationList(GetConversationListReq)returns(GetConversationListResp);
   //拉取历史消息（包括用户的，以及指定群组的）
   rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns(sdkws.PullMessageBySeqsResp);
   rpc SearchMessage(SearchMessageReq) returns(SearchMessageResp);
@@ -340,9 +376,8 @@ service msg {
   rpc MarkMsgsAsRead(MarkMsgsAsReadReq) returns(MarkMsgsAsReadResp);
   rpc MarkConversationAsRead(MarkConversationAsReadReq) returns(MarkConversationAsReadResp);
   rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns(SetConversationHasReadSeqResp);
-  
-  rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns(GetConversationsHasReadAndMaxSeqResp);
 
+  rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns(GetConversationsHasReadAndMaxSeqResp);
   rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
   rpc GetActiveGroup(GetActiveGroupReq) returns(GetActiveGroupResp);
   rpc GetServerTime(GetServerTimeReq) returns(GetServerTimeResp);
