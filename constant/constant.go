@@ -286,8 +286,9 @@ const (
 )
 
 const (
-	AppOrdinaryUsers = 1
-	AppAdmin         = 2
+	AppOrdinaryUsers     = 1
+	AppAdmin             = 2
+	AppNotificationAdmin = 3
 
 	GroupOwner         = 100
 	GroupAdmin         = 60
