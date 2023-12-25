@@ -80,6 +80,7 @@ message JoinGroupReq{
   string reqMessage = 2;
   int32 joinSource = 3;
   string inviterUserID = 4;
+  string ex = 5;
 }
 message JoinGroupResp{
 }

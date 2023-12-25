@@ -84,6 +84,14 @@ message UserInfo{
   int32 globalRecvMsgOpt = 7;
 }
 
+message UserInfoWithEx{
+  string userID = 1;
+  string nickname = 2;
+  string faceURL = 3;
+  OpenIMServer.protobuf.StringValue ex = 4;
+  int32 globalRecvMsgOpt = 7;
+}
+
 message FriendInfo{
   string ownerUserID = 1;
   string remark = 2;
@@ -421,7 +429,7 @@ message BlackDeletedTips{
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
 }
-message PinFriendTips{
+message UpdateFriendTips{
   string userID = 1;
   repeated FriendInfo updateFriends = 2;
 }
@@ -527,8 +535,9 @@ message SetAppBackgroundStatusResp {
 message ProcessUserCommand{
   string userID = 1;
   int32 type = 2;
-  string uuid = 3;
-  string value = 4;
+  int64 createTime = 3;
+  string uuid = 4;
+  string value = 5;
 }
 
 message RequestPagination {
