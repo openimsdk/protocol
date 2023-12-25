@@ -1,0 +1,286 @@
+syntax = "proto3";
+package OpenIMServer.rtc;
+import "sdkws/sdkws.proto";
+import "wrapperspb/wrapperspb.proto";
+option go_package = "github.com/OpenIMSDK/protocol/rtc";
+
+message ParticipantMetaData{
+  OpenIMServer.sdkws.GroupInfo groupInfo = 1;
+  OpenIMServer.sdkws.GroupMemberFullInfo groupMemberInfo = 2;
+  OpenIMServer.sdkws.PublicUserInfo userInfo = 3;
+}
+
+message GetJoinTokenReq{
+  string room = 1;
+  string identity = 2;
+  ParticipantMetaData metaData = 3;
+}
+
+message GetJoinTokenResp{
+  string jwt = 1;
+  string liveURL = 2;
+}
+
+
+message SignalReq {
+  oneof payload {
+    SignalInviteReq invite = 1;
+    SignalInviteInGroupReq inviteInGroup= 2;
+    SignalCancelReq cancel = 3;
+    SignalAcceptReq accept = 4;
+    SignalHungUpReq hungUp = 5;
+    SignalRejectReq reject = 6;
+    SignalGetTokenByRoomIDReq getTokenByRoomID = 7;
+  }
+}
+
+message SignalSendCustomSignalReq {
+  string roomID = 1;
+  string customInfo = 2;
+}
+
+message SignalSendCustomSignalResp {
+}
+
+message SignalOnStreamChangeReq {
+  string roomID = 1;
+  string streamType = 2;
+  bool mute = 3;
+}
+
+message SignalResp {
+  oneof payload {
+    SignalInviteResp invite = 1;
+    SignalInviteInGroupResp inviteInGroup= 2;
+    SignalCancelResp cancel = 3;
+    SignalAcceptResp accept = 4;
+    SignalHungUpResp hungUp = 5;
+    SignalRejectResp reject = 6;
+    SignalGetTokenByRoomIDResp getTokenByRoomID = 7;
+  }
+}
+
+message InvitationInfo  {
+  string inviterUserID = 1;
+  repeated string inviteeUserIDList = 2;
+  string customData = 3;
+  string  groupID = 4;
+  string roomID = 5;
+  int32 timeout = 6;
+  string mediaType = 7;
+  int32 platformID = 8;
+  int32 sessionType = 9;
+  int64 initiateTime = 10;
+  repeated string busyLineUserIDList = 11;
+}
+
+message SignalInviteReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  ParticipantMetaData participant = 3;
+  string userID = 4;
+}
+
+message SignalInviteResp {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+  repeated string busyLineUserIDList = 4;
+}
+
+message SignalInviteInGroupReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  ParticipantMetaData participant = 3;
+  string userID = 4;
+}
+
+message SignalInviteInGroupResp {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+  repeated string busyLineUserIDList = 4;
+}
+
+message SignalCancelReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  ParticipantMetaData participant = 3;
+  string userID = 4;
+}
+
+message SignalCancelResp {
+
+}
+
+message SignalAcceptReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  ParticipantMetaData participant = 3;
+  int32 opUserPlatformID = 4;
+  string userID = 5;
+}
+
+message SignalAcceptResp {
+  string token = 1;
+  string roomID = 2;
+  string liveURL = 3;
+}
+
+message SignalHungUpReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  string userID = 3;
+}
+
+message SignalHungUpResp {
+
+}
+
+
+message SignalRejectReq {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo  = 2;
+  ParticipantMetaData participant = 3;
+  int32 opUserPlatformID = 4;
+  string userID = 5;
+}
+
+message SignalRejectResp {
+
+}
+
+message SignalGetRoomByGroupIDReq {
+  string groupID = 1;
+}
+
+message SignalGetRoomByGroupIDResp {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string roomID = 3;
+}
+
+message SignalOnRoomParticipantConnectedReq {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string groupID = 3;
+}
+
+message SignalOnRoomParticipantDisconnectedReq {
+  InvitationInfo invitation = 1;
+  repeated ParticipantMetaData participant = 2;
+  string groupID = 3;
+}
+
+message SignalGetTokenByRoomIDReq {
+  string roomID = 1;
+  ParticipantMetaData participant = 2;
+  string userID = 3;
+}
+
+message SignalGetTokenByRoomIDResp {
+  string token = 1;
+  string liveURL = 2;
+}
+
+message SignalMessageAssembleReq {
+  SignalReq signalReq = 1;
+}
+
+message SignalMessageAssembleResp {
+  SignalResp signalResp = 1;
+}
+
+message SignalGetRoomsReq {
+  repeated string roomIDs = 1;
+}
+
+message SignalGetRoomsResp {
+  repeated SignalGetRoomByGroupIDResp roomList = 1;
+}
+
+
+message GetSignalInvitationInfoReq {
+  string roomID = 1;
+}
+
+message GetSignalInvitationInfoResp {
+  InvitationInfo invitationInfo = 1;
+  sdkws.OfflinePushInfo offlinePushInfo = 2;
+}
+
+message GetSignalInvitationInfoStartAppReq {
+  string userID = 1;
+}
+
+message GetSignalInvitationInfoStartAppResp {
+  InvitationInfo invitation = 1;
+  sdkws.OfflinePushInfo offlinePushInfo = 2;
+}
+
+message SignalUser {
+  string userID = 1;
+  string nickname = 2;
+  int32 status = 3;
+}
+
+message SignalRecord {
+  string roomID = 1;
+  string sID = 2;
+  string fileName = 3;
+  string mediaType = 4;
+  int32 sessionType = 5;
+  string inviterUserID = 6;
+  string inviterUserNickname = 7;
+  string groupID = 8;
+  string groupName = 9;
+  repeated SignalUser inviterUsers = 10;
+  int64 createTime = 11;
+  int64 endTime = 12;
+  string size = 13;
+  string fileURL = 14;
+}
+
+message FileRecord {
+  string size = 1;
+  string fileURL = 2;
+}
+
+message GetSignalInvitationRecordsReq {
+  sdkws.RequestPagination pagination = 1;
+  int32 sessionType = 2;
+  string sendID = 3;
+  string recvID = 4;
+  int64 startTime = 5;
+  int64 endTime = 6;
+  repeated sdkws.UserInfo JoinedUsers = 7;
+}
+
+message GetSignalInvitationRecordsResp {
+  int32 total = 1;
+  repeated SignalRecord signalRecords = 2;
+}
+
+message DeleteSignalRecordsReq {
+  repeated string sIDs = 1;
+}
+
+message DeleteSignalRecordsResp {
+}
+
+service RtcService {
+  rpc SignalMessageAssemble(SignalMessageAssembleReq) returns(SignalMessageAssembleResp);
+  rpc SignalGetRoomByGroupID(SignalGetRoomByGroupIDReq) returns(SignalGetRoomByGroupIDResp);
+  rpc SignalGetTokenByRoomID(SignalGetTokenByRoomIDReq) returns(SignalGetTokenByRoomIDResp);
+  rpc SignalGetRooms(SignalGetRoomsReq) returns(SignalGetRoomsResp);
+
+  rpc GetSignalInvitationInfo(GetSignalInvitationInfoReq) returns(GetSignalInvitationInfoResp);
+  rpc GetSignalInvitationInfoStartApp(GetSignalInvitationInfoStartAppReq) returns(GetSignalInvitationInfoStartAppResp);
+
+  // custom signal
+  rpc SignalSendCustomSignal(SignalSendCustomSignalReq) returns(SignalSendCustomSignalResp);
+
+  // rtc cms
+  rpc GetSignalInvitationRecords(GetSignalInvitationRecordsReq) returns(GetSignalInvitationRecordsResp);
+  rpc DeleteSignalRecords(DeleteSignalRecordsReq) returns(DeleteSignalRecordsResp);
+}
