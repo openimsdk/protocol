@@ -125,6 +125,7 @@ message InitiateFormDataResp {
   repeated KeyValues header = 4;
   map<string, string> formData = 5;
   int64 expires = 6;
+  repeated int32 successCodes = 7;
 }
 
 message CompleteFormDataReq {
