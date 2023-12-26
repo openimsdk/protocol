@@ -254,6 +254,47 @@ message processUserCommandGetResp {
   repeated CommandInfoResp KVArray = 1;
 }
 
+message addNotificationAccountReq{
+  string nickName=1;
+  string faceURL=2;
+}
+
+message addNotificationAccountResp{
+}
+
+message updateNotificationAccountInfoReq{
+  string userID=1;
+  string faceURL=2;
+  string nickName=3;
+}
+
+message updateNotificationAccountInfoResp{
+}
+
+message searchNotificationAccountReq{
+  string userID=1;
+  string nickName=2;
+  sdkws.RequestPagination pagination = 3;
+}
+
+message notificationAccountInfo{
+  string userID=1;
+  string faceURL=2;
+  string nickName=3;
+}
+
+message searchNotificationAccountResp{
+  int64 total=1;
+  repeated notificationAccountInfo notificationAccounts=2;
+}
+
+message getNotificationAccountReq{
+  string userID=1;
+}
+
+message getNotificationAccountResp{
+}
+
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -290,5 +331,13 @@ service user {
   rpc processUserCommandDelete(processUserCommandDeleteReq)returns(processUserCommandDeleteResp);
   //add a general function for get
   rpc processUserCommandGet(processUserCommandGetReq)returns(processUserCommandGetResp);
+  //add a system notification account
+  rpc addNotificationAccount(addNotificationAccountReq)returns(addNotificationAccountResp);
+  //update the system notification info
+  rpc updateNotificationAccountInfo(updateNotificationAccountInfoReq)returns(updateNotificationAccountInfoResp);
+  //search the system notification account
+  rpc searchNotificationAccount(searchNotificationAccountReq)returns(searchNotificationAccountResp);
+  //getNotificationAccount by userID
+  rpc getNotificationAccount(getNotificationAccountReq)returns(getNotificationAccountResp);
 }
 
