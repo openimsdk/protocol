@@ -546,4 +546,5 @@ message RequestPagination {
 }
 message FriendsInfoUpdateTips{
   FromToUserID fromToUserID = 1;
+  repeated FriendInfo friendsInfo = 2;
 }
