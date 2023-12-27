@@ -429,10 +429,7 @@ message BlackDeletedTips{
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
 }
-message UpdateFriendTips{
-  string userID = 1;
-  repeated FriendInfo updateFriends = 2;
-}
+
 //////////////////////user/////////////////////
 message UserInfoUpdatedTips{
   string userID = 1;
@@ -543,4 +540,8 @@ message ProcessUserCommand{
 message RequestPagination {
   int32 pageNumber = 1;
   int32 showNumber = 2;
+}
+message FriendsInfoUpdateTips{
+  FromToUserID fromToUserID = 1;
+  repeated string friendIDs = 2;
 }

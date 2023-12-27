@@ -57,6 +57,7 @@ const (
 	BlackAddedNotification                = 1207 // add_black
 	BlackDeletedNotification              = 1208 // remove_black
 	FriendInfoUpdatedNotification         = 1209
+	FriendsInfoUpdateNotification         = 1210 //update friend info
 
 	ConversationChangeNotification = 1300 // change conversation opt
 
