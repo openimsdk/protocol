@@ -86,10 +86,10 @@ message UserInfo{
 
 message UserInfoWithEx{
   string userID = 1;
-  string nickname = 2;
-  string faceURL = 3;
+  OpenIMServer.protobuf.StringValue nickname = 2;
+  OpenIMServer.protobuf.StringValue faceURL = 3;
   OpenIMServer.protobuf.StringValue ex = 4;
-  int32 globalRecvMsgOpt = 7;
+  OpenIMServer.protobuf.Int32Value globalRecvMsgOpt = 7;
 }
 
 message FriendInfo{
