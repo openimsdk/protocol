@@ -16,7 +16,6 @@ package msg
 
 import (
 	"errors"
-	"github.com/OpenIMSDK/protocol/constant"
 )
 
 func (x *GetMaxAndMinSeqReq) Check() error {
@@ -44,13 +43,6 @@ func (x *SetSendMsgStatusReq) Check() error {
 }
 
 func (x *GetSendMsgStatusReq) Check() error {
-	return nil
-}
-
-func (x *SearchMessageReq) Check() error {
-	if x.MsgType < constant.Text || x.MsgType > constant.AdvancedText {
-		return errors.New("msgType is error")
-	}
 	return nil
 }
 
