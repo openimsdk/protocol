@@ -3913,6 +3913,115 @@ func (x *UserStatusChangeTips) GetPlatformID() int32 {
 	return 0
 }
 
+// UserCommand Group
+type UserCommandAddTips struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FromUserID string `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"`
+	ToUserID   string `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`
+}
+
+func (x *UserCommandAddTips) Reset() {
+	*x = UserCommandAddTips{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sdkws_sdkws_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserCommandAddTips) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserCommandAddTips) ProtoMessage() {}
+
+func (x *UserCommandAddTips) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type UserCommandUpdateTips struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FromUserID string `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"`
+	ToUserID   string `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`
+}
+
+func (x *UserCommandUpdateTips) Reset() {
+	*x = UserCommandUpdateTips{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sdkws_sdkws_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserCommandUpdateTips) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserCommandUpdateTips) ProtoMessage() {}
+
+func (x *UserCommandUpdateTips) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+type UserCommandDeleteTips struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	FromUserID string `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"`
+	ToUserID   string `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`
+}
+
+func (x *UserCommandDeleteTips) Reset() {
+	*x = UserCommandDeleteTips{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_sdkws_sdkws_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserCommandDeleteTips) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserCommandDeleteTips) ProtoMessage() {}
+
+func (x *UserCommandDeleteTips) ProtoReflect() protoreflect.Message {
+	mi := &file_sdkws_sdkws_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
 // ////////////////////conversation/////////////////////
 type ConversationUpdateTips struct {
 	state         protoimpl.MessageState
