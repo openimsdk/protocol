@@ -441,6 +441,18 @@ message UserStatusChangeTips {
   int32 status = 3;
   int32 platformID = 4;
 }
+message UserCommandAddTips {
+  string fromUserID = 1;
+  string toUserID = 2;
+}
+message UserCommandUpdateTips {
+  string fromUserID = 1;
+  string toUserID = 2;
+}
+message UserCommandDeleteTips {
+  string fromUserID = 1;
+  string toUserID = 2;
+}
 
 //////////////////////conversation/////////////////////
 message ConversationUpdateTips{
