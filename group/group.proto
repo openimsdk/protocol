@@ -110,6 +110,7 @@ message GetGroupMemberListReq {
   sdkws.RequestPagination pagination = 1;
   string groupID = 2;
   int32 filter = 3;
+  string keyword=4;
 }
 
 message GetGroupMemberListResp {

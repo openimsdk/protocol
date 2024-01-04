@@ -14,11 +14,14 @@
 
 package third
 
-import "errors"
+import (
+	"errors"
+	"github.com/OpenIMSDK/protocol/constant"
+)
 
 func (x *FcmUpdateTokenReq) Check() error {
-	if x.PlatformID < 1 {
-		return errors.New("PlatformID is invalid")
+	if x.PlatformID > constant.AdminPlatformID || x.PlatformID < constant.IOSPlatformID {
+		return errors.New("platformID is invalidate")
 	}
 	if x.FcmToken == "" {
 		return errors.New("FcmToken is empty")

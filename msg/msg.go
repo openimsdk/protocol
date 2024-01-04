@@ -14,7 +14,9 @@
 
 package msg
 
-import "errors"
+import (
+	"errors"
+)
 
 func (x *GetMaxAndMinSeqReq) Check() error {
 	if x.UserID == "" {
