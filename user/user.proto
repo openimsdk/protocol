@@ -14,9 +14,10 @@
 
 syntax = "proto3";
 package OpenIMServer.user;
+
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
-
+import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/OpenIMSDK/protocol/user";
 
 message getAllUserIDReq{
@@ -212,7 +213,8 @@ message processUserCommandAddReq {
   string userID = 1;
   int32 type = 2;
   string uuid = 3;
-  string value = 4;
+  OpenIMServer.protobuf.StringValue value = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
 
 message processUserCommandAddResp {
@@ -231,7 +233,8 @@ message processUserCommandUpdateReq {
   string userID = 1;
   int32 type = 2;
   string uuid = 3;
-  string value = 4;
+  OpenIMServer.protobuf.StringValue value = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
 
 message processUserCommandUpdateResp {
@@ -248,6 +251,7 @@ message CommandInfoResp {
   int64 createTime = 2;
   string uuid = 3;
   string value = 4;
+  string ex = 5;
 }
 
 message processUserCommandGetResp {
@@ -262,6 +266,7 @@ message AllCommandInfoResp {
   int64 createTime = 2;
   string uuid = 3;
   string value = 4;
+  string ex = 5;
 }
 
 message processUserCommandGetAllResp {
