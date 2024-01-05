@@ -246,7 +246,12 @@ func (x *ProcessUserCommandGetReq) Check() error {
 	}
 	return nil
 }
-
+func (x *ProcessUserCommandGetAllReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
 func (x *AddNotificationAccountReq) Check() error {
 	if x.NickName == "" {
 		return errors.New("nickName is empty")
