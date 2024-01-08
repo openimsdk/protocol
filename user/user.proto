@@ -294,8 +294,7 @@ message updateNotificationAccountInfoResp{
 }
 
 message searchNotificationAccountReq{
-  string userID=1;
-  string nickName=2;
+  string keyword =1;
   sdkws.RequestPagination pagination = 3;
 }
 
