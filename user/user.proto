@@ -14,9 +14,10 @@
 
 syntax = "proto3";
 package OpenIMServer.user;
+
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
-
+import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/OpenIMSDK/protocol/user";
 
 message getAllUserIDReq{
@@ -212,7 +213,8 @@ message processUserCommandAddReq {
   string userID = 1;
   int32 type = 2;
   string uuid = 3;
-  string value = 4;
+  OpenIMServer.protobuf.StringValue value = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
 
 message processUserCommandAddResp {
@@ -231,7 +233,8 @@ message processUserCommandUpdateReq {
   string userID = 1;
   int32 type = 2;
   string uuid = 3;
-  string value = 4;
+  OpenIMServer.protobuf.StringValue value = 4;
+  OpenIMServer.protobuf.StringValue ex = 5;
 }
 
 message processUserCommandUpdateResp {
@@ -248,12 +251,27 @@ message CommandInfoResp {
   int64 createTime = 2;
   string uuid = 3;
   string value = 4;
+  string ex = 5;
 }
 
 message processUserCommandGetResp {
-  repeated CommandInfoResp KVArray = 1;
+  repeated CommandInfoResp CommandResp = 1;
+}
+message processUserCommandGetAllReq {
+  string userID = 1;
 }
 
+message AllCommandInfoResp {
+  int32 type = 1;
+  int64 createTime = 2;
+  string uuid = 3;
+  string value = 4;
+  string ex = 5;
+}
+
+message processUserCommandGetAllResp {
+  repeated AllCommandInfoResp CommandResp = 1;
+}
 message addNotificationAccountReq{
   string nickName=1;
   string faceURL=2;
@@ -331,6 +349,8 @@ service user {
   rpc processUserCommandDelete(processUserCommandDeleteReq)returns(processUserCommandDeleteResp);
   //add a general function for get
   rpc processUserCommandGet(processUserCommandGetReq)returns(processUserCommandGetResp);
+  //add a general function for get all
+  rpc processUserCommandGetAll(processUserCommandGetAllReq)returns(processUserCommandGetAllResp);
   //add a system notification account
   rpc addNotificationAccount(addNotificationAccountReq)returns(addNotificationAccountResp);
   //update the system notification info

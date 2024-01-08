@@ -211,9 +211,6 @@ func (x *ProcessUserCommandAddReq) Check() error {
 	if x.Uuid == "" {
 		return errors.New("UUID is empty")
 	}
-	if x.Value == "" {
-		return errors.New("value is empty")
-	}
 	return nil
 }
 func (x *ProcessUserCommandDeleteReq) Check() error {
@@ -238,9 +235,6 @@ func (x *ProcessUserCommandUpdateReq) Check() error {
 	if x.Uuid == "" {
 		return errors.New("UUID is empty")
 	}
-	if x.Value == "" {
-		return errors.New("value is empty")
-	}
 	return nil
 }
 func (x *ProcessUserCommandGetReq) Check() error {
@@ -252,7 +246,12 @@ func (x *ProcessUserCommandGetReq) Check() error {
 	}
 	return nil
 }
-
+func (x *ProcessUserCommandGetAllReq) Check() error {
+	if x.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
 func (x *AddNotificationAccountReq) Check() error {
 	if x.NickName == "" {
 		return errors.New("nickName is empty")
