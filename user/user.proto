@@ -255,8 +255,9 @@ message processUserCommandGetResp {
 }
 
 message addNotificationAccountReq{
-  string nickName=1;
-  string faceURL=2;
+  string userID=1;
+  string nickName=2;
+  string faceURL=3;
 }
 
 message addNotificationAccountResp{
