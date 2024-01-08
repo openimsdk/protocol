@@ -261,6 +261,9 @@ message addNotificationAccountReq{
 }
 
 message addNotificationAccountResp{
+  string userID=1;
+  string faceURL=2;
+  string nickName=3;
 }
 
 message updateNotificationAccountInfoReq{
