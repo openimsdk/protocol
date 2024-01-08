@@ -291,6 +291,7 @@ const (
 )
 
 const (
+	IMOrdinaryUser       = 0
 	AppOrdinaryUsers     = 1
 	AppAdmin             = 2
 	AppNotificationAdmin = 3
