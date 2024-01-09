@@ -272,3 +272,13 @@ func (x *UpdateNotificationAccountInfoReq) Check() error {
 	}
 	return nil
 }
+
+func (x *SearchNotificationAccountReq) Check() error {
+	if x.Pagination == nil {
+		return errors.New("pagination is empty")
+	}
+	if x.Pagination.PageNumber < 1 {
+		return errors.New("pageNumber is invalid")
+	}
+	return nil
+}
