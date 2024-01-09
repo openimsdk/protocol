@@ -79,9 +79,10 @@ message GetSortedConversationListReq{
 }
 
 message GetSortedConversationListResp{
-  repeated ConversationElem conversationElems=1;
+  int64 conversationTotal=1;
   int64 unreadTotal=2;
-  int64 conversationTotal=3;
+  repeated ConversationElem conversationElems=3;
+
 }
 
 message ConversationElem {
