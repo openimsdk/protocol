@@ -173,9 +173,17 @@ func (x *GetConversationsByConversationIDReq) Check() error {
 	return nil
 }
 
-func (x *GetConversationListReq) Check() error {
+func (x *GetSortedConversationListReq) Check() error {
 	if x.UserID == "" {
 		return errors.New("userID is empty")
 	}
+
+	if x.Pagination == nil {
+		return errors.New("pagination is empty")
+	}
+	if x.Pagination.PageNumber < 1 {
+		return errors.New("pageNumber is invalid")
+	}
+
 	return nil
 }
