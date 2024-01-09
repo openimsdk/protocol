@@ -14,6 +14,7 @@
 
 syntax = "proto3";
 package OpenIMServer.conversation;
+import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/OpenIMSDK/protocol/conversation";
 
@@ -71,21 +72,25 @@ message GetConversationResp{
   Conversation conversation = 2;
 }
 
-message GetConversationListReq{
+message GetSortedConversationListReq{
   string userID = 1;
   repeated string conversationIDs = 2;
+  sdkws.RequestPagination pagination = 3;
 }
 
-message GetConversationListResp{
+message GetSortedConversationListResp{
   repeated ConversationElem conversationElems=1;
+  int64 unreadTotal=2;
+  int64 conversationTotal=3;
 }
 
 message ConversationElem {
   string conversationID=1;
   int32 recvMsgOpt=2;
   int64 unreadCount = 3;
-  MsgInfo msgInfo=4;
-  bool IsPinned=5;
+  bool IsPinned=4;
+  MsgInfo msgInfo=5;
+
 }
 
 message MsgInfo{
@@ -205,7 +210,7 @@ message GetConversationOfflinePushUserIDsResp {
 
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
-  rpc GetConversationList(GetConversationListReq)returns(GetConversationListResp);
+  rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
   rpc GetAllConversations(GetAllConversationsReq)returns(GetAllConversationsResp);
   rpc GetConversations(GetConversationsReq)returns(GetConversationsResp);
   rpc SetConversation(SetConversationReq)returns(SetConversationResp);
