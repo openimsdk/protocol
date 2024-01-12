@@ -131,6 +131,8 @@ message batchSetConversationsResp{
 
 message getPaginationUsersReq {
   sdkws.RequestPagination pagination = 2;
+  string userID = 3;
+  string userName = 4;
 }
 
 message getPaginationUsersResp{
