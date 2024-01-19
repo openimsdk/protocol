@@ -54,8 +54,7 @@ message OnlineBatchPushOneMsgResp{
 
 message SingleMsgToUserPlatform{
   int64   ResultCode = 1;
-  string  RecvID = 2;
-  int32   RecvPlatFormID = 3;
+  int32   PlatFormID = 2;
 }
 
 message GetUsersOnlineStatusReq{
