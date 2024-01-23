@@ -110,7 +110,7 @@ message GetGroupMemberListReq {
   sdkws.RequestPagination pagination = 1;
   string groupID = 2;
   int32 filter = 3;
-  string keyword=4;
+  string keyword = 4;
 }
 
 message GetGroupMemberListResp {
@@ -347,7 +347,7 @@ message GroupCreateCountResp {
 }
 
 message getGroupUsersReqApplicationListReq {
-  string groupID =1;
+  string groupID = 1;
   repeated string userIDs = 2;
 }
 
@@ -357,7 +357,9 @@ message getGroupUsersReqApplicationListResp {
 }
 
 message notificationUserInfoUpdateReq {
-  string userID =1;
+  string userID = 1;
+  sdkws.PublicUserInfo oldUserInfo = 2;
+  sdkws.PublicUserInfo newUserInfo = 3;
 }
 
 message notificationUserInfoUpdateResp {
