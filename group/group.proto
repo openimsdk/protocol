@@ -358,8 +358,8 @@ message getGroupUsersReqApplicationListResp {
 
 message notificationUserInfoUpdateReq {
   string userID = 1;
-  sdkws.PublicUserInfo oldUserInfo = 2;
-  sdkws.PublicUserInfo newUserInfo = 3;
+  sdkws.UserInfo oldUserInfo = 2;
+  sdkws.UserInfo newUserInfo = 3;
 }
 
 message notificationUserInfoUpdateResp {

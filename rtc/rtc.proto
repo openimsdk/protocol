@@ -1,7 +1,6 @@
 syntax = "proto3";
 package OpenIMServer.rtc;
 import "sdkws/sdkws.proto";
-import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/OpenIMSDK/protocol/rtc";
 
 message ParticipantMetaData{
