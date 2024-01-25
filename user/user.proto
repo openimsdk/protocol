@@ -200,13 +200,13 @@ message getUserStatusResp{
   repeated onlineStatus statusList = 1;
 }
 
-
 message setUserStatusReq{
   string userID = 1;
   int32 status = 2;
   int32 platformID = 3;
+  string connID = 4;
+  bool isBackground = 5;
 }
-
 
 message setUserStatusResp {
 }
@@ -275,44 +275,44 @@ message processUserCommandGetAllResp {
   repeated AllCommandInfoResp CommandResp = 1;
 }
 message addNotificationAccountReq{
-  string userID=1;
-  string nickName=2;
-  string faceURL=3;
+  string userID = 1;
+  string nickName = 2;
+  string faceURL = 3;
 }
 
 message addNotificationAccountResp{
-  string userID=1;
-  string faceURL=2;
-  string nickName=3;
+  string userID = 1;
+  string faceURL = 2;
+  string nickName = 3;
 }
 
 message updateNotificationAccountInfoReq{
-  string userID=1;
-  string faceURL=2;
-  string nickName=3;
+  string userID = 1;
+  string faceURL = 2;
+  string nickName = 3;
 }
 
 message updateNotificationAccountInfoResp{
 }
 
 message searchNotificationAccountReq{
-  string keyword =1;
+  string keyword = 1;
   sdkws.RequestPagination pagination = 3;
 }
 
 message notificationAccountInfo{
-  string userID=1;
-  string faceURL=2;
-  string nickName=3;
+  string userID = 1;
+  string faceURL = 2;
+  string nickName = 3;
 }
 
 message searchNotificationAccountResp{
-  int64 total=1;
-  repeated notificationAccountInfo notificationAccounts=2;
+  int64 total = 1;
+  repeated notificationAccountInfo notificationAccounts = 2;
 }
 
 message getNotificationAccountReq{
-  string userID=1;
+  string userID = 1;
 }
 
 message getNotificationAccountResp{
