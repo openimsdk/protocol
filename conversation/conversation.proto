@@ -209,6 +209,14 @@ message GetConversationOfflinePushUserIDsResp {
   repeated string userIDs = 1;
 }
 
+message GetConversationNotReceiveMessageUserIDsReq {
+  string conversationID = 1;
+}
+
+message GetConversationNotReceiveMessageUserIDsResp {
+  repeated string userIDs = 1;
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
@@ -224,4 +232,5 @@ service conversation {
   rpc GetUserConversationIDsHash(GetUserConversationIDsHashReq) returns(GetUserConversationIDsHashResp);
   rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns(GetConversationsByConversationIDResp);
   rpc GetConversationOfflinePushUserIDs(GetConversationOfflinePushUserIDsReq) returns(GetConversationOfflinePushUserIDsResp);
+  rpc GetConversationNotReceiveMessageUserIDs(GetConversationNotReceiveMessageUserIDsReq) returns(GetConversationNotReceiveMessageUserIDsResp);
 }
