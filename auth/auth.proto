@@ -43,9 +43,21 @@ message parseTokenResp{
   int64 expireTimeSeconds = 4;
 }
 
+message getUserTokenReq{
+  int32  platformID = 1;
+  string userID = 2;
+}
+
+message getUserTokenResp{
+  string token = 1;
+  int64  expireTimeSeconds = 2;
+}
+
 service Auth {
   //生成token
   rpc userToken(userTokenReq) returns(userTokenResp);
+  // 管理员获取用户 token
+  rpc getUserToken(getUserTokenReq)returns(getUserTokenResp);
   //强制退出登录
   rpc forceLogout(forceLogoutReq) returns(forceLogoutResp);
   //解析token
