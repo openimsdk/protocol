@@ -45,3 +45,14 @@ func (x *ParseTokenReq) Check() error {
 	}
 	return nil
 }
+
+func (x *GetUserTokenReq) Check() error {
+	if x.UserID == "" {
+		errors.New("userID is empty")
+	}
+
+	if x.PlatformID == 0 {
+		errors.New("platformID is empty")
+	}
+	return nil
+}

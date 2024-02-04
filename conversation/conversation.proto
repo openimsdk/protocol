@@ -111,6 +111,7 @@ message MsgInfo{
   int32 msgFrom = 14;
   int32 contentType = 15;
   string content = 16;
+  string ex=17;
 }
 
 message GetConversationsReq{
