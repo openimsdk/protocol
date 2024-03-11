@@ -257,7 +257,7 @@ message GetActiveGroupResp {
 message SearchMessageReq{
   string sendID=1;//发送者ID
   string recvID=2;//接收者ID
-  int32 msgType=3;
+  int32 contentType=3;
   string sendTime=4;
   int32 sessionType=5;
   sdkws.RequestPagination pagination = 6;
