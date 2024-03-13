@@ -26,3 +26,4 @@ protoc --go_out=plugins=grpc:./third --go_opt=module=github.com/OpenIMSDK/protoc
 protoc --go_out=plugins=grpc:./user --go_opt=module=github.com/OpenIMSDK/protocol/user user/user.proto
 protoc --go_out=plugins=grpc:./wrapperspb --go_opt=module=github.com/OpenIMSDK/protocol/wrapperspb wrapperspb/wrapperspb.proto
 protoc --go_out=plugins=grpc:./statistics --go_opt=module=github.com/OpenIMSDK/protocol/statistics statistics/statistics.proto
+protoc --go_out=plugins=grpc:./aesKey --go_opt=module=github.com/OpenIMSDK/protocol/aesKey aesKey/aesKey.proto

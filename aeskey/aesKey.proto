@@ -1,0 +1,36 @@
+syntax = "proto3";
+package OpenIMServer.aes_key;
+option go_package = "github.com/OpenIMSDK/protocol/aesKey";
+
+
+message AesKey {
+  string  keyConversationsID=1;
+  string  key=2;
+  int32   conversationType=3;
+  string  ownerUserID=4;
+  string  friendUserID=5;
+  string  groupID=6;
+}
+message AcquireAesKeyReq {
+  int32 conversationType=1;
+  string ownerUserID=2;
+  string friendUserID=3;
+  string groupID=4;
+}
+
+message AcquireAesKeyResp {
+    AesKey aesKey=1;
+}
+
+message AcquireAesKeysReq {
+  string UserID=1;
+}
+
+message AcquireAesKeysResp {
+  repeated AesKey aesKeys=1;
+}
+
+service aesKey {
+  rpc AcquireAesKey(AcquireAesKeyReq)returns(AcquireAesKeyResp);
+  rpc AcquireAesKeys(AcquireAesKeysReq)returns(AcquireAesKeysResp);
+}
