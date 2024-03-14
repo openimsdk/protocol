@@ -318,7 +318,7 @@ func (c *msgClient) GetServerTime(ctx context.Context, in *GetServerTimeReq, opt
 }
 
 // MsgServer is the server API for Msg service.
-// All implementations must embed UnimplementedMsgServer
+// All implementations should embed UnimplementedMsgServer
 // for forward compatibility
 type MsgServer interface {
 	// 获取最小最大seq（包括用户的，以及指定群组的）
@@ -358,10 +358,9 @@ type MsgServer interface {
 	GetActiveUser(context.Context, *GetActiveUserReq) (*GetActiveUserResp, error)
 	GetActiveGroup(context.Context, *GetActiveGroupReq) (*GetActiveGroupResp, error)
 	GetServerTime(context.Context, *GetServerTimeReq) (*GetServerTimeResp, error)
-	mustEmbedUnimplementedMsgServer()
 }
 
-// UnimplementedMsgServer must be embedded to have forward compatible implementations.
+// UnimplementedMsgServer should be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
@@ -434,7 +433,6 @@ func (UnimplementedMsgServer) GetActiveGroup(context.Context, *GetActiveGroupReq
 func (UnimplementedMsgServer) GetServerTime(context.Context, *GetServerTimeReq) (*GetServerTimeResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerTime not implemented")
 }
-func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
 // UnsafeMsgServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to MsgServer will

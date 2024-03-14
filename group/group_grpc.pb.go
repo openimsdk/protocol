@@ -452,7 +452,7 @@ func (c *groupClient) GetJoinedGroupIDs(ctx context.Context, in *GetJoinedGroupI
 }
 
 // GroupServer is the server API for Group service.
-// All implementations must embed UnimplementedGroupServer
+// All implementations should embed UnimplementedGroupServer
 // for forward compatibility
 type GroupServer interface {
 	// 创建群
@@ -517,10 +517,9 @@ type GroupServer interface {
 	GroupCreateCount(context.Context, *GroupCreateCountReq) (*GroupCreateCountResp, error)
 	NotificationUserInfoUpdate(context.Context, *NotificationUserInfoUpdateReq) (*NotificationUserInfoUpdateResp, error)
 	GetJoinedGroupIDs(context.Context, *GetJoinedGroupIDsReq) (*GetJoinedGroupIDsResp, error)
-	mustEmbedUnimplementedGroupServer()
 }
 
-// UnimplementedGroupServer must be embedded to have forward compatible implementations.
+// UnimplementedGroupServer should be embedded to have forward compatible implementations.
 type UnimplementedGroupServer struct {
 }
 
@@ -626,7 +625,6 @@ func (UnimplementedGroupServer) NotificationUserInfoUpdate(context.Context, *Not
 func (UnimplementedGroupServer) GetJoinedGroupIDs(context.Context, *GetJoinedGroupIDsReq) (*GetJoinedGroupIDsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetJoinedGroupIDs not implemented")
 }
-func (UnimplementedGroupServer) mustEmbedUnimplementedGroupServer() {}
 
 // UnsafeGroupServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to GroupServer will

@@ -72,15 +72,14 @@ func (c *pushMsgServiceClient) DelUserPushToken(ctx context.Context, in *DelUser
 }
 
 // PushMsgServiceServer is the server API for PushMsgService service.
-// All implementations must embed UnimplementedPushMsgServiceServer
+// All implementations should embed UnimplementedPushMsgServiceServer
 // for forward compatibility
 type PushMsgServiceServer interface {
 	PushMsg(context.Context, *PushMsgReq) (*PushMsgResp, error)
 	DelUserPushToken(context.Context, *DelUserPushTokenReq) (*DelUserPushTokenResp, error)
-	mustEmbedUnimplementedPushMsgServiceServer()
 }
 
-// UnimplementedPushMsgServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedPushMsgServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedPushMsgServiceServer struct {
 }
 
@@ -90,7 +89,6 @@ func (UnimplementedPushMsgServiceServer) PushMsg(context.Context, *PushMsgReq) (
 func (UnimplementedPushMsgServiceServer) DelUserPushToken(context.Context, *DelUserPushTokenReq) (*DelUserPushTokenResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DelUserPushToken not implemented")
 }
-func (UnimplementedPushMsgServiceServer) mustEmbedUnimplementedPushMsgServiceServer() {}
 
 // UnsafePushMsgServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to PushMsgServiceServer will

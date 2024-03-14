@@ -137,7 +137,7 @@ func (c *rtcServiceClient) DeleteSignalRecords(ctx context.Context, in *DeleteSi
 }
 
 // RtcServiceServer is the server API for RtcService service.
-// All implementations must embed UnimplementedRtcServiceServer
+// All implementations should embed UnimplementedRtcServiceServer
 // for forward compatibility
 type RtcServiceServer interface {
 	SignalMessageAssemble(context.Context, *SignalMessageAssembleReq) (*SignalMessageAssembleResp, error)
@@ -151,10 +151,9 @@ type RtcServiceServer interface {
 	// rtc cms
 	GetSignalInvitationRecords(context.Context, *GetSignalInvitationRecordsReq) (*GetSignalInvitationRecordsResp, error)
 	DeleteSignalRecords(context.Context, *DeleteSignalRecordsReq) (*DeleteSignalRecordsResp, error)
-	mustEmbedUnimplementedRtcServiceServer()
 }
 
-// UnimplementedRtcServiceServer must be embedded to have forward compatible implementations.
+// UnimplementedRtcServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedRtcServiceServer struct {
 }
 
@@ -185,7 +184,6 @@ func (UnimplementedRtcServiceServer) GetSignalInvitationRecords(context.Context,
 func (UnimplementedRtcServiceServer) DeleteSignalRecords(context.Context, *DeleteSignalRecordsReq) (*DeleteSignalRecordsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSignalRecords not implemented")
 }
-func (UnimplementedRtcServiceServer) mustEmbedUnimplementedRtcServiceServer() {}
 
 // UnsafeRtcServiceServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to RtcServiceServer will

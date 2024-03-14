@@ -98,7 +98,7 @@ func (c *authClient) ParseToken(ctx context.Context, in *ParseTokenReq, opts ...
 }
 
 // AuthServer is the server API for Auth service.
-// All implementations must embed UnimplementedAuthServer
+// All implementations should embed UnimplementedAuthServer
 // for forward compatibility
 type AuthServer interface {
 	// 生成token
@@ -109,10 +109,9 @@ type AuthServer interface {
 	ForceLogout(context.Context, *ForceLogoutReq) (*ForceLogoutResp, error)
 	// 解析token
 	ParseToken(context.Context, *ParseTokenReq) (*ParseTokenResp, error)
-	mustEmbedUnimplementedAuthServer()
 }
 
-// UnimplementedAuthServer must be embedded to have forward compatible implementations.
+// UnimplementedAuthServer should be embedded to have forward compatible implementations.
 type UnimplementedAuthServer struct {
 }
 
@@ -128,7 +127,6 @@ func (UnimplementedAuthServer) ForceLogout(context.Context, *ForceLogoutReq) (*F
 func (UnimplementedAuthServer) ParseToken(context.Context, *ParseTokenReq) (*ParseTokenResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ParseToken not implemented")
 }
-func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}
 
 // UnsafeAuthServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to AuthServer will

@@ -194,7 +194,7 @@ func (c *thirdClient) SearchLogs(ctx context.Context, in *SearchLogsReq, opts ..
 }
 
 // ThirdServer is the server API for Third service.
-// All implementations must embed UnimplementedThirdServer
+// All implementations should embed UnimplementedThirdServer
 // for forward compatibility
 type ThirdServer interface {
 	PartLimit(context.Context, *PartLimitReq) (*PartLimitResp, error)
@@ -211,10 +211,9 @@ type ThirdServer interface {
 	UploadLogs(context.Context, *UploadLogsReq) (*UploadLogsResp, error)
 	DeleteLogs(context.Context, *DeleteLogsReq) (*DeleteLogsResp, error)
 	SearchLogs(context.Context, *SearchLogsReq) (*SearchLogsResp, error)
-	mustEmbedUnimplementedThirdServer()
 }
 
-// UnimplementedThirdServer must be embedded to have forward compatible implementations.
+// UnimplementedThirdServer should be embedded to have forward compatible implementations.
 type UnimplementedThirdServer struct {
 }
 
@@ -257,7 +256,6 @@ func (UnimplementedThirdServer) DeleteLogs(context.Context, *DeleteLogsReq) (*De
 func (UnimplementedThirdServer) SearchLogs(context.Context, *SearchLogsReq) (*SearchLogsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchLogs not implemented")
 }
-func (UnimplementedThirdServer) mustEmbedUnimplementedThirdServer() {}
 
 // UnsafeThirdServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to ThirdServer will

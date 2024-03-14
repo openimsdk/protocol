@@ -336,7 +336,7 @@ func (c *userClient) GetGroupOnlineUser(ctx context.Context, in *GetGroupOnlineU
 }
 
 // UserServer is the server API for User service.
-// All implementations must embed UnimplementedUserServer
+// All implementations should embed UnimplementedUserServer
 // for forward compatibility
 type UserServer interface {
 	// Get the specified user information full field
@@ -385,10 +385,9 @@ type UserServer interface {
 	// getNotificationAccount by userID
 	GetNotificationAccount(context.Context, *GetNotificationAccountReq) (*GetNotificationAccountResp, error)
 	GetGroupOnlineUser(context.Context, *GetGroupOnlineUserReq) (*GetGroupOnlineUserResp, error)
-	mustEmbedUnimplementedUserServer()
 }
 
-// UnimplementedUserServer must be embedded to have forward compatible implementations.
+// UnimplementedUserServer should be embedded to have forward compatible implementations.
 type UnimplementedUserServer struct {
 }
 
@@ -464,7 +463,6 @@ func (UnimplementedUserServer) GetNotificationAccount(context.Context, *GetNotif
 func (UnimplementedUserServer) GetGroupOnlineUser(context.Context, *GetGroupOnlineUserReq) (*GetGroupOnlineUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGroupOnlineUser not implemented")
 }
-func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 
 // UnsafeUserServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to UserServer will

@@ -215,7 +215,7 @@ func (c *conversationClient) GetConversationNotReceiveMessageUserIDs(ctx context
 }
 
 // ConversationServer is the server API for Conversation service.
-// All implementations must embed UnimplementedConversationServer
+// All implementations should embed UnimplementedConversationServer
 // for forward compatibility
 type ConversationServer interface {
 	GetConversation(context.Context, *GetConversationReq) (*GetConversationResp, error)
@@ -233,10 +233,9 @@ type ConversationServer interface {
 	GetConversationsByConversationID(context.Context, *GetConversationsByConversationIDReq) (*GetConversationsByConversationIDResp, error)
 	GetConversationOfflinePushUserIDs(context.Context, *GetConversationOfflinePushUserIDsReq) (*GetConversationOfflinePushUserIDsResp, error)
 	GetConversationNotReceiveMessageUserIDs(context.Context, *GetConversationNotReceiveMessageUserIDsReq) (*GetConversationNotReceiveMessageUserIDsResp, error)
-	mustEmbedUnimplementedConversationServer()
 }
 
-// UnimplementedConversationServer must be embedded to have forward compatible implementations.
+// UnimplementedConversationServer should be embedded to have forward compatible implementations.
 type UnimplementedConversationServer struct {
 }
 
@@ -285,7 +284,6 @@ func (UnimplementedConversationServer) GetConversationOfflinePushUserIDs(context
 func (UnimplementedConversationServer) GetConversationNotReceiveMessageUserIDs(context.Context, *GetConversationNotReceiveMessageUserIDsReq) (*GetConversationNotReceiveMessageUserIDsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConversationNotReceiveMessageUserIDs not implemented")
 }
-func (UnimplementedConversationServer) mustEmbedUnimplementedConversationServer() {}
 
 // UnsafeConversationServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to ConversationServer will
