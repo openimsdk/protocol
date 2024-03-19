@@ -13,9 +13,9 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.third;
+package openim.third;
 import "sdkws/sdkws.proto";
-option go_package = "github.com/OpenIMSDK/protocol/third";
+option go_package = "github.com/openimsdk/protocol/third";
 
 message KeyValues {
   string key = 1;

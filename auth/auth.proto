@@ -13,8 +13,8 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.auth;
-option go_package = "github.com/OpenIMSDK/protocol/auth";
+package openim.auth;
+option go_package = "github.com/openimsdk/protocol/auth";
 
 
 message userTokenReq {

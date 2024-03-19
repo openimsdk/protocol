@@ -13,10 +13,10 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.conversation;
+package openim.conversation;
 import "sdkws/sdkws.proto";
-import "wrapperspb/wrapperspb.proto";
-option go_package = "github.com/OpenIMSDK/protocol/conversation";
+import "google/wrappers.proto";
+option go_package = "github.com/openimsdk/protocol/conversation";
 
 message Conversation{
   string ownerUserID = 1;
@@ -43,17 +43,17 @@ message ConversationReq{
   int32 conversationType = 2;
   string userID = 3;
   string groupID = 4;
-  OpenIMServer.protobuf.Int32Value recvMsgOpt = 5;
-  OpenIMServer.protobuf.BoolValue isPinned = 6;
-  OpenIMServer.protobuf.StringValue attachedInfo = 7;
-  OpenIMServer.protobuf.BoolValue isPrivateChat = 8;
-  OpenIMServer.protobuf.StringValue ex = 9;
-  OpenIMServer.protobuf.Int32Value burnDuration = 10;
-  OpenIMServer.protobuf.Int64Value minSeq = 11;
-  OpenIMServer.protobuf.Int64Value maxSeq = 12;
-  OpenIMServer.protobuf.Int32Value groupAtType = 13;
-  OpenIMServer.protobuf.Int64Value msgDestructTime = 14;
-  OpenIMServer.protobuf.BoolValue isMsgDestruct = 15;
+  google.protobuf.Int32Value recvMsgOpt = 5;
+  google.protobuf.BoolValue isPinned = 6;
+  google.protobuf.StringValue attachedInfo = 7;
+  google.protobuf.BoolValue isPrivateChat = 8;
+  google.protobuf.StringValue ex = 9;
+  google.protobuf.Int32Value burnDuration = 10;
+  google.protobuf.Int64Value minSeq = 11;
+  google.protobuf.Int64Value maxSeq = 12;
+  google.protobuf.Int32Value groupAtType = 13;
+  google.protobuf.Int64Value msgDestructTime = 14;
+  google.protobuf.BoolValue isMsgDestruct = 15;
 }
 
 message SetConversationReq{

@@ -13,6 +13,6 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.statistics;
-option go_package = "github.com/OpenIMSDK/protocol/statistics";
+package openim.statistics;
+option go_package = "github.com/openimsdk/protocol/statistics";
 
