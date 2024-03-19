@@ -3,7 +3,6 @@ module github.com/openimsdk/protocol
 go 1.18
 
 require (
-	github.com/OpenIMSDK/protocol v0.0.56
 	google.golang.org/grpc v1.62.1
 	google.golang.org/protobuf v1.33.0
 )
