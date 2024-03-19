@@ -18,6 +18,8 @@ import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/OpenIMSDK/protocol/conversation";
 
+import "google/api/annotations.proto";
+
 message Conversation{
   string ownerUserID = 1;
   string conversationID = 2;
@@ -219,7 +221,9 @@ message GetConversationNotReceiveMessageUserIDsResp {
 }
 
 service conversation {
-  rpc GetConversation(GetConversationReq)returns(GetConversationResp);
+  rpc GetConversation(GetConversationReq)returns(GetConversationResp){
+    option (google.api.http) = {post: "/conversation/get_conversation", body: "*"};
+  };
   rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
   rpc GetAllConversations(GetAllConversationsReq)returns(GetAllConversationsResp);
   rpc GetConversations(GetConversationsReq)returns(GetConversationsResp);
