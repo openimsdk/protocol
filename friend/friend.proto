@@ -15,15 +15,15 @@
 syntax = "proto3";
 package OpenIMServer.friend;
 import "sdkws/sdkws.proto";
-import "wrapperspb/wrapperspb.proto";
-option go_package = "github.com/OpenIMSDK/protocol/friend";
+import "google/wrappers.proto";
+option go_package = "github.com/openimsdk/protocol/friend";
 
 message getPaginationFriendsReq{
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string userID = 2;
 }
 message getPaginationFriendsResp{
-  repeated sdkws.FriendInfo friendsInfo = 1;
+  repeated openim.sdkws.FriendInfo friendsInfo = 1;
   int32 total = 2;
 }
 
@@ -49,11 +49,11 @@ message importFriendResp{
 
 message getPaginationFriendsApplyToReq{
   string userID = 1;
-  sdkws.RequestPagination pagination = 2;
+  openim.sdkws.RequestPagination pagination = 2;
 
 }
 message getPaginationFriendsApplyToResp{
-  repeated sdkws.FriendRequest FriendRequests = 1;
+  repeated openim.sdkws.FriendRequest FriendRequests = 1;
   int32 total = 2;
 }
 
@@ -63,7 +63,7 @@ message getDesignatedFriendsApplyReq{
 }
 
 message getDesignatedFriendsApplyResp{
-  repeated sdkws.FriendRequest friendRequests = 1;
+  repeated openim.sdkws.FriendRequest friendRequests = 1;
 }
 
 
@@ -72,7 +72,7 @@ message getDesignatedFriendsReq{
   repeated string friendUserIDs = 2;
 }
 message getDesignatedFriendsResp{
-  repeated sdkws.FriendInfo friendsInfo = 1;
+  repeated openim.sdkws.FriendInfo friendsInfo = 1;
 }
 
 
@@ -94,10 +94,10 @@ message removeBlackResp{
 
 message getPaginationBlacksReq{
   string userID = 1;
-  sdkws.RequestPagination pagination = 2;
+  openim.sdkws.RequestPagination pagination = 2;
 }
 message getPaginationBlacksResp{
-  repeated sdkws.BlackInfo blacks = 1;
+  repeated openim.sdkws.BlackInfo blacks = 1;
   int32 total = 2;
 }
 
@@ -142,9 +142,9 @@ message respondFriendApplyResp{
 message updateFriendsReq{
   string ownerUserID = 1;
   repeated string friendUserIDs = 2;
-  OpenIMServer.protobuf.BoolValue isPinned = 3;
-  OpenIMServer.protobuf.StringValue remark = 4;
-  OpenIMServer.protobuf.StringValue ex = 5;
+  google.protobuf.BoolValue isPinned = 3;
+  google.protobuf.StringValue remark = 4;
+  google.protobuf.StringValue ex = 5;
 }
 message updateFriendsResp{
 
@@ -160,10 +160,10 @@ message setFriendRemarkResp{
 
 message getPaginationFriendsApplyFromReq{
   string userID = 1;
-  sdkws.RequestPagination pagination = 2;
+  openim.sdkws.RequestPagination pagination = 2;
 }
 message getPaginationFriendsApplyFromResp{
-  repeated sdkws.FriendRequest friendRequests = 1;
+  repeated openim.sdkws.FriendRequest friendRequests = 1;
   int32 total = 2;
 }
 
@@ -181,9 +181,9 @@ message getSpecifiedFriendsInfoReq {
 }
 
 message getSpecifiedFriendsInfoInfo {
-  sdkws.UserInfo userInfo = 1;
-  sdkws.FriendInfo friendInfo = 2;
-  sdkws.BlackInfo blackInfo = 3;
+  openim.sdkws.UserInfo userInfo = 1;
+  openim.sdkws.FriendInfo friendInfo = 2;
+  openim.sdkws.BlackInfo blackInfo = 3;
 }
 
 message getSpecifiedFriendsInfoResp {

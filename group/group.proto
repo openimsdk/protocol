@@ -13,21 +13,21 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.group;
+package openim.group;
 import "sdkws/sdkws.proto";
-import "wrapperspb/wrapperspb.proto";
-option go_package = "github.com/OpenIMSDK/protocol/group";
+import "google/wrappers.proto";
+option go_package = "github.com/openimsdk/protocol/group";
 
 
 
 message CreateGroupReq{
   repeated string memberUserIDs = 1;
-  sdkws.GroupInfo groupInfo = 2;
+  openim.sdkws.GroupInfo groupInfo = 2;
   repeated string adminUserIDs = 3;
   string ownerUserID = 4; //owner
 }
 message CreateGroupResp{
-  sdkws.GroupInfo groupInfo = 1;
+  openim.sdkws.GroupInfo groupInfo = 1;
 }
 
 
@@ -35,34 +35,34 @@ message GetGroupsInfoReq{
   repeated string groupIDs = 1;
 }
 message GetGroupsInfoResp{
-  repeated sdkws.GroupInfo groupInfos = 1;
+  repeated openim.sdkws.GroupInfo groupInfos = 1;
 }
 
 
 message SetGroupInfoReq{
-  sdkws.GroupInfoForSet groupInfoForSet = 1;
+  openim.sdkws.GroupInfoForSet groupInfoForSet = 1;
 }
 message SetGroupInfoResp{
 }
 
 
 message GetGroupApplicationListReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string fromUserID = 2; //owner or admin
 }
 message GetGroupApplicationListResp {
   uint32 total = 1;
-  repeated sdkws.GroupRequest groupRequests = 2;
+  repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
 message GetUserReqApplicationListReq{
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string userID = 2;
 }
 
 message GetUserReqApplicationListResp{
   uint32 total = 1;
-  repeated sdkws.GroupRequest groupRequests = 2;
+  repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
 
@@ -107,7 +107,7 @@ message QuitGroupResp{
 
 
 message GetGroupMemberListReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string groupID = 2;
   int32 filter = 3;
   string keyword = 4;
@@ -115,7 +115,7 @@ message GetGroupMemberListReq {
 
 message GetGroupMemberListResp {
   uint32 total = 1;
-  repeated sdkws.GroupMemberFullInfo members = 2;
+  repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
 
 
@@ -125,7 +125,7 @@ message GetGroupMembersInfoReq {
 }
 
 message GetGroupMembersInfoResp {
-  repeated sdkws.GroupMemberFullInfo members = 1;
+  repeated openim.sdkws.GroupMemberFullInfo members = 1;
 }
 
 message KickGroupMemberReq {
@@ -140,12 +140,12 @@ message KickGroupMemberResp {
 
 
 message GetJoinedGroupListReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string fromUserID = 2;
 }
 message GetJoinedGroupListResp{
   uint32 total = 1;
-  repeated  sdkws.GroupInfo groups = 2;
+  repeated  openim.sdkws.GroupInfo groups = 2;
 }
 
 
@@ -160,22 +160,22 @@ message InviteUserToGroupResp {
 
 
 message GetGroupAllMemberReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string groupID = 2;
 }
 message GetGroupAllMemberResp {
-  repeated sdkws.GroupMemberFullInfo members = 1;
+  repeated openim.sdkws.GroupMemberFullInfo members = 1;
 }
 
 message CMSGroup {
-  sdkws.GroupInfo groupInfo = 1;
+  openim.sdkws.GroupInfo groupInfo = 1;
   string groupOwnerUserName = 2;
   string groupOwnerUserID = 3;
 }
 
 
 message GetGroupsReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string groupName = 2;
   string groupID = 3;
 }
@@ -190,14 +190,14 @@ message GetGroupMemberReq {
 }
 
 message GetGroupMembersCMSReq {
-  sdkws.RequestPagination pagination = 1;
+  openim.sdkws.RequestPagination pagination = 1;
   string groupID = 2;
   string userName = 3;
 }
 
 message GetGroupMembersCMSResp {
   uint32 total = 1;
-  repeated sdkws.GroupMemberFullInfo members = 2;
+  repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
 
 message DismissGroupReq{
@@ -245,29 +245,13 @@ message CancelMuteGroupReq{
 message CancelMuteGroupResp{
 }
 
-message GetJoinedSuperGroupListReq {
-  string userID = 1;
-}
-
-message GetJoinedSuperGroupListResp {
-  repeated sdkws.GroupInfo groups = 1;
-}
-
-message GetSuperGroupsInfoReq {
-  repeated string groupIDs = 1;
-}
-
-message GetSuperGroupsInfoResp {
-  repeated sdkws.GroupInfo groupInfos = 1;
-}
-
 message SetGroupMemberInfo{
   string groupID = 1;
   string userID = 2;
-  OpenIMServer.protobuf.StringValue nickname = 3;
-  OpenIMServer.protobuf.StringValue faceURL = 4;
-  OpenIMServer.protobuf.Int32Value roleLevel = 5;
-  OpenIMServer.protobuf.StringValue ex = 6;
+  google.protobuf.StringValue nickname = 3;
+  google.protobuf.StringValue faceURL = 4;
+  google.protobuf.Int32Value roleLevel = 5;
+  google.protobuf.StringValue ex = 6;
 }
 
 message SetGroupMemberInfoReq{
@@ -298,7 +282,7 @@ message GetUserInGroupMembersReq {
 }
 
 message GetUserInGroupMembersResp{
-  repeated sdkws.GroupMemberFullInfo members = 1;
+  repeated openim.sdkws.GroupMemberFullInfo members = 1;
 }
 
 message GetGroupMemberUserIDsReq{
@@ -315,7 +299,7 @@ message GetGroupMemberRoleLevelReq{
 }
 
 message GetGroupMemberRoleLevelResp {
-  repeated sdkws.GroupMemberFullInfo members = 1;
+  repeated openim.sdkws.GroupMemberFullInfo members = 1;
 }
 
 message GetGroupInfoCacheReq {
@@ -323,7 +307,7 @@ message GetGroupInfoCacheReq {
 }
 
 message GetGroupInfoCacheResp {
-  sdkws.GroupInfo groupInfo = 1;
+  openim.sdkws.GroupInfo groupInfo = 1;
 }
 
 message GetGroupMemberCacheReq {
@@ -332,7 +316,7 @@ message GetGroupMemberCacheReq {
 }
 
 message GetGroupMemberCacheResp {
-  sdkws.GroupMemberFullInfo member = 1;
+  openim.sdkws.GroupMemberFullInfo member = 1;
 }
 
 message GroupCreateCountReq {
@@ -353,13 +337,13 @@ message getGroupUsersReqApplicationListReq {
 
 message getGroupUsersReqApplicationListResp {
   int64 total = 1;
-  repeated sdkws.GroupRequest groupRequests = 2;
+  repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
 message notificationUserInfoUpdateReq {
   string userID = 1;
-  sdkws.UserInfo oldUserInfo = 2;
-  sdkws.UserInfo newUserInfo = 3;
+  openim.sdkws.UserInfo oldUserInfo = 2;
+  openim.sdkws.UserInfo newUserInfo = 3;
 }
 
 message notificationUserInfoUpdateResp {
@@ -419,11 +403,6 @@ service group{
   //对某个群取消禁言
   rpc cancelMuteGroup(CancelMuteGroupReq) returns(CancelMuteGroupResp);
 
-  //获取某个用户加入的超级群
-  rpc getJoinedSuperGroupList(GetJoinedSuperGroupListReq) returns (GetJoinedSuperGroupListResp);
-  //获取指定的超级群信息
-  rpc getSuperGroupsInfo(GetSuperGroupsInfoReq) returns (GetSuperGroupsInfoResp);
-  //设置群成员昵称
   //设置群成员信息
   rpc setGroupMemberInfo(SetGroupMemberInfoReq) returns (SetGroupMemberInfoResp);
   //获取群信息hash值
@@ -444,10 +423,3 @@ service group{
 
   rpc getJoinedGroupIDs(getJoinedGroupIDsReq) returns (getJoinedGroupIDsResp);
 }
-
-
-
-
-
-
-

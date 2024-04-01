@@ -13,10 +13,9 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.msg;
+package openim.msg;
 import "sdkws/sdkws.proto";
-// import "wrapperspb/wrapperspb.proto";
-option go_package = "github.com/OpenIMSDK/protocol/msg";
+option go_package = "github.com/openimsdk/protocol/msg";
 
 message MsgDataToMQ{
   string token = 1;

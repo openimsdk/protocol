@@ -13,9 +13,9 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.push;
+package openim.push;
 import "sdkws/sdkws.proto";
-option go_package = "github.com/OpenIMSDK/protocol/push";
+option go_package = "github.com/openimsdk/protocol/push";
 
 message PushMsgReq {
   sdkws.MsgData msgData = 1;

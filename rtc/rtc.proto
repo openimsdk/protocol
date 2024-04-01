@@ -1,12 +1,12 @@
 syntax = "proto3";
-package OpenIMServer.rtc;
+package openim.rtc;
 import "sdkws/sdkws.proto";
-option go_package = "github.com/OpenIMSDK/protocol/rtc";
+option go_package = "github.com/openimsdk/protocol/rtc";
 
 message ParticipantMetaData{
-  OpenIMServer.sdkws.GroupInfo groupInfo = 1;
-  OpenIMServer.sdkws.GroupMemberFullInfo groupMemberInfo = 2;
-  OpenIMServer.sdkws.PublicUserInfo userInfo = 3;
+  openim.sdkws.GroupInfo groupInfo = 1;
+  openim.sdkws.GroupMemberFullInfo groupMemberInfo = 2;
+  openim.sdkws.PublicUserInfo userInfo = 3;
 }
 
 message GetJoinTokenReq{
