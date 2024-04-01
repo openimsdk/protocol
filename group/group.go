@@ -269,20 +269,6 @@ func (x *CancelMuteGroupReq) Check() error {
 	return nil
 }
 
-func (x *GetJoinedSuperGroupListReq) Check() error {
-	if x.UserID == "" {
-		return errors.New("userID is empty")
-	}
-	return nil
-}
-
-func (x *GetSuperGroupsInfoReq) Check() error {
-	if x.GroupIDs == nil {
-		return errors.New("GroupIDs is empty")
-	}
-	return nil
-}
-
 func (x *SetGroupMemberInfo) Check() error {
 	if x.GroupID == "" {
 		return errors.New("GroupID is empty")

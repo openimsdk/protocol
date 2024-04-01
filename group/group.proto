@@ -245,22 +245,6 @@ message CancelMuteGroupReq{
 message CancelMuteGroupResp{
 }
 
-message GetJoinedSuperGroupListReq {
-  string userID = 1;
-}
-
-message GetJoinedSuperGroupListResp {
-  repeated openim.sdkws.GroupInfo groups = 1;
-}
-
-message GetSuperGroupsInfoReq {
-  repeated string groupIDs = 1;
-}
-
-message GetSuperGroupsInfoResp {
-  repeated openim.sdkws.GroupInfo groupInfos = 1;
-}
-
 message SetGroupMemberInfo{
   string groupID = 1;
   string userID = 2;
@@ -419,11 +403,6 @@ service group{
   //对某个群取消禁言
   rpc cancelMuteGroup(CancelMuteGroupReq) returns(CancelMuteGroupResp);
 
-  //获取某个用户加入的超级群
-  rpc getJoinedSuperGroupList(GetJoinedSuperGroupListReq) returns (GetJoinedSuperGroupListResp);
-  //获取指定的超级群信息
-  rpc getSuperGroupsInfo(GetSuperGroupsInfoReq) returns (GetSuperGroupsInfoResp);
-  //设置群成员昵称
   //设置群成员信息
   rpc setGroupMemberInfo(SetGroupMemberInfoReq) returns (SetGroupMemberInfoResp);
   //获取群信息hash值
