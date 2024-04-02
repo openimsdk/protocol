@@ -349,14 +349,6 @@ message notificationUserInfoUpdateReq {
 message notificationUserInfoUpdateResp {
 }
 
-message getJoinedGroupIDsReq {
-  string userID = 1;
-}
-
-message getJoinedGroupIDsResp {
-  repeated string groupIDs = 1;
-}
-
 service group{
   //创建群
   rpc createGroup(CreateGroupReq) returns(CreateGroupResp);
@@ -421,5 +413,4 @@ service group{
 
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
 
-  rpc getJoinedGroupIDs(getJoinedGroupIDsReq) returns (getJoinedGroupIDsResp);
 }
