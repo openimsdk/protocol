@@ -61,6 +61,7 @@ message InitiateMultipartUploadReq {
   string cause = 5;
   string name = 6;
   string contentType = 7;
+  string urlPrefix = 8;
 }
 
 message UploadInfo {
@@ -93,6 +94,7 @@ message CompleteMultipartUploadReq {
   string name = 3;
   string contentType = 4;
   string cause = 5;
+  string urlPrefix = 6;
 }
 
 message CompleteMultipartUploadResp {
@@ -130,6 +132,7 @@ message InitiateFormDataResp {
 
 message CompleteFormDataReq {
   string id = 1;
+  string urlPrefix = 2;
 }
 
 message CompleteFormDataResp {
@@ -158,6 +161,7 @@ message fileURL{
   string filename = 1;
   string URL = 2;
 }
+
 message UploadLogsReq{
   int32 platform = 1;
   repeated fileURL fileURLs = 2;

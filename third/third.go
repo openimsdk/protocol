@@ -38,3 +38,24 @@ func (x *SetAppBadgeReq) Check() error {
 	}
 	return nil
 }
+
+func (x *InitiateMultipartUploadReq) Check() error {
+	if x.UrlPrefix == "" {
+		return errors.New("UrlPrefix is empty")
+	}
+	return nil
+}
+
+func (x *CompleteMultipartUploadReq) Check() error {
+	if x.UrlPrefix == "" {
+		return errors.New("UrlPrefix is empty")
+	}
+	return nil
+}
+
+func (x *CompleteFormDataReq) Check() error {
+	if x.UrlPrefix == "" {
+		return errors.New("UrlPrefix is empty")
+	}
+	return nil
+}
