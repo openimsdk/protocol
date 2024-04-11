@@ -39,7 +39,7 @@ message parseTokenReq{
 }
 message parseTokenResp{
   string userID = 1;
-  string platform = 2;
+  int32 platformID = 2;
   int64 expireTimeSeconds = 4;
 }
 
