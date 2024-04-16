@@ -44,8 +44,8 @@ type KeyValues struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key    string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
+	Key    string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key"`
+	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values"`
 }
 
 func (x *KeyValues) Reset() {
@@ -99,10 +99,10 @@ type SignPart struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PartNumber int32        `protobuf:"varint,1,opt,name=partNumber,proto3" json:"partNumber,omitempty"`
-	Url        string       `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	Query      []*KeyValues `protobuf:"bytes,3,rep,name=query,proto3" json:"query,omitempty"`
-	Header     []*KeyValues `protobuf:"bytes,4,rep,name=header,proto3" json:"header,omitempty"`
+	PartNumber int32        `protobuf:"varint,1,opt,name=partNumber,proto3" json:"partNumber"`
+	Url        string       `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
+	Query      []*KeyValues `protobuf:"bytes,3,rep,name=query,proto3" json:"query"`
+	Header     []*KeyValues `protobuf:"bytes,4,rep,name=header,proto3" json:"header"`
 }
 
 func (x *SignPart) Reset() {
@@ -170,10 +170,10 @@ type AuthSignParts struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url    string       `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Query  []*KeyValues `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty"`
-	Header []*KeyValues `protobuf:"bytes,3,rep,name=header,proto3" json:"header,omitempty"`
-	Parts  []*SignPart  `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts,omitempty"`
+	Url    string       `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Query  []*KeyValues `protobuf:"bytes,2,rep,name=query,proto3" json:"query"`
+	Header []*KeyValues `protobuf:"bytes,3,rep,name=header,proto3" json:"header"`
+	Parts  []*SignPart  `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts"`
 }
 
 func (x *AuthSignParts) Reset() {
@@ -279,9 +279,9 @@ type PartLimitResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MinPartSize int64 `protobuf:"varint,1,opt,name=minPartSize,proto3" json:"minPartSize,omitempty"`
-	MaxPartSize int64 `protobuf:"varint,2,opt,name=maxPartSize,proto3" json:"maxPartSize,omitempty"`
-	MaxNumSize  int32 `protobuf:"varint,3,opt,name=maxNumSize,proto3" json:"maxNumSize,omitempty"`
+	MinPartSize int64 `protobuf:"varint,1,opt,name=minPartSize,proto3" json:"minPartSize"`
+	MaxPartSize int64 `protobuf:"varint,2,opt,name=maxPartSize,proto3" json:"maxPartSize"`
+	MaxNumSize  int32 `protobuf:"varint,3,opt,name=maxNumSize,proto3" json:"maxNumSize"`
 }
 
 func (x *PartLimitResp) Reset() {
@@ -342,7 +342,7 @@ type PartSizeReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	Size int64 `protobuf:"varint,1,opt,name=size,proto3" json:"size"`
 }
 
 func (x *PartSizeReq) Reset() {
@@ -389,7 +389,7 @@ type PartSizeResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Size int64 `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Size int64 `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
 }
 
 func (x *PartSizeResp) Reset() {
@@ -436,14 +436,14 @@ type InitiateMultipartUploadReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Hash        string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-	Size        int64  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
-	PartSize    int64  `protobuf:"varint,3,opt,name=partSize,proto3" json:"partSize,omitempty"`
-	MaxParts    int32  `protobuf:"varint,4,opt,name=maxParts,proto3" json:"maxParts,omitempty"`
-	Cause       string `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause,omitempty"`
-	Name        string `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	ContentType string `protobuf:"bytes,7,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	UrlPrefix   string `protobuf:"bytes,8,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	Hash        string `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash"`
+	Size        int64  `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
+	PartSize    int64  `protobuf:"varint,3,opt,name=partSize,proto3" json:"partSize"`
+	MaxParts    int32  `protobuf:"varint,4,opt,name=maxParts,proto3" json:"maxParts"`
+	Cause       string `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause"`
+	Name        string `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	ContentType string `protobuf:"bytes,7,opt,name=contentType,proto3" json:"contentType"`
+	UrlPrefix   string `protobuf:"bytes,8,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 }
 
 func (x *InitiateMultipartUploadReq) Reset() {
@@ -539,10 +539,10 @@ type UploadInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UploadID   string         `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	PartSize   int64          `protobuf:"varint,2,opt,name=partSize,proto3" json:"partSize,omitempty"`
-	Sign       *AuthSignParts `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign,omitempty"`
-	ExpireTime int64          `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	UploadID   string         `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	PartSize   int64          `protobuf:"varint,2,opt,name=partSize,proto3" json:"partSize"`
+	Sign       *AuthSignParts `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign"`
+	ExpireTime int64          `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime"`
 }
 
 func (x *UploadInfo) Reset() {
@@ -610,8 +610,8 @@ type InitiateMultipartUploadResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url    string      `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Upload *UploadInfo `protobuf:"bytes,2,opt,name=upload,proto3" json:"upload,omitempty"`
+	Url    string      `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Upload *UploadInfo `protobuf:"bytes,2,opt,name=upload,proto3" json:"upload"`
 }
 
 func (x *InitiateMultipartUploadResp) Reset() {
@@ -665,8 +665,8 @@ type AuthSignReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UploadID    string  `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	PartNumbers []int32 `protobuf:"varint,2,rep,packed,name=partNumbers,proto3" json:"partNumbers,omitempty"`
+	UploadID    string  `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	PartNumbers []int32 `protobuf:"varint,2,rep,packed,name=partNumbers,proto3" json:"partNumbers"`
 }
 
 func (x *AuthSignReq) Reset() {
@@ -720,10 +720,10 @@ type AuthSignResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url    string       `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Query  []*KeyValues `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty"`
-	Header []*KeyValues `protobuf:"bytes,3,rep,name=header,proto3" json:"header,omitempty"`
-	Parts  []*SignPart  `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts,omitempty"`
+	Url    string       `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Query  []*KeyValues `protobuf:"bytes,2,rep,name=query,proto3" json:"query"`
+	Header []*KeyValues `protobuf:"bytes,3,rep,name=header,proto3" json:"header"`
+	Parts  []*SignPart  `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts"`
 }
 
 func (x *AuthSignResp) Reset() {
@@ -791,12 +791,12 @@ type CompleteMultipartUploadReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UploadID    string   `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	Parts       []string `protobuf:"bytes,2,rep,name=parts,proto3" json:"parts,omitempty"`
-	Name        string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	ContentType string   `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	Cause       string   `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause,omitempty"`
-	UrlPrefix   string   `protobuf:"bytes,6,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	UploadID    string   `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	Parts       []string `protobuf:"bytes,2,rep,name=parts,proto3" json:"parts"`
+	Name        string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	ContentType string   `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType"`
+	Cause       string   `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause"`
+	UrlPrefix   string   `protobuf:"bytes,6,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 }
 
 func (x *CompleteMultipartUploadReq) Reset() {
@@ -878,7 +878,7 @@ type CompleteMultipartUploadResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
 }
 
 func (x *CompleteMultipartUploadResp) Reset() {
@@ -925,7 +925,7 @@ type AccessURLReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name  string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name  string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
 	Query map[string]string `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
@@ -980,8 +980,8 @@ type AccessURLResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url        string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	ExpireTime int64  `protobuf:"varint,2,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	Url        string `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	ExpireTime int64  `protobuf:"varint,2,opt,name=expireTime,proto3" json:"expireTime"`
 }
 
 func (x *AccessURLResp) Reset() {
@@ -1035,12 +1035,12 @@ type InitiateFormDataReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Size        int64  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
-	ContentType string `protobuf:"bytes,3,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	Group       string `protobuf:"bytes,4,opt,name=group,proto3" json:"group,omitempty"`
-	Millisecond int64  `protobuf:"varint,5,opt,name=millisecond,proto3" json:"millisecond,omitempty"`
-	Absolute    bool   `protobuf:"varint,6,opt,name=absolute,proto3" json:"absolute,omitempty"`
+	Name        string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Size        int64  `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
+	ContentType string `protobuf:"bytes,3,opt,name=contentType,proto3" json:"contentType"`
+	Group       string `protobuf:"bytes,4,opt,name=group,proto3" json:"group"`
+	Millisecond int64  `protobuf:"varint,5,opt,name=millisecond,proto3" json:"millisecond"`
+	Absolute    bool   `protobuf:"varint,6,opt,name=absolute,proto3" json:"absolute"`
 }
 
 func (x *InitiateFormDataReq) Reset() {
@@ -1122,13 +1122,13 @@ type InitiateFormDataResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id           string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Url          string            `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	File         string            `protobuf:"bytes,3,opt,name=file,proto3" json:"file,omitempty"`
-	Header       []*KeyValues      `protobuf:"bytes,4,rep,name=header,proto3" json:"header,omitempty"`
+	Id           string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	Url          string            `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
+	File         string            `protobuf:"bytes,3,opt,name=file,proto3" json:"file"`
+	Header       []*KeyValues      `protobuf:"bytes,4,rep,name=header,proto3" json:"header"`
 	FormData     map[string]string `protobuf:"bytes,5,rep,name=formData,proto3" json:"formData,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Expires      int64             `protobuf:"varint,6,opt,name=expires,proto3" json:"expires,omitempty"`
-	SuccessCodes []int32           `protobuf:"varint,7,rep,packed,name=successCodes,proto3" json:"successCodes,omitempty"`
+	Expires      int64             `protobuf:"varint,6,opt,name=expires,proto3" json:"expires"`
+	SuccessCodes []int32           `protobuf:"varint,7,rep,packed,name=successCodes,proto3" json:"successCodes"`
 }
 
 func (x *InitiateFormDataResp) Reset() {
@@ -1217,8 +1217,8 @@ type CompleteFormDataReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id        string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UrlPrefix string `protobuf:"bytes,2,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	Id        string `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	UrlPrefix string `protobuf:"bytes,2,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 }
 
 func (x *CompleteFormDataReq) Reset() {
@@ -1272,7 +1272,7 @@ type CompleteFormDataResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url string `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
 }
 
 func (x *CompleteFormDataResp) Reset() {
@@ -1319,10 +1319,10 @@ type FcmUpdateTokenReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	PlatformID int32  `protobuf:"varint,1,opt,name=platformID,proto3" json:"platformID,omitempty"`
-	FcmToken   string `protobuf:"bytes,2,opt,name=fcmToken,proto3" json:"fcmToken,omitempty"`
-	Account    string `protobuf:"bytes,3,opt,name=account,proto3" json:"account,omitempty"`
-	ExpireTime int64  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	PlatformID int32  `protobuf:"varint,1,opt,name=platformID,proto3" json:"platformID"`
+	FcmToken   string `protobuf:"bytes,2,opt,name=fcmToken,proto3" json:"fcmToken"`
+	Account    string `protobuf:"bytes,3,opt,name=account,proto3" json:"account"`
+	ExpireTime int64  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime"`
 }
 
 func (x *FcmUpdateTokenReq) Reset() {
@@ -1428,8 +1428,8 @@ type SetAppBadgeReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserID         string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
-	AppUnreadCount int32  `protobuf:"varint,2,opt,name=appUnreadCount,proto3" json:"appUnreadCount,omitempty"`
+	UserID         string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	AppUnreadCount int32  `protobuf:"varint,2,opt,name=appUnreadCount,proto3" json:"appUnreadCount"`
 }
 
 func (x *SetAppBadgeReq) Reset() {
@@ -1521,8 +1521,8 @@ type FileURL struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
-	URL      string `protobuf:"bytes,2,opt,name=URL,proto3" json:"URL,omitempty"`
+	Filename string `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename"`
+	URL      string `protobuf:"bytes,2,opt,name=URL,proto3" json:"URL"`
 }
 
 func (x *FileURL) Reset() {
@@ -1576,11 +1576,11 @@ type UploadLogsReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Platform   int32      `protobuf:"varint,1,opt,name=platform,proto3" json:"platform,omitempty"`
-	FileURLs   []*FileURL `protobuf:"bytes,2,rep,name=fileURLs,proto3" json:"fileURLs,omitempty"`
-	SystemType string     `protobuf:"bytes,3,opt,name=systemType,proto3" json:"systemType,omitempty"`
-	Version    string     `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
-	Ex         string     `protobuf:"bytes,4,opt,name=ex,proto3" json:"ex,omitempty"`
+	Platform   int32      `protobuf:"varint,1,opt,name=platform,proto3" json:"platform"`
+	FileURLs   []*FileURL `protobuf:"bytes,2,rep,name=fileURLs,proto3" json:"fileURLs"`
+	SystemType string     `protobuf:"bytes,3,opt,name=systemType,proto3" json:"systemType"`
+	Version    string     `protobuf:"bytes,5,opt,name=version,proto3" json:"version"`
+	Ex         string     `protobuf:"bytes,4,opt,name=ex,proto3" json:"ex"`
 }
 
 func (x *UploadLogsReq) Reset() {
@@ -1693,7 +1693,7 @@ type DeleteLogsReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LogIDs []string `protobuf:"bytes,1,rep,name=logIDs,proto3" json:"logIDs,omitempty"`
+	LogIDs []string `protobuf:"bytes,1,rep,name=logIDs,proto3" json:"logIDs"`
 }
 
 func (x *DeleteLogsReq) Reset() {
@@ -1778,10 +1778,10 @@ type SearchLogsReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Keyword    string                   `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	StartTime  int64                    `protobuf:"varint,2,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	EndTime    int64                    `protobuf:"varint,3,opt,name=endTime,proto3" json:"endTime,omitempty"`
-	Pagination *sdkws.RequestPagination `protobuf:"bytes,4,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Keyword    string                   `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword"`
+	StartTime  int64                    `protobuf:"varint,2,opt,name=startTime,proto3" json:"startTime"`
+	EndTime    int64                    `protobuf:"varint,3,opt,name=endTime,proto3" json:"endTime"`
+	Pagination *sdkws.RequestPagination `protobuf:"bytes,4,opt,name=pagination,proto3" json:"pagination"`
 }
 
 func (x *SearchLogsReq) Reset() {
@@ -1849,16 +1849,16 @@ type LogInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserID     string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
-	Platform   int32  `protobuf:"varint,2,opt,name=platform,proto3" json:"platform,omitempty"`
-	Url        string `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
-	CreateTime int64  `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime,omitempty"`
-	Nickname   string `protobuf:"bytes,5,opt,name=nickname,proto3" json:"nickname,omitempty"`
-	LogID      string `protobuf:"bytes,6,opt,name=logID,proto3" json:"logID,omitempty"`
-	Filename   string `protobuf:"bytes,7,opt,name=filename,proto3" json:"filename,omitempty"`
-	SystemType string `protobuf:"bytes,8,opt,name=systemType,proto3" json:"systemType,omitempty"`
-	Ex         string `protobuf:"bytes,9,opt,name=ex,proto3" json:"ex,omitempty"`
-	Version    string `protobuf:"bytes,10,opt,name=version,proto3" json:"version,omitempty"`
+	UserID     string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	Platform   int32  `protobuf:"varint,2,opt,name=platform,proto3" json:"platform"`
+	Url        string `protobuf:"bytes,3,opt,name=url,proto3" json:"url"`
+	CreateTime int64  `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime"`
+	Nickname   string `protobuf:"bytes,5,opt,name=nickname,proto3" json:"nickname"`
+	LogID      string `protobuf:"bytes,6,opt,name=logID,proto3" json:"logID"`
+	Filename   string `protobuf:"bytes,7,opt,name=filename,proto3" json:"filename"`
+	SystemType string `protobuf:"bytes,8,opt,name=systemType,proto3" json:"systemType"`
+	Ex         string `protobuf:"bytes,9,opt,name=ex,proto3" json:"ex"`
+	Version    string `protobuf:"bytes,10,opt,name=version,proto3" json:"version"`
 }
 
 func (x *LogInfo) Reset() {
@@ -1968,8 +1968,8 @@ type SearchLogsResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	LogsInfos []*LogInfo `protobuf:"bytes,1,rep,name=logsInfos,proto3" json:"logsInfos,omitempty"`
-	Total     uint32     `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	LogsInfos []*LogInfo `protobuf:"bytes,1,rep,name=logsInfos,proto3" json:"logsInfos"`
+	Total     uint32     `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
 }
 
 func (x *SearchLogsResp) Reset() {

@@ -44,8 +44,8 @@ type PushMsgReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MsgData        *sdkws.MsgData `protobuf:"bytes,1,opt,name=msgData,proto3" json:"msgData,omitempty"`
-	ConversationID string         `protobuf:"bytes,2,opt,name=conversationID,proto3" json:"conversationID,omitempty"`
+	MsgData        *sdkws.MsgData `protobuf:"bytes,1,opt,name=msgData,proto3" json:"msgData"`
+	ConversationID string         `protobuf:"bytes,2,opt,name=conversationID,proto3" json:"conversationID"`
 }
 
 func (x *PushMsgReq) Reset() {
@@ -137,8 +137,8 @@ type DelUserPushTokenReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserID     string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
-	PlatformID int32  `protobuf:"varint,2,opt,name=platformID,proto3" json:"platformID,omitempty"`
+	UserID     string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	PlatformID int32  `protobuf:"varint,2,opt,name=platformID,proto3" json:"platformID"`
 }
 
 func (x *DelUserPushTokenReq) Reset() {

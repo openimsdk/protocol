@@ -15,7 +15,7 @@
 syntax = "proto3";
 package openim.group;
 import "sdkws/sdkws.proto";
-import "google/wrappers.proto";
+import "wrapperspb/wrapperspb.proto";
 option go_package = "github.com/openimsdk/protocol/group";
 
 
@@ -248,10 +248,10 @@ message CancelMuteGroupResp{
 message SetGroupMemberInfo{
   string groupID = 1;
   string userID = 2;
-  google.protobuf.StringValue nickname = 3;
-  google.protobuf.StringValue faceURL = 4;
-  google.protobuf.Int32Value roleLevel = 5;
-  google.protobuf.StringValue ex = 6;
+  openim.protobuf.StringValue nickname = 3;
+  openim.protobuf.StringValue faceURL = 4;
+  openim.protobuf.Int32Value roleLevel = 5;
+  openim.protobuf.StringValue ex = 6;
 }
 
 message SetGroupMemberInfoReq{

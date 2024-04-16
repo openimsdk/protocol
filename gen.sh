@@ -26,8 +26,10 @@ PROTO_NAMES=(
     "third"
     "user"
     "statistics"
+    "wrapperspb"
 )
 
 for name in "${PROTO_NAMES[@]}"; do
   protoc --go_out=plugins=grpc:./${name} --go_opt=module=github.com/openimsdk/protocol/${name} ${name}/${name}.proto
 done
+

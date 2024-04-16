@@ -39,11 +39,11 @@ type ErrorInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Path  string   `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	Line  uint32   `protobuf:"varint,2,opt,name=line,proto3" json:"line,omitempty"`
-	Name  string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Cause string   `protobuf:"bytes,4,opt,name=cause,proto3" json:"cause,omitempty"`
-	Warp  []string `protobuf:"bytes,5,rep,name=warp,proto3" json:"warp,omitempty"`
+	Path  string   `protobuf:"bytes,1,opt,name=path,proto3" json:"path"`
+	Line  uint32   `protobuf:"varint,2,opt,name=line,proto3" json:"line"`
+	Name  string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	Cause string   `protobuf:"bytes,4,opt,name=cause,proto3" json:"cause"`
+	Warp  []string `protobuf:"bytes,5,rep,name=warp,proto3" json:"warp"`
 }
 
 func (x *ErrorInfo) Reset() {
