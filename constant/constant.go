@@ -128,9 +128,10 @@ const (
 	SysMsgType  = 200
 
 	// SessionType.
-	SingleChatType       = 1
-	GroupChatType        = 2
-	SuperGroupChatType   = 3
+	SingleChatType = 1
+	// WriteGroupChatType Not enabled temporarily
+	WriteGroupChatType   = 2
+	ReadGroupChatType    = 3
 	NotificationChatType = 4
 	// token.
 	NormalToken  = 0
