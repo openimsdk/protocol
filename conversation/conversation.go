@@ -153,7 +153,7 @@ func (x *SetConversationsReq) Check() error {
 	if x.Conversation.ConversationType == constant.SingleChatType && x.Conversation.UserID == "" {
 		return errors.New("userID is empty")
 	}
-	if x.Conversation.ConversationType == constant.SuperGroupChatType && x.Conversation.GroupID == "" {
+	if x.Conversation.ConversationType == constant.ReadGroupChatType && x.Conversation.GroupID == "" {
 		return errors.New("groupID is empty")
 	}
 	return nil
