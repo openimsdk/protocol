@@ -1,4 +1,4 @@
-module github.com/openimsdk/protocol
+module github.com/LITMCALM/protocol
 
 go 1.18
 
