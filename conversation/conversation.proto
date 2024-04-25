@@ -79,39 +79,39 @@ message GetSortedConversationListReq{
 }
 
 message GetSortedConversationListResp{
-  int64 conversationTotal=1;
-  int64 unreadTotal=2;
-  repeated ConversationElem conversationElems=3;
+  int64 conversationTotal = 1;
+  int64 unreadTotal = 2;
+  repeated ConversationElem conversationElems = 3;
 
 }
 
 message ConversationElem {
-  string conversationID=1;
-  int32 recvMsgOpt=2;
+  string conversationID = 1;
+  int32 recvMsgOpt = 2;
   int64 unreadCount = 3;
-  bool IsPinned=4;
-  MsgInfo msgInfo=5;
+  bool IsPinned = 4;
+  MsgInfo msgInfo = 5;
 
 }
 
 message MsgInfo{
   string serverMsgID = 1;
   string clientMsgID = 2;
-  int32 sessionType=3;
-  string sendID=4;
-  string recvID=5;
-  string senderName=6;
-  string faceURL=7;
-  string groupID=8;
-  string groupName=9;
-  string groupFaceURL=10;
-  int32 groupType=11;
-  uint32 groupMemberCount=12;
-  int64 LatestMsgRecvTime=13;
+  int32 sessionType = 3;
+  string sendID = 4;
+  string recvID = 5;
+  string senderName = 6;
+  string faceURL = 7;
+  string groupID = 8;
+  string groupName = 9;
+  string groupFaceURL = 10;
+  int32 groupType = 11;
+  uint32 groupMemberCount = 12;
+  int64 LatestMsgRecvTime = 13;
   int32 msgFrom = 14;
   int32 contentType = 15;
   string content = 16;
-  string ex=17;
+  string ex = 17;
 }
 
 message GetConversationsReq{
@@ -218,6 +218,25 @@ message GetConversationNotReceiveMessageUserIDsResp {
   repeated string userIDs = 1;
 }
 
+message UpdateConversationReq {
+  string conversationID = 1;
+  repeated string userIDs = 2;
+  openim.protobuf.Int32Value recvMsgOpt = 3;
+  openim.protobuf.BoolValue isPinned = 4;
+  openim.protobuf.StringValue attachedInfo = 5;
+  openim.protobuf.BoolValue isPrivateChat = 6;
+  openim.protobuf.StringValue ex = 7;
+  openim.protobuf.Int32Value burnDuration = 8;
+  openim.protobuf.Int64Value minSeq = 9;
+  openim.protobuf.Int64Value maxSeq = 10;
+  openim.protobuf.Int32Value groupAtType = 11;
+  openim.protobuf.Int64Value msgDestructTime = 12;
+  openim.protobuf.BoolValue isMsgDestruct = 13;
+}
+
+message UpdateConversationResp {
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
@@ -234,4 +253,5 @@ service conversation {
   rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns(GetConversationsByConversationIDResp);
   rpc GetConversationOfflinePushUserIDs(GetConversationOfflinePushUserIDsReq) returns(GetConversationOfflinePushUserIDsResp);
   rpc GetConversationNotReceiveMessageUserIDs(GetConversationNotReceiveMessageUserIDsReq) returns(GetConversationNotReceiveMessageUserIDsResp);
+  rpc UpdateConversation(UpdateConversationReq) returns(UpdateConversationResp);
 }

@@ -306,7 +306,13 @@ message GetServerTimeReq{
 }
 message GetServerTimeResp{
   int64 serverTime=1;
+}
 
+message ClearMsgReq{
+    int64 timestamp =1;
+}
+
+message ClearMsgResp{
 }
 
 service msg {
@@ -350,4 +356,6 @@ service msg {
   rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
   rpc GetActiveGroup(GetActiveGroupReq) returns(GetActiveGroupResp);
   rpc GetServerTime(GetServerTimeReq) returns(GetServerTimeResp);
+
+  rpc ClearMsg(ClearMsgReq) returns(ClearMsgResp);
 }
