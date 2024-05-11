@@ -27,3 +27,16 @@ func (x *MsgData) Check() error {
 	}
 	return nil
 }
+
+func (x *RequestPagination) Check() error {
+	if x == nil {
+		return errors.New("pagination is nil")
+	}
+	if x.PageNumber < 1 {
+		return errors.New("pageNumber is invalid")
+	}
+	if x.ShowNumber < 1 {
+		return errors.New("showNumber is invalid")
+	}
+	return nil
+}

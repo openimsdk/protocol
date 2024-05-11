@@ -349,6 +349,18 @@ message notificationUserInfoUpdateReq {
 message notificationUserInfoUpdateResp {
 }
 
+message SearchGroupMemberReq {
+  string groupID = 1;
+  string keyword = 2;
+  int32 position = 3;
+  openim.sdkws.RequestPagination pagination = 4;
+}
+
+message SearchGroupMemberResp {
+  int64 total = 1;
+  repeated openim.sdkws.GroupMemberFullInfo members = 2;
+}
+
 service group{
   //创建群
   rpc createGroup(CreateGroupReq) returns(CreateGroupResp);
@@ -413,4 +425,5 @@ service group{
 
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
 
+  rpc SearchGroupMember(SearchGroupMemberReq) returns (SearchGroupMemberResp);
 }

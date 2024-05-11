@@ -502,17 +502,17 @@ message RevokeMsgTips{
 
 
 message MessageRevokedContent {
-	string revokerID = 1;          
-	int32 revokerRole = 2;             
-	string clientMsgID = 3;              
-	string revokerNickname = 4;             
-	int64 revokeTime = 5;         
-	int64 sourceMessageSendTime = 6;        
-	string sourceMessageSendID = 7;    
-	string sourceMessageSenderNickname = 8;  
-	int32 sessionType = 10;
-	int64 seq = 11;                         
-	string ex = 12;                        
+  string revokerID = 1;
+  int32 revokerRole = 2;
+  string clientMsgID = 3;
+  string revokerNickname = 4;
+  int64 revokeTime = 5;
+  int64 sourceMessageSendTime = 6;
+  string sourceMessageSendID = 7;
+  string sourceMessageSenderNickname = 8;
+  int32 sessionType = 10;
+  int64 seq = 11;
+  string ex = 12;
 }
 
 message ClearConversationTips {
@@ -521,7 +521,7 @@ message ClearConversationTips {
 }
 
 message DeleteMsgsTips {
-  string userID  = 1;
+  string userID = 1;
   string conversationID = 2;
   repeated int64 seqs = 3;
 }

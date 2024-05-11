@@ -380,3 +380,13 @@ const (
 	SubscriberUser = 1
 	Unsubscribe    = 2
 )
+
+const (
+	GroupSearchPositionHead = 1
+	GroupSearchPositionAny  = 2
+)
+
+const (
+	FirstPageNumber   = 1
+	MaxSyncPullNumber = 500
+)

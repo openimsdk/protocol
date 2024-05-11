@@ -190,6 +190,15 @@ message getSpecifiedFriendsInfoResp {
   repeated getSpecifiedFriendsInfoInfo infos = 1;
 }
 
+message getFriendHashReq {
+  string userID = 1;
+}
+
+message getFriendHashResp {
+  int64 total = 1;
+  uint64 hash = 2;
+}
+
 service friend{
   //申请加好友
   rpc applyToAddFriend(applyToAddFriendReq) returns(applyToAddFriendResp);
@@ -227,4 +236,6 @@ service friend{
   rpc getFriendIDs(getFriendIDsReq) returns (getFriendIDsResp);
   // 获取指定好友信息
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
+  // 获取好友列表hash
+  rpc getFriendHash(getFriendHashReq) returns (getFriendHashResp);
 }
