@@ -199,6 +199,17 @@ message getFriendHashResp {
   uint64 hash = 2;
 }
 
+message searchFriendsReq{
+  string userID = 1;
+  string keyword = 2;
+  openim.sdkws.RequestPagination pagination = 3;
+}
+
+message searchFriendsResp{
+  int64 total = 1;
+  repeated openim.sdkws.FriendInfo friends = 2;
+}
+
 service friend{
   //申请加好友
   rpc applyToAddFriend(applyToAddFriendReq) returns(applyToAddFriendResp);
@@ -238,4 +249,6 @@ service friend{
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
   // 获取好友列表hash
   rpc getFriendHash(getFriendHashReq) returns (getFriendHashResp);
+
+  rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
 }

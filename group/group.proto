@@ -361,6 +361,15 @@ message SearchGroupMemberResp {
   repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
 
+message GetGroupMemberHashReq {
+  string groupID = 1;
+}
+
+message GetGroupMemberHashResp {
+  int64 total = 1;
+  uint64 hash = 2;
+}
+
 service group{
   //创建群
   rpc createGroup(CreateGroupReq) returns(CreateGroupResp);
@@ -426,4 +435,5 @@ service group{
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
 
   rpc SearchGroupMember(SearchGroupMemberReq) returns (SearchGroupMemberResp);
+  rpc GetGroupMemberHash(GetGroupMemberHashReq) returns (GetGroupMemberHashResp);
 }
