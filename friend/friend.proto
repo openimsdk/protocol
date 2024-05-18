@@ -197,6 +197,7 @@ message getFriendHashReq {
 message getFriendHashResp {
   int64 total = 1;
   uint64 hash = 2;
+  int64 num = 3;
 }
 
 message searchFriendsReq{
