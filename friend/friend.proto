@@ -211,6 +211,23 @@ message searchFriendsResp{
   repeated openim.sdkws.FriendInfo friends = 2;
 }
 
+
+message incrSyncFriendsReq{
+  string userID = 1;
+  string versionID = 2;
+  uint64 version = 3;
+  uint64 idHash = 4;
+}
+
+
+message incrSyncFriendsResp{
+  bool full = 1;
+  repeated string sortUserIds = 2;
+  repeated string deleteUserIds = 3;
+  repeated string changeUserIds = 4;
+  uint64 version = 5;
+}
+
 service friend{
   //申请加好友
   rpc applyToAddFriend(applyToAddFriendReq) returns(applyToAddFriendResp);
@@ -252,4 +269,6 @@ service friend{
   rpc getFriendHash(getFriendHashReq) returns (getFriendHashResp);
 
   rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
+
+  rpc incrSyncFriends(incrSyncFriendsReq) returns (incrSyncFriendsResp);
 }
