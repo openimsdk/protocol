@@ -37,6 +37,18 @@ message applyToAddFriendReq{
 message applyToAddFriendResp{
 }
 
+message friendInfo {
+  string ownerUserID = 1;
+  string friendUserID = 2;
+  string friendNickname = 3;
+  string friendFaceURL = 4;
+  string remark = 5;
+  int64  createTime = 6;
+  int32  addSource = 7;
+  string operatorUserID = 8;
+  string ex = 9;
+  bool   isPinned = 10;
+}
 
 message importFriendReq{
   string ownerUserID = 1;
@@ -190,16 +202,6 @@ message getSpecifiedFriendsInfoResp {
   repeated getSpecifiedFriendsInfoInfo infos = 1;
 }
 
-message getFriendHashReq {
-  string userID = 1;
-}
-
-message getFriendHashResp {
-  int64 total = 1;
-  uint64 hash = 2;
-  int64 num = 3;
-}
-
 message searchFriendsReq{
   string userID = 1;
   string keyword = 2;
@@ -221,11 +223,13 @@ message incrSyncFriendsReq{
 
 
 message incrSyncFriendsResp{
-  bool full = 1;
-  repeated string sortUserIds = 2;
-  repeated string deleteUserIds = 3;
-  repeated string changeUserIds = 4;
-  uint64 version = 5;
+  uint64 version = 1;
+  bool full = 2;
+  uint32 syncCount = 3;
+  uint64 sortUserIdHash = 4;
+  repeated string sortUserIds = 5;
+  repeated string deleteUserIds = 6;
+  repeated friendInfo changes = 7;
 }
 
 service friend{
@@ -265,8 +269,6 @@ service friend{
   rpc getFriendIDs(getFriendIDsReq) returns (getFriendIDsResp);
   // 获取指定好友信息
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
-  // 获取好友列表hash
-  rpc getFriendHash(getFriendHashReq) returns (getFriendHashResp);
 
   rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
 
