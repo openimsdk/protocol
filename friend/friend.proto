@@ -214,22 +214,19 @@ message searchFriendsResp{
 }
 
 
-message incrSyncFriendsReq{
+message getIncrementalFriendsReq{
   string userID = 1;
   string versionID = 2;
   uint64 version = 3;
-  uint64 idHash = 4;
 }
 
-
-message incrSyncFriendsResp{
+message getIncrementalFriendsResp {
   uint64 version = 1;
-  bool full = 2;
-  uint32 syncCount = 3;
-  uint64 sortUserIdHash = 4;
-  repeated string sortUserIds = 5;
-  repeated string deleteUserIds = 6;
-  repeated friendInfo changes = 7;
+  string versionID = 2;
+  bool full = 3;
+  uint32 syncCount = 4;
+  repeated string deleteUserIds = 5;
+  repeated friendInfo changes = 6;
 }
 
 service friend{
@@ -272,5 +269,5 @@ service friend{
 
   rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
 
-  rpc incrSyncFriends(incrSyncFriendsReq) returns (incrSyncFriendsResp);
+  rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
 }
