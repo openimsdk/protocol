@@ -318,18 +318,6 @@ message getNotificationAccountReq{
 message getNotificationAccountResp{
 }
 
-message searchUserReq{
-  string keyword = 1;
-  repeated string userIDs = 2;
-  repeated string addUserIDs = 3;
-  sdkws.RequestPagination pagination = 4;
-}
-
-message searchUserResp{
-  int64 total = 1;
-  repeated sdkws.UserInfo users = 2;
-}
-
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -376,7 +364,5 @@ service user {
   rpc searchNotificationAccount(searchNotificationAccountReq)returns(searchNotificationAccountResp);
   //getNotificationAccount by userID
   rpc getNotificationAccount(getNotificationAccountReq)returns(getNotificationAccountResp);
-  //search user
-  rpc searchUser(searchUserReq)returns(searchUserResp);
 }
 

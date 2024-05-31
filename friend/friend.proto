@@ -210,11 +210,10 @@ message searchFriendsReq{
 
 message searchFriendsResp{
   int64 total = 1;
-  repeated openim.sdkws.FriendInfo friends = 2;
+  repeated friendInfo friends = 2;
 }
 
-
-message getIncrementalFriendsReq{
+message getIncrementalFriendsReq {
   string userID = 1;
   string versionID = 2;
   uint64 version = 3;
@@ -227,6 +226,15 @@ message getIncrementalFriendsResp {
   uint32 syncCount = 4;
   repeated string deleteUserIds = 5;
   repeated friendInfo changes = 6;
+}
+
+message notificationUserInfoUpdateReq {
+  string userID = 1;
+  openim.sdkws.UserInfo oldUserInfo = 2;
+  openim.sdkws.UserInfo newUserInfo = 3;
+}
+
+message notificationUserInfoUpdateResp {
 }
 
 service friend{
@@ -268,6 +276,8 @@ service friend{
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
 
   rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
+
+  rpc notificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
 }

@@ -361,15 +361,38 @@ message SearchGroupMemberResp {
   repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
 
-message GetGroupMemberHashReq {
+message getIncrementalGroupMemberReq {
   string groupID = 1;
+  string versionID = 2;
+  uint64 version = 3;
 }
 
-message GetGroupMemberHashResp {
-  int64 total = 1;
-  uint64 hash = 2;
-  int64 num = 3;
+message getIncrementalGroupMemberResp{
+  uint64 version = 1;
+  string versionID = 2;
+  bool full = 3;
+  uint32 syncCount = 4;
+  repeated string deleteUserIds = 5;
+  repeated openim.sdkws.GroupMemberFullInfo changes = 6;
 }
+
+
+message getIncrementalJoinGroupReq {
+  string userID = 1;
+  string versionID = 2;
+  uint64 version = 3;
+}
+
+message getIncrementalJoinGroupResp{
+  uint64 version = 1;
+  string versionID = 2;
+  bool full = 3;
+  uint32 syncCount = 4;
+  repeated string deleteGroupIds = 5;
+  repeated openim.sdkws.GroupInfo changes = 6;
+}
+
+
 
 service group{
   //创建群
@@ -436,5 +459,7 @@ service group{
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
 
   rpc SearchGroupMember(SearchGroupMemberReq) returns (SearchGroupMemberResp);
-  rpc GetGroupMemberHash(GetGroupMemberHashReq) returns (GetGroupMemberHashResp);
+
+  rpc getIncrementalGroupMember(getIncrementalGroupMemberReq) returns (getIncrementalGroupMemberResp);
+  rpc getIncrementalJoinGroup(getIncrementalJoinGroupReq) returns (getIncrementalJoinGroupResp);
 }
