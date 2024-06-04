@@ -233,7 +233,7 @@ message blackInfo {
 
 message getIncrementalBlacksReq {
   string userID = 1;
-  string versionID = 2; // 理解为hash 当你都存在同个Document
+  string versionID = 2;
   uint64 version = 3;
 }
 message getIncrementalBlacksResp {
@@ -246,48 +246,48 @@ message getIncrementalBlacksResp {
 }
 
 service friend {
-  //申请加好友
+  // Friend request
   rpc applyToAddFriend(applyToAddFriendReq) returns (applyToAddFriendResp);
-  //获取收到的好友申请列表
+  // Get friend request list
   rpc getPaginationFriendsApplyTo(getPaginationFriendsApplyToReq) returns (getPaginationFriendsApplyToResp);
-  //获取主动发出去的好友申请列表
+  // Get sent friend request list
   rpc getPaginationFriendsApplyFrom(getPaginationFriendsApplyFromReq) returns (getPaginationFriendsApplyFromResp);
-  //获取指定好友申请
+  // Get specified friend request
   rpc getDesignatedFriendsApply(getDesignatedFriendsApplyReq) returns (getDesignatedFriendsApplyResp);
-  //添加黑名单
+  // Add black user
   rpc addBlack(addBlackReq) returns (addBlackResp);
-  //移除黑名单
+  // Remove black user
   rpc removeBlack(removeBlackReq) returns (removeBlackResp);
-  //判断是否好友关系
+  // Check user is friend
   rpc isFriend(isFriendReq) returns (isFriendResp);
-  //判断是否在黑名单中
+  // Check user is black
   rpc isBlack(isBlackReq) returns (isBlackResp);
-  //获取黑名单列表
+  // Get black list
   rpc getPaginationBlacks(getPaginationBlacksReq) returns (getPaginationBlacksResp);
-  //删除好友
+  // Delete friend
   rpc deleteFriend(deleteFriendReq) returns (deleteFriendResp);
-  //对好友申请响应（同意或拒绝）
+  // Respond to friend request (Accept or Decline)
   rpc respondFriendApply(respondFriendApplyReq) returns (respondFriendApplyResp);
-  //星标好友
+  //Favorited friend
   rpc updateFriends(updateFriendsReq) returns (updateFriendsResp);
-  //设置好友备注
+  // Set friend kickname
   rpc setFriendRemark(setFriendRemarkReq) returns (setFriendRemarkResp);
-  //导入好友关系
+  // Import friends relationship
   rpc importFriends(importFriendReq) returns (importFriendResp);
-  //翻页获取好友列表 无结果不返回错误
+  // Paginate and retrieve friend list; do not return error if no results.
   rpc getDesignatedFriends(getDesignatedFriendsReq) returns (getDesignatedFriendsResp);
-  //获取指定好友信息 有id不存在也返回错误
+  // Get specified friend's information; return error if ID does not exist.
   rpc getPaginationFriends(getPaginationFriendsReq) returns (getPaginationFriendsResp);
-  // 获取好友ID列表
+  // Get friend IDs list
   rpc getFriendIDs(getFriendIDsReq) returns (getFriendIDsResp);
-  // 获取指定好友信息
+  // Get specified friends info
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
-
+  // Search for specific friends using keyword
   rpc searchFriends(searchFriendsReq) returns (searchFriendsResp);
 
   rpc notificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
-
+  // Get Incremental Friends list
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
-
+  // Get Incremental Blacks list
   rpc getIncrementalBlacks(getIncrementalBlacksReq) returns (getIncrementalBlacksResp);
 }

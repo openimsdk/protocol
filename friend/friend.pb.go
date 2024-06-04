@@ -2577,7 +2577,7 @@ type GetIncrementalBlacksReq struct {
 	unknownFields protoimpl.UnknownFields
 
 	UserID    string `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
-	VersionID string `protobuf:"bytes,2,opt,name=versionID,proto3" json:"versionID"` // 理解为hash 当你都存在同个Document
+	VersionID string `protobuf:"bytes,2,opt,name=versionID,proto3" json:"versionID"`
 	Version   uint64 `protobuf:"varint,3,opt,name=version,proto3" json:"version"`
 }
 
@@ -3947,45 +3947,48 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type FriendClient interface {
-	// 申请加好友
+	// Friend request
 	ApplyToAddFriend(ctx context.Context, in *ApplyToAddFriendReq, opts ...grpc.CallOption) (*ApplyToAddFriendResp, error)
-	// 获取收到的好友申请列表
+	// Get friend request list
 	GetPaginationFriendsApplyTo(ctx context.Context, in *GetPaginationFriendsApplyToReq, opts ...grpc.CallOption) (*GetPaginationFriendsApplyToResp, error)
-	// 获取主动发出去的好友申请列表
+	// Get sent friend request list
 	GetPaginationFriendsApplyFrom(ctx context.Context, in *GetPaginationFriendsApplyFromReq, opts ...grpc.CallOption) (*GetPaginationFriendsApplyFromResp, error)
-	// 获取指定好友申请
+	// Get specified friend request
 	GetDesignatedFriendsApply(ctx context.Context, in *GetDesignatedFriendsApplyReq, opts ...grpc.CallOption) (*GetDesignatedFriendsApplyResp, error)
-	// 添加黑名单
+	// Add black user
 	AddBlack(ctx context.Context, in *AddBlackReq, opts ...grpc.CallOption) (*AddBlackResp, error)
-	// 移除黑名单
+	// Remove black user
 	RemoveBlack(ctx context.Context, in *RemoveBlackReq, opts ...grpc.CallOption) (*RemoveBlackResp, error)
-	// 判断是否好友关系
+	// Check user is friend
 	IsFriend(ctx context.Context, in *IsFriendReq, opts ...grpc.CallOption) (*IsFriendResp, error)
-	// 判断是否在黑名单中
+	// Check user is black
 	IsBlack(ctx context.Context, in *IsBlackReq, opts ...grpc.CallOption) (*IsBlackResp, error)
-	// 获取黑名单列表
+	// Get black list
 	GetPaginationBlacks(ctx context.Context, in *GetPaginationBlacksReq, opts ...grpc.CallOption) (*GetPaginationBlacksResp, error)
-	// 删除好友
+	// Delete friend
 	DeleteFriend(ctx context.Context, in *DeleteFriendReq, opts ...grpc.CallOption) (*DeleteFriendResp, error)
-	// 对好友申请响应（同意或拒绝）
+	// Respond to friend request (Accept or Decline)
 	RespondFriendApply(ctx context.Context, in *RespondFriendApplyReq, opts ...grpc.CallOption) (*RespondFriendApplyResp, error)
-	// 星标好友
+	// Favorited friend
 	UpdateFriends(ctx context.Context, in *UpdateFriendsReq, opts ...grpc.CallOption) (*UpdateFriendsResp, error)
-	// 设置好友备注
+	// Set friend kickname
 	SetFriendRemark(ctx context.Context, in *SetFriendRemarkReq, opts ...grpc.CallOption) (*SetFriendRemarkResp, error)
-	// 导入好友关系
+	// Import friends relationship
 	ImportFriends(ctx context.Context, in *ImportFriendReq, opts ...grpc.CallOption) (*ImportFriendResp, error)
-	// 翻页获取好友列表 无结果不返回错误
+	// Paginate and retrieve friend list; do not return error if no results.
 	GetDesignatedFriends(ctx context.Context, in *GetDesignatedFriendsReq, opts ...grpc.CallOption) (*GetDesignatedFriendsResp, error)
-	// 获取指定好友信息 有id不存在也返回错误
+	// Get specified friend's information; return error if ID does not exist.
 	GetPaginationFriends(ctx context.Context, in *GetPaginationFriendsReq, opts ...grpc.CallOption) (*GetPaginationFriendsResp, error)
-	// 获取好友ID列表
+	// Get friend IDs list
 	GetFriendIDs(ctx context.Context, in *GetFriendIDsReq, opts ...grpc.CallOption) (*GetFriendIDsResp, error)
-	// 获取指定好友信息
+	// Get specified friends info
 	GetSpecifiedFriendsInfo(ctx context.Context, in *GetSpecifiedFriendsInfoReq, opts ...grpc.CallOption) (*GetSpecifiedFriendsInfoResp, error)
+	// Search for specific friends using keyword
 	SearchFriends(ctx context.Context, in *SearchFriendsReq, opts ...grpc.CallOption) (*SearchFriendsResp, error)
 	NotificationUserInfoUpdate(ctx context.Context, in *NotificationUserInfoUpdateReq, opts ...grpc.CallOption) (*NotificationUserInfoUpdateResp, error)
+	// Get Incremental Friends list
 	GetIncrementalFriends(ctx context.Context, in *GetIncrementalFriendsReq, opts ...grpc.CallOption) (*GetIncrementalFriendsResp, error)
+	// Get Incremental Blacks list
 	GetIncrementalBlacks(ctx context.Context, in *GetIncrementalBlacksReq, opts ...grpc.CallOption) (*GetIncrementalBlacksResp, error)
 }
 
@@ -4197,45 +4200,48 @@ func (c *friendClient) GetIncrementalBlacks(ctx context.Context, in *GetIncremen
 
 // FriendServer is the server API for Friend service.
 type FriendServer interface {
-	// 申请加好友
+	// Friend request
 	ApplyToAddFriend(context.Context, *ApplyToAddFriendReq) (*ApplyToAddFriendResp, error)
-	// 获取收到的好友申请列表
+	// Get friend request list
 	GetPaginationFriendsApplyTo(context.Context, *GetPaginationFriendsApplyToReq) (*GetPaginationFriendsApplyToResp, error)
-	// 获取主动发出去的好友申请列表
+	// Get sent friend request list
 	GetPaginationFriendsApplyFrom(context.Context, *GetPaginationFriendsApplyFromReq) (*GetPaginationFriendsApplyFromResp, error)
-	// 获取指定好友申请
+	// Get specified friend request
 	GetDesignatedFriendsApply(context.Context, *GetDesignatedFriendsApplyReq) (*GetDesignatedFriendsApplyResp, error)
-	// 添加黑名单
+	// Add black user
 	AddBlack(context.Context, *AddBlackReq) (*AddBlackResp, error)
-	// 移除黑名单
+	// Remove black user
 	RemoveBlack(context.Context, *RemoveBlackReq) (*RemoveBlackResp, error)
-	// 判断是否好友关系
+	// Check user is friend
 	IsFriend(context.Context, *IsFriendReq) (*IsFriendResp, error)
-	// 判断是否在黑名单中
+	// Check user is black
 	IsBlack(context.Context, *IsBlackReq) (*IsBlackResp, error)
-	// 获取黑名单列表
+	// Get black list
 	GetPaginationBlacks(context.Context, *GetPaginationBlacksReq) (*GetPaginationBlacksResp, error)
-	// 删除好友
+	// Delete friend
 	DeleteFriend(context.Context, *DeleteFriendReq) (*DeleteFriendResp, error)
-	// 对好友申请响应（同意或拒绝）
+	// Respond to friend request (Accept or Decline)
 	RespondFriendApply(context.Context, *RespondFriendApplyReq) (*RespondFriendApplyResp, error)
-	// 星标好友
+	// Favorited friend
 	UpdateFriends(context.Context, *UpdateFriendsReq) (*UpdateFriendsResp, error)
-	// 设置好友备注
+	// Set friend kickname
 	SetFriendRemark(context.Context, *SetFriendRemarkReq) (*SetFriendRemarkResp, error)
-	// 导入好友关系
+	// Import friends relationship
 	ImportFriends(context.Context, *ImportFriendReq) (*ImportFriendResp, error)
-	// 翻页获取好友列表 无结果不返回错误
+	// Paginate and retrieve friend list; do not return error if no results.
 	GetDesignatedFriends(context.Context, *GetDesignatedFriendsReq) (*GetDesignatedFriendsResp, error)
-	// 获取指定好友信息 有id不存在也返回错误
+	// Get specified friend's information; return error if ID does not exist.
 	GetPaginationFriends(context.Context, *GetPaginationFriendsReq) (*GetPaginationFriendsResp, error)
-	// 获取好友ID列表
+	// Get friend IDs list
 	GetFriendIDs(context.Context, *GetFriendIDsReq) (*GetFriendIDsResp, error)
-	// 获取指定好友信息
+	// Get specified friends info
 	GetSpecifiedFriendsInfo(context.Context, *GetSpecifiedFriendsInfoReq) (*GetSpecifiedFriendsInfoResp, error)
+	// Search for specific friends using keyword
 	SearchFriends(context.Context, *SearchFriendsReq) (*SearchFriendsResp, error)
 	NotificationUserInfoUpdate(context.Context, *NotificationUserInfoUpdateReq) (*NotificationUserInfoUpdateResp, error)
+	// Get Incremental Friends list
 	GetIncrementalFriends(context.Context, *GetIncrementalFriendsReq) (*GetIncrementalFriendsResp, error)
+	// Get Incremental Blacks list
 	GetIncrementalBlacks(context.Context, *GetIncrementalBlacksReq) (*GetIncrementalBlacksResp, error)
 }
 
