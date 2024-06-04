@@ -75,6 +75,20 @@ message getDesignatedFriendsApplyResp {
   repeated openim.sdkws.FriendRequest friendRequests = 1;
 }
 
+message getIncrementalFriendsApplyReq {
+  string userID = 1;
+  string versionID = 2;
+  uint64 version = 3;
+}
+message getIncrementalFriendsApplyResp {
+  uint64 version = 1;
+  string versionID = 2;
+  bool full = 3;
+  uint32 syncCount = 4;
+  repeated string deleteUserIds = 5;
+  repeated openim.sdkws.FriendRequest changes = 6;
+}
+
 message getDesignatedFriendsReq {
   string ownerUserID = 1;
   repeated string friendUserIDs = 2;
@@ -254,6 +268,8 @@ service friend {
   rpc getPaginationFriendsApplyFrom(getPaginationFriendsApplyFromReq) returns (getPaginationFriendsApplyFromResp);
   // Get specified friend request
   rpc getDesignatedFriendsApply(getDesignatedFriendsApplyReq) returns (getDesignatedFriendsApplyResp);
+  // Get Incremental friends apply list
+  rpc getIncrementalFriendsApply(getIncrementalFriendsApplyReq) returns(getIncrementalFriendsApplyResp);
   // Add black user
   rpc addBlack(addBlackReq) returns (addBlackResp);
   // Remove black user
