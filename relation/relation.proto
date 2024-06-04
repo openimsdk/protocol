@@ -13,12 +13,12 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.friend;
+package OpenIMServer.relation;
 
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
 
-option go_package = "github.com/openimsdk/protocol/friend";
+option go_package = "github.com/openimsdk/protocol/relation";
 
 message getPaginationFriendsReq {
   openim.sdkws.RequestPagination pagination = 1;
