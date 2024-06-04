@@ -1149,8 +1149,8 @@ type IsFriendResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InUser1Friends bool `protobuf:"varint,1,opt,name=inUser1Friends,proto3" json:"inUser1Friends"` //如果userID2在userID1的好友列表中 true
-	InUser2Friends bool `protobuf:"varint,2,opt,name=inUser2Friends,proto3" json:"inUser2Friends"` //如果userID1在userID2的好友列表中 true
+	InUser1Friends bool `protobuf:"varint,1,opt,name=inUser1Friends,proto3" json:"inUser1Friends"` // If userID2 is in userID1’s friend list, return true
+	InUser2Friends bool `protobuf:"varint,2,opt,name=inUser2Friends,proto3" json:"inUser2Friends"` // If userID1 is in userID2’s friend list, return true
 }
 
 func (x *IsFriendResp) Reset() {
@@ -1259,8 +1259,8 @@ type IsBlackResp struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InUser1Blacks bool `protobuf:"varint,1,opt,name=inUser1Blacks,proto3" json:"inUser1Blacks"` //如果userID2在userID1的黑名单列表中 true
-	InUser2Blacks bool `protobuf:"varint,2,opt,name=inUser2Blacks,proto3" json:"inUser2Blacks"` //如果userID1在userID2的黑名单列表中 true
+	InUser1Blacks bool `protobuf:"varint,1,opt,name=inUser1Blacks,proto3" json:"inUser1Blacks"` // If userID2 is in userID1's blacklist, true
+	InUser2Blacks bool `protobuf:"varint,2,opt,name=inUser2Blacks,proto3" json:"inUser2Blacks"` // If userID1 is in userID2's blacklist, true
 }
 
 func (x *IsBlackResp) Reset() {
@@ -1408,8 +1408,8 @@ type RespondFriendApplyReq struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	FromUserID   string `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"` //主动发起的申请者
-	ToUserID     string `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`     //被动添加者
+	FromUserID   string `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"` // ID of the user initiating the friend request
+	ToUserID     string `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`     // ID of the user receiving the friend request
 	HandleResult int32  `protobuf:"varint,3,opt,name=handleResult,proto3" json:"handleResult"`
 	HandleMsg    string `protobuf:"bytes,4,opt,name=handleMsg,proto3" json:"handleMsg"`
 }
@@ -3965,11 +3965,11 @@ type FriendClient interface {
 	AddBlack(ctx context.Context, in *AddBlackReq, opts ...grpc.CallOption) (*AddBlackResp, error)
 	// Remove black user
 	RemoveBlack(ctx context.Context, in *RemoveBlackReq, opts ...grpc.CallOption) (*RemoveBlackResp, error)
-	// Check user is friend
+	// Check user is in friends list
 	IsFriend(ctx context.Context, in *IsFriendReq, opts ...grpc.CallOption) (*IsFriendResp, error)
-	// Check user is black
+	// Check user is blacklist
 	IsBlack(ctx context.Context, in *IsBlackReq, opts ...grpc.CallOption) (*IsBlackResp, error)
-	// Get black list
+	// Get blacklist
 	GetPaginationBlacks(ctx context.Context, in *GetPaginationBlacksReq, opts ...grpc.CallOption) (*GetPaginationBlacksResp, error)
 	// Delete friend
 	DeleteFriend(ctx context.Context, in *DeleteFriendReq, opts ...grpc.CallOption) (*DeleteFriendResp, error)
@@ -3977,7 +3977,7 @@ type FriendClient interface {
 	RespondFriendApply(ctx context.Context, in *RespondFriendApplyReq, opts ...grpc.CallOption) (*RespondFriendApplyResp, error)
 	// Favorited friend
 	UpdateFriends(ctx context.Context, in *UpdateFriendsReq, opts ...grpc.CallOption) (*UpdateFriendsResp, error)
-	// Set friend kickname
+	// Set friend nickname
 	SetFriendRemark(ctx context.Context, in *SetFriendRemarkReq, opts ...grpc.CallOption) (*SetFriendRemarkResp, error)
 	// Import friends relationship
 	ImportFriends(ctx context.Context, in *ImportFriendReq, opts ...grpc.CallOption) (*ImportFriendResp, error)
@@ -3992,9 +3992,9 @@ type FriendClient interface {
 	// Search for specific friends using keyword
 	SearchFriends(ctx context.Context, in *SearchFriendsReq, opts ...grpc.CallOption) (*SearchFriendsResp, error)
 	NotificationUserInfoUpdate(ctx context.Context, in *NotificationUserInfoUpdateReq, opts ...grpc.CallOption) (*NotificationUserInfoUpdateResp, error)
-	// Get Incremental Friends list
+	// Get Incremental friends list
 	GetIncrementalFriends(ctx context.Context, in *GetIncrementalFriendsReq, opts ...grpc.CallOption) (*GetIncrementalFriendsResp, error)
-	// Get Incremental Blacks list
+	// Get Incremental blackslist
 	GetIncrementalBlacks(ctx context.Context, in *GetIncrementalBlacksReq, opts ...grpc.CallOption) (*GetIncrementalBlacksResp, error)
 }
 
@@ -4218,11 +4218,11 @@ type FriendServer interface {
 	AddBlack(context.Context, *AddBlackReq) (*AddBlackResp, error)
 	// Remove black user
 	RemoveBlack(context.Context, *RemoveBlackReq) (*RemoveBlackResp, error)
-	// Check user is friend
+	// Check user is in friends list
 	IsFriend(context.Context, *IsFriendReq) (*IsFriendResp, error)
-	// Check user is black
+	// Check user is blacklist
 	IsBlack(context.Context, *IsBlackReq) (*IsBlackResp, error)
-	// Get black list
+	// Get blacklist
 	GetPaginationBlacks(context.Context, *GetPaginationBlacksReq) (*GetPaginationBlacksResp, error)
 	// Delete friend
 	DeleteFriend(context.Context, *DeleteFriendReq) (*DeleteFriendResp, error)
@@ -4230,7 +4230,7 @@ type FriendServer interface {
 	RespondFriendApply(context.Context, *RespondFriendApplyReq) (*RespondFriendApplyResp, error)
 	// Favorited friend
 	UpdateFriends(context.Context, *UpdateFriendsReq) (*UpdateFriendsResp, error)
-	// Set friend kickname
+	// Set friend nickname
 	SetFriendRemark(context.Context, *SetFriendRemarkReq) (*SetFriendRemarkResp, error)
 	// Import friends relationship
 	ImportFriends(context.Context, *ImportFriendReq) (*ImportFriendResp, error)
@@ -4245,9 +4245,9 @@ type FriendServer interface {
 	// Search for specific friends using keyword
 	SearchFriends(context.Context, *SearchFriendsReq) (*SearchFriendsResp, error)
 	NotificationUserInfoUpdate(context.Context, *NotificationUserInfoUpdateReq) (*NotificationUserInfoUpdateResp, error)
-	// Get Incremental Friends list
+	// Get Incremental friends list
 	GetIncrementalFriends(context.Context, *GetIncrementalFriendsReq) (*GetIncrementalFriendsResp, error)
-	// Get Incremental Blacks list
+	// Get Incremental blackslist
 	GetIncrementalBlacks(context.Context, *GetIncrementalBlacksReq) (*GetIncrementalBlacksResp, error)
 }
 

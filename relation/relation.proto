@@ -110,8 +110,8 @@ message isFriendReq {
   string userID2 = 2;
 }
 message isFriendResp {
-  bool inUser1Friends = 1; //如果userID2在userID1的好友列表中 true
-  bool inUser2Friends = 2; //如果userID1在userID2的好友列表中 true
+  bool inUser1Friends = 1; // If userID2 is in userID1’s friend list, return true
+  bool inUser2Friends = 2; // If userID1 is in userID2’s friend list, return true
 }
 
 message isBlackReq {
@@ -119,8 +119,8 @@ message isBlackReq {
   string userID2 = 2;
 }
 message isBlackResp {
-  bool inUser1Blacks = 1; //如果userID2在userID1的黑名单列表中 true
-  bool inUser2Blacks = 2; //如果userID1在userID2的黑名单列表中 true
+  bool inUser1Blacks = 1; // If userID2 is in userID1's blacklist, true
+  bool inUser2Blacks = 2; // If userID1 is in userID2's blacklist, true
 }
 
 message deleteFriendReq {
@@ -129,10 +129,10 @@ message deleteFriendReq {
 }
 message deleteFriendResp {}
 
-//process
+// process
 message respondFriendApplyReq {
-  string fromUserID = 1; //主动发起的申请者
-  string toUserID = 2; //被动添加者
+  string fromUserID = 1; // ID of the user initiating the friend request
+  string toUserID = 2; // ID of the user receiving the friend request
   int32 handleResult = 3;
   string handleMsg = 4;
 }
@@ -258,11 +258,11 @@ service friend {
   rpc addBlack(addBlackReq) returns (addBlackResp);
   // Remove black user
   rpc removeBlack(removeBlackReq) returns (removeBlackResp);
-  // Check user is friend
+  // Check user is in friends list
   rpc isFriend(isFriendReq) returns (isFriendResp);
-  // Check user is black
+  // Check user is blacklist
   rpc isBlack(isBlackReq) returns (isBlackResp);
-  // Get black list
+  // Get blacklist
   rpc getPaginationBlacks(getPaginationBlacksReq) returns (getPaginationBlacksResp);
   // Delete friend
   rpc deleteFriend(deleteFriendReq) returns (deleteFriendResp);
@@ -270,7 +270,7 @@ service friend {
   rpc respondFriendApply(respondFriendApplyReq) returns (respondFriendApplyResp);
   //Favorited friend
   rpc updateFriends(updateFriendsReq) returns (updateFriendsResp);
-  // Set friend kickname
+  // Set friend nickname
   rpc setFriendRemark(setFriendRemarkReq) returns (setFriendRemarkResp);
   // Import friends relationship
   rpc importFriends(importFriendReq) returns (importFriendResp);
@@ -286,8 +286,8 @@ service friend {
   rpc searchFriends(searchFriendsReq) returns (searchFriendsResp);
 
   rpc notificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
-  // Get Incremental Friends list
+  // Get Incremental friends list
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
-  // Get Incremental Blacks list
+  // Get Incremental blackslist
   rpc getIncrementalBlacks(getIncrementalBlacksReq) returns (getIncrementalBlacksResp);
 }
