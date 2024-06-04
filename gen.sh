@@ -16,7 +16,7 @@ PROTO_NAMES=(
     "auth"
     "conversation"
     "errinfo"
-    "friend"
+    "relation"
     "group"
     "msg"
     "msggateway"
