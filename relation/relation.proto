@@ -227,7 +227,7 @@ message getIncrementalFriendsResp {
   bool full = 3;
   uint32 syncCount = 4;
   repeated string deleteUserIds = 5;
-  repeated friendInfo changes = 6;
+  repeated openim.sdkws.FriendInfo changes = 6;
 }
 
 message blackInfo {
