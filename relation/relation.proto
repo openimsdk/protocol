@@ -13,7 +13,7 @@
 // limitations under the License.
 
 syntax = "proto3";
-package OpenIMServer.relation;
+package openim.relation;
 
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
@@ -164,6 +164,7 @@ message respondFriendApplyReq {
   int32 handleResult = 3;
   string handleMsg = 4;
 }
+
 message respondFriendApplyResp {}
 
 message updateFriendsReq {
@@ -214,17 +215,6 @@ message getSpecifiedFriendsInfoResp {
   repeated getSpecifiedFriendsInfoInfo infos = 1;
 }
 
-message searchFriendsReq {
-  string userID = 1;
-  string keyword = 2;
-  openim.sdkws.RequestPagination pagination = 3;
-}
-
-message searchFriendsResp {
-  int64 total = 1;
-  repeated friendInfo friends = 2;
-}
-
 message getIncrementalFriendsReq {
   string userID = 1;
   string versionID = 2;
@@ -239,14 +229,6 @@ message getIncrementalFriendsResp {
   repeated string deleteUserIds = 5;
   repeated friendInfo changes = 6;
 }
-
-message notificationUserInfoUpdateReq {
-  string userID = 1;
-  openim.sdkws.UserInfo oldUserInfo = 2;
-  openim.sdkws.UserInfo newUserInfo = 3;
-}
-
-message notificationUserInfoUpdateResp {}
 
 message blackInfo {
   string ownerUserID = 1;
@@ -314,11 +296,7 @@ service friend {
   rpc getFriendIDs(getFriendIDsReq) returns (getFriendIDsResp);
   // Get specified friends info
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
-  // Search for specific friends using keyword
-  rpc searchFriends(searchFriendsReq) returns (searchFriendsResp);
 
-  rpc notificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
-  // Get Incremental friends list
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
   // Get Incremental blackslist
   rpc getIncrementalBlacks(getIncrementalBlacksReq) returns (getIncrementalBlacksResp);
