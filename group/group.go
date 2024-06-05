@@ -16,7 +16,6 @@ package group
 
 import (
 	"errors"
-	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *CreateGroupReq) Check() error {
@@ -354,25 +353,6 @@ func (x *GroupCreateCountReq) Check() error {
 	}
 	if x.End <= 0 {
 		return errors.New("end is invalid")
-	}
-	return nil
-}
-
-func (x *SearchGroupMemberReq) Check() error {
-	if x.GroupID == "" {
-		return errors.New("groupID is empty")
-	}
-	if x.Keyword == "" {
-		return errors.New("keyword is empty")
-	}
-	switch x.Position {
-	case constant.GroupSearchPositionHead:
-	case constant.GroupSearchPositionAny:
-	default:
-		return errors.New("position is invalid")
-	}
-	if err := x.Pagination.Check(); err != nil {
-		return err
 	}
 	return nil
 }

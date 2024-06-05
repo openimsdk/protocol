@@ -62,6 +62,7 @@ message setGlobalRecvMessageOptReq{
   string userID = 1;
   int32 globalRecvMsgOpt = 3;
 }
+
 message setGlobalRecvMessageOptResp{
 }
 
@@ -72,7 +73,6 @@ message setConversationReq{
 }
 
 message setConversationResp{
-
 }
 
 message setRecvMsgOptReq {
@@ -318,6 +318,15 @@ message getNotificationAccountReq{
 message getNotificationAccountResp{
 }
 
+message sortQueryReq {
+  bool asc = 1;
+  map<string, string> userIDName = 2;
+}
+
+message sortQueryResp {
+  repeated sdkws.UserInfo users = 2;
+}
+
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -364,5 +373,7 @@ service user {
   rpc searchNotificationAccount(searchNotificationAccountReq)returns(searchNotificationAccountResp);
   //getNotificationAccount by userID
   rpc getNotificationAccount(getNotificationAccountReq)returns(getNotificationAccountResp);
+
+  rpc sortQuery(sortQueryReq)returns(sortQueryResp);
 }
 

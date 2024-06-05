@@ -37,19 +37,6 @@ message applyToAddFriendReq{
 message applyToAddFriendResp{
 }
 
-message friendInfo {
-  string ownerUserID = 1;
-  string friendUserID = 2;
-  string friendNickname = 3;
-  string friendFaceURL = 4;
-  string remark = 5;
-  int64  createTime = 6;
-  int32  addSource = 7;
-  string operatorUserID = 8;
-  string ex = 9;
-  bool   isPinned = 10;
-}
-
 message importFriendReq{
   string ownerUserID = 1;
   repeated string friendUserIDs = 2;
@@ -210,7 +197,7 @@ message searchFriendsReq{
 
 message searchFriendsResp{
   int64 total = 1;
-  repeated friendInfo friends = 2;
+  repeated openim.sdkws.FriendInfo friends = 2;
 }
 
 message getIncrementalFriendsReq {
@@ -225,16 +212,7 @@ message getIncrementalFriendsResp {
   bool full = 3;
   uint32 syncCount = 4;
   repeated string deleteUserIds = 5;
-  repeated friendInfo changes = 6;
-}
-
-message notificationUserInfoUpdateReq {
-  string userID = 1;
-  openim.sdkws.UserInfo oldUserInfo = 2;
-  openim.sdkws.UserInfo newUserInfo = 3;
-}
-
-message notificationUserInfoUpdateResp {
+  repeated openim.sdkws.FriendInfo changes = 6;
 }
 
 service friend{
@@ -275,9 +253,7 @@ service friend{
   // 获取指定好友信息
   rpc GetSpecifiedFriendsInfo(getSpecifiedFriendsInfoReq) returns (getSpecifiedFriendsInfoResp);
 
-  rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
-
-  rpc notificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
+//  rpc searchFriends(searchFriendsReq)returns (searchFriendsResp);
 
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
 }
