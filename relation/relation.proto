@@ -226,8 +226,9 @@ message getIncrementalFriendsResp {
   string versionID = 2;
   bool full = 3;
   uint32 syncCount = 4;
-  repeated string deleteUserIds = 5;
-  repeated openim.sdkws.FriendInfo changes = 6;
+  repeated string delete = 5;
+  repeated openim.sdkws.FriendInfo insert = 6;
+  repeated openim.sdkws.FriendInfo update = 7;
 }
 
 message blackInfo {
@@ -251,8 +252,9 @@ message getIncrementalBlacksResp {
   string versionID = 2;
   bool full = 3;
   uint32 syncCount = 4;
-  repeated string deleteUserIds = 5;
-  repeated blackInfo changes = 6;
+  repeated string delete = 5;
+  repeated blackInfo insert = 6;
+  repeated blackInfo update = 7;
 }
 
 service friend {

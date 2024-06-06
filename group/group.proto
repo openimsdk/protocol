@@ -360,8 +360,9 @@ message getIncrementalGroupMemberResp{
   string versionID = 2;
   bool full = 3;
   uint32 syncCount = 4;
-  repeated string deleteUserIds = 5;
-  repeated openim.sdkws.GroupMemberFullInfo changes = 6;
+  repeated string delete = 5;
+  repeated openim.sdkws.GroupMemberFullInfo insert = 6;
+  repeated openim.sdkws.GroupMemberFullInfo update = 7;
 }
 
 
@@ -376,11 +377,10 @@ message getIncrementalJoinGroupResp{
   string versionID = 2;
   bool full = 3;
   uint32 syncCount = 4;
-  repeated string deleteGroupIds = 5;
-  repeated openim.sdkws.GroupInfo changes = 6;
+  repeated string delete = 5;
+  repeated openim.sdkws.GroupInfo insert = 6;
+  repeated openim.sdkws.GroupInfo update = 7;
 }
-
-
 
 service group{
   //创建群
