@@ -19,9 +19,9 @@ import (
 )
 
 func (x *CreateGroupReq) Check() error {
-	if x.MemberUserIDs == nil && x.AdminUserIDs == nil {
-		return errors.New("memberUserIDS and adminUserIDs are empty")
-	}
+	//if x.MemberUserIDs == nil && x.AdminUserIDs == nil {
+	//	return errors.New("memberUserIDS and adminUserIDs are empty")
+	//}
 	if x.GroupInfo == nil {
 		return errors.New("groupInfo is empty")
 	}
