@@ -248,6 +248,7 @@ message GroupCreatedTips{
   repeated GroupMemberFullInfo memberList = 3;
   int64 operationTime = 4;
   GroupMemberFullInfo groupOwnerUser = 5;
+  uint64 groupMemberVersion = 6;
 }
 
 //	OnGroupInfoSet()
@@ -306,6 +307,7 @@ message GroupOwnerTransferredTips{
   GroupMemberFullInfo newGroupOwner = 3;
   string oldGroupOwner = 4;
   int64 operationTime = 5;
+  uint64 groupMemberVersion = 6;
 }
 
 
@@ -315,6 +317,7 @@ message MemberKickedTips{
   GroupMemberFullInfo opUser = 2;
   repeated GroupMemberFullInfo kickedUserList = 3;
   int64 operationTime = 4;
+  uint64 groupMemberVersion = 5;
 }
 
 //	OnMemberInvited()
@@ -323,6 +326,7 @@ message MemberInvitedTips{
   GroupMemberFullInfo opUser = 2;
   repeated GroupMemberFullInfo invitedUserList = 3;
   int64 operationTime = 4;
+  uint64 groupMemberVersion = 5;
 }
 
 //Actively join the group
@@ -330,6 +334,7 @@ message MemberEnterTips{
   GroupInfo group = 1;
   GroupMemberFullInfo entrantUser = 2;
   int64 operationTime = 3;
+  uint64 groupMemberVersion = 5;
 }
 
 message GroupDismissedTips{
@@ -344,6 +349,7 @@ message GroupMemberMutedTips{
   int64 operationTime = 3;
   GroupMemberFullInfo mutedUser = 4;
   uint32 mutedSeconds = 5;
+  uint64 groupMemberVersion = 6;
 }
 
 message GroupMemberCancelMutedTips{
@@ -351,6 +357,7 @@ message GroupMemberCancelMutedTips{
   GroupMemberFullInfo opUser = 2;
   int64 operationTime = 3;
   GroupMemberFullInfo mutedUser = 4;
+  uint64 groupMemberVersion = 5;
 }
 
 message GroupMutedTips{
@@ -370,6 +377,7 @@ message GroupMemberInfoSetTips{
   GroupMemberFullInfo opUser = 2;
   int64 operationTime = 3;
   GroupMemberFullInfo changedUser = 4;
+  uint64 groupMemberVersion = 5;
 }
 
 //////////////////////friend/////////////////////
