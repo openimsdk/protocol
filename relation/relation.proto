@@ -84,9 +84,8 @@ message getIncrementalFriendsApplyToResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
-  uint32 syncCount = 4;
-  repeated string deleteUserIds = 5;
-  repeated openim.sdkws.FriendRequest changes = 6;
+  repeated string deleteUserIds = 4;
+  repeated openim.sdkws.FriendRequest changes = 5;
 }
 
 message getIncrementalFriendsApplyFromReq {
@@ -98,9 +97,8 @@ message getIncrementalFriendsApplyFromResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
-  uint32 syncCount = 4;
-  repeated string deleteUserIds = 5;
-  repeated openim.sdkws.FriendRequest changes = 6;
+  repeated string deleteUserIds = 4;
+  repeated openim.sdkws.FriendRequest changes = 5;
 }
 
 message getDesignatedFriendsReq {
@@ -225,10 +223,9 @@ message getIncrementalFriendsResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
-  uint32 syncCount = 4;
-  repeated string delete = 5;
-  repeated openim.sdkws.FriendInfo insert = 6;
-  repeated openim.sdkws.FriendInfo update = 7;
+  repeated string delete = 4;
+  repeated openim.sdkws.FriendInfo insert = 5;
+  repeated openim.sdkws.FriendInfo update = 6;
 }
 
 message blackInfo {
@@ -251,10 +248,9 @@ message getIncrementalBlacksResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
-  uint32 syncCount = 4;
-  repeated string delete = 5;
-  repeated blackInfo insert = 6;
-  repeated blackInfo update = 7;
+  repeated string delete = 4;
+  repeated blackInfo insert = 5;
+  repeated blackInfo update = 6;
 }
 
 service friend {
