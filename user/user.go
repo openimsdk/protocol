@@ -257,7 +257,7 @@ func (x *AddNotificationAccountReq) Check() error {
 		return errors.New("nickName is empty")
 	}
 	if x.FaceURL == "" {
-		return errors.New("nickName is empty")
+		return errors.New("faceURL is empty")
 	}
 	return nil
 }
