@@ -380,24 +380,24 @@ message getIncrementalJoinGroupResp{
   repeated openim.sdkws.GroupInfo update = 6;
 }
 
-message GetIncrementalGroupMemberUserIDsReq {
+message GetFullGroupMemberUserIDsReq {
   uint64 idHash = 1;
   string groupID = 2;
 }
 
-message GetIncrementalGroupMemberUserIDsResp {
+message GetFullGroupMemberUserIDsResp {
   uint64 version = 1;
   string versionID = 2;
   bool equal = 3;
   repeated string userIDs = 4;
 }
 
-message GetIncrementalJoinGroupIDsReq {
+message GetFullJoinGroupIDsReq {
   uint64 idHash = 1;
   string userID = 2;
 }
 
-message GetIncrementalJoinGroupIDsResp {
+message GetFullJoinGroupIDsResp {
   uint64 version = 1;
   string versionID = 2;
   bool equal = 3;
@@ -471,7 +471,7 @@ service group{
   rpc getIncrementalGroupMember(getIncrementalGroupMemberReq) returns (getIncrementalGroupMemberResp);
   rpc getIncrementalJoinGroup(getIncrementalJoinGroupReq) returns (getIncrementalJoinGroupResp);
 
-  rpc GetIncrementalGroupMemberUserIDs(GetIncrementalGroupMemberUserIDsReq) returns (GetIncrementalGroupMemberUserIDsResp);
+  rpc GetFullGroupMemberUserIDs(GetFullGroupMemberUserIDsReq) returns (GetFullGroupMemberUserIDsResp);
 
-  rpc GetIncrementalJoinGroupIDs(GetIncrementalJoinGroupIDsReq) returns (GetIncrementalJoinGroupIDsResp);
+  rpc GetFullJoinGroupIDs(GetFullJoinGroupIDsReq) returns (GetFullJoinGroupIDsResp);
 }

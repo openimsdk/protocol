@@ -356,3 +356,15 @@ func (x *GroupCreateCountReq) Check() error {
 	}
 	return nil
 }
+func (x *GetFullGroupMemberUserIDsReq) Check() error {
+	if len(x.GroupID) == 0 {
+		return errors.New("groupID is empty")
+	}
+	return nil
+}
+func (x *GetFullJoinGroupIDsReq) Check() error {
+	if len(x.UserID) == 0 {
+		return errors.New("userID is empty")
+	}
+	return nil
+}

@@ -253,6 +253,18 @@ message getIncrementalBlacksResp {
   repeated blackInfo update = 6;
 }
 
+message getFullFriendUserIDsReq {
+  uint64 idHash = 1;
+  string userID = 2;
+}
+
+message getFullFriendUserIDsResp {
+  uint64 version = 1;
+  string versionID = 2;
+  bool equal = 3;
+  repeated string userIDs = 4;
+}
+
 service friend {
   // Friend request
   rpc applyToAddFriend(applyToAddFriendReq) returns (applyToAddFriendResp);
@@ -298,4 +310,6 @@ service friend {
   rpc getIncrementalFriends(getIncrementalFriendsReq) returns (getIncrementalFriendsResp);
   // Get Incremental blackslist
   rpc getIncrementalBlacks(getIncrementalBlacksReq) returns (getIncrementalBlacksResp);
+  // Get full friend userIDs
+  rpc getFullFriendUserIDs(getFullFriendUserIDsReq) returns (getFullFriendUserIDsResp);
 }
