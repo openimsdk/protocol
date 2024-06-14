@@ -201,3 +201,9 @@ func (x *GetSpecifiedFriendsInfoReq) Check() error {
 	}
 	return nil
 }
+func (x *GetFullFriendUserIDsReq) Check() error {
+	if len(x.UserID) == 0 {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
