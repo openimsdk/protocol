@@ -402,6 +402,7 @@ message FriendApplicationTips{
 message FriendApplicationApprovedTips{
   FromToUserID fromToUserID = 1; //from：同意者；to：请求发起者
   string handleMsg = 2;
+  uint64 friendVersion = 3;
 }
 
 //FromUserID accept or reject ToUserID
@@ -416,12 +417,13 @@ message FriendAddedTips{
   FriendInfo friend = 1;
   int64 operationTime = 2;
   PublicUserInfo     opUser = 3;  //who do this
-
+  uint64 friendVersion = 4;
 }
 
 // FromUserID  deleted a friend ToUserID
 message FriendDeletedTips{
   FromToUserID fromToUserID = 1; //from：owner； to：friend
+  uint64 friendVersion = 2;
 }
 
 
@@ -436,6 +438,7 @@ message BlackDeletedTips{
 
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
+  uint64 friendVersion = 2;
 }
 
 //////////////////////user/////////////////////
@@ -564,4 +567,5 @@ message RequestPagination {
 message FriendsInfoUpdateTips{
   FromToUserID fromToUserID = 1;
   repeated string friendIDs = 2;
+  uint64 friendVersion = 3;
 }
