@@ -249,6 +249,7 @@ message GroupCreatedTips{
   int64 operationTime = 4;
   GroupMemberFullInfo groupOwnerUser = 5;
   uint64 groupMemberVersion = 6;
+  string groupMemberVersionID = 7;
 }
 
 //	OnGroupInfoSet()
@@ -281,6 +282,8 @@ message MemberQuitTips{
   GroupInfo group = 1;
   GroupMemberFullInfo quitUser = 2;
   int64 operationTime = 3;
+  uint64 groupMemberVersion = 4;
+  string groupMemberVersionID = 5;
 }
 
 
@@ -308,6 +311,7 @@ message GroupOwnerTransferredTips{
   string oldGroupOwner = 4;
   int64 operationTime = 5;
   uint64 groupMemberVersion = 6;
+  string groupMemberVersionID = 7;
 }
 
 
@@ -318,6 +322,7 @@ message MemberKickedTips{
   repeated GroupMemberFullInfo kickedUserList = 3;
   int64 operationTime = 4;
   uint64 groupMemberVersion = 5;
+  string groupMemberVersionID = 6;
 }
 
 //	OnMemberInvited()
@@ -327,6 +332,7 @@ message MemberInvitedTips{
   repeated GroupMemberFullInfo invitedUserList = 3;
   int64 operationTime = 4;
   uint64 groupMemberVersion = 5;
+  string groupMemberVersionID = 6;
 }
 
 //Actively join the group
@@ -335,6 +341,7 @@ message MemberEnterTips{
   GroupMemberFullInfo entrantUser = 2;
   int64 operationTime = 3;
   uint64 groupMemberVersion = 5;
+  string groupMemberVersionID = 6;
 }
 
 message GroupDismissedTips{
@@ -350,6 +357,7 @@ message GroupMemberMutedTips{
   GroupMemberFullInfo mutedUser = 4;
   uint32 mutedSeconds = 5;
   uint64 groupMemberVersion = 6;
+  string groupMemberVersionID = 7;
 }
 
 message GroupMemberCancelMutedTips{
@@ -358,6 +366,7 @@ message GroupMemberCancelMutedTips{
   int64 operationTime = 3;
   GroupMemberFullInfo mutedUser = 4;
   uint64 groupMemberVersion = 5;
+  string groupMemberVersionID = 6;
 }
 
 message GroupMutedTips{
@@ -378,6 +387,7 @@ message GroupMemberInfoSetTips{
   int64 operationTime = 3;
   GroupMemberFullInfo changedUser = 4;
   uint64 groupMemberVersion = 5;
+  string groupMemberVersionID = 6;
 }
 
 //////////////////////friend/////////////////////
@@ -403,6 +413,7 @@ message FriendApplicationApprovedTips{
   FromToUserID fromToUserID = 1; //from：同意者；to：请求发起者
   string handleMsg = 2;
   uint64 friendVersion = 3;
+  string friendVersionID = 4;
 }
 
 //FromUserID accept or reject ToUserID
@@ -418,12 +429,14 @@ message FriendAddedTips{
   int64 operationTime = 2;
   PublicUserInfo     opUser = 3;  //who do this
   uint64 friendVersion = 4;
+  string friendVersionID = 5;
 }
 
 // FromUserID  deleted a friend ToUserID
 message FriendDeletedTips{
   FromToUserID fromToUserID = 1; //from：owner； to：friend
   uint64 friendVersion = 2;
+  string friendVersionID = 3;
 }
 
 
@@ -439,6 +452,7 @@ message BlackDeletedTips{
 message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
   uint64 friendVersion = 2;
+  string friendVersionID = 3;
 }
 
 //////////////////////user/////////////////////
@@ -568,4 +582,5 @@ message FriendsInfoUpdateTips{
   FromToUserID fromToUserID = 1;
   repeated string friendIDs = 2;
   uint64 friendVersion = 3;
+  string friendVersionID = 4;
 }
