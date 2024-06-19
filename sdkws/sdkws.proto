@@ -316,8 +316,9 @@ message GroupOwnerTransferredTips{
   GroupMemberFullInfo newGroupOwner = 3;
   string oldGroupOwner = 4;
   int64 operationTime = 5;
-  uint64 groupMemberVersion = 6;
-  string groupMemberVersionID = 7;
+  GroupMemberFullInfo oldGroupOwnerInfo = 6;
+  uint64 groupMemberVersion = 7;
+  string groupMemberVersionID = 8;
 }
 
 
