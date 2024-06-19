@@ -377,8 +377,8 @@ message getIncrementalJoinGroupResp{
   string versionID = 2;
   bool full = 3;
   repeated string delete = 4;
-  repeated string insert = 5;
-  repeated string update = 6;
+  repeated openim.sdkws.GroupInfo insert = 5;
+  repeated openim.sdkws.GroupInfo update = 6;
 }
 
 message GetFullGroupMemberUserIDsReq {
