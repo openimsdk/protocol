@@ -76,19 +76,6 @@ message ParticipantMetaData {
   UserInfo userInfo = 1;
 }
 
-message StreamOperateData {
-  string operatorUserID = 1;
-  repeated UserOperationData operation = 2;
-}
-
-message UserOperationData {
-  string userID = 1;
-  //  pbwrapper.BoolValue cameraOnEntry = 2;
-  //  pbwrapper.BoolValue microphoneOnEntry = 3;
-  bool cameraOnEntry = 2;
-  bool microphoneOnEntry = 3;
-}
-
 
 // Request to book a future meeting.
 message BookMeetingReq {
@@ -296,12 +283,30 @@ message SetMeetingHostInfoResp {
 
 }
 
-message NotifyMeetingHostData {
+message NotifyMeetingData {
   string operatorUserID = 1;
+  oneof messageType {
+    StreamOperateData streamOperateData = 2;
+    MeetingHostData meetingHostData = 3;
+  }
+}
+
+message StreamOperateData {
+  repeated UserOperationData operation = 1;
+}
+
+message UserOperationData {
+  string userID = 1;
+  bool cameraOnEntry = 2;
+  bool microphoneOnEntry = 3;
+}
+
+message MeetingHostData {
   string operatorNickname = 2;
   string userID = 3;
   string hostType = 4;
 }
+
 
 // Defines services related to meeting management.
 service MeetingService {
