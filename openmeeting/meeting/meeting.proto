@@ -39,10 +39,11 @@ message MeetingInfo {
 }
 
 message MeetingRepeatInfo {
-  string endDate  = 1;
-  string repeatType = 2;
-  string uintType = 3;
-  int32 interval = 4;
+  int64 endDate  = 1;
+  int32 repeatTimes = 2;
+  string repeatType = 3;
+  string uintType = 4;
+  int32 interval = 5;
 }
 
 // Settings controlling meeting features such as video, audio, and screen sharing permissions.
