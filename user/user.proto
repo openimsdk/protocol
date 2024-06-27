@@ -211,6 +211,20 @@ message setUserStatusReq{
 message setUserStatusResp {
 }
 
+message userOnlineStatus {
+  string userID = 1;
+  string connID = 2;
+  repeated int32 online = 3;
+  repeated int32 offline = 4;
+}
+
+message setUserOnlineStatusReq {
+  repeated userOnlineStatus status = 1;
+}
+
+message setUserOnlineStatusResp {
+}
+
 message processUserCommandAddReq {
   string userID = 1;
   int32 type = 2;
@@ -375,5 +389,7 @@ service user {
   rpc getNotificationAccount(getNotificationAccountReq)returns(getNotificationAccountResp);
 
   rpc sortQuery(sortQueryReq)returns(sortQueryResp);
+
+  rpc setUserOnlineStatus(setUserOnlineStatusReq)returns(setUserOnlineStatusResp);
 }
 
