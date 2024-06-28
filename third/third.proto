@@ -141,7 +141,7 @@ message CompleteFormDataResp {
 }
 
 message DeleteOutdatedDataReq {
-  int64 expireTime = 1;
+  string expireTime = 1;
 }
 
 message DeleteOutdatedDataResp {}
