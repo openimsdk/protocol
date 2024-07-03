@@ -68,6 +68,8 @@ const (
 	UserCommandDeleteNotification = 1306
 	UserCommandUpdateNotification = 1307
 
+	UserSubscribeOnlineStatusNotification = 1308
+
 	UserNotificationEnd = 1399
 	OANotification      = 1400
 
