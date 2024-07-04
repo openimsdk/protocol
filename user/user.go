@@ -146,7 +146,7 @@ func (x *UserRegisterReq) Check() error {
 	for _, u := range x.Users {
 		switch {
 		case u == nil:
-			return errors.New("user are empty")
+			return errors.New("user is empty")
 		case datautil.IsLegalUserID(u.UserID):
 			return errors.New("userID is legal")
 		}
