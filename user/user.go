@@ -17,6 +17,7 @@ package user
 import (
 	"errors"
 	"github.com/openimsdk/protocol/constant"
+	"github.com/openimsdk/protocol/util/datautil"
 )
 
 func (x *GetAllUserIDReq) Check() error {
@@ -140,11 +141,19 @@ func (x *GetPaginationUsersReq) Check() error {
 
 func (x *UserRegisterReq) Check() error {
 	if x.Users == nil {
-		return errors.New("Users are empty")
+		return errors.New("users are empty")
+	}
+	for _, u := range x.Users {
+		switch {
+		case u == nil:
+			return errors.New("user is empty")
+		case datautil.IsLegalUserID(u.UserID):
+			return errors.New("userID is legal")
+		}
 	}
 	for _, u := range x.Users {
 		if u.Nickname == "" {
-			return errors.New("User name is empty")
+			return errors.New("user name is empty")
 		}
 	}
 
