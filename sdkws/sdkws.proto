@@ -37,6 +37,7 @@ message GroupInfo{
   int32 applyMemberFriend = 15;
   int64 notificationUpdateTime = 16;
   string notificationUserID = 17;
+  bool displayRead = 18;
 }
 
 message GroupInfoForSet{
