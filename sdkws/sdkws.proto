@@ -46,10 +46,11 @@ message GroupInfoForSet{
   string notification = 3;
   string introduction = 4;
   string faceURL = 5;
-  openim.protobuf.StringValue ex = 6;
-  openim.protobuf.Int32Value needVerification = 7;
-  openim.protobuf.Int32Value lookMemberInfo = 8;
-  openim.protobuf.Int32Value applyMemberFriend = 9;
+  optional bool displayRead = 6;
+  openim.protobuf.StringValue ex = 7;
+  openim.protobuf.Int32Value needVerification = 8;
+  openim.protobuf.Int32Value lookMemberInfo = 9;
+  openim.protobuf.Int32Value applyMemberFriend = 10;
 }
 
 
