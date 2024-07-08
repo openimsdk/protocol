@@ -16,6 +16,7 @@ package group
 
 import (
 	"errors"
+	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *CreateGroupReq) Check() error {
@@ -47,6 +48,11 @@ func (x *SetGroupInfoReq) Check() error {
 	}
 	if x.GroupInfoForSet.GroupID == "" {
 		return errors.New("GroupID is empty")
+	}
+	if x.GroupInfoForSet.DisplayIsRead != nil {
+		if x.GroupInfoForSet.DisplayIsRead.Value != constant.GroupMessageUnDisplayIsRead {
+			return errors.New("displayIsRead can only set false")
+		}
 	}
 	return nil
 }
