@@ -50,6 +50,7 @@ message GroupInfoForSet{
   openim.protobuf.Int32Value needVerification = 7;
   openim.protobuf.Int32Value lookMemberInfo = 8;
   openim.protobuf.Int32Value applyMemberFriend = 9;
+  openim.protobuf.BoolValue displayRead = 10;
 }
 
 
