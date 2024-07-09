@@ -37,7 +37,6 @@ message GroupInfo{
   int32 applyMemberFriend = 15;
   int64 notificationUpdateTime = 16;
   string notificationUserID = 17;
-  bool displayIsRead = 18;
 }
 
 message GroupInfoForSet{
@@ -50,7 +49,6 @@ message GroupInfoForSet{
   openim.protobuf.Int32Value needVerification = 7;
   openim.protobuf.Int32Value lookMemberInfo = 8;
   openim.protobuf.Int32Value applyMemberFriend = 9;
-  openim.protobuf.BoolValue displayIsRead = 10;
 }
 
 
