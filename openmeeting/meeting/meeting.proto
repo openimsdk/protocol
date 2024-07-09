@@ -319,6 +319,13 @@ message MeetingHostData {
   string hostType = 4;
 }
 
+message CleanPreviousMeetingsReq {
+  string userID = 1;
+}
+
+message CleanPreviousMeetingsResp {
+}
+
 
 // Defines services related to meeting management.
 service MeetingService {
@@ -352,4 +359,6 @@ service MeetingService {
   rpc RemoveParticipants(RemoveMeetingParticipantsReq) returns (RemoveMeetingParticipantsResp);
   // modify host or co host of the meeting room
   rpc SetMeetingHostInfo(SetMeetingHostInfoReq) returns (SetMeetingHostInfoResp);
+  // clean previous meetings in rtc when login
+  rpc CleanPreviousMeetings(CleanPreviousMeetingsReq) returns (CleanPreviousMeetingsResp);
 }
