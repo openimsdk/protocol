@@ -48,6 +48,11 @@ enum DayOfWeek {
   SATURDAY = 6;
 }
 
+enum KickOffReason {
+  DuplicatedLogin = 0;
+  Offline = 1;
+}
+
 message MeetingRepeatInfo {
   int64 endDate  = 1;
   int32 repeatTimes = 2;
@@ -307,7 +312,8 @@ message NotifyMeetingData {
 message KickOffMeetingData {
   string userID = 1;
   string nickname = 2;
-  string reason = 3;
+  KickOffReason reasonCode = 3;
+  string reason = 4;
 }
 
 message StreamOperateData {
