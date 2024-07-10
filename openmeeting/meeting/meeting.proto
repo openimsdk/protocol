@@ -300,7 +300,14 @@ message NotifyMeetingData {
   oneof messageType {
     StreamOperateData streamOperateData = 2;
     MeetingHostData meetingHostData = 3;
+    KickOffMeetingData kickOffMeetingData = 4;
   }
+}
+
+message KickOffMeetingData {
+  string userID = 1;
+  string nickname = 2;
+  string reason = 3;
 }
 
 message StreamOperateData {
