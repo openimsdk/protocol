@@ -595,3 +595,17 @@ message FriendsInfoUpdateTips{
   uint64 friendVersion = 3;
   string friendVersionID = 4;
 }
+
+message SubUserOnlineStatusElem {
+  string userID = 1;
+  repeated int32 onlinePlatformIDs = 2;
+}
+
+message SubUserOnlineStatusTips {
+  repeated SubUserOnlineStatusElem subscribers = 1;
+}
+
+message SubUserOnlineStatus {
+  repeated string subscribeUserID = 1;
+  repeated string unsubscribeUserID = 2;
+}
