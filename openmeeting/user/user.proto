@@ -73,6 +73,15 @@ message getUserInfoResp{
   string account = 3;
 }
 
+message updateUserPasswordReq{
+  string userID = 1;
+  string password = 2;
+}
+
+message updateUserPasswordResp{
+
+}
+
 
 service user {
   //Get the specified user information full field
@@ -85,6 +94,10 @@ service user {
   rpc getUserToken(getUserTokenReq) returns (getUserTokenResp);
   // get user info
   rpc getUserInfo(getUserInfoReq) returns (getUserInfoResp);
+  // update user password
+  rpc updateUserPassword(updateUserPasswordReq) returns (updateUserPasswordResp);
+
+
 }
 
 
