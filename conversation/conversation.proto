@@ -237,6 +237,33 @@ message UpdateConversationReq {
 message UpdateConversationResp {
 }
 
+message GetFullOwnerConversationIDsReq {
+  uint64 idHash = 1;
+  string userID = 2;
+}
+
+message GetFullOwnerConversationIDsResp {
+  uint64 version = 1;
+  string versionID = 2;
+  bool equal = 3;
+  repeated string conversationIDs = 4;
+}
+
+message GetIncrementalConversationReq {
+  string userID = 1;
+  string versionID = 2;
+  uint64 version = 3;
+}
+
+message GetIncrementalConversationResp {
+  uint64 version = 1;
+  string versionID = 2;
+  bool full = 3;
+  repeated string delete = 4;
+  repeated Conversation insert = 5;
+  repeated Conversation update = 6;
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
@@ -254,4 +281,6 @@ service conversation {
   rpc GetConversationOfflinePushUserIDs(GetConversationOfflinePushUserIDsReq) returns(GetConversationOfflinePushUserIDsResp);
   rpc GetConversationNotReceiveMessageUserIDs(GetConversationNotReceiveMessageUserIDsReq) returns(GetConversationNotReceiveMessageUserIDsResp);
   rpc UpdateConversation(UpdateConversationReq) returns(UpdateConversationResp);
+  rpc GetFullOwnerConversationIDs(GetFullOwnerConversationIDsReq) returns(GetFullOwnerConversationIDsResp);
+  rpc GetIncrementalConversation(GetIncrementalConversationReq) returns(GetIncrementalConversationResp);
 }
