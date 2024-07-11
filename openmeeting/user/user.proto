@@ -82,6 +82,14 @@ message updateUserPasswordResp{
 
 }
 
+message ClearUserTokenReq{
+  string userID = 1;
+}
+
+message ClearUserTokenResp{
+
+}
+
 
 service user {
   //Get the specified user information full field
@@ -96,7 +104,8 @@ service user {
   rpc getUserInfo(getUserInfoReq) returns (getUserInfoResp);
   // update user password
   rpc updateUserPassword(updateUserPasswordReq) returns (updateUserPasswordResp);
-
+  // clear user token
+  rpc ClearUserToken(ClearUserTokenReq) returns(ClearUserTokenResp);
 
 }
 
