@@ -264,6 +264,16 @@ message GetIncrementalConversationResp {
   repeated Conversation update = 6;
 }
 
+message GetOwnerConversationReq {
+  string userID = 1;
+  openim.sdkws.RequestPagination pagination = 2;
+}
+
+message GetOwnerConversationResp {
+  int64 total = 1;
+  repeated Conversation conversations = 2;
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq)returns(GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
@@ -283,4 +293,5 @@ service conversation {
   rpc UpdateConversation(UpdateConversationReq) returns(UpdateConversationResp);
   rpc GetFullOwnerConversationIDs(GetFullOwnerConversationIDsReq) returns(GetFullOwnerConversationIDsResp);
   rpc GetIncrementalConversation(GetIncrementalConversationReq) returns(GetIncrementalConversationResp);
+  rpc GetOwnerConversation(GetOwnerConversationReq) returns(GetOwnerConversationResp);
 }
