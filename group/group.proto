@@ -14,37 +14,33 @@
 
 syntax = "proto3";
 package openim.group;
+
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
+
 option go_package = "github.com/openimsdk/protocol/group";
 
-
-
-message CreateGroupReq{
+message CreateGroupReq {
   repeated string memberUserIDs = 1;
   openim.sdkws.GroupInfo groupInfo = 2;
   repeated string adminUserIDs = 3;
   string ownerUserID = 4; //owner
 }
-message CreateGroupResp{
+message CreateGroupResp {
   openim.sdkws.GroupInfo groupInfo = 1;
 }
 
-
-message GetGroupsInfoReq{
+message GetGroupsInfoReq {
   repeated string groupIDs = 1;
 }
-message GetGroupsInfoResp{
+message GetGroupsInfoResp {
   repeated openim.sdkws.GroupInfo groupInfos = 1;
 }
 
-
-message SetGroupInfoReq{
+message SetGroupInfoReq {
   openim.sdkws.GroupInfoForSet groupInfoForSet = 1;
 }
-message SetGroupInfoResp{
-}
-
+message SetGroupInfoResp {}
 
 message GetGroupApplicationListReq {
   openim.sdkws.RequestPagination pagination = 1;
@@ -55,56 +51,45 @@ message GetGroupApplicationListResp {
   repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
-message GetUserReqApplicationListReq{
+message GetUserReqApplicationListReq {
   openim.sdkws.RequestPagination pagination = 1;
   string userID = 2;
 }
 
-message GetUserReqApplicationListResp{
+message GetUserReqApplicationListResp {
   uint32 total = 1;
   repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
-
 
 message TransferGroupOwnerReq {
   string groupID = 1;
   string oldOwnerUserID = 2;
   string newOwnerUserID = 3;
 }
-message TransferGroupOwnerResp{
+message TransferGroupOwnerResp {}
 
-}
-
-message JoinGroupReq{
+message JoinGroupReq {
   string groupID = 1;
   string reqMessage = 2;
   int32 joinSource = 3;
   string inviterUserID = 4;
   string ex = 5;
 }
-message JoinGroupResp{
-}
+message JoinGroupResp {}
 
-
-message GroupApplicationResponseReq{
+message GroupApplicationResponseReq {
   string groupID = 1;
-  string fromUserID = 2;  //
+  string fromUserID = 2; //
   string handledMsg = 3;
   int32 handleResult = 4;
 }
-message GroupApplicationResponseResp{
+message GroupApplicationResponseResp {}
 
-}
-
-
-
-message QuitGroupReq{
+message QuitGroupReq {
   string groupID = 1;
   string userID = 2;
 }
-message QuitGroupResp{
-}
-
+message QuitGroupResp {}
 
 message GetGroupMemberListReq {
   openim.sdkws.RequestPagination pagination = 1;
@@ -117,7 +102,6 @@ message GetGroupMemberListResp {
   uint32 total = 1;
   repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
-
 
 message GetGroupMembersInfoReq {
   string groupID = 1;
@@ -134,30 +118,23 @@ message KickGroupMemberReq {
   string reason = 3;
 }
 
-message KickGroupMemberResp {
-
-}
-
+message KickGroupMemberResp {}
 
 message GetJoinedGroupListReq {
   openim.sdkws.RequestPagination pagination = 1;
   string fromUserID = 2;
 }
-message GetJoinedGroupListResp{
+message GetJoinedGroupListResp {
   uint32 total = 1;
-  repeated  openim.sdkws.GroupInfo groups = 2;
+  repeated openim.sdkws.GroupInfo groups = 2;
 }
-
 
 message InviteUserToGroupReq {
   string groupID = 1;
   string reason = 2;
   repeated string invitedUserIDs = 3;
 }
-message InviteUserToGroupResp {
-
-}
-
+message InviteUserToGroupResp {}
 
 message GetGroupAllMemberReq {
   openim.sdkws.RequestPagination pagination = 1;
@@ -172,7 +149,6 @@ message CMSGroup {
   string groupOwnerUserName = 2;
   string groupOwnerUserID = 3;
 }
-
 
 message GetGroupsReq {
   openim.sdkws.RequestPagination pagination = 1;
@@ -200,52 +176,41 @@ message GetGroupMembersCMSResp {
   repeated openim.sdkws.GroupMemberFullInfo members = 2;
 }
 
-message DismissGroupReq{
+message DismissGroupReq {
   string groupID = 1;
   bool deleteMember = 2;
 }
 
-message DismissGroupResp{
-}
+message DismissGroupResp {}
 
-
-message MuteGroupMemberReq{
+message MuteGroupMemberReq {
   string groupID = 1;
   string userID = 2;
   uint32 mutedSeconds = 3;
 }
 
-message MuteGroupMemberResp{
-}
+message MuteGroupMemberResp {}
 
-
-
-message CancelMuteGroupMemberReq{
+message CancelMuteGroupMemberReq {
   string groupID = 1;
   string userID = 2;
 }
 
-message CancelMuteGroupMemberResp{
-}
+message CancelMuteGroupMemberResp {}
 
-
-message MuteGroupReq{
+message MuteGroupReq {
   string groupID = 1;
 }
 
-message MuteGroupResp{
-}
+message MuteGroupResp {}
 
-
-
-message CancelMuteGroupReq{
+message CancelMuteGroupReq {
   string groupID = 1;
 }
 
-message CancelMuteGroupResp{
-}
+message CancelMuteGroupResp {}
 
-message SetGroupMemberInfo{
+message SetGroupMemberInfo {
   string groupID = 1;
   string userID = 2;
   openim.protobuf.StringValue nickname = 3;
@@ -254,25 +219,23 @@ message SetGroupMemberInfo{
   openim.protobuf.StringValue ex = 6;
 }
 
-message SetGroupMemberInfoReq{
+message SetGroupMemberInfoReq {
   repeated SetGroupMemberInfo members = 1;
 }
 
-message SetGroupMemberInfoResp{
+message SetGroupMemberInfoResp {}
 
-}
-
-message GetGroupAbstractInfoReq{
+message GetGroupAbstractInfoReq {
   repeated string groupIDs = 1;
 }
 
-message GroupAbstractInfo{
+message GroupAbstractInfo {
   string groupID = 1;
   uint32 groupMemberNumber = 2;
   uint64 groupMemberListHash = 3;
 }
 
-message GetGroupAbstractInfoResp{
+message GetGroupAbstractInfoResp {
   repeated GroupAbstractInfo groupAbstractInfos = 1;
 }
 
@@ -281,19 +244,19 @@ message GetUserInGroupMembersReq {
   repeated string groupIDs = 2;
 }
 
-message GetUserInGroupMembersResp{
+message GetUserInGroupMembersResp {
   repeated openim.sdkws.GroupMemberFullInfo members = 1;
 }
 
-message GetGroupMemberUserIDsReq{
+message GetGroupMemberUserIDsReq {
   string groupID = 1;
 }
 
-message GetGroupMemberUserIDsResp{
+message GetGroupMemberUserIDsResp {
   repeated string userIDs = 1;
 }
 
-message GetGroupMemberRoleLevelReq{
+message GetGroupMemberRoleLevelReq {
   string groupID = 1;
   repeated int32 roleLevels = 2;
 }
@@ -346,8 +309,7 @@ message notificationUserInfoUpdateReq {
   openim.sdkws.UserInfo newUserInfo = 3;
 }
 
-message notificationUserInfoUpdateResp {
-}
+message notificationUserInfoUpdateResp {}
 
 message getIncrementalGroupMemberReq {
   string groupID = 1;
@@ -355,7 +317,7 @@ message getIncrementalGroupMemberReq {
   uint64 version = 3;
 }
 
-message getIncrementalGroupMemberResp{
+message getIncrementalGroupMemberResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
@@ -365,14 +327,13 @@ message getIncrementalGroupMemberResp{
   openim.sdkws.GroupInfo group = 7;
 }
 
-
 message getIncrementalJoinGroupReq {
   string userID = 1;
   string versionID = 2;
   uint64 version = 3;
 }
 
-message getIncrementalJoinGroupResp{
+message getIncrementalJoinGroupResp {
   uint64 version = 1;
   string versionID = 2;
   bool full = 3;
@@ -405,31 +366,40 @@ message GetFullJoinGroupIDsResp {
   repeated string groupIDs = 4;
 }
 
-service group{
+message BatchGetIncrementGroupMemberReq {
+  string userID = 1;
+  repeated getIncrementalGroupMemberReq reqList = 2;
+}
+
+message BatchGetIncrementalGroupMemberResp {
+  map<string, getIncrementalGroupMemberResp> respList = 1;
+}
+
+service group {
   //创建群
-  rpc createGroup(CreateGroupReq) returns(CreateGroupResp);
+  rpc createGroup(CreateGroupReq) returns (CreateGroupResp);
   //申请加群
-  rpc joinGroup(JoinGroupReq) returns(JoinGroupResp);
+  rpc joinGroup(JoinGroupReq) returns (JoinGroupResp);
   //退出群
-  rpc quitGroup(QuitGroupReq) returns(QuitGroupResp);
+  rpc quitGroup(QuitGroupReq) returns (QuitGroupResp);
   //获取指定群信息
-  rpc getGroupsInfo(GetGroupsInfoReq) returns(GetGroupsInfoResp);
+  rpc getGroupsInfo(GetGroupsInfoReq) returns (GetGroupsInfoResp);
   //设置群信息
-  rpc setGroupInfo(SetGroupInfoReq) returns(SetGroupInfoResp);
+  rpc setGroupInfo(SetGroupInfoReq) returns (SetGroupInfoResp);
   //（以管理员或群主身份）获取群的加群申请
-  rpc getGroupApplicationList(GetGroupApplicationListReq) returns(GetGroupApplicationListResp);
+  rpc getGroupApplicationList(GetGroupApplicationListReq) returns (GetGroupApplicationListResp);
   //获取用户自己的主动加群申请
-  rpc getUserReqApplicationList(GetUserReqApplicationListReq) returns(GetUserReqApplicationListResp);
+  rpc getUserReqApplicationList(GetUserReqApplicationListReq) returns (GetUserReqApplicationListResp);
   // 获取该群用户的加群申请
-  rpc getGroupUsersReqApplicationList(getGroupUsersReqApplicationListReq) returns(getGroupUsersReqApplicationListResp);
+  rpc getGroupUsersReqApplicationList(getGroupUsersReqApplicationListReq) returns (getGroupUsersReqApplicationListResp);
   //转让群主
-  rpc transferGroupOwner(TransferGroupOwnerReq) returns(TransferGroupOwnerResp);
+  rpc transferGroupOwner(TransferGroupOwnerReq) returns (TransferGroupOwnerResp);
   //群主或管理员处理进群申请
-  rpc groupApplicationResponse(GroupApplicationResponseReq) returns(GroupApplicationResponseResp);
+  rpc groupApplicationResponse(GroupApplicationResponseReq) returns (GroupApplicationResponseResp);
   //获取某个群的群成员
-  rpc getGroupMemberList(GetGroupMemberListReq) returns(GetGroupMemberListResp);
+  rpc getGroupMemberList(GetGroupMemberListReq) returns (GetGroupMemberListResp);
   //获取某个群的指定群成员
-  rpc getGroupMembersInfo(GetGroupMembersInfoReq) returns(GetGroupMembersInfoResp);
+  rpc getGroupMembersInfo(GetGroupMembersInfoReq) returns (GetGroupMembersInfoResp);
   //踢出群
   rpc kickGroupMember(KickGroupMemberReq) returns (KickGroupMemberResp);
   //获取某个人已加入群
@@ -437,19 +407,19 @@ service group{
   //邀请某些人进群
   rpc inviteUserToGroup(InviteUserToGroupReq) returns (InviteUserToGroupResp);
 
-  rpc getGroups(GetGroupsReq) returns(GetGroupsResp);
-  rpc getGroupMembersCMS(GetGroupMembersCMSReq) returns(GetGroupMembersCMSResp);
+  rpc getGroups(GetGroupsReq) returns (GetGroupsResp);
+  rpc getGroupMembersCMS(GetGroupMembersCMSReq) returns (GetGroupMembersCMSResp);
 
   //解散群
-  rpc dismissGroup(DismissGroupReq) returns(DismissGroupResp);
+  rpc dismissGroup(DismissGroupReq) returns (DismissGroupResp);
   //对某个群成员禁言
-  rpc muteGroupMember(MuteGroupMemberReq) returns(MuteGroupMemberResp);
+  rpc muteGroupMember(MuteGroupMemberReq) returns (MuteGroupMemberResp);
   //对某个群成员取消禁言
-  rpc cancelMuteGroupMember(CancelMuteGroupMemberReq) returns(CancelMuteGroupMemberResp);
+  rpc cancelMuteGroupMember(CancelMuteGroupMemberReq) returns (CancelMuteGroupMemberResp);
   //对某个群禁言
-  rpc muteGroup(MuteGroupReq) returns(MuteGroupResp);
+  rpc muteGroup(MuteGroupReq) returns (MuteGroupResp);
   //对某个群取消禁言
-  rpc cancelMuteGroup(CancelMuteGroupReq) returns(CancelMuteGroupResp);
+  rpc cancelMuteGroup(CancelMuteGroupReq) returns (CancelMuteGroupResp);
 
   //设置群成员信息
   rpc setGroupMemberInfo(SetGroupMemberInfoReq) returns (SetGroupMemberInfoResp);
@@ -460,16 +430,17 @@ service group{
   //获取群成员用户ID
   rpc getGroupMemberUserIDs(GetGroupMemberUserIDsReq) returns (GetGroupMemberUserIDsResp);
   //查询群组中对应级别的成员
-  rpc GetGroupMemberRoleLevel(GetGroupMemberRoleLevelReq)returns (GetGroupMemberRoleLevelResp);
+  rpc GetGroupMemberRoleLevel(GetGroupMemberRoleLevelReq) returns (GetGroupMemberRoleLevelResp);
 
   rpc GetGroupInfoCache(GetGroupInfoCacheReq) returns (GetGroupInfoCacheResp);
   rpc GetGroupMemberCache(GetGroupMemberCacheReq) returns (GetGroupMemberCacheResp);
 
   rpc GroupCreateCount(GroupCreateCountReq) returns (GroupCreateCountResp);
 
-  rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
+  rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 
   rpc getIncrementalGroupMember(getIncrementalGroupMemberReq) returns (getIncrementalGroupMemberResp);
+  rpc BatchGetIncrementalGroupMember(BatchGetIncrementGroupMemberReq) returns (BatchGetIncrementalGroupMemberResp);
   rpc getIncrementalJoinGroup(getIncrementalJoinGroupReq) returns (getIncrementalJoinGroupResp);
 
   rpc GetFullGroupMemberUserIDs(GetFullGroupMemberUserIDsReq) returns (GetFullGroupMemberUserIDsResp);
