@@ -366,7 +366,7 @@ message GetFullJoinGroupIDsResp {
   repeated string groupIDs = 4;
 }
 
-message BatchGetIncrementGroupMemberReq {
+message BatchGetIncrementalGroupMemberReq {
   string userID = 1;
   repeated getIncrementalGroupMemberReq reqList = 2;
 }
@@ -440,7 +440,7 @@ service group {
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 
   rpc getIncrementalGroupMember(getIncrementalGroupMemberReq) returns (getIncrementalGroupMemberResp);
-  rpc BatchGetIncrementalGroupMember(BatchGetIncrementGroupMemberReq) returns (BatchGetIncrementalGroupMemberResp);
+  rpc BatchGetIncrementalGroupMember(BatchGetIncrementalGroupMemberReq) returns (BatchGetIncrementalGroupMemberResp);
   rpc getIncrementalJoinGroup(getIncrementalJoinGroupReq) returns (getIncrementalJoinGroupResp);
 
   rpc GetFullGroupMemberUserIDs(GetFullGroupMemberUserIDsReq) returns (GetFullGroupMemberUserIDsResp);
