@@ -51,6 +51,7 @@ enum DayOfWeek {
 enum KickOffReason {
   DuplicatedLogin = 0;
   Offline = 1;
+  Logout = 2;
 }
 
 message MeetingRepeatInfo {
@@ -334,6 +335,8 @@ message MeetingHostData {
 
 message CleanPreviousMeetingsReq {
   string userID = 1;
+  int32 reasonCode = 2;
+  string reason = 3;
 }
 
 message CleanPreviousMeetingsResp {
