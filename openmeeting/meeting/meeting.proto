@@ -323,8 +323,8 @@ message StreamOperateData {
 
 message UserOperationData {
   string userID = 1;
-  bool cameraOnEntry = 2;
-  bool microphoneOnEntry = 3;
+  openim.protobuf.BoolValue cameraOnEntry = 2; // Whether the camera should be enabled
+  openim.protobuf.BoolValue microphoneOnEntry = 3; // Whether the microphone should be enabled
 }
 
 message MeetingHostData {
