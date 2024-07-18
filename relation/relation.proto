@@ -226,6 +226,7 @@ message getIncrementalFriendsResp {
   repeated string delete = 4;
   repeated openim.sdkws.FriendInfo insert = 5;
   repeated openim.sdkws.FriendInfo update = 6;
+  uint64 sortVersion = 7;
 }
 
 message blackInfo {

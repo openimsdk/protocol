@@ -399,6 +399,7 @@ message GroupMemberInfoSetTips{
   GroupMemberFullInfo changedUser = 4;
   uint64 groupMemberVersion = 5;
   string groupMemberVersionID = 6;
+  uint64 groupSortVersion = 7;
 }
 
 //////////////////////friend/////////////////////
@@ -464,6 +465,7 @@ message FriendInfoChangedTips{
   FromToUserID fromToUserID = 1; //from：changed； to：friend
   uint64 friendVersion = 2;
   string friendVersionID = 3;
+  uint64 groupSortVersion = 4;
 }
 
 //////////////////////user/////////////////////
