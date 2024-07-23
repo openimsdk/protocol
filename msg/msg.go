@@ -232,3 +232,10 @@ func (x *GetConversationsHasReadAndMaxSeqResp) Format() any {
 	}
 	return x
 }
+
+func (x *SeqsInfoResp) Format() any {
+	if len(x.MaxSeqs) > 50 {
+		return fmt.Sprintf("len is %v", len(x.MaxSeqs))
+	}
+	return x
+}
