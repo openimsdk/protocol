@@ -16,6 +16,7 @@ package msg
 
 import (
 	"errors"
+	"fmt"
 )
 
 func (x *GetMaxAndMinSeqReq) Check() error {
@@ -216,4 +217,18 @@ func (x *GetConversationsHasReadAndMaxSeqReq) Check() error {
 		return errors.New("userID is empty")
 	}
 	return nil
+}
+
+func (x *GetConversationMaxSeqResp) Format() any {
+	if x.MaxSeq > 50 {
+		return fmt.Sprintf("len is %v", x.MaxSeq)
+	}
+	return x
+}
+
+func (x *GetConversationsHasReadAndMaxSeqResp) Format() any {
+	if len(x.Seqs) > 50 {
+		return fmt.Sprintf("len is %v", len(x.Seqs))
+	}
+	return x
 }

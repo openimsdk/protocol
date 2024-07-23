@@ -16,6 +16,7 @@ package group
 
 import (
 	"errors"
+	"fmt"
 )
 
 func (x *CreateGroupReq) Check() error {
@@ -367,4 +368,18 @@ func (x *GetFullJoinGroupIDsReq) Check() error {
 		return errors.New("userID is empty")
 	}
 	return nil
+}
+
+func (x *BatchGetIncrementalGroupMemberResp) Format() any {
+	if len(x.RespList) > 50 {
+		return fmt.Sprintf("len is %v", len(x.RespList))
+	}
+	return x
+}
+
+func (x *GetGroupApplicationListResp) Format() any {
+	if x.Total > 50 {
+		return fmt.Sprintf("len is %v", x.Total)
+	}
+	return x
 }

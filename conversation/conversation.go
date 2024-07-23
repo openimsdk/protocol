@@ -16,6 +16,8 @@ package conversation
 
 import (
 	"errors"
+	"fmt"
+
 	"github.com/openimsdk/protocol/constant"
 )
 
@@ -186,4 +188,11 @@ func (x *GetSortedConversationListReq) Check() error {
 	}
 
 	return nil
+}
+
+func (x *GetConversationIDsResp) Format() any {
+	if len(x.ConversationIDs) > 50 {
+		return fmt.Sprintf("len is %v", len(x.ConversationIDs))
+	}
+	return x
 }
