@@ -378,8 +378,8 @@ func (x *BatchGetIncrementalGroupMemberResp) Format() any {
 }
 
 func (x *GetGroupApplicationListResp) Format() any {
-	if x.Total > 50 {
-		return fmt.Sprintf("len is %v", x.Total)
+	if len(x.GroupRequests) > 50 {
+		return fmt.Sprintf("len is %v", len(x.GroupRequests))
 	}
 	return x
 }

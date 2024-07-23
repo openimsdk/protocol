@@ -14,25 +14,26 @@
 
 syntax = "proto3";
 package openim.msg;
+
 import "sdkws/sdkws.proto";
+
 option go_package = "github.com/openimsdk/protocol/msg";
 
-message MsgDataToMQ{
+message MsgDataToMQ {
   string token = 1;
   sdkws.MsgData msgData = 2;
 }
-
 
 message MsgDataToDB {
   sdkws.MsgData msgData = 1;
 }
 
-message PushMsgDataToMQ{
+message PushMsgDataToMQ {
   sdkws.MsgData msgData = 1;
   string conversationID = 2;
 }
 
-message MsgDataToMongoByMQ{
+message MsgDataToMongoByMQ {
   int64 lastSeq = 1;
   string conversationID = 2;
   repeated sdkws.MsgData msgData = 3;
@@ -53,36 +54,29 @@ message SendMsgReq {
 message SendMsgResp {
   string serverMsgID = 1;
   string clientMsgID = 2;
-  int64  sendTime = 3;
+  int64 sendTime = 3;
 }
 
-
-
-message SetSendMsgStatusReq{
+message SetSendMsgStatusReq {
   int32 status = 1;
 }
 
-message SetSendMsgStatusResp{
-}
+message SetSendMsgStatusResp {}
 
-message GetSendMsgStatusReq{
-}
+message GetSendMsgStatusReq {}
 
-message GetSendMsgStatusResp{
+message GetSendMsgStatusResp {
   int32 status = 1;
 }
 
-
-message MsgDataToModifyByMQ{
+message MsgDataToModifyByMQ {
   repeated sdkws.MsgData messages = 1;
   string conversationID = 2;
 }
 
-message DelMsgsReq{
-}
+message DelMsgsReq {}
 
-message DelMsgsResp{
-}
+message DelMsgsResp {}
 
 message RevokeMsgReq {
   string conversationID = 1;
@@ -90,8 +84,7 @@ message RevokeMsgReq {
   string userID = 3;
 }
 
-message RevokeMsgResp {
-}
+message RevokeMsgResp {}
 
 message MarkMsgsAsReadReq {
   string conversationID = 1;
@@ -99,8 +92,7 @@ message MarkMsgsAsReadReq {
   string userID = 3;
 }
 
-message MarkMsgsAsReadResp {
-}
+message MarkMsgsAsReadResp {}
 
 message MarkConversationAsReadReq {
   string conversationID = 1;
@@ -109,8 +101,7 @@ message MarkConversationAsReadReq {
   repeated int64 seqs = 4;
 }
 
-message MarkConversationAsReadResp {
-}
+message MarkConversationAsReadResp {}
 
 message SetConversationHasReadSeqReq {
   string conversationID = 1;
@@ -118,8 +109,7 @@ message SetConversationHasReadSeqReq {
   int64 hasReadSeq = 3;
 }
 
-message SetConversationHasReadSeqResp {
-}
+message SetConversationHasReadSeqResp {}
 
 message DeleteSyncOpt {
   bool IsSyncSelf = 3;
@@ -132,16 +122,14 @@ message ClearConversationsMsgReq {
   DeleteSyncOpt deleteSyncOpt = 3;
 }
 
-message ClearConversationsMsgResp {
-}
+message ClearConversationsMsgResp {}
 
 message UserClearAllMsgReq {
   string userID = 1;
   DeleteSyncOpt deleteSyncOpt = 3;
 }
 
-message UserClearAllMsgResp {
-}
+message UserClearAllMsgResp {}
 
 message DeleteMsgsReq {
   string conversationID = 1;
@@ -150,46 +138,42 @@ message DeleteMsgsReq {
   DeleteSyncOpt deleteSyncOpt = 4;
 }
 
-message DeleteMsgsResp {
-}
+message DeleteMsgsResp {}
 
 message DeleteMsgPhysicalReq {
   repeated string conversationIDs = 1;
   int64 timestamp = 2;
 }
 
-message DeleteMsgPhysicalResp {
-}
+message DeleteMsgPhysicalResp {}
 
 message DeleteMsgPhysicalBySeqReq {
   string conversationID = 1;
   repeated int64 seqs = 2;
 }
 
-message DeleteMsgPhysicalBySeqResp {
+message DeleteMsgPhysicalBySeqResp {}
 
+message GetMaxSeqsReq {
+  repeated string conversationIDs = 1;
 }
 
-message GetMaxSeqsReq{
-  repeated string conversationIDs=2;
+message GetHasReadSeqsReq {
+  string userID = 1;
+  repeated string conversationIDs = 2;
 }
 
-message GetHasReadSeqsReq{
-  string userID=1;
-  repeated string conversationIDs=2;
-}
-
-message SeqsInfoResp{
+message SeqsInfoResp {
   map<string, int64> maxSeqs = 1;
 }
 
-message GetMsgByConversationIDsReq{
-  repeated string conversationIDs=1;
+message GetMsgByConversationIDsReq {
+  repeated string conversationIDs = 1;
   map<string, int64> maxSeqs = 2;
 }
 
-message GetMsgByConversationIDsResp{
-  map<string,sdkws.MsgData> msgDatas=1;
+message GetMsgByConversationIDsResp {
+  map<string, sdkws.MsgData> msgDatas = 1;
 }
 
 message GetConversationMaxSeqReq {
@@ -253,20 +237,19 @@ message GetActiveGroupResp {
   repeated ActiveGroup groups = 4;
 }
 
-message SearchMessageReq{
-  string sendID=1;//发送者ID
-  string recvID=2;//接收者ID
-  int32 contentType=3;
-  string sendTime=4;
-  int32 sessionType=5;
+message SearchMessageReq {
+  string sendID = 1; //发送者ID
+  string recvID = 2; //接收者ID
+  int32 contentType = 3;
+  string sendTime = 4;
+  int32 sessionType = 5;
   sdkws.RequestPagination pagination = 6;
 }
 
-message SearchMessageResp{
-  repeated ChatLog chatLogs=1;
+message SearchMessageResp {
+  repeated ChatLog chatLogs = 1;
   int32 chatLogsNum = 2;
 }
-
 
 message ChatLog {
   string serverMsgID = 1;
@@ -287,75 +270,71 @@ message ChatLog {
   int64 sendTime = 16;
   int64 createTime = 17;
   string ex = 18;
-  string groupFaceURL=19;
-  uint32 groupMemberCount=20;
-  int64 seq=21;
-  string groupOwner=22;
-  int32 groupType=23;
+  string groupFaceURL = 19;
+  uint32 groupMemberCount = 20;
+  int64 seq = 21;
+  string groupOwner = 22;
+  int32 groupType = 23;
 }
 
-message batchSendMessageReq{
-  repeated string recvIDList=1;
+message batchSendMessageReq {
+  repeated string recvIDList = 1;
   sdkws.MsgData msgData = 2;
 }
 
-message batchSendMessageResp{
-}
-message GetServerTimeReq{
-
-}
-message GetServerTimeResp{
-  int64 serverTime=1;
+message batchSendMessageResp {}
+message GetServerTimeReq {}
+message GetServerTimeResp {
+  int64 serverTime = 1;
 }
 
-message ClearMsgReq{
-    int64 timestamp =1;
+message ClearMsgReq {
+  int64 timestamp = 1;
 }
 
-message ClearMsgResp{
-}
+message ClearMsgResp {}
 
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
-  rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns(sdkws.GetMaxSeqResp);
+  rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
   //获取会话列表的最大seq
-  rpc GetMaxSeqs(GetMaxSeqsReq)returns(SeqsInfoResp);
+  rpc GetMaxSeqs(GetMaxSeqsReq) returns (SeqsInfoResp);
   //获取会话列表已读的最大seq
-  rpc GetHasReadSeqs(GetHasReadSeqsReq)returns(SeqsInfoResp);
+  rpc GetHasReadSeqs(GetHasReadSeqsReq) returns (SeqsInfoResp);
   //获取最新消息
-  rpc GetMsgByConversationIDs(GetMsgByConversationIDsReq)returns(GetMsgByConversationIDsResp);
-  rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns(GetConversationMaxSeqResp);
+  rpc GetMsgByConversationIDs(GetMsgByConversationIDsReq) returns (GetMsgByConversationIDsResp);
+  rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns (GetConversationMaxSeqResp);
   //拉取历史消息（包括用户的，以及指定群组的）
-  rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns(sdkws.PullMessageBySeqsResp);
-  rpc SearchMessage(SearchMessageReq) returns(SearchMessageResp);
+  rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns (sdkws.PullMessageBySeqsResp);
+  rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
-  rpc SendMsg(SendMsgReq) returns(SendMsgResp);
+  rpc SendMsg(SendMsgReq) returns (SendMsgResp);
 
   // 全量清空指定会话消息 重置min seq 比最大seq大1
-  rpc ClearConversationsMsg(ClearConversationsMsgReq) returns(ClearConversationsMsgResp);
+  rpc ClearConversationsMsg(ClearConversationsMsgReq) returns (ClearConversationsMsgResp);
   // 删除用户全部消息 重置min seq 比最大seq大1
-  rpc UserClearAllMsg(UserClearAllMsgReq) returns(UserClearAllMsgResp);
+  rpc UserClearAllMsg(UserClearAllMsgReq) returns (UserClearAllMsgResp);
   // 用户标记删除部分消息by Seq
-  rpc DeleteMsgs(DeleteMsgsReq) returns(DeleteMsgsResp);
+  rpc DeleteMsgs(DeleteMsgsReq) returns (DeleteMsgsResp);
   // seq物理删除消息
-  rpc DeleteMsgPhysicalBySeq(DeleteMsgPhysicalBySeqReq) returns(DeleteMsgPhysicalBySeqResp);
+  rpc DeleteMsgPhysicalBySeq(DeleteMsgPhysicalBySeqReq) returns (DeleteMsgPhysicalBySeqResp);
   // 物理删除消息by 时间
-  rpc DeleteMsgPhysical(DeleteMsgPhysicalReq) returns(DeleteMsgPhysicalResp);
+  rpc DeleteMsgPhysical(DeleteMsgPhysicalReq) returns (DeleteMsgPhysicalResp);
 
   //设置消息是否发送成功-针对api发送的消息
-  rpc SetSendMsgStatus(SetSendMsgStatusReq) returns(SetSendMsgStatusResp);
+  rpc SetSendMsgStatus(SetSendMsgStatusReq) returns (SetSendMsgStatusResp);
   //获取消息发送状态
-  rpc GetSendMsgStatus(GetSendMsgStatusReq) returns(GetSendMsgStatusResp);
-  rpc RevokeMsg(RevokeMsgReq) returns(RevokeMsgResp);
+  rpc GetSendMsgStatus(GetSendMsgStatusReq) returns (GetSendMsgStatusResp);
+  rpc RevokeMsg(RevokeMsgReq) returns (RevokeMsgResp);
   // mark as read
-  rpc MarkMsgsAsRead(MarkMsgsAsReadReq) returns(MarkMsgsAsReadResp);
-  rpc MarkConversationAsRead(MarkConversationAsReadReq) returns(MarkConversationAsReadResp);
-  rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns(SetConversationHasReadSeqResp);
+  rpc MarkMsgsAsRead(MarkMsgsAsReadReq) returns (MarkMsgsAsReadResp);
+  rpc MarkConversationAsRead(MarkConversationAsReadReq) returns (MarkConversationAsReadResp);
+  rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns (SetConversationHasReadSeqResp);
 
-  rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns(GetConversationsHasReadAndMaxSeqResp);
-  rpc GetActiveUser(GetActiveUserReq) returns(GetActiveUserResp);
-  rpc GetActiveGroup(GetActiveGroupReq) returns(GetActiveGroupResp);
-  rpc GetServerTime(GetServerTimeReq) returns(GetServerTimeResp);
+  rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns (GetConversationsHasReadAndMaxSeqResp);
+  rpc GetActiveUser(GetActiveUserReq) returns (GetActiveUserResp);
+  rpc GetActiveGroup(GetActiveGroupReq) returns (GetActiveGroupResp);
+  rpc GetServerTime(GetServerTimeReq) returns (GetServerTimeResp);
 
-  rpc ClearMsg(ClearMsgReq) returns(ClearMsgResp);
+  rpc ClearMsg(ClearMsgReq) returns (ClearMsgResp);
 }
