@@ -16,6 +16,8 @@ package user
 
 import (
 	"errors"
+	"fmt"
+
 	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/util/datautil"
 )
@@ -290,4 +292,15 @@ func (x *SearchNotificationAccountReq) Check() error {
 		return errors.New("pageNumber is invalid")
 	}
 	return nil
+}
+
+func (x *GetDesignateUsersResp) Format() any {
+	if len(x.UsersInfo) > 50 {
+		// var userIDs []string
+		// for _, v := range x.UsersInfo {
+		// 	userIDs = append(userIDs, v.UserID)
+		// }
+		return fmt.Sprintf("len is %v", len(x.UsersInfo))
+	}
+	return x
 }

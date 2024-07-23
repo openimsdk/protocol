@@ -372,11 +372,14 @@ func (x *GetFullJoinGroupIDsReq) Check() error {
 
 func (x *BatchGetIncrementalGroupMemberResp) Format() any {
 	if len(x.RespList) > 50 {
-		var groupIDs []string
-		for k := range x.RespList {
-			groupIDs = append(groupIDs, "groupID is", k)
-		}
-		return fmt.Sprint(groupIDs, "len is ", len(x.RespList))
+		return fmt.Sprintf("len is %v", len(x.RespList))
+	}
+	return x
+}
+
+func (x *GetGroupApplicationListResp) Format() any {
+	if x.Total > 50 {
+		return fmt.Sprintf("len is %v", x.Total)
 	}
 	return x
 }
