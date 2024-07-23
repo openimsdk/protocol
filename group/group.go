@@ -383,3 +383,10 @@ func (x *GetGroupApplicationListResp) Format() any {
 	}
 	return x
 }
+
+func (x *GetGroupsInfoResp) Format() any {
+	if len(x.GroupInfos) > 50 {
+		return fmt.Sprintf("len is %v", len(x.GroupInfos))
+	}
+	return x
+}

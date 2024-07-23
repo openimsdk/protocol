@@ -196,3 +196,10 @@ func (x *GetConversationIDsResp) Format() any {
 	}
 	return x
 }
+
+func (x *GetOwnerConversationResp) Format() any {
+	if x.Total > 50 {
+		return fmt.Sprintf("len is %v", x.Total)
+	}
+	return x
+}
