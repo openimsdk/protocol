@@ -16,6 +16,7 @@ package group
 
 import (
 	"errors"
+	"fmt"
 )
 
 func (x *CreateGroupReq) Check() error {
@@ -367,4 +368,11 @@ func (x *GetFullJoinGroupIDsReq) Check() error {
 		return errors.New("userID is empty")
 	}
 	return nil
+}
+
+func (x *GetIncrementalGroupMemberResp) Format() any {
+	if len(x.String()) > 100 {
+		return fmt.Sprint(len(x.String()))
+	}
+	return x
 }
