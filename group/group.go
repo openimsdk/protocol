@@ -374,7 +374,7 @@ func (x *BatchGetIncrementalGroupMemberResp) Format() any {
 	if len(x.RespList) > 50 {
 		var groupIDs []string
 		for k := range x.RespList {
-			groupIDs = append(groupIDs, k)
+			groupIDs = append(groupIDs, "groupID is", k)
 		}
 		return fmt.Sprint(groupIDs, "len is ", len(x.RespList))
 	}
