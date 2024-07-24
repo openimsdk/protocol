@@ -390,3 +390,10 @@ func (x *GetGroupsInfoResp) Format() any {
 	}
 	return x
 }
+
+func (x *GetGroupMemberListResp) Format() any {
+	if len(x.Members) > 50 {
+		return fmt.Sprintf("len is %v", len(x.Members))
+	}
+	return x
+}
