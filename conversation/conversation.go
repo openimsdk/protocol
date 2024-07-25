@@ -203,3 +203,10 @@ func (x *GetOwnerConversationResp) Format() any {
 	}
 	return x
 }
+
+func (x *GetAllConversationsResp) Format() any {
+	if len(x.Conversations) > 50 {
+		return fmt.Sprintf("len is %v", len(x.Conversations))
+	}
+	return x
+}
