@@ -54,6 +54,11 @@ enum KickOffReason {
   Logout = 2;
 }
 
+enum MeetingEndType {
+   CancelType = 0;
+   EndType = 1;
+}
+
 message MeetingRepeatInfo {
   int64 endDate  = 1;
   int32 repeatTimes = 2;
@@ -159,6 +164,7 @@ message LeaveMeetingResp {
 message EndMeetingReq {
   string meetingID = 1;
   string userID = 2;
+  MeetingEndType endType = 3;
 }
 
 // Response after ending a meeting.
