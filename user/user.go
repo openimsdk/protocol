@@ -296,10 +296,6 @@ func (x *SearchNotificationAccountReq) Check() error {
 
 func (x *GetDesignateUsersResp) Format() any {
 	if len(x.UsersInfo) > 50 {
-		// var userIDs []string
-		// for _, v := range x.UsersInfo {
-		// 	userIDs = append(userIDs, v.UserID)
-		// }
 		return fmt.Sprintf("len is %v", len(x.UsersInfo))
 	}
 	return x
