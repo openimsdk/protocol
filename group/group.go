@@ -397,3 +397,10 @@ func (x *GetGroupMemberListResp) Format() any {
 	}
 	return x
 }
+
+func (x *GetUserReqApplicationListResp) Format() any {
+	if len(x.GroupRequests) > 50 {
+		return fmt.Sprintf("len is %v", len(x.GroupRequests))
+	}
+	return x
+}

@@ -212,11 +212,19 @@ func (x *GetFullFriendUserIDsReq) Check() error {
 }
 
 func (x *GetPaginationFriendsApplyToResp) Format() any {
-	if x.Total > 50 {
+	if x.Total > 20 {
 		return fmt.Sprintf("len is %v", x.Total)
 	}
 	return x
 }
+
+func (x *GetPaginationFriendsApplyFromResp) Format() any {
+	if x.Total > 20 {
+		return fmt.Sprintf("len is %v", x.Total)
+	}
+	return x
+}
+
 func (x *GetPaginationFriendsResp) Format() any {
 	if len(x.FriendsInfo) > 50 {
 		return fmt.Sprintf("len is %v", len(x.FriendsInfo))
