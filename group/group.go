@@ -383,9 +383,15 @@ func (x *GetGroupApplicationListResp) Format() any {
 	}
 	return x
 }
+func (x *GetJoinedGroupListResp) Format() any {
+	if len(x.Groups) > 20 {
+		return fmt.Sprintf("len is %v", len(x.Groups))
+	}
+	return x
+}
 
 func (x *GetGroupsInfoResp) Format() any {
-	if len(x.GroupInfos) > 50 {
+	if len(x.GroupInfos) > 20 {
 		return fmt.Sprintf("len is %v", len(x.GroupInfos))
 	}
 	return x
@@ -399,7 +405,7 @@ func (x *GetGroupMemberListResp) Format() any {
 }
 
 func (x *GetUserReqApplicationListResp) Format() any {
-	if len(x.GroupRequests) > 50 {
+	if len(x.GroupRequests) > 20 {
 		return fmt.Sprintf("len is %v", len(x.GroupRequests))
 	}
 	return x

@@ -226,7 +226,7 @@ func (x *GetPaginationFriendsApplyFromResp) Format() any {
 }
 
 func (x *GetPaginationFriendsResp) Format() any {
-	if len(x.FriendsInfo) > 50 {
+	if len(x.FriendsInfo) > 20 {
 		return fmt.Sprintf("len is %v", len(x.FriendsInfo))
 	}
 	return x
