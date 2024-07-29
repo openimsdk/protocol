@@ -192,7 +192,7 @@ message SearchLogsReq {
 
 message LogInfo {
   string userID = 1;
-  int32 platform = 2;
+  string platform = 2;
   string url = 3;
   int64 createTime = 4;
   string nickname = 5;
