@@ -107,15 +107,14 @@ const (
 
 	ConversationPrivateChatNotification = 1701
 	ConversationUnreadNotification      = 1702
-
-	MsgRevokeNotification = 2101
+	ClearConversationNotification       = 1703
 
 	BusinessNotificationBegin = 2000
 	BusinessNotification      = 2001
 	BusinessNotificationEnd   = 2099
 
-	ClearConversationNotification = 2101
-	DeleteMsgsNotification        = 2102
+	MsgRevokeNotification  = 2101
+	DeleteMsgsNotification = 2102
 
 	HasReadReceipt = 2200
 

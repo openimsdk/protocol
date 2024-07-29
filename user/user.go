@@ -295,7 +295,7 @@ func (x *SearchNotificationAccountReq) Check() error {
 }
 
 func (x *GetDesignateUsersResp) Format() any {
-	if len(x.UsersInfo) > 50 {
+	if len(x.UsersInfo) > 20 {
 		return fmt.Sprintf("len is %v", len(x.UsersInfo))
 	}
 	return x
