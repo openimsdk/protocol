@@ -92,7 +92,7 @@ message UserInfo {
   string userID = 1;
   string nickname = 2;
   string account = 3;
-  string avatarUrl = 4;
+  string faceURL = 4;
 }
 
 // participant meta data
