@@ -14,11 +14,13 @@
 
 syntax = "proto3";
 package openim.conversation;
+
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
+
 option go_package = "github.com/openimsdk/protocol/conversation";
 
-message Conversation{
+message Conversation {
   string ownerUserID = 1;
   string conversationID = 2;
   int32 recvMsgOpt = 3;
@@ -38,7 +40,7 @@ message Conversation{
   bool isMsgDestruct = 17;
 }
 
-message ConversationReq{
+message ConversationReq {
   string conversationID = 1;
   int32 conversationType = 2;
   string userID = 3;
@@ -56,33 +58,31 @@ message ConversationReq{
   openim.protobuf.BoolValue isMsgDestruct = 15;
 }
 
-message SetConversationReq{
+message SetConversationReq {
   Conversation conversation = 1;
 }
 
-message SetConversationResp{
-}
+message SetConversationResp {}
 
-message GetConversationReq{
+message GetConversationReq {
   string conversationID = 1;
   string ownerUserID = 2;
 }
 
-message GetConversationResp{
+message GetConversationResp {
   Conversation conversation = 2;
 }
 
-message GetSortedConversationListReq{
+message GetSortedConversationListReq {
   string userID = 1;
   repeated string conversationIDs = 2;
   sdkws.RequestPagination pagination = 3;
 }
 
-message GetSortedConversationListResp{
+message GetSortedConversationListResp {
   int64 conversationTotal = 1;
   int64 unreadTotal = 2;
   repeated ConversationElem conversationElems = 3;
-
 }
 
 message ConversationElem {
@@ -91,10 +91,9 @@ message ConversationElem {
   int64 unreadCount = 3;
   bool IsPinned = 4;
   MsgInfo msgInfo = 5;
-
 }
 
-message MsgInfo{
+message MsgInfo {
   string serverMsgID = 1;
   string clientMsgID = 2;
   int32 sessionType = 3;
@@ -114,23 +113,22 @@ message MsgInfo{
   string ex = 17;
 }
 
-message GetConversationsReq{
+message GetConversationsReq {
   string ownerUserID = 1;
   repeated string conversationIDs = 2;
 }
 
-message GetConversationsResp{
+message GetConversationsResp {
   repeated Conversation conversations = 2;
 }
 
-message GetAllConversationsReq{
+message GetAllConversationsReq {
   string ownerUserID = 1;
 }
 
-message GetAllConversationsResp{
+message GetAllConversationsResp {
   repeated Conversation conversations = 2;
 }
-
 
 message GetRecvMsgNotNotifyUserIDsReq {
   string groupID = 1;
@@ -147,16 +145,14 @@ message CreateSingleChatConversationsReq {
   int32 conversationType = 4;
 }
 
-message CreateSingleChatConversationsResp {
-}
+message CreateSingleChatConversationsResp {}
 
 message CreateGroupChatConversationsReq {
   repeated string userIDs = 1;
   string groupID = 2;
 }
 
-message CreateGroupChatConversationsResp {
-}
+message CreateGroupChatConversationsResp {}
 
 message SetConversationMaxSeqReq {
   string conversationID = 1;
@@ -164,8 +160,7 @@ message SetConversationMaxSeqReq {
   int64 maxSeq = 3;
 }
 
-message SetConversationMaxSeqResp {
-}
+message SetConversationMaxSeqResp {}
 
 message GetConversationIDsReq {
   string userID = 1;
@@ -175,15 +170,12 @@ message GetConversationIDsResp {
   repeated string conversationIDs = 1;
 }
 
-
-
 message SetConversationsReq {
   repeated string userIDs = 1;
   ConversationReq conversation = 2;
 }
 
-message SetConversationsResp {
-}
+message SetConversationsResp {}
 
 message GetUserConversationIDsHashReq {
   string ownerUserID = 1;
@@ -232,10 +224,10 @@ message UpdateConversationReq {
   openim.protobuf.Int32Value groupAtType = 11;
   openim.protobuf.Int64Value msgDestructTime = 12;
   openim.protobuf.BoolValue isMsgDestruct = 13;
+  openim.protobuf.Int64Value latestMsgDestructTime = 14;
 }
 
-message UpdateConversationResp {
-}
+message UpdateConversationResp {}
 
 message GetFullOwnerConversationIDsReq {
   uint64 idHash = 1;
@@ -275,23 +267,23 @@ message GetOwnerConversationResp {
 }
 
 service conversation {
-  rpc GetConversation(GetConversationReq)returns(GetConversationResp);
-  rpc GetSortedConversationList(GetSortedConversationListReq)returns(GetSortedConversationListResp);
-  rpc GetAllConversations(GetAllConversationsReq)returns(GetAllConversationsResp);
-  rpc GetConversations(GetConversationsReq)returns(GetConversationsResp);
-  rpc SetConversation(SetConversationReq)returns(SetConversationResp);
+  rpc GetConversation(GetConversationReq) returns (GetConversationResp);
+  rpc GetSortedConversationList(GetSortedConversationListReq) returns (GetSortedConversationListResp);
+  rpc GetAllConversations(GetAllConversationsReq) returns (GetAllConversationsResp);
+  rpc GetConversations(GetConversationsReq) returns (GetConversationsResp);
+  rpc SetConversation(SetConversationReq) returns (SetConversationResp);
   rpc GetRecvMsgNotNotifyUserIDs(GetRecvMsgNotNotifyUserIDsReq) returns (GetRecvMsgNotNotifyUserIDsResp);
   rpc CreateSingleChatConversations(CreateSingleChatConversationsReq) returns (CreateSingleChatConversationsResp);
   rpc CreateGroupChatConversations(CreateGroupChatConversationsReq) returns (CreateGroupChatConversationsResp);
-  rpc SetConversationMaxSeq(SetConversationMaxSeqReq) returns(SetConversationMaxSeqResp);
-  rpc GetConversationIDs(GetConversationIDsReq) returns(GetConversationIDsResp);
-  rpc SetConversations(SetConversationsReq) returns(SetConversationsResp);
-  rpc GetUserConversationIDsHash(GetUserConversationIDsHashReq) returns(GetUserConversationIDsHashResp);
-  rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns(GetConversationsByConversationIDResp);
-  rpc GetConversationOfflinePushUserIDs(GetConversationOfflinePushUserIDsReq) returns(GetConversationOfflinePushUserIDsResp);
-  rpc GetConversationNotReceiveMessageUserIDs(GetConversationNotReceiveMessageUserIDsReq) returns(GetConversationNotReceiveMessageUserIDsResp);
-  rpc UpdateConversation(UpdateConversationReq) returns(UpdateConversationResp);
-  rpc GetFullOwnerConversationIDs(GetFullOwnerConversationIDsReq) returns(GetFullOwnerConversationIDsResp);
-  rpc GetIncrementalConversation(GetIncrementalConversationReq) returns(GetIncrementalConversationResp);
-  rpc GetOwnerConversation(GetOwnerConversationReq) returns(GetOwnerConversationResp);
+  rpc SetConversationMaxSeq(SetConversationMaxSeqReq) returns (SetConversationMaxSeqResp);
+  rpc GetConversationIDs(GetConversationIDsReq) returns (GetConversationIDsResp);
+  rpc SetConversations(SetConversationsReq) returns (SetConversationsResp);
+  rpc GetUserConversationIDsHash(GetUserConversationIDsHashReq) returns (GetUserConversationIDsHashResp);
+  rpc GetConversationsByConversationID(GetConversationsByConversationIDReq) returns (GetConversationsByConversationIDResp);
+  rpc GetConversationOfflinePushUserIDs(GetConversationOfflinePushUserIDsReq) returns (GetConversationOfflinePushUserIDsResp);
+  rpc GetConversationNotReceiveMessageUserIDs(GetConversationNotReceiveMessageUserIDsReq) returns (GetConversationNotReceiveMessageUserIDsResp);
+  rpc UpdateConversation(UpdateConversationReq) returns (UpdateConversationResp);
+  rpc GetFullOwnerConversationIDs(GetFullOwnerConversationIDsReq) returns (GetFullOwnerConversationIDsResp);
+  rpc GetIncrementalConversation(GetIncrementalConversationReq) returns (GetIncrementalConversationResp);
+  rpc GetOwnerConversation(GetOwnerConversationReq) returns (GetOwnerConversationResp);
 }
