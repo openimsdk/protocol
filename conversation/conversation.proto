@@ -266,9 +266,11 @@ message GetOwnerConversationResp {
   repeated Conversation conversations = 2;
 }
 
-message ConversationsDestructMsgsReq {}
+message GetConversationsNeedDestructMsgsReq {}
 
-message ConversationsDestructMsgsResp {}
+message GetConversationsNeedDestructMsgsResp {
+  repeated Conversation conversations = 1;
+}
 
 service conversation {
   rpc GetConversation(GetConversationReq) returns (GetConversationResp);
@@ -290,5 +292,5 @@ service conversation {
   rpc GetFullOwnerConversationIDs(GetFullOwnerConversationIDsReq) returns (GetFullOwnerConversationIDsResp);
   rpc GetIncrementalConversation(GetIncrementalConversationReq) returns (GetIncrementalConversationResp);
   rpc GetOwnerConversation(GetOwnerConversationReq) returns (GetOwnerConversationResp);
-  rpc ConversationsDestructMsgs(ConversationsDestructMsgsReq) returns (ConversationsDestructMsgsResp);
+  rpc GetConversationsNeedDestructMsgs(GetConversationsNeedDestructMsgsReq) returns (GetConversationsNeedDestructMsgsResp);
 }
