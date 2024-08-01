@@ -18,7 +18,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/openimsdk/protocol/constant"
+	"github.com/olstory/protocol/constant"
 )
 
 func (x *ConversationReq) Check() error {
