@@ -15,6 +15,7 @@
 syntax = "proto3";
 package openim.msg;
 
+import "conversation/conversation.proto";
 import "sdkws/sdkws.proto";
 
 option go_package = "github.com/openimsdk/protocol/msg";
@@ -294,6 +295,12 @@ message ClearMsgReq {
 
 message ClearMsgResp {}
 
+message DestructMsgsReq {
+  repeated conversation.Conversation conversations = 1;
+}
+
+message DestructMsgsResp {}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -337,4 +344,5 @@ service msg {
   rpc GetServerTime(GetServerTimeReq) returns (GetServerTimeResp);
 
   rpc ClearMsg(ClearMsgReq) returns (ClearMsgResp);
+  rpc DestructMsgs(DestructMsgsReq) returns (DestructMsgsResp);
 }
