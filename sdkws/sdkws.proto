@@ -335,7 +335,7 @@ message MemberKickedTips{
 //Actively join the group
 message MemberEnterTips{
   GroupInfo group = 1;
-  repeated GroupMemberFullInfo entrantUser = 2;
+  repeated GroupMemberFullInfo entrantUsers = 2;
   int64 operationTime = 3;
   uint64 groupMemberVersion = 4;
   string groupMemberVersionID = 5;
