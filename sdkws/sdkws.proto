@@ -332,23 +332,13 @@ message MemberKickedTips{
   string groupMemberVersionID = 6;
 }
 
-//	OnMemberInvited()
-message MemberInvitedTips{
-  GroupInfo group = 1;
-  GroupMemberFullInfo opUser = 2;
-  repeated GroupMemberFullInfo invitedUserList = 3;
-  int64 operationTime = 4;
-  uint64 groupMemberVersion = 5;
-  string groupMemberVersionID = 6;
-}
-
 //Actively join the group
 message MemberEnterTips{
   GroupInfo group = 1;
-  GroupMemberFullInfo entrantUser = 2;
+  repeated GroupMemberFullInfo entrantUser = 2;
   int64 operationTime = 3;
-  uint64 groupMemberVersion = 5;
-  string groupMemberVersionID = 6;
+  uint64 groupMemberVersion = 4;
+  string groupMemberVersionID = 5;
 }
 
 message GroupDismissedTips{
