@@ -350,6 +350,16 @@ message CleanPreviousMeetingsResp {
 }
 
 
+message ToggleRecordMeetingReq {
+  string meetingID = 1;
+  string userID = 2;
+  bool enableRecord = 3;
+}
+
+message ToggleRecordMeetingResp {
+}
+
+
 // Defines services related to meeting management.
 service MeetingService {
   // Books a future meeting.
@@ -384,4 +394,6 @@ service MeetingService {
   rpc SetMeetingHostInfo(SetMeetingHostInfoReq) returns (SetMeetingHostInfoResp);
   // clean previous meetings in rtc when login
   rpc CleanPreviousMeetings(CleanPreviousMeetingsReq) returns (CleanPreviousMeetingsResp);
+  // toggle record meeting
+  rpc ToggleRecordMeeting(ToggleRecordMeetingReq) returns (ToggleRecordMeetingResp);
 }
