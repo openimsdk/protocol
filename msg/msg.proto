@@ -108,6 +108,7 @@ message SetConversationHasReadSeqReq {
   string conversationID = 1;
   string userID = 2;
   int64 hasReadSeq = 3;
+  bool noNotification = 4;
 }
 
 message SetConversationHasReadSeqResp {}
@@ -298,6 +299,8 @@ message ClearMsgResp {}
 message DestructMsgsReq {
   repeated conversation.Conversation conversations = 1;
 }
+
+
 
 message DestructMsgsResp {}
 
