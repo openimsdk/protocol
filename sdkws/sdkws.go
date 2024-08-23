@@ -17,6 +17,7 @@ package sdkws
 import (
 	"errors"
 	"fmt"
+	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *MsgData) Check() error {
@@ -25,6 +26,10 @@ func (x *MsgData) Check() error {
 	}
 	if x.Content == nil {
 		return errors.New("content is empty")
+	}
+	if x.SessionType == constant.NotificationChatType && x.ContentType != constant.OANotification ||
+		x.SessionType != constant.NotificationChatType && x.ContentType == constant.OANotification {
+		return errors.New("notification msg must have correct session type and content type")
 	}
 	return nil
 }

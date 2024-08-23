@@ -30,10 +30,9 @@ message userLoginResp {
 }
 
 message userRegisterReq {
-  string userID = 1;
-  string nickname = 2;
-  string account = 3;
-  string password = 4;
+  string nickname = 1;
+  string account = 2;
+  string password = 3;
 }
 
 message userRegisterResp {

@@ -98,6 +98,13 @@ message logoutReq{
 message logoutResp{
 }
 
+message parseTokenReq{
+  string token = 1;
+}
+message parseTokenResp{
+  string userID = 1;
+  int64 expireTimeSeconds = 2;
+}
 
 service user {
   //Get the specified user information full field
@@ -116,7 +123,8 @@ service user {
   rpc ClearUserToken(ClearUserTokenReq) returns(ClearUserTokenResp);
   // user log out
   rpc userLogout(logoutReq) returns(logoutResp);
-
+  // parse token
+  rpc parseToken(parseTokenReq) returns(parseTokenResp);
 }
 
 
