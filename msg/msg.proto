@@ -300,9 +300,15 @@ message DestructMsgsReq {
   repeated conversation.Conversation conversations = 1;
 }
 
-
-
 message DestructMsgsResp {}
+
+message SetUserConversationsMinSeqReq {
+  string userID = 1;
+  string conversationID = 2;
+  int64 seq = 3;
+}
+
+message SetUserConversationsMinSeqResp {}
 
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
@@ -319,6 +325,8 @@ service msg {
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
+
+  rpc SetUserConversationsMinSeq(SetUserConversationsMinSeqReq) returns (SetUserConversationsMinSeqResp);
 
   // 全量清空指定会话消息 重置min seq 比最大seq大1
   rpc ClearConversationsMsg(ClearConversationsMsgReq) returns (ClearConversationsMsgResp);
