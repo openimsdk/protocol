@@ -303,7 +303,7 @@ message DestructMsgsReq {
 message DestructMsgsResp {}
 
 message SetUserConversationsMinSeqReq {
-  string userID = 1;
+  repeated string userIDs = 1;
   string conversationID = 2;
   int64 seq = 3;
 }
