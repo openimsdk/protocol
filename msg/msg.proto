@@ -310,6 +310,25 @@ message SetUserConversationsMinSeqReq {
 
 message SetUserConversationsMinSeqResp {}
 
+
+message ConversationSeqs {
+  string conversationID = 2;
+  repeated int64 seqs = 3;
+}
+
+message ConversationMessage {
+  map<int64, sdkws.MsgData> msgs = 1;
+}
+
+message GetSeqMessageReq {
+  string userID = 1;
+  repeated ConversationSeqs conversations = 2;
+}
+
+message GetSeqMessageResp {
+  map<string, ConversationMessage> conversations = 1;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -322,6 +341,7 @@ service msg {
   rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns (GetConversationMaxSeqResp);
   //拉取历史消息（包括用户的，以及指定群组的）
   rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns (sdkws.PullMessageBySeqsResp);
+  rpc GetSeqMessage(GetSeqMessageReq) returns (GetSeqMessageResp);
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
