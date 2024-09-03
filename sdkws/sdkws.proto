@@ -340,6 +340,7 @@ message MemberInvitedTips{
   int64 operationTime = 4;
   uint64 groupMemberVersion = 5;
   string groupMemberVersionID = 6;
+  GroupMemberFullInfo inviterUser = 7;
 }
 
 //Actively join the group
