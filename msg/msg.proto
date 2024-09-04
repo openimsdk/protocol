@@ -316,17 +316,14 @@ message ConversationSeqs {
   repeated int64 seqs = 3;
 }
 
-message ConversationMessage {
-  map<int64, sdkws.MsgData> msgs = 1;
-}
-
 message GetSeqMessageReq {
   string userID = 1;
   repeated ConversationSeqs conversations = 2;
 }
 
 message GetSeqMessageResp {
-  map<string, ConversationMessage> conversations = 1;
+  map<string, sdkws.PullMsgs> msgs = 1;
+  map<string, sdkws.PullMsgs> notificationMsgs = 2;
 }
 
 service msg {
