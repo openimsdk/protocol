@@ -108,6 +108,7 @@ message SetConversationHasReadSeqReq {
   string conversationID = 1;
   string userID = 2;
   int64 hasReadSeq = 3;
+  bool noNotification = 4;
 }
 
 message SetConversationHasReadSeqResp {}
@@ -301,6 +302,30 @@ message DestructMsgsReq {
 
 message DestructMsgsResp {}
 
+message SetUserConversationsMinSeqReq {
+  repeated string userIDs = 1;
+  string conversationID = 2;
+  int64 seq = 3;
+}
+
+message SetUserConversationsMinSeqResp {}
+
+
+message ConversationSeqs {
+  string conversationID = 2;
+  repeated int64 seqs = 3;
+}
+
+message GetSeqMessageReq {
+  string userID = 1;
+  repeated ConversationSeqs conversations = 2;
+}
+
+message GetSeqMessageResp {
+  map<string, sdkws.PullMsgs> msgs = 1;
+  map<string, sdkws.PullMsgs> notificationMsgs = 2;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -313,9 +338,12 @@ service msg {
   rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns (GetConversationMaxSeqResp);
   //拉取历史消息（包括用户的，以及指定群组的）
   rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns (sdkws.PullMessageBySeqsResp);
+  rpc GetSeqMessage(GetSeqMessageReq) returns (GetSeqMessageResp);
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
+
+  rpc SetUserConversationsMinSeq(SetUserConversationsMinSeqReq) returns (SetUserConversationsMinSeqResp);
 
   // 全量清空指定会话消息 重置min seq 比最大seq大1
   rpc ClearConversationsMsg(ClearConversationsMsgReq) returns (ClearConversationsMsgResp);
