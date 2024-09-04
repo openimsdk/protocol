@@ -49,6 +49,10 @@ func (x *ImportFriendReq) Check() error {
 	if x.FriendUserIDs == nil {
 		return errors.New("friendUserIDS is empty")
 	}
+
+	if len(x.FriendUserIDs) > 1000 {
+		return errors.New("too many FriendUserIDs, need to be less than 1000")
+	}
 	return nil
 }
 
@@ -72,6 +76,10 @@ func (x *GetDesignatedFriendsReq) Check() error {
 	if x.FriendUserIDs == nil {
 		return errors.New("friendUserIDS is empty")
 	}
+
+	// if len(x.FriendUserIDs) > 1000 {
+	// 	return errors.New("too many FriendUserIDs, need to be less than 1000")
+	// }
 	return nil
 }
 
@@ -193,6 +201,10 @@ func (x *UpdateFriendsReq) Check() error {
 	if x.FriendUserIDs == nil {
 		return errors.New("friendUserIDs is empty")
 	}
+
+	if len(x.FriendUserIDs) > 1000 {
+		return errors.New("too many FriendUserIDs, need to be less than 1000")
+	}
 	return nil
 }
 func (x *GetSpecifiedFriendsInfoReq) Check() error {
@@ -201,6 +213,10 @@ func (x *GetSpecifiedFriendsInfoReq) Check() error {
 	}
 	if x.UserIDList == nil {
 		return errors.New("userIDList is empty")
+	}
+
+	if len(x.UserIDList) > 1000 {
+		return errors.New("too many UserIDs, need to be less than 1000")
 	}
 	return nil
 }
