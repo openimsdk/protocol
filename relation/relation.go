@@ -17,6 +17,7 @@ package relation
 import (
 	"errors"
 	"fmt"
+	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *GetPaginationFriendsReq) Check() error {
@@ -50,7 +51,7 @@ func (x *ImportFriendReq) Check() error {
 		return errors.New("friendUserIDS is empty")
 	}
 
-	if len(x.FriendUserIDs) > 1000 {
+	if len(x.FriendUserIDs) > constant.ParamMaxLength {
 		return errors.New("too many FriendUserIDs, need to be less than 1000")
 	}
 	return nil
@@ -202,7 +203,7 @@ func (x *UpdateFriendsReq) Check() error {
 		return errors.New("friendUserIDs is empty")
 	}
 
-	if len(x.FriendUserIDs) > 1000 {
+	if len(x.FriendUserIDs) > constant.ParamMaxLength {
 		return errors.New("too many FriendUserIDs, need to be less than 1000")
 	}
 	return nil
@@ -215,7 +216,7 @@ func (x *GetSpecifiedFriendsInfoReq) Check() error {
 		return errors.New("userIDList is empty")
 	}
 
-	if len(x.UserIDList) > 1000 {
+	if len(x.UserIDList) > constant.ParamMaxLength {
 		return errors.New("too many UserIDs, need to be less than 1000")
 	}
 	return nil
