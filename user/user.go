@@ -199,7 +199,7 @@ func (x *GetUserStatusReq) Check() error {
 	if x.UserIDs == nil {
 		return errors.New("user-list is empty")
 	}
-	if len(x.UserIDs) > constant.MaxUsersStatusList {
+	if len(x.UserIDs) > constant.ParamMaxLength {
 		return errors.New("user-list is Limit Exceeded")
 	}
 	return nil
