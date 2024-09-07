@@ -17,7 +17,6 @@ package group
 import (
 	"errors"
 	"fmt"
-	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *CreateGroupReq) Check() error {
