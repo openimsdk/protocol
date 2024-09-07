@@ -17,6 +17,7 @@ package group
 import (
 	"errors"
 	"fmt"
+	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *CreateGroupReq) Check() error {
@@ -30,10 +31,7 @@ func (x *CreateGroupReq) Check() error {
 		return errors.New("GroupType is invalid")
 	}
 	if x.OwnerUserID == "" {
-		return errors.New("ownerUserID is empty")
-	}
-	if len(x.MemberUserIDs) > 1000 {
-		return errors.New("too many MemberUserIDs, need to be less than 1000")
+		return errors.New("ownerUserID")
 	}
 	return nil
 }
@@ -163,10 +161,6 @@ func (x *KickGroupMemberReq) Check() error {
 	if x.KickedUserIDs == nil {
 		return errors.New("kickUserIDs is empty")
 	}
-
-	if len(x.KickedUserIDs) > 1000 {
-		return errors.New("too many KickedUserIDs, need to be less than 1000")
-	}
 	return nil
 }
 
@@ -191,11 +185,6 @@ func (x *InviteUserToGroupReq) Check() error {
 	if x.InvitedUserIDs == nil {
 		return errors.New("invitedUserIDs is empty")
 	}
-
-	if len(x.InvitedUserIDs) > 1000 {
-		return errors.New("too many InvitedUserIDs, need to be less than 1000")
-	}
-
 	return nil
 }
 
@@ -298,11 +287,7 @@ func (x *SetGroupMemberInfo) Check() error {
 
 func (x *SetGroupMemberInfoReq) Check() error {
 	if x.Members == nil {
-		return errors.New("members is empty")
-	}
-
-	if len(x.Members) > 1000 {
-		return errors.New("too many Members, need to be less than 1000")
+		return errors.New("Members is empty")
 	}
 	return nil
 }
@@ -310,10 +295,6 @@ func (x *SetGroupMemberInfoReq) Check() error {
 func (x *GetGroupAbstractInfoReq) Check() error {
 	if x.GroupIDs == nil {
 		return errors.New("GroupID is empty")
-	}
-
-	if len(x.GroupIDs) > 1000 {
-		return errors.New("too many GroupIDs, need to be less than 1000")
 	}
 	return nil
 }
@@ -324,10 +305,6 @@ func (x *GetUserInGroupMembersReq) Check() error {
 	}
 	if x.UserID == "" {
 		return errors.New("userID is empty")
-	}
-
-	if len(x.GroupIDs) > 1000 {
-		return errors.New("too many GroupIDs, need to be less than 1000")
 	}
 	return nil
 }
@@ -371,10 +348,6 @@ func (x *GetGroupUsersReqApplicationListReq) Check() error {
 	}
 	if x.UserIDs == nil {
 		return errors.New("UserID is empty")
-	}
-
-	if len(x.UserIDs) > 1000 {
-		return errors.New("too many UserIDs, need to be less than 1000")
 	}
 	return nil
 }
