@@ -341,6 +341,15 @@ message sortQueryResp {
   repeated sdkws.UserInfo users = 2;
 }
 
+message getAllOnlineUsersReq {
+  uint64 cursor = 1;
+}
+
+message getAllOnlineUsersResp {
+  repeated onlineStatus StatusList = 1;
+  uint64 nextCursor = 2;
+}
+
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns(getDesignateUsersResp);
@@ -391,5 +400,7 @@ service user {
   rpc sortQuery(sortQueryReq)returns(sortQueryResp);
 
   rpc setUserOnlineStatus(setUserOnlineStatusReq)returns(setUserOnlineStatusResp);
+  // get all online users
+  rpc getAllOnlineUsers(getAllOnlineUsersReq)returns(getAllOnlineUsersResp);
 }
 
