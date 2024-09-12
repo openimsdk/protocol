@@ -253,6 +253,11 @@ message SearchChatLog {
   bool isRevoked = 2;
 }
 
+message SearchedMsgData {
+  sdkws.MsgData msgData = 1;
+  bool isRevoked = 2;
+}
+
 message SearchMessageResp {
   repeated SearchChatLog chatLogs = 1;
   int32 chatLogsNum = 2;
