@@ -248,8 +248,13 @@ message SearchMessageReq {
   sdkws.RequestPagination pagination = 6;
 }
 
+message SearchChatLog {
+  ChatLog chatLog = 1;
+  bool isRevoked = 2;
+}
+
 message SearchMessageResp {
-  repeated ChatLog chatLogs = 1;
+  repeated SearchChatLog chatLogs = 1;
   int32 chatLogsNum = 2;
 }
 
@@ -309,7 +314,6 @@ message SetUserConversationsMinSeqReq {
 }
 
 message SetUserConversationsMinSeqResp {}
-
 
 message ConversationSeqs {
   string conversationID = 2;
