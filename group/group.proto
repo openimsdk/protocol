@@ -43,7 +43,7 @@ message SetGroupInfoReq {
 message SetGroupInfoResp {}
 
 message SetGroupInfoEXReq {
-  openim.sdkws.GroupInfoForSetEX groupInfoForSetEX = 1;
+  openim.sdkws.GroupInfoForSetEX groupInfoForSet = 1;
 }
 message SetGroupInfoEXResp {}
 
