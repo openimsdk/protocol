@@ -4856,7 +4856,7 @@ var file_group_group_proto_rawDesc = []byte{
 	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x1e, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69, 0x6d, 0x2e,
 	0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e,
 	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x53, 0x0a, 0x0e, 0x73, 0x65, 0x74, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x58, 0x12, 0x1f, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69,
+	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x78, 0x12, 0x1f, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69,
 	0x6d, 0x2e, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70,
 	0x49, 0x6e, 0x66, 0x6f, 0x45, 0x78, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
 	0x69, 0x6d, 0x2e, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75,
@@ -5219,7 +5219,7 @@ var file_group_group_proto_depIdxs = []int32{
 	18, // 45: openim.group.group.quitGroup:input_type -> openim.group.QuitGroupReq
 	2,  // 46: openim.group.group.getGroupsInfo:input_type -> openim.group.GetGroupsInfoReq
 	4,  // 47: openim.group.group.setGroupInfo:input_type -> openim.group.SetGroupInfoReq
-	6,  // 48: openim.group.group.setGroupInfoEX:input_type -> openim.group.SetGroupInfoExReq
+	6,  // 48: openim.group.group.setGroupInfoEx:input_type -> openim.group.SetGroupInfoExReq
 	8,  // 49: openim.group.group.getGroupApplicationList:input_type -> openim.group.GetGroupApplicationListReq
 	10, // 50: openim.group.group.getUserReqApplicationList:input_type -> openim.group.GetUserReqApplicationListReq
 	66, // 51: openim.group.group.getGroupUsersReqApplicationList:input_type -> openim.group.getGroupUsersReqApplicationListReq
@@ -5256,7 +5256,7 @@ var file_group_group_proto_depIdxs = []int32{
 	19, // 82: openim.group.group.quitGroup:output_type -> openim.group.QuitGroupResp
 	3,  // 83: openim.group.group.getGroupsInfo:output_type -> openim.group.GetGroupsInfoResp
 	5,  // 84: openim.group.group.setGroupInfo:output_type -> openim.group.SetGroupInfoResp
-	7,  // 85: openim.group.group.setGroupInfoEX:output_type -> openim.group.SetGroupInfoExResp
+	7,  // 85: openim.group.group.setGroupInfoEx:output_type -> openim.group.SetGroupInfoExResp
 	9,  // 86: openim.group.group.getGroupApplicationList:output_type -> openim.group.GetGroupApplicationListResp
 	11, // 87: openim.group.group.getUserReqApplicationList:output_type -> openim.group.GetUserReqApplicationListResp
 	67, // 88: openim.group.group.getGroupUsersReqApplicationList:output_type -> openim.group.getGroupUsersReqApplicationListResp
@@ -6304,7 +6304,7 @@ type GroupClient interface {
 	GetGroupsInfo(ctx context.Context, in *GetGroupsInfoReq, opts ...grpc.CallOption) (*GetGroupsInfoResp, error)
 	// 设置群信息
 	SetGroupInfo(ctx context.Context, in *SetGroupInfoReq, opts ...grpc.CallOption) (*SetGroupInfoResp, error)
-	SetGroupInfoEX(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error)
+	SetGroupInfoEx(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error)
 	// （以管理员或群主身份）获取群的加群申请
 	GetGroupApplicationList(ctx context.Context, in *GetGroupApplicationListReq, opts ...grpc.CallOption) (*GetGroupApplicationListResp, error)
 	// 获取用户自己的主动加群申请
@@ -6411,9 +6411,9 @@ func (c *groupClient) SetGroupInfo(ctx context.Context, in *SetGroupInfoReq, opt
 	return out, nil
 }
 
-func (c *groupClient) SetGroupInfoEX(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error) {
+func (c *groupClient) SetGroupInfoEx(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error) {
 	out := new(SetGroupInfoExResp)
-	err := c.cc.Invoke(ctx, "/openim.group.group/setGroupInfoEX", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/openim.group.group/setGroupInfoEx", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -6711,7 +6711,7 @@ type GroupServer interface {
 	GetGroupsInfo(context.Context, *GetGroupsInfoReq) (*GetGroupsInfoResp, error)
 	// 设置群信息
 	SetGroupInfo(context.Context, *SetGroupInfoReq) (*SetGroupInfoResp, error)
-	SetGroupInfoEX(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error)
+	SetGroupInfoEx(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error)
 	// （以管理员或群主身份）获取群的加群申请
 	GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error)
 	// 获取用户自己的主动加群申请
@@ -6784,8 +6784,8 @@ func (*UnimplementedGroupServer) GetGroupsInfo(context.Context, *GetGroupsInfoRe
 func (*UnimplementedGroupServer) SetGroupInfo(context.Context, *SetGroupInfoReq) (*SetGroupInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetGroupInfo not implemented")
 }
-func (*UnimplementedGroupServer) SetGroupInfoEX(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetGroupInfoEX not implemented")
+func (*UnimplementedGroupServer) SetGroupInfoEx(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetGroupInfoEx not implemented")
 }
 func (*UnimplementedGroupServer) GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGroupApplicationList not implemented")
@@ -6975,20 +6975,20 @@ func _Group_SetGroupInfo_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Group_SetGroupInfoEX_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Group_SetGroupInfoEx_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetGroupInfoExReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GroupServer).SetGroupInfoEX(ctx, in)
+		return srv.(GroupServer).SetGroupInfoEx(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/openim.group.group/SetGroupInfoEX",
+		FullMethod: "/openim.group.group/SetGroupInfoEx",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServer).SetGroupInfoEX(ctx, req.(*SetGroupInfoExReq))
+		return srv.(GroupServer).SetGroupInfoEx(ctx, req.(*SetGroupInfoExReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -7576,8 +7576,8 @@ var _Group_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Group_SetGroupInfo_Handler,
 		},
 		{
-			MethodName: "setGroupInfoEX",
-			Handler:    _Group_SetGroupInfoEX_Handler,
+			MethodName: "setGroupInfoEx",
+			Handler:    _Group_SetGroupInfoEx_Handler,
 		},
 		{
 			MethodName: "getGroupApplicationList",

@@ -393,7 +393,7 @@ service group {
   rpc getGroupsInfo(GetGroupsInfoReq) returns (GetGroupsInfoResp);
   //设置群信息
   rpc setGroupInfo(SetGroupInfoReq) returns (SetGroupInfoResp);
-  rpc setGroupInfoEX(SetGroupInfoExReq) returns (SetGroupInfoExResp);
+  rpc setGroupInfoEx(SetGroupInfoExReq) returns (SetGroupInfoExResp);
   //（以管理员或群主身份）获取群的加群申请
   rpc getGroupApplicationList(GetGroupApplicationListReq) returns (GetGroupApplicationListResp);
   //获取用户自己的主动加群申请
