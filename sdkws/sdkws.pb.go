@@ -368,7 +368,7 @@ func (x *GroupInfoForSet) GetApplyMemberFriend() *wrapperspb.Int32Value {
 	return nil
 }
 
-type GroupInfoForSetEX struct {
+type GroupInfoForSetEx struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -384,8 +384,8 @@ type GroupInfoForSetEX struct {
 	ApplyMemberFriend *wrapperspb.Int32Value  `protobuf:"bytes,9,opt,name=applyMemberFriend,proto3" json:"applyMemberFriend"`
 }
 
-func (x *GroupInfoForSetEX) Reset() {
-	*x = GroupInfoForSetEX{}
+func (x *GroupInfoForSetEx) Reset() {
+	*x = GroupInfoForSetEx{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_sdkws_sdkws_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -393,13 +393,13 @@ func (x *GroupInfoForSetEX) Reset() {
 	}
 }
 
-func (x *GroupInfoForSetEX) String() string {
+func (x *GroupInfoForSetEx) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*GroupInfoForSetEX) ProtoMessage() {}
+func (*GroupInfoForSetEx) ProtoMessage() {}
 
-func (x *GroupInfoForSetEX) ProtoReflect() protoreflect.Message {
+func (x *GroupInfoForSetEx) ProtoReflect() protoreflect.Message {
 	mi := &file_sdkws_sdkws_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -411,68 +411,68 @@ func (x *GroupInfoForSetEX) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use GroupInfoForSetEX.ProtoReflect.Descriptor instead.
-func (*GroupInfoForSetEX) Descriptor() ([]byte, []int) {
+// Deprecated: Use GroupInfoForSetEx.ProtoReflect.Descriptor instead.
+func (*GroupInfoForSetEx) Descriptor() ([]byte, []int) {
 	return file_sdkws_sdkws_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *GroupInfoForSetEX) GetGroupID() string {
+func (x *GroupInfoForSetEx) GetGroupID() string {
 	if x != nil {
 		return x.GroupID
 	}
 	return ""
 }
 
-func (x *GroupInfoForSetEX) GetGroupName() string {
+func (x *GroupInfoForSetEx) GetGroupName() string {
 	if x != nil {
 		return x.GroupName
 	}
 	return ""
 }
 
-func (x *GroupInfoForSetEX) GetNotification() *wrapperspb.StringValue {
+func (x *GroupInfoForSetEx) GetNotification() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Notification
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetIntroduction() *wrapperspb.StringValue {
+func (x *GroupInfoForSetEx) GetIntroduction() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Introduction
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetFaceURL() *wrapperspb.StringValue {
+func (x *GroupInfoForSetEx) GetFaceURL() *wrapperspb.StringValue {
 	if x != nil {
 		return x.FaceURL
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetEx() *wrapperspb.StringValue {
+func (x *GroupInfoForSetEx) GetEx() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Ex
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetNeedVerification() *wrapperspb.Int32Value {
+func (x *GroupInfoForSetEx) GetNeedVerification() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.NeedVerification
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetLookMemberInfo() *wrapperspb.Int32Value {
+func (x *GroupInfoForSetEx) GetLookMemberInfo() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.LookMemberInfo
 	}
 	return nil
 }
 
-func (x *GroupInfoForSetEX) GetApplyMemberFriend() *wrapperspb.Int32Value {
+func (x *GroupInfoForSetEx) GetApplyMemberFriend() *wrapperspb.Int32Value {
 	if x != nil {
 		return x.ApplyMemberFriend
 	}
@@ -5804,7 +5804,7 @@ var file_sdkws_sdkws_proto_rawDesc = []byte{
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x56, 0x61, 0x6c,
 	0x75, 0x65, 0x52, 0x11, 0x61, 0x70, 0x70, 0x6c, 0x79, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x46,
 	0x72, 0x69, 0x65, 0x6e, 0x64, 0x22, 0x8e, 0x04, 0x0a, 0x11, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49,
-	0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x45, 0x58, 0x12, 0x18, 0x0a, 0x07, 0x67,
+	0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x45, 0x78, 0x12, 0x18, 0x0a, 0x07, 0x67,
 	0x72, 0x6f, 0x75, 0x70, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x72,
 	0x6f, 0x75, 0x70, 0x49, 0x44, 0x12, 0x1c, 0x0a, 0x09, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e, 0x61,
 	0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x4e,
@@ -6766,7 +6766,7 @@ var file_sdkws_sdkws_proto_goTypes = []interface{}{
 	(PullOrder)(0),                        // 0: openim.sdkws.PullOrder
 	(*GroupInfo)(nil),                     // 1: openim.sdkws.GroupInfo
 	(*GroupInfoForSet)(nil),               // 2: openim.sdkws.GroupInfoForSet
-	(*GroupInfoForSetEX)(nil),             // 3: openim.sdkws.GroupInfoForSetEX
+	(*GroupInfoForSetEx)(nil),             // 3: openim.sdkws.GroupInfoForSetEx
 	(*GroupMemberFullInfo)(nil),           // 4: openim.sdkws.GroupMemberFullInfo
 	(*PublicUserInfo)(nil),                // 5: openim.sdkws.PublicUserInfo
 	(*UserInfo)(nil),                      // 6: openim.sdkws.UserInfo
@@ -6853,13 +6853,13 @@ var file_sdkws_sdkws_proto_depIdxs = []int32{
 	83, // 1: openim.sdkws.GroupInfoForSet.needVerification:type_name -> openim.protobuf.Int32Value
 	83, // 2: openim.sdkws.GroupInfoForSet.lookMemberInfo:type_name -> openim.protobuf.Int32Value
 	83, // 3: openim.sdkws.GroupInfoForSet.applyMemberFriend:type_name -> openim.protobuf.Int32Value
-	82, // 4: openim.sdkws.GroupInfoForSetEX.notification:type_name -> openim.protobuf.StringValue
-	82, // 5: openim.sdkws.GroupInfoForSetEX.introduction:type_name -> openim.protobuf.StringValue
-	82, // 6: openim.sdkws.GroupInfoForSetEX.faceURL:type_name -> openim.protobuf.StringValue
-	82, // 7: openim.sdkws.GroupInfoForSetEX.ex:type_name -> openim.protobuf.StringValue
-	83, // 8: openim.sdkws.GroupInfoForSetEX.needVerification:type_name -> openim.protobuf.Int32Value
-	83, // 9: openim.sdkws.GroupInfoForSetEX.lookMemberInfo:type_name -> openim.protobuf.Int32Value
-	83, // 10: openim.sdkws.GroupInfoForSetEX.applyMemberFriend:type_name -> openim.protobuf.Int32Value
+	82, // 4: openim.sdkws.GroupInfoForSetEx.notification:type_name -> openim.protobuf.StringValue
+	82, // 5: openim.sdkws.GroupInfoForSetEx.introduction:type_name -> openim.protobuf.StringValue
+	82, // 6: openim.sdkws.GroupInfoForSetEx.faceURL:type_name -> openim.protobuf.StringValue
+	82, // 7: openim.sdkws.GroupInfoForSetEx.ex:type_name -> openim.protobuf.StringValue
+	83, // 8: openim.sdkws.GroupInfoForSetEx.needVerification:type_name -> openim.protobuf.Int32Value
+	83, // 9: openim.sdkws.GroupInfoForSetEx.lookMemberInfo:type_name -> openim.protobuf.Int32Value
+	83, // 10: openim.sdkws.GroupInfoForSetEx.applyMemberFriend:type_name -> openim.protobuf.Int32Value
 	82, // 11: openim.sdkws.UserInfoWithEx.nickname:type_name -> openim.protobuf.StringValue
 	82, // 12: openim.sdkws.UserInfoWithEx.faceURL:type_name -> openim.protobuf.StringValue
 	82, // 13: openim.sdkws.UserInfoWithEx.ex:type_name -> openim.protobuf.StringValue
@@ -6978,7 +6978,7 @@ func file_sdkws_sdkws_proto_init() {
 			}
 		}
 		file_sdkws_sdkws_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GroupInfoForSetEX); i {
+			switch v := v.(*GroupInfoForSetEx); i {
 			case 0:
 				return &v.state
 			case 1:
