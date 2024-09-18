@@ -53,7 +53,7 @@ message GroupInfoForSet {
   openim.protobuf.Int32Value applyMemberFriend = 9;
 }
 
-message GroupInfoForSetEX {
+message GroupInfoForSetEx {
   string groupID = 1;
   string groupName = 2;
   openim.protobuf.StringValue notification = 3;
@@ -333,7 +333,7 @@ message MemberKickedTips {
 }
 
 //	OnMemberInvited()
-message MemberInvitedTips{
+message MemberInvitedTips {
   GroupInfo group = 1;
   GroupMemberFullInfo opUser = 2;
   repeated GroupMemberFullInfo invitedUserList = 3;
@@ -344,7 +344,7 @@ message MemberInvitedTips{
 }
 
 //Actively join the group
-message MemberEnterTips{
+message MemberEnterTips {
   GroupInfo group = 1;
   GroupMemberFullInfo entrantUser = 2;
   int64 operationTime = 3;

@@ -337,16 +337,16 @@ func (*SetGroupInfoResp) Descriptor() ([]byte, []int) {
 	return file_group_group_proto_rawDescGZIP(), []int{5}
 }
 
-type SetGroupInfoEXReq struct {
+type SetGroupInfoExReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupInfoForSet *sdkws.GroupInfoForSetEX `protobuf:"bytes,1,opt,name=groupInfoForSet,proto3" json:"groupInfoForSet"`
+	GroupInfoForSet *sdkws.GroupInfoForSetEx `protobuf:"bytes,1,opt,name=groupInfoForSet,proto3" json:"groupInfoForSet"`
 }
 
-func (x *SetGroupInfoEXReq) Reset() {
-	*x = SetGroupInfoEXReq{}
+func (x *SetGroupInfoExReq) Reset() {
+	*x = SetGroupInfoExReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_group_group_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -354,13 +354,13 @@ func (x *SetGroupInfoEXReq) Reset() {
 	}
 }
 
-func (x *SetGroupInfoEXReq) String() string {
+func (x *SetGroupInfoExReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetGroupInfoEXReq) ProtoMessage() {}
+func (*SetGroupInfoExReq) ProtoMessage() {}
 
-func (x *SetGroupInfoEXReq) ProtoReflect() protoreflect.Message {
+func (x *SetGroupInfoExReq) ProtoReflect() protoreflect.Message {
 	mi := &file_group_group_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -372,26 +372,26 @@ func (x *SetGroupInfoEXReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetGroupInfoEXReq.ProtoReflect.Descriptor instead.
-func (*SetGroupInfoEXReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetGroupInfoExReq.ProtoReflect.Descriptor instead.
+func (*SetGroupInfoExReq) Descriptor() ([]byte, []int) {
 	return file_group_group_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SetGroupInfoEXReq) GetGroupInfoForSet() *sdkws.GroupInfoForSetEX {
+func (x *SetGroupInfoExReq) GetGroupInfoForSet() *sdkws.GroupInfoForSetEx {
 	if x != nil {
 		return x.GroupInfoForSet
 	}
 	return nil
 }
 
-type SetGroupInfoEXResp struct {
+type SetGroupInfoExResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 }
 
-func (x *SetGroupInfoEXResp) Reset() {
-	*x = SetGroupInfoEXResp{}
+func (x *SetGroupInfoExResp) Reset() {
+	*x = SetGroupInfoExResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_group_group_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -399,13 +399,13 @@ func (x *SetGroupInfoEXResp) Reset() {
 	}
 }
 
-func (x *SetGroupInfoEXResp) String() string {
+func (x *SetGroupInfoExResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*SetGroupInfoEXResp) ProtoMessage() {}
+func (*SetGroupInfoExResp) ProtoMessage() {}
 
-func (x *SetGroupInfoEXResp) ProtoReflect() protoreflect.Message {
+func (x *SetGroupInfoExResp) ProtoReflect() protoreflect.Message {
 	mi := &file_group_group_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -417,8 +417,8 @@ func (x *SetGroupInfoEXResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use SetGroupInfoEXResp.ProtoReflect.Descriptor instead.
-func (*SetGroupInfoEXResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use SetGroupInfoExResp.ProtoReflect.Descriptor instead.
+func (*SetGroupInfoExResp) Descriptor() ([]byte, []int) {
 	return file_group_group_proto_rawDescGZIP(), []int{7}
 }
 
@@ -4377,13 +4377,13 @@ var file_group_group_proto_rawDesc = []byte{
 	0x70, 0x49, 0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x22, 0x12, 0x0a, 0x10, 0x53,
 	0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x22,
 	0x5e, 0x0a, 0x11, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45,
-	0x58, 0x52, 0x65, 0x71, 0x12, 0x49, 0x0a, 0x0f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66,
+	0x78, 0x52, 0x65, 0x71, 0x12, 0x49, 0x0a, 0x0f, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66,
 	0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e,
 	0x6f, 0x70, 0x65, 0x6e, 0x69, 0x6d, 0x2e, 0x73, 0x64, 0x6b, 0x77, 0x73, 0x2e, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x45, 0x58, 0x52, 0x0f,
+	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x45, 0x78, 0x52, 0x0f,
 	0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x46, 0x6f, 0x72, 0x53, 0x65, 0x74, 0x22,
 	0x14, 0x0a, 0x12, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45,
-	0x58, 0x52, 0x65, 0x73, 0x70, 0x22, 0x7d, 0x0a, 0x1a, 0x47, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75,
+	0x78, 0x52, 0x65, 0x73, 0x70, 0x22, 0x7d, 0x0a, 0x1a, 0x47, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75,
 	0x70, 0x41, 0x70, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74,
 	0x52, 0x65, 0x71, 0x12, 0x3f, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69, 0x6d,
@@ -4858,9 +4858,9 @@ var file_group_group_proto_rawDesc = []byte{
 	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x53, 0x0a, 0x0e, 0x73, 0x65, 0x74, 0x47, 0x72, 0x6f,
 	0x75, 0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x58, 0x12, 0x1f, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69,
 	0x6d, 0x2e, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70,
-	0x49, 0x6e, 0x66, 0x6f, 0x45, 0x58, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
+	0x49, 0x6e, 0x66, 0x6f, 0x45, 0x78, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
 	0x69, 0x6d, 0x2e, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x53, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75,
-	0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x58, 0x52, 0x65, 0x73, 0x70, 0x12, 0x6e, 0x0a, 0x17, 0x67,
+	0x70, 0x49, 0x6e, 0x66, 0x6f, 0x45, 0x78, 0x52, 0x65, 0x73, 0x70, 0x12, 0x6e, 0x0a, 0x17, 0x67,
 	0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x41, 0x70, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x74, 0x69,
 	0x6f, 0x6e, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x28, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x69, 0x6d, 0x2e,
 	0x67, 0x72, 0x6f, 0x75, 0x70, 0x2e, 0x47, 0x65, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x41, 0x70,
@@ -5084,8 +5084,8 @@ var file_group_group_proto_goTypes = []interface{}{
 	(*GetGroupsInfoResp)(nil),                   // 3: openim.group.GetGroupsInfoResp
 	(*SetGroupInfoReq)(nil),                     // 4: openim.group.SetGroupInfoReq
 	(*SetGroupInfoResp)(nil),                    // 5: openim.group.SetGroupInfoResp
-	(*SetGroupInfoEXReq)(nil),                   // 6: openim.group.SetGroupInfoEXReq
-	(*SetGroupInfoEXResp)(nil),                  // 7: openim.group.SetGroupInfoEXResp
+	(*SetGroupInfoExReq)(nil),                   // 6: openim.group.SetGroupInfoExReq
+	(*SetGroupInfoExResp)(nil),                  // 7: openim.group.SetGroupInfoExResp
 	(*GetGroupApplicationListReq)(nil),          // 8: openim.group.GetGroupApplicationListReq
 	(*GetGroupApplicationListResp)(nil),         // 9: openim.group.GetGroupApplicationListResp
 	(*GetUserReqApplicationListReq)(nil),        // 10: openim.group.GetUserReqApplicationListReq
@@ -5162,7 +5162,7 @@ var file_group_group_proto_goTypes = []interface{}{
 	nil,                               // 81: openim.group.BatchGetIncrementalGroupMemberResp.RespListEntry
 	(*sdkws.GroupInfo)(nil),           // 82: openim.sdkws.GroupInfo
 	(*sdkws.GroupInfoForSet)(nil),     // 83: openim.sdkws.GroupInfoForSet
-	(*sdkws.GroupInfoForSetEX)(nil),   // 84: openim.sdkws.GroupInfoForSetEX
+	(*sdkws.GroupInfoForSetEx)(nil),   // 84: openim.sdkws.GroupInfoForSetEx
 	(*sdkws.RequestPagination)(nil),   // 85: openim.sdkws.RequestPagination
 	(*sdkws.GroupRequest)(nil),        // 86: openim.sdkws.GroupRequest
 	(*sdkws.GroupMemberFullInfo)(nil), // 87: openim.sdkws.GroupMemberFullInfo
@@ -5175,7 +5175,7 @@ var file_group_group_proto_depIdxs = []int32{
 	82, // 1: openim.group.CreateGroupResp.groupInfo:type_name -> openim.sdkws.GroupInfo
 	82, // 2: openim.group.GetGroupsInfoResp.groupInfos:type_name -> openim.sdkws.GroupInfo
 	83, // 3: openim.group.SetGroupInfoReq.groupInfoForSet:type_name -> openim.sdkws.GroupInfoForSet
-	84, // 4: openim.group.SetGroupInfoEXReq.groupInfoForSet:type_name -> openim.sdkws.GroupInfoForSetEX
+	84, // 4: openim.group.SetGroupInfoExReq.groupInfoForSet:type_name -> openim.sdkws.GroupInfoForSetEx
 	85, // 5: openim.group.GetGroupApplicationListReq.pagination:type_name -> openim.sdkws.RequestPagination
 	86, // 6: openim.group.GetGroupApplicationListResp.groupRequests:type_name -> openim.sdkws.GroupRequest
 	85, // 7: openim.group.GetUserReqApplicationListReq.pagination:type_name -> openim.sdkws.RequestPagination
@@ -5219,7 +5219,7 @@ var file_group_group_proto_depIdxs = []int32{
 	18, // 45: openim.group.group.quitGroup:input_type -> openim.group.QuitGroupReq
 	2,  // 46: openim.group.group.getGroupsInfo:input_type -> openim.group.GetGroupsInfoReq
 	4,  // 47: openim.group.group.setGroupInfo:input_type -> openim.group.SetGroupInfoReq
-	6,  // 48: openim.group.group.setGroupInfoEX:input_type -> openim.group.SetGroupInfoEXReq
+	6,  // 48: openim.group.group.setGroupInfoEX:input_type -> openim.group.SetGroupInfoExReq
 	8,  // 49: openim.group.group.getGroupApplicationList:input_type -> openim.group.GetGroupApplicationListReq
 	10, // 50: openim.group.group.getUserReqApplicationList:input_type -> openim.group.GetUserReqApplicationListReq
 	66, // 51: openim.group.group.getGroupUsersReqApplicationList:input_type -> openim.group.getGroupUsersReqApplicationListReq
@@ -5256,7 +5256,7 @@ var file_group_group_proto_depIdxs = []int32{
 	19, // 82: openim.group.group.quitGroup:output_type -> openim.group.QuitGroupResp
 	3,  // 83: openim.group.group.getGroupsInfo:output_type -> openim.group.GetGroupsInfoResp
 	5,  // 84: openim.group.group.setGroupInfo:output_type -> openim.group.SetGroupInfoResp
-	7,  // 85: openim.group.group.setGroupInfoEX:output_type -> openim.group.SetGroupInfoEXResp
+	7,  // 85: openim.group.group.setGroupInfoEX:output_type -> openim.group.SetGroupInfoExResp
 	9,  // 86: openim.group.group.getGroupApplicationList:output_type -> openim.group.GetGroupApplicationListResp
 	11, // 87: openim.group.group.getUserReqApplicationList:output_type -> openim.group.GetUserReqApplicationListResp
 	67, // 88: openim.group.group.getGroupUsersReqApplicationList:output_type -> openim.group.getGroupUsersReqApplicationListResp
@@ -5374,7 +5374,7 @@ func file_group_group_proto_init() {
 			}
 		}
 		file_group_group_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetGroupInfoEXReq); i {
+			switch v := v.(*SetGroupInfoExReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5386,7 +5386,7 @@ func file_group_group_proto_init() {
 			}
 		}
 		file_group_group_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SetGroupInfoEXResp); i {
+			switch v := v.(*SetGroupInfoExResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6304,7 +6304,7 @@ type GroupClient interface {
 	GetGroupsInfo(ctx context.Context, in *GetGroupsInfoReq, opts ...grpc.CallOption) (*GetGroupsInfoResp, error)
 	// 设置群信息
 	SetGroupInfo(ctx context.Context, in *SetGroupInfoReq, opts ...grpc.CallOption) (*SetGroupInfoResp, error)
-	SetGroupInfoEX(ctx context.Context, in *SetGroupInfoEXReq, opts ...grpc.CallOption) (*SetGroupInfoEXResp, error)
+	SetGroupInfoEX(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error)
 	// （以管理员或群主身份）获取群的加群申请
 	GetGroupApplicationList(ctx context.Context, in *GetGroupApplicationListReq, opts ...grpc.CallOption) (*GetGroupApplicationListResp, error)
 	// 获取用户自己的主动加群申请
@@ -6411,8 +6411,8 @@ func (c *groupClient) SetGroupInfo(ctx context.Context, in *SetGroupInfoReq, opt
 	return out, nil
 }
 
-func (c *groupClient) SetGroupInfoEX(ctx context.Context, in *SetGroupInfoEXReq, opts ...grpc.CallOption) (*SetGroupInfoEXResp, error) {
-	out := new(SetGroupInfoEXResp)
+func (c *groupClient) SetGroupInfoEX(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error) {
+	out := new(SetGroupInfoExResp)
 	err := c.cc.Invoke(ctx, "/openim.group.group/setGroupInfoEX", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -6711,7 +6711,7 @@ type GroupServer interface {
 	GetGroupsInfo(context.Context, *GetGroupsInfoReq) (*GetGroupsInfoResp, error)
 	// 设置群信息
 	SetGroupInfo(context.Context, *SetGroupInfoReq) (*SetGroupInfoResp, error)
-	SetGroupInfoEX(context.Context, *SetGroupInfoEXReq) (*SetGroupInfoEXResp, error)
+	SetGroupInfoEX(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error)
 	// （以管理员或群主身份）获取群的加群申请
 	GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error)
 	// 获取用户自己的主动加群申请
@@ -6784,7 +6784,7 @@ func (*UnimplementedGroupServer) GetGroupsInfo(context.Context, *GetGroupsInfoRe
 func (*UnimplementedGroupServer) SetGroupInfo(context.Context, *SetGroupInfoReq) (*SetGroupInfoResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetGroupInfo not implemented")
 }
-func (*UnimplementedGroupServer) SetGroupInfoEX(context.Context, *SetGroupInfoEXReq) (*SetGroupInfoEXResp, error) {
+func (*UnimplementedGroupServer) SetGroupInfoEX(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetGroupInfoEX not implemented")
 }
 func (*UnimplementedGroupServer) GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error) {
@@ -6976,7 +6976,7 @@ func _Group_SetGroupInfo_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _Group_SetGroupInfoEX_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetGroupInfoEXReq)
+	in := new(SetGroupInfoExReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -6988,7 +6988,7 @@ func _Group_SetGroupInfoEX_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/openim.group.group/SetGroupInfoEX",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GroupServer).SetGroupInfoEX(ctx, req.(*SetGroupInfoEXReq))
+		return srv.(GroupServer).SetGroupInfoEX(ctx, req.(*SetGroupInfoExReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
