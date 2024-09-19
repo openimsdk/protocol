@@ -53,18 +53,6 @@ message GroupInfoForSet {
   openim.protobuf.Int32Value applyMemberFriend = 9;
 }
 
-message GroupInfoForSetEx {
-  string groupID = 1;
-  string groupName = 2;
-  openim.protobuf.StringValue notification = 3;
-  openim.protobuf.StringValue introduction = 4;
-  openim.protobuf.StringValue faceURL = 5;
-  openim.protobuf.StringValue ex = 6;
-  openim.protobuf.Int32Value needVerification = 7;
-  openim.protobuf.Int32Value lookMemberInfo = 8;
-  openim.protobuf.Int32Value applyMemberFriend = 9;
-}
-
 message GroupMemberFullInfo {
   string groupID = 1;
   string userID = 2;
