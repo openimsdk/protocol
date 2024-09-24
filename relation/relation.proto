@@ -229,17 +229,6 @@ message getIncrementalFriendsResp {
   uint64 sortVersion = 7;
 }
 
-message blackInfo {
-  string ownerUserID = 1;
-  string blackUserID = 2;
-  string blackNickname = 3;
-  string blackFaceURL = 4;
-  int64 createTime = 5;
-  int32 addSource = 6;
-  string operatorUserID = 7;
-  string ex = 8;
-}
-
 message getIncrementalBlacksReq {
   string userID = 1;
   string versionID = 2;
@@ -250,8 +239,18 @@ message getIncrementalBlacksResp {
   string versionID = 2;
   bool full = 3;
   repeated string delete = 4;
-  repeated blackInfo insert = 5;
-  repeated blackInfo update = 6;
+  repeated openim.sdkws.BlackInfo insert = 5;
+  repeated openim.sdkws.BlackInfo update = 6;
+}
+
+message GetSpecifiedBlacksReq {
+  string ownerUserID = 1;
+  repeated string userIDList = 2;
+}
+
+message GetSpecifiedBlacksResp {
+  repeated openim.sdkws.BlackInfo blacks = 1;
+  int32 total = 2;
 }
 
 message getFullFriendUserIDsReq {
@@ -272,8 +271,7 @@ message notificationUserInfoUpdateReq {
   openim.sdkws.UserInfo newUserInfo = 3;
 }
 
-message notificationUserInfoUpdateResp {
-}
+message notificationUserInfoUpdateResp {}
 
 service friend {
   // Friend request
@@ -285,9 +283,9 @@ service friend {
   // Get specified friend request
   rpc getDesignatedFriendsApply(getDesignatedFriendsApplyReq) returns (getDesignatedFriendsApplyResp);
   // Get Incremental friends apply to list
-  rpc getIncrementalFriendsApplyTo(getIncrementalFriendsApplyToReq) returns(getIncrementalFriendsApplyToResp);
+  rpc getIncrementalFriendsApplyTo(getIncrementalFriendsApplyToReq) returns (getIncrementalFriendsApplyToResp);
   // Get Incremental friends apply from list
-  rpc getIncrementalFriendsApplyFrom(getIncrementalFriendsApplyFromReq) returns(getIncrementalFriendsApplyFromResp);
+  rpc getIncrementalFriendsApplyFrom(getIncrementalFriendsApplyFromReq) returns (getIncrementalFriendsApplyFromResp);
   // Add black user
   rpc addBlack(addBlackReq) returns (addBlackResp);
   // Remove black user
@@ -298,6 +296,8 @@ service friend {
   rpc isBlack(isBlackReq) returns (isBlackResp);
   // Get blacklist
   rpc getPaginationBlacks(getPaginationBlacksReq) returns (getPaginationBlacksResp);
+  // Get specified blacklist
+  rpc GetSpecifiedBlacks(GetSpecifiedBlacksReq) returns (GetSpecifiedBlacksResp);
   // Delete friend
   rpc deleteFriend(deleteFriendReq) returns (deleteFriendResp);
   // Respond to friend request (Accept or Decline)
@@ -323,5 +323,5 @@ service friend {
   // Get full friend userIDs
   rpc getFullFriendUserIDs(getFullFriendUserIDsReq) returns (getFullFriendUserIDsResp);
 
-  rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq)returns(notificationUserInfoUpdateResp);
+  rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 }
