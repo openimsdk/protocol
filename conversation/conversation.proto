@@ -288,6 +288,15 @@ message GetNotNotifyConversationIDsResp {
   repeated string conversationIDs = 1;
 }
 
+message GetPinnedConversationIDsReq {
+  string userID = 1;
+}
+
+message GetPinnedConversationIDsResp {
+  repeated string conversationIDs = 1;
+}
+
+
 service conversation {
   rpc GetConversation(GetConversationReq) returns (GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq) returns (GetSortedConversationListResp);
@@ -311,4 +320,5 @@ service conversation {
   rpc GetOwnerConversation(GetOwnerConversationReq) returns (GetOwnerConversationResp);
   rpc GetConversationsNeedDestructMsgs(GetConversationsNeedDestructMsgsReq) returns (GetConversationsNeedDestructMsgsResp);
   rpc GetNotNotifyConversationIDs(GetNotNotifyConversationIDsReq) returns (GetNotNotifyConversationIDsResp);
+  rpc GetPinnedConversationIDs(GetPinnedConversationIDsReq) returns (GetPinnedConversationIDsResp);
 }
