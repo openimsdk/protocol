@@ -74,6 +74,16 @@ message GetUserReqApplicationListResp {
   repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
+message GetSpecifiedUserGroupRequestInfoReq {
+  string groupID = 1;
+  string userID = 2;
+}
+
+message GetSpecifiedUserGroupRequestInfoResp {
+  uint32 total = 1;
+  repeated openim.sdkws.GroupRequest groupRequests = 2;
+}
+
 message TransferGroupOwnerReq {
   string groupID = 1;
   string oldOwnerUserID = 2;
@@ -408,6 +418,7 @@ service group {
   rpc getUserReqApplicationList(GetUserReqApplicationListReq) returns (GetUserReqApplicationListResp);
   // 获取该群用户的加群申请
   rpc getGroupUsersReqApplicationList(getGroupUsersReqApplicationListReq) returns (getGroupUsersReqApplicationListResp);
+  rpc getSpecifiedUserGroupRequestInfo(GetSpecifiedUserGroupRequestInfoReq) returns (GetSpecifiedUserGroupRequestInfoResp);
   //转让群主
   rpc transferGroupOwner(TransferGroupOwnerReq) returns (TransferGroupOwnerResp);
   //群主或管理员处理进群申请
