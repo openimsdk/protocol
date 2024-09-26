@@ -66,7 +66,7 @@ message GetUsersOnlineStatusResp{
   repeated SuccessResult successResult = 1;
   repeated FailedDetail failedResult = 2;
   message SuccessDetail{
-    string platform = 1;
+    int32 platformID = 1;
     string status = 2;
     string connID = 3;
     bool isBackground = 4;
