@@ -87,7 +87,7 @@ message SingleDetail{
   repeated SinglePlatformToken singlePlatformToken = 3;
 }
 message SinglePlatformToken{
-  string platform = 1;
+  int32 platformID = 1;
    int32  total =2;
    repeated string token = 3;
 }
