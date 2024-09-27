@@ -194,6 +194,7 @@ message GetConversationsHasReadAndMaxSeqReq {
 message Seqs {
   int64 maxSeq = 1;
   int64 hasReadSeq = 2;
+  int64 maxSeqTime = 3;
 }
 
 message GetConversationsHasReadAndMaxSeqResp {
@@ -335,6 +336,21 @@ message GetSeqMessageResp {
   map<string, sdkws.PullMsgs> notificationMsgs = 2;
 }
 
+message GetActiveConversationReq {
+  repeated string conversationIDs = 1;
+  int64 limit = 2;
+}
+
+message ActiveConversation {
+  string conversationID = 1;
+  int64 lastTime = 2;
+  int64 maxSeq = 3;
+}
+
+message GetActiveConversationResp {
+  repeated ActiveConversation conversations = 1;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -382,4 +398,6 @@ service msg {
 
   rpc ClearMsg(ClearMsgReq) returns (ClearMsgResp);
   rpc DestructMsgs(DestructMsgsReq) returns (DestructMsgsResp);
+
+  rpc GetActiveConversation(GetActiveConversationReq) returns (GetActiveConversationResp);
 }
