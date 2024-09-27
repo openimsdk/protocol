@@ -154,13 +154,16 @@ const (
 	// The PC terminal can be online at the same time,but other terminal only one of the endpoints can login.
 	PCAndOther = 5
 
-	OnlineStatus  = "online"
-	OfflineStatus = "offline"
-	Registered    = "registered"
-	UnRegistered  = "unregistered"
+	// OnlineStatus  = "online"
+	// OfflineStatus = "offline"
+	// Registered    = "registered"
+	// UnRegistered  = "unregistered"
 
 	Online  = 1
 	Offline = 0
+
+	Registered   = 1
+	UnRegistered = 0
 
 	// MsgReceiveOpt.
 	ReceiveMessage          = 0
