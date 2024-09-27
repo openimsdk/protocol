@@ -16,15 +16,13 @@ package auth
 
 import (
 	"errors"
+
 	"github.com/openimsdk/protocol/constant"
 )
 
 func (x *UserTokenReq) Check() error {
 	if x.UserID == "" {
 		return errors.New("userID is empty")
-	}
-	if x.PlatformID > constant.AdminPlatformID || x.PlatformID < constant.IOSPlatformID {
-		return errors.New("platform is invalidate")
 	}
 	return nil
 }
