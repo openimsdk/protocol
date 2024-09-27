@@ -66,12 +66,11 @@ message GetUsersOnlineStatusReq {
 message GetUsersOnlineStatusResp {
   repeated SuccessResult successResult = 1;
   repeated FailedDetail failedResult = 2;
-  message SuccessDetail{
-    string platform = 1;
-    string status = 2;
-    string connID = 3;
-    bool isBackground = 4;
-    string token   =5;
+  message SuccessDetail {
+    int32 platformID = 1;
+    string connID = 2;
+    bool isBackground = 3;
+    string token = 4;
   }
 
   message FailedDetail {
@@ -88,10 +87,10 @@ message SingleDetail {
   int32 status = 2;
   repeated SinglePlatformToken singlePlatformToken = 3;
 }
-message SinglePlatformToken{
-  string platform = 1;
-   int32  total =2;
-   repeated string token = 3;
+message SinglePlatformToken {
+  int32 platformID = 1;
+  int32 total = 2;
+  repeated string token = 3;
 }
 
 message KickUserOfflineReq {
