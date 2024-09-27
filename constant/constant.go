@@ -162,8 +162,8 @@ const (
 	Online  = 1
 	Offline = 0
 
-	Registered   = 1
-	UnRegistered = 0
+	Registered   = true
+	UnRegistered = false
 
 	// MsgReceiveOpt.
 	ReceiveMessage          = 0

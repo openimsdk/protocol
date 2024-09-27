@@ -35,7 +35,7 @@ message accountCheckReq {
 message accountCheckResp {
   message singleUserStatus {
     string userID = 1;
-    bool accountStatus = 2;
+    int32 accountStatus = 2;
   }
   repeated singleUserStatus results = 1;
 }
