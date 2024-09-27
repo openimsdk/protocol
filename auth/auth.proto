@@ -14,64 +14,59 @@
 
 syntax = "proto3";
 package openim.auth;
-option go_package = "github.com/openimsdk/protocol/auth";
 
+option go_package = "github.com/openimsdk/protocol/auth";
 
 message userTokenReq {
   string secret = 1;
-  int32  platformID = 2;
-  string userID = 3;
+  string userID = 2;
 }
 message userTokenResp {
   string token = 2;
-  int64  expireTimeSeconds = 3;
+  int64 expireTimeSeconds = 3;
 }
 
 message forceLogoutReq {
-  int32  platformID = 1;
+  int32 platformID = 1;
   string userID = 2;
 }
-message forceLogoutResp {
-}
+message forceLogoutResp {}
 
-message parseTokenReq{
+message parseTokenReq {
   string token = 1;
 }
-message parseTokenResp{
+message parseTokenResp {
   string userID = 1;
   int32 platformID = 2;
   int64 expireTimeSeconds = 4;
 }
 
-message getUserTokenReq{
-  int32  platformID = 1;
+message getUserTokenReq {
+  int32 platformID = 1;
   string userID = 2;
 }
 
-message getUserTokenResp{
+message getUserTokenResp {
   string token = 1;
-  int64  expireTimeSeconds = 2;
+  int64 expireTimeSeconds = 2;
 }
 
-message invalidateTokenReq{
+message invalidateTokenReq {
   string preservedToken = 1;
   string userID = 2;
   int32 platformID = 3;
 }
-message  invalidateTokenResp{
-}
+message invalidateTokenResp {}
 
 service Auth {
   // Generate token
-  rpc userToken(userTokenReq) returns(userTokenResp);
+  rpc userToken(userTokenReq) returns (userTokenResp);
   // Admin retrieves user token
-  rpc getUserToken(getUserTokenReq) returns(getUserTokenResp);
+  rpc getUserToken(getUserTokenReq) returns (getUserTokenResp);
   // Force logout
-  rpc forceLogout(forceLogoutReq) returns(forceLogoutResp);
+  rpc forceLogout(forceLogoutReq) returns (forceLogoutResp);
   // Parse token
-  rpc parseToken(parseTokenReq) returns(parseTokenResp);
+  rpc parseToken(parseTokenReq) returns (parseTokenResp);
   // Invalidate or mark the token as kicked out
-  rpc invalidateToken(invalidateTokenReq) returns(invalidateTokenResp);
+  rpc invalidateToken(invalidateTokenReq) returns (invalidateTokenResp);
 }
-
-
