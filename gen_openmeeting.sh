@@ -19,7 +19,7 @@ PROTO_NAMES=(
 )
 
 for name in "${PROTO_NAMES[@]}"; do
-  protoc --go_out=plugins=grpc:./openmeeting/${name} --go_opt=module=github.com/openimsdk/protocol/openmeeting/${name} openmeeting/${name}/${name}.proto
+  protoc --go_out=plugins=grpc:./openmeeting/${name} --go_opt=module=github.com/zilinyo/protocol/openmeeting/${name} openmeeting/${name}/${name}.proto
   if [ $? -ne 0 ]; then
       echo "error processing ${name}.proto"
       exit $?

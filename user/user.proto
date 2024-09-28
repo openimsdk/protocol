@@ -18,7 +18,7 @@ package openim.user;
 import "sdkws/sdkws.proto";
 import "conversation/conversation.proto";
 import "wrapperspb/wrapperspb.proto";
-option go_package = "github.com/openimsdk/protocol/user";
+option go_package = "github.com/zilinyo/protocol/user";
 
 message getAllUserIDReq{
   sdkws.RequestPagination pagination = 1;

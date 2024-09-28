@@ -3,7 +3,7 @@ syntax = "proto3";
 import "wrapperspb/wrapperspb.proto";
 package openmeeting.meeting;
 
-option go_package = "github.com/openimsdk/protocol/openmeeting/meeting";
+option go_package = "github.com/zilinyo/protocol/openmeeting/meeting";
 
 
 // Defines LiveKit access information.

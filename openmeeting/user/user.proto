@@ -15,7 +15,7 @@
 syntax = "proto3";
 package openmeeting.user;
 
-option go_package = "github.com/openimsdk/protocol/openmeeting/user";
+option go_package = "github.com/zilinyo/protocol/openmeeting/user";
 
 
 message getDesignateUsersReq{

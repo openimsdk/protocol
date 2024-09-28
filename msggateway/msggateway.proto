@@ -15,7 +15,7 @@
 syntax = "proto3";
 package openim.msggateway;
 import "sdkws/sdkws.proto";
-option go_package = "github.com/openimsdk/protocol/msggateway";
+option go_package = "github.com/zilinyo/protocol/msggateway";
 
 message OnlinePushMsgReq {
   sdkws.MsgData msgData = 1;

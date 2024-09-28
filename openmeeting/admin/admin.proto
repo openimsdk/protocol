@@ -16,7 +16,7 @@ syntax = "proto3";
 
 package openmeeting.admin;
 
-option go_package = "github.com/openimsdk/protocol/openmeeting/admin";
+option go_package = "github.com/zilinyo/protocol/openmeeting/admin";
 
 
 message userLoginReq {
