@@ -20,7 +20,7 @@ import (
 	"github.com/openimsdk/protocol/constant"
 )
 
-func (x *UserTokenReq) Check() error {
+func (x *GetAdminTokenReq) Check() error {
 	if x.UserID == "" {
 		return errors.New("userID is empty")
 	}
