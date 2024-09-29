@@ -18,7 +18,7 @@ package openim.group;
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
 
-option go_package = "github.com/openimsdk/protocol/group";
+option go_package = "github.com/zilinyo/protocol/group";
 
 message CreateGroupReq {
   repeated string memberUserIDs = 1;

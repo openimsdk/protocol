@@ -1,7 +1,7 @@
 syntax = "proto3";
 package openim.rtc;
 import "sdkws/sdkws.proto";
-option go_package = "github.com/openimsdk/protocol/rtc";
+option go_package = "github.com/zilinyo/protocol/rtc";
 
 message ParticipantMetaData{
   openim.sdkws.GroupInfo groupInfo = 1;

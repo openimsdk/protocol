@@ -22,7 +22,7 @@ package third
 
 import (
 	context "context"
-	sdkws "github.com/openimsdk/protocol/sdkws"
+	sdkws "github.com/zilinyo/protocol/sdkws"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
