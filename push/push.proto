@@ -17,7 +17,7 @@ package openim.push;
 
 import "sdkws/sdkws.proto";
 
-option go_package = "github.com/openimsdk/protocol/push";
+option go_package = "github.com/zilinyo/protocol/push";
 
 message PushMsgReq {
   sdkws.MsgData msgData = 1;

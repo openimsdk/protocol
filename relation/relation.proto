@@ -18,7 +18,7 @@ package openim.relation;
 import "sdkws/sdkws.proto";
 import "wrapperspb/wrapperspb.proto";
 
-option go_package = "github.com/openimsdk/protocol/relation";
+option go_package = "github.com/zilinyo/protocol/relation";
 
 message getPaginationFriendsReq {
   openim.sdkws.RequestPagination pagination = 1;
