@@ -17,11 +17,11 @@ package openim.auth;
 
 option go_package = "github.com/openimsdk/protocol/auth";
 
-message userTokenReq {
+message getAdminTokenReq {
   string secret = 1;
-  string userID = 2;
+  string userID = 3;
 }
-message userTokenResp {
+message getAdminTokenResp {
   string token = 2;
   int64 expireTimeSeconds = 3;
 }
@@ -60,7 +60,7 @@ message invalidateTokenResp {}
 
 service Auth {
   // Generate token
-  rpc userToken(userTokenReq) returns (userTokenResp);
+  rpc getAdminToken(getAdminTokenReq) returns (getAdminTokenResp);
   // Admin retrieves user token
   rpc getUserToken(getUserTokenReq) returns (getUserTokenResp);
   // Force logout
