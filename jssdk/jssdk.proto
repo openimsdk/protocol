@@ -1,0 +1,53 @@
+// Copyright © 2023 OpenIM. All rights reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+package openim.jssdk;
+
+import "sdkws/sdkws.proto";
+import "relation/relation.proto";
+import "conversation/conversation.proto";
+//import "wrapperspb/wrapperspb.proto";
+
+option go_package = "github.com/openimsdk/protocol/jssdk";
+
+message ConversationMsg {
+  conversation.Conversation conversation = 1;
+  sdkws.MsgData lastMsg = 2;
+  sdkws.UserInfo user = 3;
+  relation.FriendInfoOnly friend = 4;
+  sdkws.GroupInfo group = 5;
+  int64 maxSeq = 6;
+  int64 readSeq = 7;
+}
+
+message GetActiveConversationsReq  {
+  string ownerUserID = 1;
+  int64 count = 2;
+}
+
+message GetActiveConversationsResp {
+  int64 unreadCount = 1;
+  repeated ConversationMsg conversations = 2;
+}
+
+message GetConversationsReq  {
+  string ownerUserID = 1;
+  repeated string conversationIDs = 2;
+}
+
+message GetConversationsResp {
+  int64 unreadCount = 1;
+  repeated ConversationMsg conversations = 2;
+}
