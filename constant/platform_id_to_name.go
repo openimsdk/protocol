@@ -73,23 +73,29 @@ var PlatformName2ID = map[string]int{
 }
 
 var PlatformName2class = map[string]string{
-	IOSPlatformStr:     TerminalMobile,
-	AndroidPlatformStr: TerminalMobile,
-	MiniWebPlatformStr: WebPlatformStr,
-	WebPlatformStr:     WebPlatformStr,
-	WindowsPlatformStr: TerminalPC,
-	OSXPlatformStr:     TerminalPC,
-	LinuxPlatformStr:   TerminalPC,
+	IOSPlatformStr:        TerminalMobile,
+	AndroidPlatformStr:    TerminalMobile,
+	MiniWebPlatformStr:    WebPlatformStr,
+	WebPlatformStr:        WebPlatformStr,
+	WindowsPlatformStr:    TerminalPC,
+	OSXPlatformStr:        TerminalPC,
+	LinuxPlatformStr:      TerminalPC,
+	AndroidPadPlatformStr: TerminalMobile,
+	IPadPlatformStr:       TerminalMobile,
+	AdminPlatformStr:      AdminPlatformStr,
 }
 
 var PlatformID2class = map[int]string{
-	IOSPlatformID:     TerminalMobile,
-	AndroidPlatformID: TerminalMobile,
-	MiniWebPlatformID: WebPlatformStr,
-	WebPlatformID:     WebPlatformStr,
-	WindowsPlatformID: TerminalPC,
-	OSXPlatformID:     TerminalPC,
-	LinuxPlatformID:   TerminalPC,
+	IOSPlatformID:        TerminalMobile,
+	AndroidPlatformID:    TerminalMobile,
+	MiniWebPlatformID:    WebPlatformStr,
+	WebPlatformID:        WebPlatformStr,
+	WindowsPlatformID:    TerminalPC,
+	OSXPlatformID:        TerminalPC,
+	LinuxPlatformID:      TerminalPC,
+	AndroidPadPlatformID: TerminalMobile,
+	IPadPlatformID:       TerminalMobile,
+	AdminPlatformID:      AdminPlatformStr,
 }
 
 func PlatformIDToName(num int) string {
