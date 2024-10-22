@@ -153,6 +153,8 @@ const (
 	PcMobileAndWeb = 4
 	// The PC terminal can be online at the same time,but other terminal only one of the endpoints can login.
 	PCAndOther = 5
+	// Customize login policy
+	Customize = 6
 
 	// OnlineStatus  = "online"
 	// OfflineStatus = "offline"
