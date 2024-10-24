@@ -396,3 +396,11 @@ const (
 	FirstPageNumber   = 1
 	MaxSyncPullNumber = 500
 )
+
+const (
+	MsgStatusSending     = 1
+	MsgStatusSendSuccess = 2
+	MsgStatusSendFailed  = 3
+	MsgStatusHasDeleted  = 4
+	MsgStatusFiltered    = 5
+)
