@@ -18,6 +18,7 @@ PROTO_NAMES=(
     "errinfo"
     "relation"
     "group"
+    "jssdk"
     "msg"
     "msggateway"
     "push"

@@ -58,6 +58,12 @@ message invalidateTokenReq {
 }
 message invalidateTokenResp {}
 
+message kickTokensReq {
+  repeated string tokens = 1;
+}
+message kickTokensResp {}
+
+
 service Auth {
   // Generate token
   rpc getAdminToken(getAdminTokenReq) returns (getAdminTokenResp);
@@ -69,4 +75,6 @@ service Auth {
   rpc parseToken(parseTokenReq) returns (parseTokenResp);
   // Invalidate or mark the token as kicked out
   rpc invalidateToken(invalidateTokenReq) returns (invalidateTokenResp);
+  // kick tokens
+  rpc kickTokens(kickTokensReq) returns (kickTokensResp);
 }
