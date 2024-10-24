@@ -100,7 +100,7 @@ func (x *JoinGroupReq) Check() error {
 	if x.GroupID == "" {
 		return errors.New("groupID is empty")
 	}
-	if x.JoinSource < 2 || x.JoinSource > 4 {
+	if x.JoinSource < 1 || x.JoinSource > 4 {
 		return errors.New("joinSource is invalid")
 	}
 	if x.JoinSource == 2 {
