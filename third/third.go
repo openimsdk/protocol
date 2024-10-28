@@ -16,6 +16,7 @@ package third
 
 import (
 	"errors"
+
 	"github.com/openimsdk/protocol/constant"
 )
 
@@ -56,26 +57,6 @@ func (x *CompleteMultipartUploadReq) Check() error {
 func (x *CompleteFormDataReq) Check() error {
 	if x.UrlPrefix == "" {
 		return errors.New("UrlPrefix is empty")
-	}
-	return nil
-}
-
-func (x *LatestApplicationVersionReq) Check() error {
-	if x.Platform == "" {
-		return errors.New("platform is empty")
-	}
-	return nil
-}
-
-func (x *PageApplicationVersionReq) Check() error {
-	if x.Pagination == nil {
-		return errors.New("pagination is empty")
-	}
-	if x.Pagination.PageNumber < 1 {
-		return errors.New("pageNumber is invalid")
-	}
-	if x.Pagination.ShowNumber < 1 {
-		return errors.New("showNumber is invalid")
 	}
 	return nil
 }
