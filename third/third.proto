@@ -229,19 +229,6 @@ message LatestApplicationVersionResp {
   ApplicationVersion version = 1;
 }
 
-message AddApplicationVersionReq {
-  string platform = 1;
-  string version = 2;
-  string url = 3;
-  string text = 4;
-  bool force = 5;
-  bool latest = 6;
-}
-
-message AddApplicationVersionResp {
-
-}
-
 message UpdateApplicationVersionReq {
   string id = 1;
   openim.protobuf.StringValue platform = 2;
@@ -252,17 +239,13 @@ message UpdateApplicationVersionReq {
   openim.protobuf.BoolValue latest = 7;
 }
 
-message UpdateApplicationVersionResp {
-
-}
+message UpdateApplicationVersionResp {}
 
 message DeleteApplicationVersionReq {
   repeated string id = 1;
 }
 
-message DeleteApplicationVersionResp {
-
-}
+message DeleteApplicationVersionResp {}
 
 message PageApplicationVersionReq {
   repeated string platform = 1;
@@ -293,7 +276,6 @@ service third {
   rpc SearchLogs(SearchLogsReq) returns (SearchLogsResp);
 
   rpc LatestApplicationVersion(LatestApplicationVersionReq) returns (LatestApplicationVersionResp);
-  rpc AddApplicationVersion(AddApplicationVersionReq) returns (AddApplicationVersionResp);
   rpc UpdateApplicationVersion(UpdateApplicationVersionReq) returns (UpdateApplicationVersionResp);
   rpc DeleteApplicationVersion(DeleteApplicationVersionReq) returns (DeleteApplicationVersionResp);
   rpc PageApplicationVersion(PageApplicationVersionReq) returns (PageApplicationVersionResp);
