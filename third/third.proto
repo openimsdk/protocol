@@ -16,7 +16,6 @@ syntax = "proto3";
 package openim.third;
 
 import "sdkws/sdkws.proto";
-import "wrapperspb/wrapperspb.proto";
 
 option go_package = "github.com/openimsdk/protocol/third";
 
