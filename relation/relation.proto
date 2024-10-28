@@ -284,15 +284,6 @@ message FriendInfoOnly {
   bool isPinned = 8;
 }
 
-message getFriendInfoReq {
-  string ownerUserID = 1;
-  repeated string friendUserIDs = 2;
-}
-
-message getFriendInfoResp {
-  repeated FriendInfoOnly friendInfos = 1;
-}
-
 service friend {
   // Friend request
   rpc applyToAddFriend(applyToAddFriendReq) returns (applyToAddFriendResp);
@@ -344,6 +335,4 @@ service friend {
   rpc getFullFriendUserIDs(getFullFriendUserIDsReq) returns (getFullFriendUserIDsResp);
 
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
-
-  rpc getFriendInfo(getFriendInfoReq) returns (getFriendInfoResp);
 }
