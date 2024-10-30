@@ -228,7 +228,6 @@ message LatestApplicationVersionReq {
 
 message LatestApplicationVersionResp {
   ApplicationVersion version = 1;
-  ApplicationVersion hot = 2;
 }
 
 message AddApplicationVersionReq {
