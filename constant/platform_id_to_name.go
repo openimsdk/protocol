@@ -76,7 +76,7 @@ var PlatformName2ID = map[string]int{
 var PlatformName2class = map[string]string{
 	IOSPlatformStr:        TerminalMobile,
 	AndroidPlatformStr:    TerminalMobile,
-	MiniWebPlatformStr:    WebPlatformStr,
+	MiniWebPlatformStr:    MiniWebPlatformStr,
 	WebPlatformStr:        WebPlatformStr,
 	WindowsPlatformStr:    TerminalPC,
 	OSXPlatformStr:        TerminalPC,
@@ -89,7 +89,7 @@ var PlatformName2class = map[string]string{
 var PlatformID2class = map[int]string{
 	IOSPlatformID:        TerminalMobile,
 	AndroidPlatformID:    TerminalMobile,
-	MiniWebPlatformID:    WebPlatformStr,
+	MiniWebPlatformID:    MiniWebPlatformStr,
 	WebPlatformID:        WebPlatformStr,
 	WindowsPlatformID:    TerminalPC,
 	OSXPlatformID:        TerminalPC,
