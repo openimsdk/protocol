@@ -150,7 +150,7 @@ const (
 	WebAndOther = 3
 	// The PC side is mutually exclusive, and the mobile side is mutually exclusive, but the web side can be online at
 	// the same time.
-	PcMobileAndWeb = 4
+	AllLoginButSameClassKick = 4
 	// The PC terminal can be online at the same time,but other terminal only one of the endpoints can login.
 	PCAndOther = 5
 	// Customize login policy
