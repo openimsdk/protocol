@@ -44,6 +44,7 @@ const (
 	// terminal types.
 	TerminalPC     = "PC"
 	TerminalMobile = "Mobile"
+	TerminalPad    = "Pad"
 )
 
 var PlatformID2Name = map[int]string{
@@ -75,26 +76,26 @@ var PlatformName2ID = map[string]int{
 var PlatformName2class = map[string]string{
 	IOSPlatformStr:        TerminalMobile,
 	AndroidPlatformStr:    TerminalMobile,
-	MiniWebPlatformStr:    WebPlatformStr,
+	MiniWebPlatformStr:    MiniWebPlatformStr,
 	WebPlatformStr:        WebPlatformStr,
 	WindowsPlatformStr:    TerminalPC,
 	OSXPlatformStr:        TerminalPC,
 	LinuxPlatformStr:      TerminalPC,
-	AndroidPadPlatformStr: TerminalMobile,
-	IPadPlatformStr:       TerminalMobile,
+	AndroidPadPlatformStr: TerminalPad,
+	IPadPlatformStr:       TerminalPad,
 	AdminPlatformStr:      AdminPlatformStr,
 }
 
 var PlatformID2class = map[int]string{
 	IOSPlatformID:        TerminalMobile,
 	AndroidPlatformID:    TerminalMobile,
-	MiniWebPlatformID:    WebPlatformStr,
+	MiniWebPlatformID:    MiniWebPlatformStr,
 	WebPlatformID:        WebPlatformStr,
 	WindowsPlatformID:    TerminalPC,
 	OSXPlatformID:        TerminalPC,
 	LinuxPlatformID:      TerminalPC,
-	AndroidPadPlatformID: TerminalMobile,
-	IPadPlatformID:       TerminalMobile,
+	AndroidPadPlatformID: TerminalPad,
+	IPadPlatformID:       TerminalPad,
 	AdminPlatformID:      AdminPlatformStr,
 }
 
