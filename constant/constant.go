@@ -39,11 +39,11 @@ const (
 	CustomOnlineOnly             = 120
 	ReactionMessageModifier      = 121
 	ReactionMessageDeleter       = 122
-
-	Common             = 200
-	GroupMsg           = 201
-	SignalMsg          = 202
-	CustomNotification = 203
+	Stream                       = 123
+	Common                       = 200
+	GroupMsg                     = 201
+	SignalMsg                    = 202
+	CustomNotification           = 203
 
 	// SysRelated.
 	NotificationBegin = 1000
@@ -118,6 +118,8 @@ const (
 
 	HasReadReceipt = 2200
 
+	StreamMsgNotification = 2300
+
 	NotificationEnd = 5000
 
 	// status.
@@ -144,17 +146,11 @@ const (
 	DefalutNotKick = 0
 	// Full-end login, but the same end is mutually exclusive.
 	AllLoginButSameTermKick = 1
-	// Only one of the endpoints can log in.
-	SingleTerminalLogin = 2
-	// The web side can be online at the same time, and the other side can only log in at one end.
-	WebAndOther = 3
 	// The PC side is mutually exclusive, and the mobile side is mutually exclusive, but the web side can be online at
 	// the same time.
-	PcMobileAndWeb = 4
+	AllLoginButSameClassKick = 4
 	// The PC terminal can be online at the same time,but other terminal only one of the endpoints can login.
 	PCAndOther = 5
-	// Customize login policy
-	Customize = 6
 
 	// OnlineStatus  = "online"
 	// OfflineStatus = "offline"

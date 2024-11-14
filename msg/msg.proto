@@ -351,6 +351,30 @@ message GetActiveConversationResp {
   repeated ActiveConversation conversations = 1;
 }
 
+message AppendStreamMsgReq {
+  string clientMsgID = 1;
+  int64 startIndex = 2;
+  repeated string packets = 3;
+  bool end = 4;
+}
+
+message AppendStreamMsgResp {
+}
+
+message GetStreamMsgReq {
+  string clientMsgID = 1;
+}
+
+message GetStreamMsgResp {
+  string clientMsgID = 1;
+  string conversationID = 2;
+  string userID = 3;
+  repeated string packets = 4;
+  bool end = 5;
+  int64 createTime = 6;
+  int64 deadlineTime = 7;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -400,4 +424,7 @@ service msg {
   rpc DestructMsgs(DestructMsgsReq) returns (DestructMsgsResp);
 
   rpc GetActiveConversation(GetActiveConversationReq) returns (GetActiveConversationResp);
+
+  rpc AppendStreamMsg(AppendStreamMsgReq) returns (AppendStreamMsgResp);
+  rpc GetStreamMsg(GetStreamMsgReq) returns (GetStreamMsgResp);
 }
