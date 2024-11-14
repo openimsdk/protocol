@@ -13,15 +13,15 @@ for %%i in (%PROTO_NAMES%) do (
     )
 )
 
-rem Generate Go-grpc code (optional, currently commented out)
+rem Generate Go-grpc code
 
-rem for %%i in (%PROTO_NAMES%) do (
-rem     protoc --go-grpc_out=./%%i --go-grpc_opt=module=github.com/openimsdk/protocol/%%i %%i/%%i.proto
-rem     if ERRORLEVEL 1 (
-rem         echo error processing %%i.proto (go-grpc_out)
-rem         exit /b %ERRORLEVEL%
-rem     )
-rem )
+for %%i in (%PROTO_NAMES%) do (
+     protoc --go-grpc_out=./%%i --go-grpc_opt=module=github.com/openimsdk/protocol/%%i %%i/%%i.proto
+     if ERRORLEVEL 1 (
+         echo error processing %%i.proto (go-grpc_out)
+         exit /b %ERRORLEVEL%
+     )
+ )
 
 
 rem Replace "omitempty" in *.pb.go files with UTF-8 encoding
