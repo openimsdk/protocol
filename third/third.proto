@@ -144,7 +144,9 @@ message DeleteOutdatedDataReq {
   int64 expireTime = 1;
 }
 
-message DeleteOutdatedDataResp {}
+message DeleteOutdatedDataResp {
+  int32 count = 1;
+}
 
 message FcmUpdateTokenReq {
   int32 platformID = 1;
@@ -221,7 +223,8 @@ service third {
 
   rpc FcmUpdateToken(FcmUpdateTokenReq) returns (FcmUpdateTokenResp);
   rpc SetAppBadge(SetAppBadgeReq) returns (SetAppBadgeResp);
-  //日志
+
+  // Logs
   rpc UploadLogs(UploadLogsReq) returns (UploadLogsResp);
   rpc DeleteLogs(DeleteLogsReq) returns (DeleteLogsResp);
   rpc SearchLogs(SearchLogsReq) returns (SearchLogsResp);
