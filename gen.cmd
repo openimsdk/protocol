@@ -16,11 +16,11 @@ for %%i in (%PROTO_NAMES%) do (
 rem Generate Go-grpc code
 
 for %%i in (%PROTO_NAMES%) do (
-     protoc --go-grpc_out=./%%i --go-grpc_opt=module=github.com/openimsdk/protocol/%%i %%i/%%i.proto
-     if ERRORLEVEL 1 (
-         echo error processing %%i.proto (go-grpc_out)
-         exit /b %ERRORLEVEL%
-     )
+    protoc --go-grpc_out=./%%i --go-grpc_opt=module=github.com/openimsdk/protocol/%%i %%i/%%i.proto
+    if ERRORLEVEL 1 (
+        echo error processing %%i.proto
+        exit /b %ERRORLEVEL%
+    )
  )
 
 
