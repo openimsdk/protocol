@@ -142,6 +142,7 @@ message CompleteFormDataResp {
 
 message DeleteOutdatedDataReq {
   int64 expireTime = 1;
+  repeated string objectGroup = 2;
 }
 
 message DeleteOutdatedDataResp {
