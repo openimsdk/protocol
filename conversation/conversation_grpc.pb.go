@@ -53,7 +53,7 @@ const (
 	Conversation_GetFullOwnerConversationIDs_FullMethodName             = "/openim.conversation.conversation/GetFullOwnerConversationIDs"
 	Conversation_GetIncrementalConversation_FullMethodName              = "/openim.conversation.conversation/GetIncrementalConversation"
 	Conversation_GetOwnerConversation_FullMethodName                    = "/openim.conversation.conversation/GetOwnerConversation"
-	Conversation_GetConversationsNeedDestructMsgs_FullMethodName        = "/openim.conversation.conversation/GetConversationsNeedDestructMsgs"
+	Conversation_GetConversationsNeedClearMsg_FullMethodName            = "/openim.conversation.conversation/GetConversationsNeedClearMsg"
 	Conversation_GetNotNotifyConversationIDs_FullMethodName             = "/openim.conversation.conversation/GetNotNotifyConversationIDs"
 	Conversation_GetPinnedConversationIDs_FullMethodName                = "/openim.conversation.conversation/GetPinnedConversationIDs"
 )
@@ -82,7 +82,7 @@ type ConversationClient interface {
 	GetFullOwnerConversationIDs(ctx context.Context, in *GetFullOwnerConversationIDsReq, opts ...grpc.CallOption) (*GetFullOwnerConversationIDsResp, error)
 	GetIncrementalConversation(ctx context.Context, in *GetIncrementalConversationReq, opts ...grpc.CallOption) (*GetIncrementalConversationResp, error)
 	GetOwnerConversation(ctx context.Context, in *GetOwnerConversationReq, opts ...grpc.CallOption) (*GetOwnerConversationResp, error)
-	GetConversationsNeedDestructMsgs(ctx context.Context, in *GetConversationsNeedDestructMsgsReq, opts ...grpc.CallOption) (*GetConversationsNeedDestructMsgsResp, error)
+	GetConversationsNeedClearMsg(ctx context.Context, in *GetConversationsNeedClearMsgReq, opts ...grpc.CallOption) (*GetConversationsNeedClearMsgResp, error)
 	GetNotNotifyConversationIDs(ctx context.Context, in *GetNotNotifyConversationIDsReq, opts ...grpc.CallOption) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(ctx context.Context, in *GetPinnedConversationIDsReq, opts ...grpc.CallOption) (*GetPinnedConversationIDsResp, error)
 }
@@ -295,10 +295,10 @@ func (c *conversationClient) GetOwnerConversation(ctx context.Context, in *GetOw
 	return out, nil
 }
 
-func (c *conversationClient) GetConversationsNeedDestructMsgs(ctx context.Context, in *GetConversationsNeedDestructMsgsReq, opts ...grpc.CallOption) (*GetConversationsNeedDestructMsgsResp, error) {
+func (c *conversationClient) GetConversationsNeedClearMsg(ctx context.Context, in *GetConversationsNeedClearMsgReq, opts ...grpc.CallOption) (*GetConversationsNeedClearMsgResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetConversationsNeedDestructMsgsResp)
-	err := c.cc.Invoke(ctx, Conversation_GetConversationsNeedDestructMsgs_FullMethodName, in, out, cOpts...)
+	out := new(GetConversationsNeedClearMsgResp)
+	err := c.cc.Invoke(ctx, Conversation_GetConversationsNeedClearMsg_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -349,7 +349,7 @@ type ConversationServer interface {
 	GetFullOwnerConversationIDs(context.Context, *GetFullOwnerConversationIDsReq) (*GetFullOwnerConversationIDsResp, error)
 	GetIncrementalConversation(context.Context, *GetIncrementalConversationReq) (*GetIncrementalConversationResp, error)
 	GetOwnerConversation(context.Context, *GetOwnerConversationReq) (*GetOwnerConversationResp, error)
-	GetConversationsNeedDestructMsgs(context.Context, *GetConversationsNeedDestructMsgsReq) (*GetConversationsNeedDestructMsgsResp, error)
+	GetConversationsNeedClearMsg(context.Context, *GetConversationsNeedClearMsgReq) (*GetConversationsNeedClearMsgResp, error)
 	GetNotNotifyConversationIDs(context.Context, *GetNotNotifyConversationIDsReq) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(context.Context, *GetPinnedConversationIDsReq) (*GetPinnedConversationIDsResp, error)
 	mustEmbedUnimplementedConversationServer()
@@ -422,8 +422,8 @@ func (UnimplementedConversationServer) GetIncrementalConversation(context.Contex
 func (UnimplementedConversationServer) GetOwnerConversation(context.Context, *GetOwnerConversationReq) (*GetOwnerConversationResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOwnerConversation not implemented")
 }
-func (UnimplementedConversationServer) GetConversationsNeedDestructMsgs(context.Context, *GetConversationsNeedDestructMsgsReq) (*GetConversationsNeedDestructMsgsResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetConversationsNeedDestructMsgs not implemented")
+func (UnimplementedConversationServer) GetConversationsNeedClearMsg(context.Context, *GetConversationsNeedClearMsgReq) (*GetConversationsNeedClearMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConversationsNeedClearMsg not implemented")
 }
 func (UnimplementedConversationServer) GetNotNotifyConversationIDs(context.Context, *GetNotNotifyConversationIDsReq) (*GetNotNotifyConversationIDsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNotNotifyConversationIDs not implemented")
@@ -812,20 +812,20 @@ func _Conversation_GetOwnerConversation_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Conversation_GetConversationsNeedDestructMsgs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetConversationsNeedDestructMsgsReq)
+func _Conversation_GetConversationsNeedClearMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationsNeedClearMsgReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationServer).GetConversationsNeedDestructMsgs(ctx, in)
+		return srv.(ConversationServer).GetConversationsNeedClearMsg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Conversation_GetConversationsNeedDestructMsgs_FullMethodName,
+		FullMethod: Conversation_GetConversationsNeedClearMsg_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationServer).GetConversationsNeedDestructMsgs(ctx, req.(*GetConversationsNeedDestructMsgsReq))
+		return srv.(ConversationServer).GetConversationsNeedClearMsg(ctx, req.(*GetConversationsNeedClearMsgReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -954,8 +954,8 @@ var Conversation_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Conversation_GetOwnerConversation_Handler,
 		},
 		{
-			MethodName: "GetConversationsNeedDestructMsgs",
-			Handler:    _Conversation_GetConversationsNeedDestructMsgs_Handler,
+			MethodName: "GetConversationsNeedClearMsg",
+			Handler:    _Conversation_GetConversationsNeedClearMsg_Handler,
 		},
 		{
 			MethodName: "GetNotNotifyConversationIDs",
