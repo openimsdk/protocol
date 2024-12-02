@@ -302,13 +302,13 @@ message GetServerTimeResp {
 }
 
 message ClearMsgReq {
-  int64 timestamp = 1;
+  repeated conversation.Conversation conversations = 1;
 }
 
 message ClearMsgResp {}
 
 message DestructMsgsReq {
-  repeated conversation.Conversation conversations = 1;
+  int64 timestamp = 1;
 }
 
 message DestructMsgsResp {}
@@ -358,8 +358,7 @@ message AppendStreamMsgReq {
   bool end = 4;
 }
 
-message AppendStreamMsgResp {
-}
+message AppendStreamMsgResp {}
 
 message GetStreamMsgReq {
   string clientMsgID = 1;
