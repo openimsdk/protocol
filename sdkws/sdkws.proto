@@ -164,6 +164,7 @@ message SeqRange {
 message PullMsgs {
   repeated MsgData Msgs = 1;
   bool isEnd = 2;
+  int64 minSeq = 3;
 }
 
 message PullMessageBySeqsResp {
