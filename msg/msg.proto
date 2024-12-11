@@ -329,6 +329,7 @@ message ConversationSeqs {
 message GetSeqMessageReq {
   string userID = 1;
   repeated ConversationSeqs conversations = 2;
+  sdkws.PullOrder order = 3;
 }
 
 message GetSeqMessageResp {
