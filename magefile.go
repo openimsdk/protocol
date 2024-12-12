@@ -186,7 +186,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 }
 
 // generateGoFile 使用模板生成 Go 文件
-func generateGoFile(rpccallDir string, service Service) error {
+func generateGoFile(dir string, service Service) error {
 	// 定义模板
 	tmpl := `package rpccall
 
@@ -235,8 +235,8 @@ var (
 	}
 
 	// 定义生成的文件路径
-	goFileName := strings.ToLower(service.Name) + ".go"
-	goFilePath := filepath.Join(rpccallDir, goFileName)
+	goFileName := strings.ToLower(service.Name) + "_caller.go"
+	goFilePath := filepath.Join(dir, goFileName)
 
 	// 写入文件
 	if err := os.WriteFile(goFilePath, buf.Bytes(), 0644); err != nil {
