@@ -16,6 +16,8 @@ import (
 	"text/template"
 )
 
+var Default = RpcCaller
+
 func RpcCaller() {
 	if err := Generate(); err != nil {
 		fmt.Println(err)
@@ -41,7 +43,7 @@ type Service struct {
 
 // Generate is the Mage target to generate Go code from proto files
 func Generate() error {
-	fmt.Println("Generating service...")
+	fmt.Println("Generating rpc_caller...")
 
 	projectRoot, err := os.Getwd()
 	if err != nil {
