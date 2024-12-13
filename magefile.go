@@ -18,6 +18,14 @@ import (
 
 var Default = RpcCaller
 
+var (
+	//packageRegex = regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
+	importRegex    = regexp.MustCompile(`^\s*import\s+"([a-zA-Z0-9_.]+)";`)
+	goPackageRegex = regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
+	serviceRegex   = regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
+	rpcRegex       = regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\)\s+returns\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\);`)
+)
+
 func RpcCaller() {
 	if err := Generate(); err != nil {
 		fmt.Println(err)
@@ -39,6 +47,7 @@ type Service struct {
 	ServiceName string
 	GoPackage   string
 	Methods     []ServiceMethod
+	Imports     []string
 }
 
 // Generate is the Mage target to generate Go code from proto files
@@ -119,23 +128,21 @@ func Generate() error {
 func parseProtoFile(protoFilePath string) (Service, error) {
 	file, err := os.Open(protoFilePath)
 	if err != nil {
-		return Service{}, fmt.Errorf("打开 proto 文件失败: %v", err)
+		return Service{}, fmt.Errorf("open proto file failed: %v", err)
 	}
 	defer file.Close()
 
-	filePath := filepath.Dir(protoFilePath)
+	filePath_ := filepath.Dir(protoFilePath)
 	fileName := strings.TrimSuffix(filepath.Base(protoFilePath), filepath.Ext(protoFilePath))
 	scanner := bufio.NewScanner(file)
 	var (
-		goPackage   string
-		serviceName string
-		methods     []ServiceMethod
+		goPackage      string
+		serviceName    string
+		methods        []ServiceMethod
+		imports        []string
+		alreadyImports map[string]struct{}
+		allImports     map[string]string
 	)
-
-	//packageRegex := regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
-	goPackageRegex := regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
-	serviceRegex := regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
-	rpcRegex := regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+)\s*\)\s+returns\s*\(\s*([A-Za-z0-9_]+)\s*\);`)
 
 	inService := false
 
@@ -146,6 +153,12 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 		//	protoPackage = matches[1]
 		//	continue
 		//}
+
+		if matches := importRegex.FindStringSubmatch(line); matches != nil {
+			pkg := strings.TrimSuffix(filepath.Base(matches[1]), filepath.Ext(matches[1]))
+			allImports[pkg] = matches[1]
+			continue
+		}
 
 		if matches := goPackageRegex.FindStringSubmatch(line); matches != nil {
 			goPackage = matches[1]
@@ -172,6 +185,21 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 					FullMethodName: fullMethodName,
 				}
 				methods = append(methods, method)
+
+				if strings.Contains(requestType, ".") {
+					imp := strings.Split(requestType, ".")[0]
+					if f, ok := allImports[imp]; ok {
+						if _, ok = alreadyImports[imp]; !ok {
+							alreadyImports[imp] = struct{}{}
+							gopkg, err := getGoPackage(filepath.Join(protoFilePath, f))
+							if err != nil {
+								fmt.Printf("get go package failed: %v", err)
+							} else {
+								imports = append(imports, gopkg)
+							}
+						}
+					}
+				}
 				continue
 			}
 
@@ -195,7 +223,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 
 	sp := strings.Split(goPackage, "/")
 	service := Service{
-		FilePath:    filePath,
+		FilePath:    filePath_,
 		FileName:    fileName,
 		ServiceName: serviceName,
 		GoPackage:   sp[len(sp)-1],
@@ -213,6 +241,9 @@ func generateGoFile(service Service) error {
 	tmpl := `package {{.GoPackage}}
 
 import (
+	{{- range .Imports }}
+	"{{ .Imports }}"
+	{{- end }}
 	"github.com/openimsdk/protocol/rpccall"
 	"google.golang.org/grpc"
 )
@@ -234,10 +265,12 @@ var (
 		ServiceNameCamel string
 		GoPackage        string
 		Methods          []ServiceMethod
+		Imports          []string
 	}{
 		ServiceNameCamel: toCamelCase(service.ServiceName),
 		GoPackage:        service.GoPackage,
 		Methods:          service.Methods,
+		Imports:          service.Imports,
 	}
 
 	t, err := template.New("goFile").Parse(tmpl)
@@ -259,6 +292,23 @@ var (
 
 	formatFile(goFilePath)
 	return nil
+}
+
+func getGoPackage(filePath string) (string, error) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return "", fmt.Errorf("open proto file failed: %v", err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		if matches := goPackageRegex.FindStringSubmatch(line); matches != nil {
+			return matches[1], nil
+		}
+	}
+	return "", errors.New("goPackage not found")
 }
 
 func toCamelCase(s string) string {
