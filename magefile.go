@@ -8,8 +8,8 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"log"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -253,12 +253,11 @@ var (
 	goFileName := strings.ToLower(service.FileName) + "_caller.go"
 	goFilePath := filepath.Join(service.FilePath, goFileName)
 
-	// 写入文件
 	if err := os.WriteFile(goFilePath, buf.Bytes(), 0644); err != nil {
 		return fmt.Errorf("write file failed: %v", err)
 	}
 
-	log.Printf("gen %s success", goFilePath)
+	formatFile(goFilePath)
 	return nil
 }
 
@@ -270,4 +269,29 @@ func toCamelCase(s string) string {
 		}
 	}
 	return strings.Join(parts, "")
+}
+
+func formatFile(filePath string) {
+	_ = runGoImports(filePath)
+	_ = runGoFmt(filePath)
+}
+
+func runGoImports(filePath string) error {
+	cmd := exec.Command("goimports", "-w", filePath)
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("goimports error: %v, stderr: %s", err, stderr.String())
+	}
+	return nil
+}
+
+func runGoFmt(filePath string) error {
+	cmd := exec.Command("gofmt", "-w", filePath)
+	var stderr bytes.Buffer
+	cmd.Stderr = &stderr
+	if err := cmd.Run(); err != nil {
+		return fmt.Errorf("gofmt error: %v, stderr: %s", err, stderr.String())
+	}
+	return nil
 }
