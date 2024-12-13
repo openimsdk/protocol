@@ -6,6 +6,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -31,68 +32,88 @@ type ServiceMethod struct {
 
 // Service holds information about a service and its methods
 type Service struct {
-	Name           string
-	GoPackage      string
-	QuoteGoPackage string
-	ProtoPackage   string
-	Methods        []ServiceMethod
-	ProtoFilePath  string
+	FilePath    string
+	FileName    string
+	ServiceName string
+	GoPackage   string
+	Methods     []ServiceMethod
 }
 
 // Generate is the Mage target to generate Go code from proto files
 func Generate() error {
 	fmt.Println("Generating service...")
-	// 获取项目根目录
+
 	projectRoot, err := os.Getwd()
 	if err != nil {
-		return fmt.Errorf("获取当前工作目录失败: %v", err)
+		return errors.New("get root directory failed")
 	}
 
-	//// rpccall 目录
-	//rpccallDir := filepath.Join(projectRoot, "rpccall")
-	//if _, err := os.Stat(rpccallDir); os.IsNotExist(err) {
-	//	if err := os.Mkdir(rpccallDir, 0755); err != nil {
-	//		return fmt.Errorf("创建 rpccall 目录失败: %v", err)
-	//	}
-	//}
-	fmt.Println("ReadDir...")
-	// 遍历项目根目录下的所有子目录，查找 .proto 文件
 	entries, err := os.ReadDir(projectRoot)
 	if err != nil {
-		return fmt.Errorf("读取项目根目录失败: %v", err)
+		return fmt.Errorf("read root directory failed: %v", err)
 	}
+
 	var services []Service
+
 	for _, entry := range entries {
 		if entry.IsDir() {
 			serviceName := entry.Name()
-			protoFile := filepath.Join(projectRoot, serviceName, serviceName+".proto")
-			if _, err := os.Stat(protoFile); os.IsNotExist(err) {
-				log.Printf("警告: 找不到 %s 目录下的 %s.proto 文件，跳过...", serviceName, serviceName)
-				continue
-			}
-			fmt.Println("parseProtoFile...")
-			service, err := parseProtoFile(protoFile)
+			subDir := filepath.Join(projectRoot, serviceName)
+
+			protoFiles, err := filepath.Glob(filepath.Join(subDir, "*.proto"))
 			if err != nil {
-				//return fmt.Errorf("解析 %s 失败: %v", protoFile, err)
 				continue
 			}
-			service.Name = serviceName
-			service.ProtoFilePath = protoFile
-			services = append(services, service)
+
+			if len(protoFiles) == 0 {
+				continue
+			}
+
+			for _, protoFile := range protoFiles {
+				service, err := parseProtoFile(protoFile)
+				if err != nil {
+					fmt.Printf("warn: parse %s failed: %v\n", protoFile, err)
+					continue
+				}
+
+				services = append(services, service)
+			}
 		}
 	}
-	fmt.Println("generateGoFile...")
-	// 为每个服务生成 Go 文件
+	// // for all protoFile
+	//err = filepath.Walk(projectRoot, func(path string, info os.FileInfo, err error) error {
+	//	if err != nil {
+	//		log.Printf("warn: err in begin walk %s: %v\n", path, err)
+	//		return nil
+	//	}
+	//
+	//	if info.IsDir() {
+	//		return nil
+	//	}
+	//
+	//	if strings.HasSuffix(info.Name(), ".proto") {
+	//		service, err := parseProtoFile(path)
+	//		if err != nil {
+	//			//log.Printf("warn: parse %s failed: %v\n", path, err)
+	//			return nil
+	//		}
+	//
+	//		services = append(services, service)
+	//	}
+	//
+	//	return nil
+	//})
+	// gen Go file for each service
+
 	for _, service := range services {
-		if err := generateGoFile(filepath.Join(projectRoot, service.Name), service); err != nil {
-			return fmt.Errorf("生成 Go 文件失败: %v", err)
+		if err := generateGoFile(service); err != nil {
+			return fmt.Errorf("gen Go file failed: %v", err)
 		}
 	}
 
 	return nil
 }
 
-// parseProtoFile 解析单个 proto 文件，提取服务和方法信息
 func parseProtoFile(protoFilePath string) (Service, error) {
 	file, err := os.Open(protoFilePath)
 	if err != nil {
@@ -100,14 +121,16 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 	}
 	defer file.Close()
 
+	filePath := filepath.Dir(protoFilePath)
+	fileName := strings.TrimSuffix(filepath.Base(protoFilePath), filepath.Ext(protoFilePath))
 	scanner := bufio.NewScanner(file)
-	var protoPackage string
-	var goPackage string
-	var serviceName string
-	var methods []ServiceMethod
+	var (
+		goPackage   string
+		serviceName string
+		methods     []ServiceMethod
+	)
 
-	// 正则表达式
-	packageRegex := regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
+	//packageRegex := regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
 	goPackageRegex := regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
 	serviceRegex := regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
 	rpcRegex := regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+)\s*\)\s+returns\s+\(\s*([A-Za-z0-9_]+)\s*\);`)
@@ -117,27 +140,23 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 	for scanner.Scan() {
 		line := scanner.Text()
 
-		// 查找 package
-		if matches := packageRegex.FindStringSubmatch(line); matches != nil {
-			protoPackage = matches[1]
-			continue
-		}
+		//if matches := packageRegex.FindStringSubmatch(line); matches != nil {
+		//	protoPackage = matches[1]
+		//	continue
+		//}
 
-		// 查找 go_package
 		if matches := goPackageRegex.FindStringSubmatch(line); matches != nil {
 			goPackage = matches[1]
 
 			continue
 		}
 
-		// 查找 service
 		if matches := serviceRegex.FindStringSubmatch(line); matches != nil {
 			serviceName = matches[1]
 			inService = true
 			continue
 		}
 
-		// 查找 rpc 方法
 		if inService {
 			if matches := rpcRegex.FindStringSubmatch(line); matches != nil {
 				methodName := matches[1]
@@ -145,7 +164,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 				responseType := matches[3]
 				fullMethodName := fmt.Sprintf("%s_%s_FullMethodName", toCamelCase(serviceName), toCamelCase(methodName))
 				method := ServiceMethod{
-					Name:           toCamelCase(methodName),
+					Name:           toCamelCase(methodName) + "Caller",
 					RequestType:    toCamelCase(requestType),
 					ResponseType:   toCamelCase(responseType),
 					FullMethodName: fullMethodName,
@@ -154,7 +173,6 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 				continue
 			}
 
-			// 检查服务块是否结束
 			if strings.Contains(line, "}") {
 				inService = false
 			}
@@ -162,38 +180,39 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		return Service{}, fmt.Errorf("扫描 proto 文件失败: %v", err)
+		return Service{}, fmt.Errorf("scan proto file failed: %v", err)
 	}
 
 	if serviceName == "" {
-		return Service{}, fmt.Errorf("在 proto 文件中未找到 service 定义")
+		return Service{}, fmt.Errorf("no serviceName in proto")
 	}
 
 	if goPackage == "" {
-		return Service{}, fmt.Errorf("在 proto 文件中未找到 go_package 选项")
+		return Service{}, fmt.Errorf("to goPackage in proto")
 	}
 
 	sp := strings.Split(goPackage, "/")
 	service := Service{
-		ProtoPackage:   protoPackage,
-		GoPackage:      goPackage,
-		QuoteGoPackage: sp[len(sp)-1],
-		Name:           serviceName,
-		Methods:        methods,
+		FilePath:    filePath,
+		FileName:    fileName,
+		ServiceName: serviceName,
+		GoPackage:   sp[len(sp)-1],
+		Methods:     methods,
 	}
 
 	return service, nil
 }
 
-// generateGoFile 使用模板生成 Go 文件
-func generateGoFile(dir string, service Service) error {
-	// 定义模板
-	tmpl := `package rpccall
+func generateGoFile(service Service) error {
+	if len(service.Methods) == 0 {
+		return nil
+	}
+
+	tmpl := `package {{.GoPackage}}
 
 import (
-	"{{.GoPackage}}"
-	"google.golang.org/grpc"
 	"github.com/openimsdk/protocol/rpccall"
+	"google.golang.org/grpc"
 )
 
 func Init{{.ServiceNameCamel}}(conn *grpc.ClientConn) {
@@ -204,50 +223,45 @@ func Init{{.ServiceNameCamel}}(conn *grpc.ClientConn) {
 
 var (
 	{{- range .Methods }}
-	{{ .Name }} = rpccall.NewRpcCaller[{{ $.QuoteGoPackage }}.{{ .RequestType }}, {{ $.QuoteGoPackage }}.{{ .ResponseType }}]({{ $.QuoteGoPackage }}.{{ .FullMethodName }})
+	{{ .Name }} = rpccall.NewRpcCaller[{{ .RequestType }}, {{ .ResponseType }}]({{ .FullMethodName }})
 	{{- end }}
 )
 `
 
-	// 准备模板数据
 	data := struct {
+		FileName         string
 		ServiceNameCamel string
 		GoPackage        string
-		QuoteGoPackage   string
 		Methods          []ServiceMethod
 	}{
-		ServiceNameCamel: toCamelCase(service.Name),
+		FileName:         service.FileName,
+		ServiceNameCamel: toCamelCase(service.ServiceName),
 		GoPackage:        service.GoPackage,
-		QuoteGoPackage:   service.QuoteGoPackage,
 		Methods:          service.Methods,
 	}
 
-	// 解析模板
 	t, err := template.New("goFile").Parse(tmpl)
 	if err != nil {
-		return fmt.Errorf("解析模板失败: %v", err)
+		return fmt.Errorf("parse template failed: %v", err)
 	}
 
-	// 生成内容
 	var buf bytes.Buffer
 	if err := t.Execute(&buf, data); err != nil {
-		return fmt.Errorf("执行模板失败: %v", err)
+		return fmt.Errorf("execute template failed: %v", err)
 	}
 
-	// 定义生成的文件路径
-	goFileName := strings.ToLower(service.Name) + "_caller.go"
-	goFilePath := filepath.Join(dir, goFileName)
+	goFileName := strings.ToLower(service.FileName) + "_caller.go"
+	goFilePath := filepath.Join(service.FilePath, goFileName)
 
 	// 写入文件
 	if err := os.WriteFile(goFilePath, buf.Bytes(), 0644); err != nil {
-		return fmt.Errorf("写入文件失败: %v", err)
+		return fmt.Errorf("write file failed: %v", err)
 	}
 
-	log.Printf("生成 %s 成功", goFilePath)
+	log.Printf("gen %s success", goFilePath)
 	return nil
 }
 
-// toCamelCase 将字符串转换为大驼峰
 func toCamelCase(s string) string {
 	parts := strings.Split(s, "_")
 	for i, p := range parts {
@@ -256,14 +270,4 @@ func toCamelCase(s string) string {
 		}
 	}
 	return strings.Join(parts, "")
-}
-
-func upperFirst(s string) string {
-	parts := strings.Split(s, "_")
-	for i, p := range parts {
-		if len(p) > 0 {
-			parts[i] = strings.ToUpper(p[:1]) + p[1:]
-		}
-	}
-	return strings.Join(parts, "_")
 }
