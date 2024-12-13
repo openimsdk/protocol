@@ -72,7 +72,7 @@ func Generate() error {
 			for _, protoFile := range protoFiles {
 				service, err := parseProtoFile(protoFile)
 				if err != nil {
-					fmt.Printf("warn: parse %s failed: %v\n", protoFile, err)
+					//fmt.Printf("warn: parse %s failed: %v\n", protoFile, err)
 					continue
 				}
 
@@ -133,7 +133,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 	//packageRegex := regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
 	goPackageRegex := regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
 	serviceRegex := regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
-	rpcRegex := regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+)\s*\)\s+returns\s+\(\s*([A-Za-z0-9_]+)\s*\);`)
+	rpcRegex := regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+)\s*\)\s+returns\s*\(\s*([A-Za-z0-9_]+)\s*\);`)
 
 	inService := false
 
@@ -229,12 +229,10 @@ var (
 `
 
 	data := struct {
-		FileName         string
 		ServiceNameCamel string
 		GoPackage        string
 		Methods          []ServiceMethod
 	}{
-		FileName:         service.FileName,
 		ServiceNameCamel: toCamelCase(service.ServiceName),
 		GoPackage:        service.GoPackage,
 		Methods:          service.Methods,
