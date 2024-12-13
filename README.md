@@ -6,3 +6,6 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 ```
 
 More to read [regenerate-grpc-code](https://grpc.io/docs/languages/go/quickstart/#regenerate-grpc-code).
+
+
+ - Run `mage` to gen rpc_caller.
