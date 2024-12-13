@@ -33,8 +33,8 @@ func (r RpcCaller[Req, Resp]) Invoke(ctx context.Context, in *Req, opts ...grpc.
 	return out, nil
 }
 
-func (r RpcCaller[Req, Resp]) Execute(ctx context.Context, req *Req) error {
-	_, err := r.Invoke(ctx, req)
+func (r RpcCaller[Req, Resp]) Execute(ctx context.Context, req *Req, opts ...grpc.CallOption) error {
+	_, err := r.Invoke(ctx, req, opts...)
 	return err
 }
 
@@ -43,8 +43,8 @@ func (r RpcCaller[Req, Resp]) MethodName() string {
 }
 
 // ExtractField is a generic function that extracts a field from the response of a given function.
-func ExtractField[A, B, C any](ctx context.Context, fn func(ctx context.Context, req *A) (*B, error), req *A, get func(*B) C) (C, error) {
-	resp, err := fn(ctx, req)
+func ExtractField[A, B, C any](ctx context.Context, fn func(ctx context.Context, req *A, opts ...grpc.CallOption) (*B, error), req *A, get func(*B) C, opts ...grpc.CallOption) (C, error) {
+	resp, err := fn(ctx, req, opts...)
 	if err != nil {
 		var c C
 		return c, err
@@ -56,7 +56,7 @@ type pagination interface {
 	GetPagination() *sdkws.RequestPagination
 }
 
-func Page[Req pagination, Resp any, Elem any](ctx context.Context, req Req, api func(ctx context.Context, req Req) (*Resp, error), fn func(*Resp) []Elem) ([]Elem, error) {
+func Page[Req pagination, Resp any, Elem any](ctx context.Context, req Req, api func(ctx context.Context, req Req, opts ...grpc.CallOption) (*Resp, error), fn func(*Resp) []Elem, opts ...grpc.CallOption) ([]Elem, error) {
 	if req.GetPagination() == nil {
 		vof := reflect.ValueOf(req)
 		for {
@@ -84,7 +84,7 @@ func Page[Req pagination, Resp any, Elem any](ctx context.Context, req Req, api 
 	var result []Elem
 	for i := int32(0); ; i++ {
 		req.GetPagination().PageNumber = i + 1
-		resp, err := api(ctx, req)
+		resp, err := api(ctx, req, opts...)
 		if err != nil {
 			return nil, err
 		}
