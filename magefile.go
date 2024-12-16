@@ -219,7 +219,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 	}
 
 	if goPackage == "" {
-		return Service{}, fmt.Errorf("to goPackage in proto")
+		return Service{}, fmt.Errorf("no goPackage in proto")
 	}
 
 	sp := strings.Split(goPackage, "/")
