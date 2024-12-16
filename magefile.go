@@ -19,8 +19,9 @@ import (
 var Default = RpcCaller
 
 var (
+	projectRoot string
 	//packageRegex = regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
-	importRegex    = regexp.MustCompile(`^\s*import\s+"([a-zA-Z0-9_.]+)";`)
+	importRegex    = regexp.MustCompile(`^\s*import\s+"([a-zA-Z0-9_./]+)";`)
 	goPackageRegex = regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
 	serviceRegex   = regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
 	rpcRegex       = regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\)\s+returns\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\);`)
@@ -53,8 +54,8 @@ type Service struct {
 // Generate is the Mage target to generate Go code from proto files
 func Generate() error {
 	fmt.Println("Generating rpc_caller...")
-
-	projectRoot, err := os.Getwd()
+	var err error
+	projectRoot, err = os.Getwd()
 	if err != nil {
 		return errors.New("get root directory failed")
 	}
@@ -140,8 +141,8 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 		serviceName    string
 		methods        []ServiceMethod
 		imports        []string
-		alreadyImports map[string]struct{}
-		allImports     map[string]string
+		alreadyImports = make(map[string]struct{})
+		allImports     = make(map[string]string)
 	)
 
 	inService := false
@@ -191,7 +192,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 					if f, ok := allImports[imp]; ok {
 						if _, ok = alreadyImports[imp]; !ok {
 							alreadyImports[imp] = struct{}{}
-							gopkg, err := getGoPackage(filepath.Join(protoFilePath, f))
+							gopkg, err := getGoPackage(filepath.Join(projectRoot, f))
 							if err != nil {
 								fmt.Printf("get go package failed: %v", err)
 							} else {
@@ -228,6 +229,7 @@ func parseProtoFile(protoFilePath string) (Service, error) {
 		ServiceName: serviceName,
 		GoPackage:   sp[len(sp)-1],
 		Methods:     methods,
+		Imports:     imports,
 	}
 
 	return service, nil
@@ -242,7 +244,7 @@ func generateGoFile(service Service) error {
 
 import (
 	{{- range .Imports }}
-	"{{ .Imports }}"
+	"{{ . }}"
 	{{- end }}
 	"github.com/openimsdk/protocol/rpccall"
 	"google.golang.org/grpc"
@@ -312,13 +314,20 @@ func getGoPackage(filePath string) (string, error) {
 }
 
 func toCamelCase(s string) string {
-	parts := strings.Split(s, "_")
+	pkg := ""
+	ss := s
+	if strings.Contains(ss, ".") {
+		sl := strings.Split(ss, ".")
+		ss = sl[1]
+		pkg = sl[0] + "."
+	}
+	parts := strings.Split(ss, "_")
 	for i, p := range parts {
 		if len(p) > 0 {
 			parts[i] = strings.ToUpper(p[:1]) + p[1:]
 		}
 	}
-	return strings.Join(parts, "")
+	return pkg + strings.Join(parts, "")
 }
 
 func formatFile(filePath string) {

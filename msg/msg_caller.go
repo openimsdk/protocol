@@ -2,14 +2,17 @@ package msg
 
 import (
 	"github.com/openimsdk/protocol/rpccall"
+	"github.com/openimsdk/protocol/sdkws"
 	"google.golang.org/grpc"
 )
 
 func InitMsg(conn *grpc.ClientConn) {
+	GetMaxSeqCaller.SetConn(conn)
 	GetMaxSeqsCaller.SetConn(conn)
 	GetHasReadSeqsCaller.SetConn(conn)
 	GetMsgByConversationIDsCaller.SetConn(conn)
 	GetConversationMaxSeqCaller.SetConn(conn)
+	PullMessageBySeqsCaller.SetConn(conn)
 	GetSeqMessageCaller.SetConn(conn)
 	SearchMessageCaller.SetConn(conn)
 	SendMsgCaller.SetConn(conn)
@@ -39,10 +42,12 @@ func InitMsg(conn *grpc.ClientConn) {
 }
 
 var (
+	GetMaxSeqCaller                        = rpccall.NewRpcCaller[sdkws.GetMaxSeqReq, sdkws.GetMaxSeqResp](Msg_GetMaxSeq_FullMethodName)
 	GetMaxSeqsCaller                       = rpccall.NewRpcCaller[GetMaxSeqsReq, SeqsInfoResp](Msg_GetMaxSeqs_FullMethodName)
 	GetHasReadSeqsCaller                   = rpccall.NewRpcCaller[GetHasReadSeqsReq, SeqsInfoResp](Msg_GetHasReadSeqs_FullMethodName)
 	GetMsgByConversationIDsCaller          = rpccall.NewRpcCaller[GetMsgByConversationIDsReq, GetMsgByConversationIDsResp](Msg_GetMsgByConversationIDs_FullMethodName)
 	GetConversationMaxSeqCaller            = rpccall.NewRpcCaller[GetConversationMaxSeqReq, GetConversationMaxSeqResp](Msg_GetConversationMaxSeq_FullMethodName)
+	PullMessageBySeqsCaller                = rpccall.NewRpcCaller[sdkws.PullMessageBySeqsReq, sdkws.PullMessageBySeqsResp](Msg_PullMessageBySeqs_FullMethodName)
 	GetSeqMessageCaller                    = rpccall.NewRpcCaller[GetSeqMessageReq, GetSeqMessageResp](Msg_GetSeqMessage_FullMethodName)
 	SearchMessageCaller                    = rpccall.NewRpcCaller[SearchMessageReq, SearchMessageResp](Msg_SearchMessage_FullMethodName)
 	SendMsgCaller                          = rpccall.NewRpcCaller[SendMsgReq, SendMsgResp](Msg_SendMsg_FullMethodName)
