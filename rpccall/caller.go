@@ -9,8 +9,8 @@ import (
 	"google.golang.org/grpc"
 )
 
-func NewRpcCaller[Req, Resp any](name string) RpcCaller[Req, Resp] {
-	return RpcCaller[Req, Resp]{
+func NewRpcCaller[Req, Resp any](name string) *RpcCaller[Req, Resp] {
+	return &RpcCaller[Req, Resp]{
 		methodName: name,
 	}
 }
@@ -20,11 +20,11 @@ type RpcCaller[Req, Resp any] struct {
 	methodName string
 }
 
-func (r RpcCaller[Req, Resp]) SetConn(conn *grpc.ClientConn) {
+func (r *RpcCaller[Req, Resp]) SetConn(conn *grpc.ClientConn) {
 	r.conn = conn
 }
 
-func (r RpcCaller[Req, Resp]) Invoke(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Resp, error) {
+func (r *RpcCaller[Req, Resp]) Invoke(ctx context.Context, in *Req, opts ...grpc.CallOption) (*Resp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Resp)
 	if err := r.conn.Invoke(ctx, r.methodName, in, out, cOpts...); err != nil {
@@ -33,12 +33,12 @@ func (r RpcCaller[Req, Resp]) Invoke(ctx context.Context, in *Req, opts ...grpc.
 	return out, nil
 }
 
-func (r RpcCaller[Req, Resp]) Execute(ctx context.Context, req *Req, opts ...grpc.CallOption) error {
+func (r *RpcCaller[Req, Resp]) Execute(ctx context.Context, req *Req, opts ...grpc.CallOption) error {
 	_, err := r.Invoke(ctx, req, opts...)
 	return err
 }
 
-func (r RpcCaller[Req, Resp]) MethodName() string {
+func (r *RpcCaller[Req, Resp]) MethodName() string {
 	return r.methodName
 }
 
