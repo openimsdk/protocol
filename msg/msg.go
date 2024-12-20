@@ -17,6 +17,7 @@ package msg
 import (
 	"errors"
 	"fmt"
+	"time"
 )
 
 func (x *GetMaxAndMinSeqReq) Check() error {
@@ -238,4 +239,14 @@ func (x *SeqsInfoResp) Format() any {
 		return fmt.Sprintf("len is %v", len(x.MaxSeqs))
 	}
 	return x
+}
+
+func (x *DestructMsgsReq) Check() error {
+	if x.Timestamp > time.Now().UnixMilli() {
+		return errors.New("request millisecond timestamp error")
+	}
+	if x.Limit <= 0 {
+		return errors.New("request limit error")
+	}
+	return nil
 }

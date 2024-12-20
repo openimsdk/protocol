@@ -39,6 +39,7 @@ func InitMsg(conn *grpc.ClientConn) {
 	GetStreamMsgCaller.SetConn(conn)
 	SetUserConversationMaxSeqCaller.SetConn(conn)
 	SetUserConversationMinSeqCaller.SetConn(conn)
+	GetLastMessageSeqByTime.SetConn(conn)
 }
 
 var (
@@ -74,4 +75,5 @@ var (
 	GetStreamMsgCaller                     = rpccall.NewRpcCaller[GetStreamMsgReq, GetStreamMsgResp](Msg_GetStreamMsg_FullMethodName)
 	SetUserConversationMaxSeqCaller        = rpccall.NewRpcCaller[SetUserConversationMaxSeqReq, SetUserConversationMaxSeqResp](Msg_SetUserConversationMaxSeq_FullMethodName)
 	SetUserConversationMinSeqCaller        = rpccall.NewRpcCaller[SetUserConversationMinSeqReq, SetUserConversationMinSeqResp](Msg_SetUserConversationMinSeq_FullMethodName)
+	GetLastMessageSeqByTime                = rpccall.NewRpcCaller[GetLastMessageSeqByTimeReq, GetLastMessageSeqByTimeResp](Msg_GetLastMessageSeqByTime_FullMethodName)
 )

@@ -66,6 +66,7 @@ const (
 	Msg_GetStreamMsg_FullMethodName                     = "/openim.msg.msg/GetStreamMsg"
 	Msg_SetUserConversationMaxSeq_FullMethodName        = "/openim.msg.msg/SetUserConversationMaxSeq"
 	Msg_SetUserConversationMinSeq_FullMethodName        = "/openim.msg.msg/SetUserConversationMinSeq"
+	Msg_GetLastMessageSeqByTime_FullMethodName          = "/openim.msg.msg/GetLastMessageSeqByTime"
 )
 
 // MsgClient is the client API for Msg service.
@@ -118,6 +119,7 @@ type MsgClient interface {
 	GetStreamMsg(ctx context.Context, in *GetStreamMsgReq, opts ...grpc.CallOption) (*GetStreamMsgResp, error)
 	SetUserConversationMaxSeq(ctx context.Context, in *SetUserConversationMaxSeqReq, opts ...grpc.CallOption) (*SetUserConversationMaxSeqResp, error)
 	SetUserConversationMinSeq(ctx context.Context, in *SetUserConversationMinSeqReq, opts ...grpc.CallOption) (*SetUserConversationMinSeqResp, error)
+	GetLastMessageSeqByTime(ctx context.Context, in *GetLastMessageSeqByTimeReq, opts ...grpc.CallOption) (*GetLastMessageSeqByTimeResp, error)
 }
 
 type msgClient struct {
@@ -448,6 +450,16 @@ func (c *msgClient) SetUserConversationMinSeq(ctx context.Context, in *SetUserCo
 	return out, nil
 }
 
+func (c *msgClient) GetLastMessageSeqByTime(ctx context.Context, in *GetLastMessageSeqByTimeReq, opts ...grpc.CallOption) (*GetLastMessageSeqByTimeResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetLastMessageSeqByTimeResp)
+	err := c.cc.Invoke(ctx, Msg_GetLastMessageSeqByTime_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility.
@@ -498,6 +510,7 @@ type MsgServer interface {
 	GetStreamMsg(context.Context, *GetStreamMsgReq) (*GetStreamMsgResp, error)
 	SetUserConversationMaxSeq(context.Context, *SetUserConversationMaxSeqReq) (*SetUserConversationMaxSeqResp, error)
 	SetUserConversationMinSeq(context.Context, *SetUserConversationMinSeqReq) (*SetUserConversationMinSeqResp, error)
+	GetLastMessageSeqByTime(context.Context, *GetLastMessageSeqByTimeReq) (*GetLastMessageSeqByTimeResp, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -603,6 +616,9 @@ func (UnimplementedMsgServer) SetUserConversationMaxSeq(context.Context, *SetUse
 }
 func (UnimplementedMsgServer) SetUserConversationMinSeq(context.Context, *SetUserConversationMinSeqReq) (*SetUserConversationMinSeqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserConversationMinSeq not implemented")
+}
+func (UnimplementedMsgServer) GetLastMessageSeqByTime(context.Context, *GetLastMessageSeqByTimeReq) (*GetLastMessageSeqByTimeResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLastMessageSeqByTime not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 func (UnimplementedMsgServer) testEmbeddedByValue()             {}
@@ -1201,6 +1217,24 @@ func _Msg_SetUserConversationMinSeq_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_GetLastMessageSeqByTime_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLastMessageSeqByTimeReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).GetLastMessageSeqByTime(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_GetLastMessageSeqByTime_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).GetLastMessageSeqByTime(ctx, req.(*GetLastMessageSeqByTimeReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1335,6 +1369,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetUserConversationMinSeq",
 			Handler:    _Msg_SetUserConversationMinSeq_Handler,
+		},
+		{
+			MethodName: "GetLastMessageSeqByTime",
+			Handler:    _Msg_GetLastMessageSeqByTime_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

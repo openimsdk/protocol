@@ -56,6 +56,7 @@ const (
 	Conversation_GetConversationsNeedClearMsg_FullMethodName            = "/openim.conversation.conversation/GetConversationsNeedClearMsg"
 	Conversation_GetNotNotifyConversationIDs_FullMethodName             = "/openim.conversation.conversation/GetNotNotifyConversationIDs"
 	Conversation_GetPinnedConversationIDs_FullMethodName                = "/openim.conversation.conversation/GetPinnedConversationIDs"
+	Conversation_ClearUserConversationMsg_FullMethodName                = "/openim.conversation.conversation/ClearUserConversationMsg"
 )
 
 // ConversationClient is the client API for Conversation service.
@@ -85,6 +86,7 @@ type ConversationClient interface {
 	GetConversationsNeedClearMsg(ctx context.Context, in *GetConversationsNeedClearMsgReq, opts ...grpc.CallOption) (*GetConversationsNeedClearMsgResp, error)
 	GetNotNotifyConversationIDs(ctx context.Context, in *GetNotNotifyConversationIDsReq, opts ...grpc.CallOption) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(ctx context.Context, in *GetPinnedConversationIDsReq, opts ...grpc.CallOption) (*GetPinnedConversationIDsResp, error)
+	ClearUserConversationMsg(ctx context.Context, in *ClearUserConversationMsgReq, opts ...grpc.CallOption) (*ClearUserConversationMsgResp, error)
 }
 
 type conversationClient struct {
@@ -325,6 +327,16 @@ func (c *conversationClient) GetPinnedConversationIDs(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *conversationClient) ClearUserConversationMsg(ctx context.Context, in *ClearUserConversationMsgReq, opts ...grpc.CallOption) (*ClearUserConversationMsgResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearUserConversationMsgResp)
+	err := c.cc.Invoke(ctx, Conversation_ClearUserConversationMsg_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationServer is the server API for Conversation service.
 // All implementations must embed UnimplementedConversationServer
 // for forward compatibility.
@@ -352,6 +364,7 @@ type ConversationServer interface {
 	GetConversationsNeedClearMsg(context.Context, *GetConversationsNeedClearMsgReq) (*GetConversationsNeedClearMsgResp, error)
 	GetNotNotifyConversationIDs(context.Context, *GetNotNotifyConversationIDsReq) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(context.Context, *GetPinnedConversationIDsReq) (*GetPinnedConversationIDsResp, error)
+	ClearUserConversationMsg(context.Context, *ClearUserConversationMsgReq) (*ClearUserConversationMsgResp, error)
 	mustEmbedUnimplementedConversationServer()
 }
 
@@ -430,6 +443,9 @@ func (UnimplementedConversationServer) GetNotNotifyConversationIDs(context.Conte
 }
 func (UnimplementedConversationServer) GetPinnedConversationIDs(context.Context, *GetPinnedConversationIDsReq) (*GetPinnedConversationIDsResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPinnedConversationIDs not implemented")
+}
+func (UnimplementedConversationServer) ClearUserConversationMsg(context.Context, *ClearUserConversationMsgReq) (*ClearUserConversationMsgResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClearUserConversationMsg not implemented")
 }
 func (UnimplementedConversationServer) mustEmbedUnimplementedConversationServer() {}
 func (UnimplementedConversationServer) testEmbeddedByValue()                      {}
@@ -866,6 +882,24 @@ func _Conversation_GetPinnedConversationIDs_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Conversation_ClearUserConversationMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearUserConversationMsgReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationServer).ClearUserConversationMsg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Conversation_ClearUserConversationMsg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationServer).ClearUserConversationMsg(ctx, req.(*ClearUserConversationMsgReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Conversation_ServiceDesc is the grpc.ServiceDesc for Conversation service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -964,6 +998,10 @@ var Conversation_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPinnedConversationIDs",
 			Handler:    _Conversation_GetPinnedConversationIDs_Handler,
+		},
+		{
+			MethodName: "ClearUserConversationMsg",
+			Handler:    _Conversation_ClearUserConversationMsg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

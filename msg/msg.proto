@@ -309,9 +309,12 @@ message ClearMsgResp {}
 
 message DestructMsgsReq {
   int64 timestamp = 1;
+  int32 limit = 2;
 }
 
-message DestructMsgsResp {}
+message DestructMsgsResp {
+  int32 count = 1;
+}
 
 message SetUserConversationsMinSeqReq {
   repeated string userIDs = 1;
@@ -389,6 +392,15 @@ message SetUserConversationMinSeqReq {
 }
 message SetUserConversationMinSeqResp {}
 
+message GetLastMessageSeqByTimeReq {
+  string conversationID = 1;
+  int64 time = 2;
+}
+
+message GetLastMessageSeqByTimeResp {
+  int64 seq = 1;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -443,4 +455,5 @@ service msg {
   rpc GetStreamMsg(GetStreamMsgReq) returns (GetStreamMsgResp);
   rpc SetUserConversationMaxSeq(SetUserConversationMaxSeqReq) returns (SetUserConversationMaxSeqResp);
   rpc SetUserConversationMinSeq(SetUserConversationMinSeqReq) returns (SetUserConversationMinSeqResp);
+  rpc GetLastMessageSeqByTime(GetLastMessageSeqByTimeReq) returns (GetLastMessageSeqByTimeResp);
 }
