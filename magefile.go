@@ -4,353 +4,198 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
-	"errors"
 	"fmt"
+	"go/build"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"regexp"
 	"strings"
-	"text/template"
 )
 
-var Default = RpcCaller
+var Default = InstallDepend
 
-var (
-	projectRoot string
-	//packageRegex = regexp.MustCompile(`^\s*package\s+([a-zA-Z0-9_.]+);`)
-	importRegex    = regexp.MustCompile(`^\s*import\s+"([a-zA-Z0-9_./]+)";`)
-	goPackageRegex = regexp.MustCompile(`^\s*option\s+go_package\s*=\s*"([^"]+)";`)
-	serviceRegex   = regexp.MustCompile(`^\s*service\s+([A-Za-z0-9_]+)\s*{`)
-	rpcRegex       = regexp.MustCompile(`^\s*rpc\s+([A-Za-z0-9_]+)\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\)\s+returns\s*\(\s*([A-Za-z0-9_]+\.?[A-Za-z0-9_]*)\s*\);`)
-)
-
-func RpcCaller() {
-	if err := Generate(); err != nil {
-		fmt.Println(err)
-	}
+var Aliases = map[string]any{
+	"go":  GenGo,
+	"dep": InstallDepend,
 }
 
-// ServiceMethod holds information about a single RPC method
-type ServiceMethod struct {
-	Name           string
-	RequestType    string
-	ResponseType   string
-	FullMethodName string
+var protoModules = []string{
+	"auth",
+	"conversation",
+	"errinfo",
+	"group",
+	"jssdk",
+	"msg",
+	"msggateway",
+	"push",
+	"relation",
+	"rtc",
+	"sdkws",
+	"third",
+	"user",
+	"wrapperspb",
 }
 
-// Service holds information about a service and its methods
-type Service struct {
-	FilePath    string
-	FileName    string
-	ServiceName string
-	GoPackage   string
-	Methods     []ServiceMethod
-	Imports     []string
+var meetingModules = []string{
+	"admin",
+	"meeting",
+	"user",
 }
 
-// Generate is the Mage target to generate Go code from proto files
-func Generate() error {
-	fmt.Println("Generating rpc_caller...")
-	var err error
-	projectRoot, err = os.Getwd()
-	if err != nil {
-		return errors.New("get root directory failed")
+// install proto plugin
+func InstallDepend() error {
+	log.SetOutput(os.Stdout)
+	// log.SetFlags(log.Lshortfile)
+
+	// log.Println("installing protoc-gen-go and protoc-gen-go-grpc")
+	log.Println("installing protobuf dependencies in Go.")
+
+	cmds := [][]string{
+		{"install", "google.golang.org/protobuf/cmd/protoc-gen-go@latest"},
+		{"install", "google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest"},
 	}
 
-	entries, err := os.ReadDir(projectRoot)
-	if err != nil {
-		return fmt.Errorf("read root directory failed: %v", err)
-	}
+	for _, cmdArgs := range cmds {
+		cmd := exec.Command("go", cmdArgs...)
 
-	var services []Service
+		log.Println("running command:", "go", cmdArgs)
+		connectStd(cmd)
 
-	for _, entry := range entries {
-		if entry.IsDir() {
-			serviceName := entry.Name()
-			subDir := filepath.Join(projectRoot, serviceName)
-
-			protoFiles, err := filepath.Glob(filepath.Join(subDir, "*.proto"))
-			if err != nil {
-				continue
-			}
-
-			if len(protoFiles) == 0 {
-				continue
-			}
-
-			for _, protoFile := range protoFiles {
-				service, err := parseProtoFile(protoFile)
-				if err != nil {
-					//fmt.Printf("warn: parse %s failed: %v\n", protoFile, err)
-					continue
-				}
-
-				services = append(services, service)
-			}
-		}
-	}
-	// // for all protoFile
-	//err = filepath.Walk(projectRoot, func(path string, info os.FileInfo, err error) error {
-	//	if err != nil {
-	//		log.Printf("warn: err in begin walk %s: %v\n", path, err)
-	//		return nil
-	//	}
-	//
-	//	if info.IsDir() {
-	//		return nil
-	//	}
-	//
-	//	if strings.HasSuffix(info.Name(), ".proto") {
-	//		service, err := parseProtoFile(path)
-	//		if err != nil {
-	//			//log.Printf("warn: parse %s failed: %v\n", path, err)
-	//			return nil
-	//		}
-	//
-	//		services = append(services, service)
-	//	}
-	//
-	//	return nil
-	//})
-	// gen Go file for each service
-
-	for _, service := range services {
-		if err := generateGoFile(service); err != nil {
-			return fmt.Errorf("gen Go file failed: %v", err)
+		if err := cmd.Run(); err != nil {
+			log.Printf("command %v error: %v", cmdArgs, err)
+			return err
 		}
 	}
 
 	return nil
 }
 
-func parseProtoFile(protoFilePath string) (Service, error) {
-	file, err := os.Open(protoFilePath)
+func GenGo() error {
+	log.SetOutput(os.Stdout)
+	// log.SetFlags(log.Lshortfile)
+	log.Println("Generating Go code from proto files")
+
+	// goOutDir := filepath.Join(protoDir, GO)
+
+	protoc, err := getToolPath("protoc")
 	if err != nil {
-		return Service{}, fmt.Errorf("open proto file failed: %v", err)
+		return err
 	}
-	defer file.Close()
 
-	filePath_ := filepath.Dir(protoFilePath)
-	fileName := strings.TrimSuffix(filepath.Base(protoFilePath), filepath.Ext(protoFilePath))
-	scanner := bufio.NewScanner(file)
-	var (
-		goPackage      string
-		serviceName    string
-		methods        []ServiceMethod
-		imports        []string
-		alreadyImports = make(map[string]struct{})
-		allImports     = make(map[string]string)
-	)
+	for _, module := range protoModules {
+		args := []string{
+			// "--proto_path=" + filepath.Join(".", module),
+			"--go_out=" + filepath.Join(".", module),
+			"--go-grpc_out=" + filepath.Join(".", module),
+			"--go_opt=module=github.com/openimsdk/protocol/" + strings.Join([]string{module}, "/"),
+			filepath.Join(module, module) + ".proto",
+		}
+		// log.Println("protoc args", args)
 
-	inService := false
+		cmd := exec.Command(protoc, args...)
+		connectStd(cmd)
 
-	for scanner.Scan() {
-		line := scanner.Text()
-
-		//if matches := packageRegex.FindStringSubmatch(line); matches != nil {
-		//	protoPackage = matches[1]
-		//	continue
-		//}
-
-		if matches := importRegex.FindStringSubmatch(line); matches != nil {
-			pkg := strings.TrimSuffix(filepath.Base(matches[1]), filepath.Ext(matches[1]))
-			allImports[pkg] = matches[1]
+		if err := cmd.Run(); err != nil {
+			log.Printf("Error generating Go code for module %s: %v\n", module, err)
 			continue
 		}
-
-		if matches := goPackageRegex.FindStringSubmatch(line); matches != nil {
-			goPackage = matches[1]
-
-			continue
-		}
-
-		if matches := serviceRegex.FindStringSubmatch(line); matches != nil {
-			serviceName = matches[1]
-			inService = true
-			continue
-		}
-
-		if inService {
-			if matches := rpcRegex.FindStringSubmatch(line); matches != nil {
-				methodName := matches[1]
-				requestType := matches[2]
-				responseType := matches[3]
-				fullMethodName := fmt.Sprintf("%s_%s_FullMethodName", toCamelCase(serviceName), toCamelCase(methodName))
-				method := ServiceMethod{
-					Name:           toCamelCase(methodName) + "Caller",
-					RequestType:    toCamelCase(requestType),
-					ResponseType:   toCamelCase(responseType),
-					FullMethodName: fullMethodName,
-				}
-				methods = append(methods, method)
-
-				if strings.Contains(requestType, ".") {
-					imp := strings.Split(requestType, ".")[0]
-					if f, ok := allImports[imp]; ok {
-						if _, ok = alreadyImports[imp]; !ok {
-							alreadyImports[imp] = struct{}{}
-							gopkg, err := getGoPackage(filepath.Join(projectRoot, f))
-							if err != nil {
-								fmt.Printf("get go package failed: %v", err)
-							} else {
-								imports = append(imports, gopkg)
-							}
-						}
-					}
-				}
-				continue
-			}
-
-			if strings.Contains(line, "}") {
-				inService = false
-			}
-		}
 	}
 
-	if err := scanner.Err(); err != nil {
-		return Service{}, fmt.Errorf("scan proto file failed: %v", err)
-	}
+	// if err := removeOmitemptyTags(); err != nil {
+	// 	log.Println("Remove Omitempty is Error", err)
+	// 	return err
+	// } else {
+	// 	log.Println("Remove Omitempty is Success")
+	// }
 
-	if serviceName == "" {
-		return Service{}, fmt.Errorf("no serviceName in proto")
-	}
-
-	if goPackage == "" {
-		return Service{}, fmt.Errorf("to goPackage in proto")
-	}
-
-	sp := strings.Split(goPackage, "/")
-	service := Service{
-		FilePath:    filePath_,
-		FileName:    fileName,
-		ServiceName: serviceName,
-		GoPackage:   sp[len(sp)-1],
-		Methods:     methods,
-		Imports:     imports,
-	}
-
-	return service, nil
+	return nil
 }
 
-func generateGoFile(service Service) error {
-	if len(service.Methods) == 0 {
+// ------------------
+func connectStd(cmd *exec.Cmd) {
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+}
+
+func getWorkDirToolPath(name string) string {
+	toolPath := ""
+	workDir, err := os.Getwd()
+	if err != nil {
+		log.Println("Error", err)
+		return toolPath
+	}
+	toolsPath := filepath.Join(workDir, "tools")
+	filepath.Walk(toolsPath, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if strings.TrimSuffix(info.Name(), filepath.Ext(info.Name())) == name {
+			toolPath = path
+		}
 		return nil
-	}
+	})
 
-	tmpl := `package {{.GoPackage}}
-
-import (
-	{{- range .Imports }}
-	"{{ . }}"
-	{{- end }}
-	"github.com/openimsdk/protocol/rpccall"
-	"google.golang.org/grpc"
-)
-
-func Init{{.ServiceNameCamel}}(conn *grpc.ClientConn) {
-	{{- range .Methods }}
-	{{ .Name }}.SetConn(conn)
-	{{- end }}
+	return toolPath
 }
 
-var (
-	{{- range .Methods }}
-	{{ .Name }} = rpccall.NewRpcCaller[{{ .RequestType }}, {{ .ResponseType }}]({{ .FullMethodName }})
-	{{- end }}
-)
-`
-
-	data := struct {
-		ServiceNameCamel string
-		GoPackage        string
-		Methods          []ServiceMethod
-		Imports          []string
-	}{
-		ServiceNameCamel: toCamelCase(service.ServiceName),
-		GoPackage:        service.GoPackage,
-		Methods:          service.Methods,
-		Imports:          service.Imports,
+func getToolPath(name string) (string, error) {
+	// Get in work dir.
+	toolPath := getWorkDirToolPath(name)
+	if toolPath != "" {
+		return toolPath, nil
 	}
 
-	t, err := template.New("goFile").Parse(tmpl)
-	if err != nil {
-		return fmt.Errorf("parse template failed: %v", err)
+	// Get in env path.
+	if p, err := exec.LookPath(name); err == nil {
+		return p, nil
 	}
 
-	var buf bytes.Buffer
-	if err := t.Execute(&buf, data); err != nil {
-		return fmt.Errorf("execute template failed: %v", err)
+	// check under gopath
+	gopath := os.Getenv("GOPATH")
+	if gopath == "" {
+		gopath = build.Default.GOPATH
+	}
+	p := filepath.Join(gopath, "bin", name)
+
+	if _, err := os.Stat(p); err != nil {
+		return "", err
 	}
 
-	goFileName := strings.ToLower(service.FileName) + "_caller.go"
-	goFilePath := filepath.Join(service.FilePath, goFileName)
-
-	if err := os.WriteFile(goFilePath, buf.Bytes(), 0644); err != nil {
-		return fmt.Errorf("write file failed: %v", err)
-	}
-
-	formatFile(goFilePath)
-	return nil
+	return p, nil
 }
 
-func getGoPackage(filePath string) (string, error) {
-	file, err := os.Open(filePath)
-	if err != nil {
-		return "", fmt.Errorf("open proto file failed: %v", err)
-	}
-	defer file.Close()
+func removeOmitemptyTags() error {
+	// protoGoDir := filepath.Join(protoDir, GO) // "./proto/go"
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		if matches := goPackageRegex.FindStringSubmatch(line); matches != nil {
-			return matches[1], nil
+	re := regexp.MustCompile(`,\s*omitempty`)
+
+	return filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println("access path error:", err)
+			return err
 		}
-	}
-	return "", errors.New("goPackage not found")
-}
+		if !info.IsDir() && strings.HasSuffix(path, ".pb.go") {
+			input, err := os.ReadFile(path)
+			if err != nil {
+				fmt.Println("ReadFile error. Path: %s, Error %v", path, err)
+				return err
+			}
 
-func toCamelCase(s string) string {
-	pkg := ""
-	ss := s
-	if strings.Contains(ss, ".") {
-		sl := strings.Split(ss, ".")
-		ss = sl[1]
-		pkg = sl[0] + "."
-	}
-	parts := strings.Split(ss, "_")
-	for i, p := range parts {
-		if len(p) > 0 {
-			parts[i] = strings.ToUpper(p[:1]) + p[1:]
+			output := re.ReplaceAllString(string(input), "")
+
+			// check replace is happened
+			if string(input) != output {
+				err = os.WriteFile(path, []byte(output), info.Mode())
+				if err != nil {
+					fmt.Printf("Error writing file: %s, error: %v\n", path, err)
+					return err
+				}
+				// fmt.Println("Modified file:", path)
+			}
 		}
-	}
-	return pkg + strings.Join(parts, "")
-}
 
-func formatFile(filePath string) {
-	_ = runGoImports(filePath)
-	_ = runGoFmt(filePath)
-}
-
-func runGoImports(filePath string) error {
-	cmd := exec.Command("goimports", "-w", filePath)
-	var stderr bytes.Buffer
-	cmd.Stderr = &stderr
-	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("goimports error: %v, stderr: %s", err, stderr.String())
-	}
-	return nil
-}
-
-func runGoFmt(filePath string) error {
-	cmd := exec.Command("gofmt", "-w", filePath)
-	var stderr bytes.Buffer
-	cmd.Stderr = &stderr
-	if err := cmd.Run(); err != nil {
-		return fmt.Errorf("gofmt error: %v, stderr: %s", err, stderr.String())
-	}
-	return nil
+		return nil
+	})
 }
