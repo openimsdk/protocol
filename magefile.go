@@ -17,9 +17,22 @@ import (
 var Default = InstallDepend
 
 var Aliases = map[string]any{
-	"go":  GenGo,
-	"dep": InstallDepend,
+	"go":     GenGo,
+	"dep":    InstallDepend,
+	"meetgo": Meeting.GenGo,
 }
+
+// Langeuage target
+// Define output directories for each target language
+const (
+	GO     = "go"
+	JAVA   = "java"
+	CSharp = "csharp"
+	JS     = "js"
+	TS     = "ts"
+	RS     = "rust"
+	Swift  = "swift"
+)
 
 var protoModules = []string{
 	"auth",
@@ -90,6 +103,7 @@ func GenGo() error {
 			"--go_out=" + filepath.Join(".", module),
 			"--go-grpc_out=" + filepath.Join(".", module),
 			"--go_opt=module=github.com/openimsdk/protocol/" + strings.Join([]string{module}, "/"),
+			"--go-grpc_opt=module=github.com/openimsdk/protocol/" + strings.Join([]string{module}, "/"),
 			filepath.Join(module, module) + ".proto",
 		}
 		// log.Println("protoc args", args)
@@ -103,12 +117,12 @@ func GenGo() error {
 		}
 	}
 
-	// if err := removeOmitemptyTags(); err != nil {
-	// 	log.Println("Remove Omitempty is Error", err)
-	// 	return err
-	// } else {
-	// 	log.Println("Remove Omitempty is Success")
-	// }
+	if err := removeOmitemptyTags(); err != nil {
+		log.Println("Remove Omitempty is Error", err)
+		return err
+	} else {
+		log.Println("Remove Omitempty is Success")
+	}
 
 	return nil
 }
