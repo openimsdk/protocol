@@ -355,7 +355,8 @@ func GenTS() error {
 	}
 
 	for _, module := range protoModules {
-		tsOutDir := filepath.Join(".", module, TS)
+		// tsOutDir := filepath.Join(".", module, TS)
+		tsOutDir := filepath.Join("pb", TS)
 
 		if err := os.MkdirAll(tsOutDir, 0755); err != nil {
 			return err
@@ -363,10 +364,8 @@ func GenTS() error {
 
 		args := []string{
 			"--plugin=protoc-gen-ts_proto=" + tsProto,
-			// "--proto_path=" + module,
 			"--ts_proto_opt=messages=true,outputJsonMethods=false,outputPartialMethods=false,outputClientImpl=false,outputEncodeMethods=false,useOptionals=messages",
-			// "--ts_proto_out=" + tsOutDir,
-			"--ts_proto_out=" + filepath.Join("pb", TS),
+			"--ts_proto_out=" + tsOutDir,
 			filepath.Join(module, module) + ".proto",
 		}
 
@@ -399,7 +398,6 @@ func GenSwift() error {
 		swiftOutDir := filepath.Join(".", module, SWIFT)
 
 		modulePath := filepath.Join(module, module+".proto")
-		// outputPath := filepath.Join(swiftOutDir, module)
 
 		// Ensure the output directory for the module exists
 		if err := os.MkdirAll(swiftOutDir, 0755); err != nil {
@@ -408,7 +406,6 @@ func GenSwift() error {
 
 		// Prepare protoc command
 		args := []string{
-			// "--proto_path=" + protoDir,
 			"--swift_out=" + swiftOutDir,
 			"--swift_opt=Visibility=" + "Public",
 			modulePath,
