@@ -1,5 +1,7 @@
 # Generate Protocol Buffers with Mage
 
+Only generate Go and TS pb file in this repo.
+
 ## Preconditions
 
 - Go 1.18 or higher
