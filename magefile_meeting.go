@@ -177,10 +177,10 @@ func (Meeting) GenCSharp() error {
 	return nil
 }
 
-func (Meeting) GenJS() error {
+func (Meeting) GenJavaScript() error {
 	log.SetOutput(os.Stdout)
 	// log.SetFlags(log.Lshortfile)
-	log.Println("Generating JS code from proto files")
+	log.Println("Generating JavaScript code from proto files")
 
 	protoc, err := getToolPath("protoc")
 	if err != nil {
@@ -212,7 +212,7 @@ func (Meeting) GenJS() error {
 }
 
 // Generate TypeScript code from protobuf files.
-func (Meeting) GenTS() error {
+func (Meeting) GenTypeScript() error {
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.Lshortfile)
 	log.Println("Generating TypeScript code from proto files")

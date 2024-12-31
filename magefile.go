@@ -22,8 +22,8 @@ var Aliases = map[string]any{
 	"java":   GenJava,
 	"kotlin": GenKotlin,
 	"csharp": GenCSharp,
-	"js":     GenJS,
-	"ts":     GenTS,
+	"js":     GenJavaScript,
+	"ts":     GenTypeScript,
 	"swift":  GenSwift,
 
 	"dep": InstallDepend,
@@ -32,8 +32,8 @@ var Aliases = map[string]any{
 	"m:java":   Meeting.GenJava,
 	"m:kotlin": Meeting.GenKotlin,
 	"m:csharp": Meeting.GenCSharp,
-	"m:js":     Meeting.GenJS,
-	"m:ts":     Meeting.GenTS,
+	"m:js":     Meeting.GenJavaScript,
+	"m:ts":     Meeting.GenTypeScript,
 	"m:swift":  Meeting.GenSwift,
 }
 
@@ -83,7 +83,7 @@ func InstallDepend() error {
 	for _, cmdArgs := range cmds {
 		cmd := exec.Command("go", cmdArgs...)
 
-		log.Println("running command:", "go", cmdArgs)
+		// log.Println("running command:", "go", cmdArgs)
 		connectStd(cmd)
 
 		if err := cmd.Run(); err != nil {
@@ -142,10 +142,10 @@ func AllProtobuf() error {
 	if err := GenCSharp(); err != nil {
 		return err
 	}
-	if err := GenJS(); err != nil {
+	if err := GenJavaScript(); err != nil {
 		return err
 	}
-	if err := GenTS(); err != nil {
+	if err := GenTypeScript(); err != nil {
 		return err
 	}
 	return nil
@@ -298,13 +298,22 @@ func GenCSharp() error {
 	return nil
 }
 
-func GenJS() error {
+func GenJavaScript() error {
 	log.SetOutput(os.Stdout)
 	// log.SetFlags(log.Lshortfile)
-	log.Println("Generating JS code from proto files")
+	log.Println("Generating JavaScript code from proto files")
 
 	protoc, err := getToolPath("protoc")
 	if err != nil {
+		return err
+	}
+
+	jsDir := filepath.Join(".", "pb", "js")
+	args := []string{
+		"--js_out=import_style=commonjs,binary:" + jsDir,
+	}
+
+	if err := os.MkdirAll(jsDir, 0755); err != nil {
 		return err
 	}
 
@@ -315,25 +324,25 @@ func GenJS() error {
 			return err
 		}
 
-		args := []string{
-			"--js_out=import_style=commonjs,binary:" + jsOutDir,
-			filepath.Join(module, module) + ".proto",
-		}
+		args = append(args,
+			filepath.Join(module, module)+".proto")
+	}
 
-		cmd := exec.Command(protoc, args...)
-		connectStd(cmd)
+	cmd := exec.Command(protoc, args...)
+	connectStd(cmd)
 
-		if err := cmd.Run(); err != nil {
-			log.Printf("Error generating JS code for module %s: %v\n", module, err)
-			continue
-		}
+	if err := cmd.Run(); err != nil {
+		// log.Printf("Error generating JS code for module %s: %v\n", module, err)
+		log.Panicf("Error generating JS code: %v\n", err)
+		// continue
 	}
 
 	return nil
 }
 
+// Need to install `ts-proto`.
 // Generate TypeScript code from protobuf files.
-func GenTS() error {
+func GenTypeScript() error {
 	log.SetOutput(os.Stdout)
 	log.SetFlags(log.Lshortfile)
 	log.Println("Generating TypeScript code from proto files")
@@ -419,8 +428,81 @@ func GenSwift() error {
 			log.Printf("Error generating Swift code for module %s: %v\n", module, err)
 			continue
 		}
+
 		log.Printf("Successfully generated Swift code for module %s\n", module)
 	}
+
+	return nil
+}
+
+// Generate Harmony JavaScript code from protobuf files.
+// Note: please install pbjs and pbts command first
+// Reference Link: https://ohpm.openharmony.cn/#/cn/detail/@ohos%2Fprotobufjs
+func GenHarmonyTS() error {
+	log.SetOutput(os.Stdout)
+	log.SetFlags(log.Lshortfile)
+
+	log.Println("Generating Harmony TypeScript code from proto files")
+
+	// Generate js
+
+	outJSFile := "proto.js"
+	args := []string{
+		"-t", "static-module",
+		"-w", "es6",
+		"-o", outJSFile}
+
+	for _, module := range protoModules {
+		protoFile := filepath.Join(module, module) + ".proto"
+		args = append(args, protoFile)
+	}
+
+	jscmd := exec.Command("pbjs", args...)
+	jscmd.Env = os.Environ()
+	connectStd(jscmd)
+
+	log.Println("Running harmony js command", jscmd.String())
+	if err := jscmd.Run(); err != nil {
+		log.Printf("Error generating Harmony JS code: %v\n", err)
+	}
+
+	// Generate ts definition
+	outTSDefFile := "proto.d.ts"
+	tscmd := exec.Command("pbts",
+		outJSFile,
+		"-o", outTSDefFile,
+	)
+
+	tscmd.Env = os.Environ()
+	connectStd(tscmd)
+
+	log.Println("Running harmony ts command", tscmd.String())
+	if err := tscmd.Run(); err != nil {
+		log.Printf("Error generating Harmony TS code: %v\n", err)
+	}
+
+	// Modify the generated files
+	// 1
+
+	replaceStr := func(filePath, oldStr, newStr string) {
+		content, err := os.ReadFile(filePath)
+		if err != nil {
+			log.Panic("failed to read file: %w", err)
+		}
+
+		originalContent := string(content)
+		modifiedContent := strings.Replace(originalContent, oldStr, newStr, 1) // 只替换一次
+
+		if originalContent == modifiedContent {
+			return
+		}
+		err = os.WriteFile(filePath, []byte(modifiedContent), 0644)
+		if err != nil {
+			log.Panic("failed to write file: %w", err)
+		}
+	}
+	replaceStr(outJSFile, "import * as $protobuf from \"protobufjs/minimal\";", "import { index } from \"@ohos/protobufjs\"; \nconst $protobuf = index; \n import Long from 'long';\n$protobuf.util.Long=Long \n$protobuf.configure()")
+	replaceStr(outTSDefFile, "import * as $protobuf from \"protobufjs\";\nimport Long = require(\"long\");", "import * as $protobuf from \"@ohos/protobufjs\"\nimport Long from 'long';")
 
 	return nil
 }
