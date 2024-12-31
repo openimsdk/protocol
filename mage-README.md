@@ -1,8 +1,4 @@
-# Protocol generate mage Usage
-
-怎么安装 怎么写 proto 怎么生成代码，生成的代码在哪 （怎么使用）
-
-一个文档就解释一件事
+# Generate Protocol Buffers with Mage
 
 ## Preconditions
 
