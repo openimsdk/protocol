@@ -7,7 +7,7 @@
 - Install mage bin in your PATH.
 
 > Notice:  
-> Usually, different versions of the Protocol Buffers compiler are not
+> Usually, different versions of `protoc` do not have a significant impact, as they are compatible with each other.
 
 ## Install Go
 
