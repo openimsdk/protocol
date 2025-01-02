@@ -49,36 +49,10 @@ You can use `bootstrap_install_mage.bat` or `bootstrap_install_mage.sh` to insta
 
 - You can also view the [Go Usage Docs](https://grpc.io/docs/languages/go/quickstart/#prerequisites) for more information.
 
-### Java Generated Code
-
-- Execute `mage GenJava` to generate Java code.
-- You can view the [Java Usage Docs](https://github.com/protocolbuffers/protobuf/tree/main/java) for more information.
-
-### Kotlin Generated Code
-
-- Execute `mage GenKotlin` to generate Kotlin code.
-- You can view the [Kotlin Usage Docs](https://github.com/protocolbuffers/protobuf/tree/main/java#kotlin-protocol-buffers) for more information.
-
-### CSharp Generated Code
-
-- Execute `mage GenCSharp` to generate CSharp code.
-- You can view the [CSharp Usage Docs](https://github.com/protocolbuffers/protobuf/tree/main/csharp) for more information.
-
-### JavaScript Generated Code
-
-- Execute `npm install google-protobuf` to the workdir.
-- Execute `mage GenJavaScript` to generate JavaScript code.
-- You can view the [JavaScript Usage Docs](https://github.com/protocolbuffers/protobuf-javascript) for more information.
-
 ### TypeScript Generated Code
 
 - Execute `npm install ts-proto` to the workdir.
 - Execute `mage GenTypeScript` to generate TypeScript code.
-
-### Swift Generated Code
-
-- Execute `brew install swift-protobuf` to the workdir.
-- Execute `mage GenSwift` to generate Swift code.
 
 ## Modify the Protocol Buffers
 
