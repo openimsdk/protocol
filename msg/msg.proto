@@ -401,6 +401,14 @@ message GetLastMessageSeqByTimeResp {
   int64 seq = 1;
 }
 
+message GetLastMessageReq {
+  string userID = 1;
+  repeated string conversationIDs = 2;
+}
+message GetLastMessageResp {
+  map<string,sdkws.MsgData> msgs = 1;
+}
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -456,4 +464,5 @@ service msg {
   rpc SetUserConversationMaxSeq(SetUserConversationMaxSeqReq) returns (SetUserConversationMaxSeqResp);
   rpc SetUserConversationMinSeq(SetUserConversationMinSeqReq) returns (SetUserConversationMinSeqResp);
   rpc GetLastMessageSeqByTime(GetLastMessageSeqByTimeReq) returns (GetLastMessageSeqByTimeResp);
+  rpc GetLastMessage(GetLastMessageReq) returns (GetLastMessageResp);
 }
