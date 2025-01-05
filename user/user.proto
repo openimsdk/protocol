@@ -275,6 +275,7 @@ message addNotificationAccountReq {
   string userID = 1;
   string nickName = 2;
   string faceURL = 3;
+  int32 appMangerLevel = 4;
 }
 
 message addNotificationAccountResp {
