@@ -314,7 +314,9 @@ message getNotificationAccountReq {
   string userID = 1;
 }
 
-message getNotificationAccountResp {}
+message getNotificationAccountResp {
+    notificationAccountInfo account = 1;
+}
 
 message sortQueryReq {
   bool asc = 1;
