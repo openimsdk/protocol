@@ -275,12 +275,14 @@ message addNotificationAccountReq {
   string userID = 1;
   string nickName = 2;
   string faceURL = 3;
+  int32 appMangerLevel = 4;
 }
 
 message addNotificationAccountResp {
   string userID = 1;
   string faceURL = 2;
   string nickName = 3;
+  int32 appMangerLevel = 4;
 }
 
 message updateNotificationAccountInfoReq {
@@ -300,6 +302,7 @@ message notificationAccountInfo {
   string userID = 1;
   string faceURL = 2;
   string nickName = 3;
+  int32 appMangerLevel = 4;
 }
 
 message searchNotificationAccountResp {
@@ -311,7 +314,9 @@ message getNotificationAccountReq {
   string userID = 1;
 }
 
-message getNotificationAccountResp {}
+message getNotificationAccountResp {
+    notificationAccountInfo account = 1;
+}
 
 message sortQueryReq {
   bool asc = 1;
