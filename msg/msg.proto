@@ -58,6 +58,13 @@ message SendMsgResp {
   int64 sendTime = 3;
 }
 
+message SendSimpleMsgReq{
+  bytes content = 1;
+  sdkws.OfflinePushInfo offlinePushInfo = 2;
+}
+
+message SendSimpleMsgResp{}
+
 message SetSendMsgStatusReq {
   int32 status = 1;
 }
@@ -425,6 +432,8 @@ service msg {
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
+  // 发送精简消息
+  rpc SendSimpleMsg(SendSimpleMsgReq) returns (SendSimpleMsgResp);
 
   rpc SetUserConversationsMinSeq(SetUserConversationsMinSeqReq) returns (SetUserConversationsMinSeqResp);
 
