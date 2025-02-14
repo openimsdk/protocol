@@ -295,7 +295,7 @@ message updateNotificationAccountInfoResp {}
 
 message searchNotificationAccountReq {
   string keyword = 1;
-  optional int32 type = 2;
+  optional int32 appManagerLevel = 2;
   sdkws.RequestPagination pagination = 3;
 }
 
