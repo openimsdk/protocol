@@ -59,8 +59,11 @@ message SendMsgResp {
 }
 
 message SendSimpleMsgReq{
-  bytes content = 1;
-  sdkws.OfflinePushInfo offlinePushInfo = 2;
+  string sendID = 1;
+  string recvID = 2;
+  string groupID = 3;
+  bytes content = 4;
+  sdkws.OfflinePushInfo offlinePushInfo = 5;
 }
 
 message SendSimpleMsgResp{}
