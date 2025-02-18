@@ -43,7 +43,6 @@ const (
 	Msg_GetSeqMessage_FullMethodName                    = "/openim.msg.msg/GetSeqMessage"
 	Msg_SearchMessage_FullMethodName                    = "/openim.msg.msg/SearchMessage"
 	Msg_SendMsg_FullMethodName                          = "/openim.msg.msg/SendMsg"
-	Msg_SendSimpleMsg_FullMethodName                    = "/openim.msg.msg/SendSimpleMsg"
 	Msg_SetUserConversationsMinSeq_FullMethodName       = "/openim.msg.msg/SetUserConversationsMinSeq"
 	Msg_ClearConversationsMsg_FullMethodName            = "/openim.msg.msg/ClearConversationsMsg"
 	Msg_UserClearAllMsg_FullMethodName                  = "/openim.msg.msg/UserClearAllMsg"
@@ -90,8 +89,6 @@ type MsgClient interface {
 	SearchMessage(ctx context.Context, in *SearchMessageReq, opts ...grpc.CallOption) (*SearchMessageResp, error)
 	// 发送消息
 	SendMsg(ctx context.Context, in *SendMsgReq, opts ...grpc.CallOption) (*SendMsgResp, error)
-	// 发送精简消息
-	SendSimpleMsg(ctx context.Context, in *SendSimpleMsgReq, opts ...grpc.CallOption) (*SendSimpleMsgResp, error)
 	SetUserConversationsMinSeq(ctx context.Context, in *SetUserConversationsMinSeqReq, opts ...grpc.CallOption) (*SetUserConversationsMinSeqResp, error)
 	// 全量清空指定会话消息 重置min seq 比最大seq大1
 	ClearConversationsMsg(ctx context.Context, in *ClearConversationsMsgReq, opts ...grpc.CallOption) (*ClearConversationsMsgResp, error)
@@ -219,16 +216,6 @@ func (c *msgClient) SendMsg(ctx context.Context, in *SendMsgReq, opts ...grpc.Ca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SendMsgResp)
 	err := c.cc.Invoke(ctx, Msg_SendMsg_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) SendSimpleMsg(ctx context.Context, in *SendSimpleMsgReq, opts ...grpc.CallOption) (*SendSimpleMsgResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SendSimpleMsgResp)
-	err := c.cc.Invoke(ctx, Msg_SendSimpleMsg_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -504,8 +491,6 @@ type MsgServer interface {
 	SearchMessage(context.Context, *SearchMessageReq) (*SearchMessageResp, error)
 	// 发送消息
 	SendMsg(context.Context, *SendMsgReq) (*SendMsgResp, error)
-	// 发送精简消息
-	SendSimpleMsg(context.Context, *SendSimpleMsgReq) (*SendSimpleMsgResp, error)
 	SetUserConversationsMinSeq(context.Context, *SetUserConversationsMinSeqReq) (*SetUserConversationsMinSeqResp, error)
 	// 全量清空指定会话消息 重置min seq 比最大seq大1
 	ClearConversationsMsg(context.Context, *ClearConversationsMsgReq) (*ClearConversationsMsgResp, error)
@@ -575,9 +560,6 @@ func (UnimplementedMsgServer) SearchMessage(context.Context, *SearchMessageReq) 
 }
 func (UnimplementedMsgServer) SendMsg(context.Context, *SendMsgReq) (*SendMsgResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendMsg not implemented")
-}
-func (UnimplementedMsgServer) SendSimpleMsg(context.Context, *SendSimpleMsgReq) (*SendSimpleMsgResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SendSimpleMsg not implemented")
 }
 func (UnimplementedMsgServer) SetUserConversationsMinSeq(context.Context, *SetUserConversationsMinSeqReq) (*SetUserConversationsMinSeqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserConversationsMinSeq not implemented")
@@ -833,24 +815,6 @@ func _Msg_SendMsg_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).SendMsg(ctx, req.(*SendMsgReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_SendSimpleMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SendSimpleMsgReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).SendSimpleMsg(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_SendSimpleMsg_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).SendSimpleMsg(ctx, req.(*SendSimpleMsgReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1347,10 +1311,6 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendMsg",
 			Handler:    _Msg_SendMsg_Handler,
-		},
-		{
-			MethodName: "SendSimpleMsg",
-			Handler:    _Msg_SendSimpleMsg_Handler,
 		},
 		{
 			MethodName: "SetUserConversationsMinSeq",
