@@ -18,7 +18,6 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/openimsdk/protocol/constant"
 	"github.com/openimsdk/protocol/util/datautil"
 )
 
@@ -193,14 +192,8 @@ func (x *SubscribeOrCancelUsersStatusReq) Check() error {
 }
 
 func (x *GetUserStatusReq) Check() error {
-	if x.UserID == "" {
-		return errors.New("UserID is empty")
-	}
-	if x.UserIDs == nil {
-		return errors.New("user-list is empty")
-	}
-	if len(x.UserIDs) > constant.ParamMaxLength {
-		return errors.New("user-list is Limit Exceeded")
+	if len(x.UserIDs) == 0 {
+		return errors.New("UserIDs is empty")
 	}
 	return nil
 }

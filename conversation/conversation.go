@@ -217,3 +217,10 @@ func (x *GetFullOwnerConversationIDsResp) Format() any {
 	}
 	return x
 }
+
+func (x *ClearUserConversationMsgReq) Check() error {
+	if x.Limit <= 0 {
+		return errors.New("limit is invalid")
+	}
+	return nil
+}

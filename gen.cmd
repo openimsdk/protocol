@@ -26,7 +26,7 @@ for %%i in (%PROTO_NAMES%) do (
 
 rem Replace "omitempty" in *.pb.go files with UTF-8 encoding
 for /r %%f in (*.pb.go) do (
-    powershell -Command "(Get-Content -Path '%%f' -Encoding UTF8) -replace ',omitempty\"`"', '\"`"' | Set-Content -Path '%%f' -Encoding UTF8"
+    powershell -Command "(Get-Content -Path '%%f' -Encoding UTF8) -replace ',omitempty', '' | Set-Content -Path '%%f' -Encoding UTF8"
 )
 
 endlocal

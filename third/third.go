@@ -59,3 +59,13 @@ func (x *CompleteFormDataReq) Check() error {
 	}
 	return nil
 }
+
+func (x *DeleteOutdatedDataReq) Check() error {
+	if x.Limit <= 0 {
+		return errors.New("limit must be greater than 0")
+	}
+	if len(x.ObjectGroup) == 0 {
+		return errors.New("ObjectGroup is empty")
+	}
+	return nil
+}
