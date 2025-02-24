@@ -25,6 +25,7 @@ message CreateGroupReq {
   openim.sdkws.GroupInfo groupInfo = 2;
   repeated string adminUserIDs = 3;
   string ownerUserID = 4; //owner
+  optional bool sendNotification = 5;
 }
 message CreateGroupResp {
   openim.sdkws.GroupInfo groupInfo = 1;
