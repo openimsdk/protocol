@@ -24,9 +24,9 @@ const (
 
 type ParticipantMetaData struct {
 	state           protoimpl.MessageState     `protogen:"open.v1"`
-	GroupInfo       *sdkws.GroupInfo           `protobuf:"bytes,1,opt,name=groupInfo,proto3" json:"groupInfo"`
-	GroupMemberInfo *sdkws.GroupMemberFullInfo `protobuf:"bytes,2,opt,name=groupMemberInfo,proto3" json:"groupMemberInfo"`
-	UserInfo        *sdkws.PublicUserInfo      `protobuf:"bytes,3,opt,name=userInfo,proto3" json:"userInfo"`
+	GroupInfo       *sdkws.GroupInfo           `protobuf:"bytes,1,opt,name=groupInfo,proto3" json:"groupInfo,omitempty"`
+	GroupMemberInfo *sdkws.GroupMemberFullInfo `protobuf:"bytes,2,opt,name=groupMemberInfo,proto3" json:"groupMemberInfo,omitempty"`
+	UserInfo        *sdkws.PublicUserInfo      `protobuf:"bytes,3,opt,name=userInfo,proto3" json:"userInfo,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -84,9 +84,9 @@ func (x *ParticipantMetaData) GetUserInfo() *sdkws.PublicUserInfo {
 
 type GetJoinTokenReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Room          string                 `protobuf:"bytes,1,opt,name=room,proto3" json:"room"`
-	Identity      string                 `protobuf:"bytes,2,opt,name=identity,proto3" json:"identity"`
-	MetaData      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=metaData,proto3" json:"metaData"`
+	Room          string                 `protobuf:"bytes,1,opt,name=room,proto3" json:"room,omitempty"`
+	Identity      string                 `protobuf:"bytes,2,opt,name=identity,proto3" json:"identity,omitempty"`
+	MetaData      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=metaData,proto3" json:"metaData,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -144,8 +144,8 @@ func (x *GetJoinTokenReq) GetMetaData() *ParticipantMetaData {
 
 type GetJoinTokenResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Jwt           string                 `protobuf:"bytes,1,opt,name=jwt,proto3" json:"jwt"`
-	LiveURL       string                 `protobuf:"bytes,2,opt,name=liveURL,proto3" json:"liveURL"`
+	Jwt           string                 `protobuf:"bytes,1,opt,name=jwt,proto3" json:"jwt,omitempty"`
+	LiveURL       string                 `protobuf:"bytes,2,opt,name=liveURL,proto3" json:"liveURL,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -358,8 +358,8 @@ func (*SignalReq_GetTokenByRoomID) isSignalReq_Payload() {}
 
 type SignalSendCustomSignalReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID"`
-	CustomInfo    string                 `protobuf:"bytes,2,opt,name=customInfo,proto3" json:"customInfo"`
+	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	CustomInfo    string                 `protobuf:"bytes,2,opt,name=customInfo,proto3" json:"customInfo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -446,9 +446,9 @@ func (*SignalSendCustomSignalResp) Descriptor() ([]byte, []int) {
 
 type SignalOnStreamChangeReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID"`
-	StreamType    string                 `protobuf:"bytes,2,opt,name=streamType,proto3" json:"streamType"`
-	Mute          bool                   `protobuf:"varint,3,opt,name=mute,proto3" json:"mute"`
+	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	StreamType    string                 `protobuf:"bytes,2,opt,name=streamType,proto3" json:"streamType,omitempty"`
+	Mute          bool                   `protobuf:"varint,3,opt,name=mute,proto3" json:"mute,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -668,17 +668,17 @@ func (*SignalResp_GetTokenByRoomID) isSignalResp_Payload() {}
 
 type InvitationInfo struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	InviterUserID      string                 `protobuf:"bytes,1,opt,name=inviterUserID,proto3" json:"inviterUserID"`
-	InviteeUserIDList  []string               `protobuf:"bytes,2,rep,name=inviteeUserIDList,proto3" json:"inviteeUserIDList"`
-	CustomData         string                 `protobuf:"bytes,3,opt,name=customData,proto3" json:"customData"`
-	GroupID            string                 `protobuf:"bytes,4,opt,name=groupID,proto3" json:"groupID"`
-	RoomID             string                 `protobuf:"bytes,5,opt,name=roomID,proto3" json:"roomID"`
-	Timeout            int32                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout"`
-	MediaType          string                 `protobuf:"bytes,7,opt,name=mediaType,proto3" json:"mediaType"`
-	PlatformID         int32                  `protobuf:"varint,8,opt,name=platformID,proto3" json:"platformID"`
-	SessionType        int32                  `protobuf:"varint,9,opt,name=sessionType,proto3" json:"sessionType"`
-	InitiateTime       int64                  `protobuf:"varint,10,opt,name=initiateTime,proto3" json:"initiateTime"`
-	BusyLineUserIDList []string               `protobuf:"bytes,11,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList"`
+	InviterUserID      string                 `protobuf:"bytes,1,opt,name=inviterUserID,proto3" json:"inviterUserID,omitempty"`
+	InviteeUserIDList  []string               `protobuf:"bytes,2,rep,name=inviteeUserIDList,proto3" json:"inviteeUserIDList,omitempty"`
+	CustomData         string                 `protobuf:"bytes,3,opt,name=customData,proto3" json:"customData,omitempty"`
+	GroupID            string                 `protobuf:"bytes,4,opt,name=groupID,proto3" json:"groupID,omitempty"`
+	RoomID             string                 `protobuf:"bytes,5,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	Timeout            int32                  `protobuf:"varint,6,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	MediaType          string                 `protobuf:"bytes,7,opt,name=mediaType,proto3" json:"mediaType,omitempty"`
+	PlatformID         int32                  `protobuf:"varint,8,opt,name=platformID,proto3" json:"platformID,omitempty"`
+	SessionType        int32                  `protobuf:"varint,9,opt,name=sessionType,proto3" json:"sessionType,omitempty"`
+	InitiateTime       int64                  `protobuf:"varint,10,opt,name=initiateTime,proto3" json:"initiateTime,omitempty"`
+	BusyLineUserIDList []string               `protobuf:"bytes,11,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -792,10 +792,10 @@ func (x *InvitationInfo) GetBusyLineUserIDList() []string {
 
 type SignalInviteReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant"`
-	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID"`
+	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant,omitempty"`
+	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -860,10 +860,10 @@ func (x *SignalInviteReq) GetUserID() string {
 
 type SignalInviteResp struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	Token              string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token"`
-	RoomID             string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID"`
-	LiveURL            string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL"`
-	BusyLineUserIDList []string               `protobuf:"bytes,4,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList"`
+	Token              string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	RoomID             string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	LiveURL            string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL,omitempty"`
+	BusyLineUserIDList []string               `protobuf:"bytes,4,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -928,10 +928,10 @@ func (x *SignalInviteResp) GetBusyLineUserIDList() []string {
 
 type SignalInviteInGroupReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant"`
-	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID"`
+	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant,omitempty"`
+	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -996,10 +996,10 @@ func (x *SignalInviteInGroupReq) GetUserID() string {
 
 type SignalInviteInGroupResp struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
-	Token              string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token"`
-	RoomID             string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID"`
-	LiveURL            string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL"`
-	BusyLineUserIDList []string               `protobuf:"bytes,4,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList"`
+	Token              string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	RoomID             string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	LiveURL            string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL,omitempty"`
+	BusyLineUserIDList []string               `protobuf:"bytes,4,rep,name=busyLineUserIDList,proto3" json:"busyLineUserIDList,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1064,10 +1064,10 @@ func (x *SignalInviteInGroupResp) GetBusyLineUserIDList() []string {
 
 type SignalCancelReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant"`
-	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID"`
+	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	Participant     *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant,omitempty"`
+	UserID          string                 `protobuf:"bytes,4,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1168,11 +1168,11 @@ func (*SignalCancelResp) Descriptor() ([]byte, []int) {
 
 type SignalAcceptReq struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Invitation       *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo  *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	Participant      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant"`
-	OpUserPlatformID int32                  `protobuf:"varint,4,opt,name=opUserPlatformID,proto3" json:"opUserPlatformID"`
-	UserID           string                 `protobuf:"bytes,5,opt,name=userID,proto3" json:"userID"`
+	Invitation       *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo  *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	Participant      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant,omitempty"`
+	OpUserPlatformID int32                  `protobuf:"varint,4,opt,name=opUserPlatformID,proto3" json:"opUserPlatformID,omitempty"`
+	UserID           string                 `protobuf:"bytes,5,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1244,9 +1244,9 @@ func (x *SignalAcceptReq) GetUserID() string {
 
 type SignalAcceptResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token"`
-	RoomID        string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID"`
-	LiveURL       string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	RoomID        string                 `protobuf:"bytes,2,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	LiveURL       string                 `protobuf:"bytes,3,opt,name=liveURL,proto3" json:"liveURL,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1304,9 +1304,9 @@ func (x *SignalAcceptResp) GetLiveURL() string {
 
 type SignalHungUpReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	UserID          string                 `protobuf:"bytes,3,opt,name=userID,proto3" json:"userID"`
+	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	UserID          string                 `protobuf:"bytes,3,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1400,11 +1400,11 @@ func (*SignalHungUpResp) Descriptor() ([]byte, []int) {
 
 type SignalRejectReq struct {
 	state            protoimpl.MessageState `protogen:"open.v1"`
-	Invitation       *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo  *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
-	Participant      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant"`
-	OpUserPlatformID int32                  `protobuf:"varint,4,opt,name=opUserPlatformID,proto3" json:"opUserPlatformID"`
-	UserID           string                 `protobuf:"bytes,5,opt,name=userID,proto3" json:"userID"`
+	Invitation       *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo  *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
+	Participant      *ParticipantMetaData   `protobuf:"bytes,3,opt,name=participant,proto3" json:"participant,omitempty"`
+	OpUserPlatformID int32                  `protobuf:"varint,4,opt,name=opUserPlatformID,proto3" json:"opUserPlatformID,omitempty"`
+	UserID           string                 `protobuf:"bytes,5,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -1512,7 +1512,7 @@ func (*SignalRejectResp) Descriptor() ([]byte, []int) {
 
 type SignalGetRoomByGroupIDReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	GroupID       string                 `protobuf:"bytes,1,opt,name=groupID,proto3" json:"groupID"`
+	GroupID       string                 `protobuf:"bytes,1,opt,name=groupID,proto3" json:"groupID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1556,9 +1556,9 @@ func (x *SignalGetRoomByGroupIDReq) GetGroupID() string {
 
 type SignalGetRoomByGroupIDResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant"`
-	RoomID        string                 `protobuf:"bytes,3,opt,name=roomID,proto3" json:"roomID"`
+	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant,omitempty"`
+	RoomID        string                 `protobuf:"bytes,3,opt,name=roomID,proto3" json:"roomID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1616,9 +1616,9 @@ func (x *SignalGetRoomByGroupIDResp) GetRoomID() string {
 
 type SignalOnRoomParticipantConnectedReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant"`
-	GroupID       string                 `protobuf:"bytes,3,opt,name=groupID,proto3" json:"groupID"`
+	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant,omitempty"`
+	GroupID       string                 `protobuf:"bytes,3,opt,name=groupID,proto3" json:"groupID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1676,9 +1676,9 @@ func (x *SignalOnRoomParticipantConnectedReq) GetGroupID() string {
 
 type SignalOnRoomParticipantDisconnectedReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant"`
-	GroupID       string                 `protobuf:"bytes,3,opt,name=groupID,proto3" json:"groupID"`
+	Invitation    *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	Participant   []*ParticipantMetaData `protobuf:"bytes,2,rep,name=participant,proto3" json:"participant,omitempty"`
+	GroupID       string                 `protobuf:"bytes,3,opt,name=groupID,proto3" json:"groupID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1736,9 +1736,9 @@ func (x *SignalOnRoomParticipantDisconnectedReq) GetGroupID() string {
 
 type SignalGetTokenByRoomIDReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID"`
-	Participant   *ParticipantMetaData   `protobuf:"bytes,2,opt,name=participant,proto3" json:"participant"`
-	UserID        string                 `protobuf:"bytes,3,opt,name=userID,proto3" json:"userID"`
+	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	Participant   *ParticipantMetaData   `protobuf:"bytes,2,opt,name=participant,proto3" json:"participant,omitempty"`
+	UserID        string                 `protobuf:"bytes,3,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1796,8 +1796,8 @@ func (x *SignalGetTokenByRoomIDReq) GetUserID() string {
 
 type SignalGetTokenByRoomIDResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token"`
-	LiveURL       string                 `protobuf:"bytes,2,opt,name=liveURL,proto3" json:"liveURL"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	LiveURL       string                 `protobuf:"bytes,2,opt,name=liveURL,proto3" json:"liveURL,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1848,7 +1848,7 @@ func (x *SignalGetTokenByRoomIDResp) GetLiveURL() string {
 
 type SignalMessageAssembleReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SignalReq     *SignalReq             `protobuf:"bytes,1,opt,name=signalReq,proto3" json:"signalReq"`
+	SignalReq     *SignalReq             `protobuf:"bytes,1,opt,name=signalReq,proto3" json:"signalReq,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1892,7 +1892,7 @@ func (x *SignalMessageAssembleReq) GetSignalReq() *SignalReq {
 
 type SignalMessageAssembleResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SignalResp    *SignalResp            `protobuf:"bytes,1,opt,name=signalResp,proto3" json:"signalResp"`
+	SignalResp    *SignalResp            `protobuf:"bytes,1,opt,name=signalResp,proto3" json:"signalResp,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1936,7 +1936,7 @@ func (x *SignalMessageAssembleResp) GetSignalResp() *SignalResp {
 
 type SignalGetRoomsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomIDs       []string               `protobuf:"bytes,1,rep,name=roomIDs,proto3" json:"roomIDs"`
+	RoomIDs       []string               `protobuf:"bytes,1,rep,name=roomIDs,proto3" json:"roomIDs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1980,7 +1980,7 @@ func (x *SignalGetRoomsReq) GetRoomIDs() []string {
 
 type SignalGetRoomsResp struct {
 	state         protoimpl.MessageState        `protogen:"open.v1"`
-	RoomList      []*SignalGetRoomByGroupIDResp `protobuf:"bytes,1,rep,name=roomList,proto3" json:"roomList"`
+	RoomList      []*SignalGetRoomByGroupIDResp `protobuf:"bytes,1,rep,name=roomList,proto3" json:"roomList,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2024,7 +2024,7 @@ func (x *SignalGetRoomsResp) GetRoomList() []*SignalGetRoomByGroupIDResp {
 
 type GetSignalInvitationInfoReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID"`
+	RoomID        string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2068,8 +2068,8 @@ func (x *GetSignalInvitationInfoReq) GetRoomID() string {
 
 type GetSignalInvitationInfoResp struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	InvitationInfo  *InvitationInfo        `protobuf:"bytes,1,opt,name=invitationInfo,proto3" json:"invitationInfo"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
+	InvitationInfo  *InvitationInfo        `protobuf:"bytes,1,opt,name=invitationInfo,proto3" json:"invitationInfo,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2120,7 +2120,7 @@ func (x *GetSignalInvitationInfoResp) GetOfflinePushInfo() *sdkws.OfflinePushInf
 
 type GetSignalInvitationInfoStartAppReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2164,8 +2164,8 @@ func (x *GetSignalInvitationInfoStartAppReq) GetUserID() string {
 
 type GetSignalInvitationInfoStartAppResp struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation"`
-	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo"`
+	Invitation      *InvitationInfo        `protobuf:"bytes,1,opt,name=invitation,proto3" json:"invitation,omitempty"`
+	OfflinePushInfo *sdkws.OfflinePushInfo `protobuf:"bytes,2,opt,name=offlinePushInfo,proto3" json:"offlinePushInfo,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2216,9 +2216,9 @@ func (x *GetSignalInvitationInfoStartAppResp) GetOfflinePushInfo() *sdkws.Offlin
 
 type SignalUser struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
-	Nickname      string                 `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname"`
-	Status        int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status"`
+	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
+	Nickname      string                 `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	Status        int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2276,20 +2276,20 @@ func (x *SignalUser) GetStatus() int32 {
 
 type SignalRecord struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
-	RoomID              string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID"`
-	SID                 string                 `protobuf:"bytes,2,opt,name=sID,proto3" json:"sID"`
-	FileName            string                 `protobuf:"bytes,3,opt,name=fileName,proto3" json:"fileName"`
-	MediaType           string                 `protobuf:"bytes,4,opt,name=mediaType,proto3" json:"mediaType"`
-	SessionType         int32                  `protobuf:"varint,5,opt,name=sessionType,proto3" json:"sessionType"`
-	InviterUserID       string                 `protobuf:"bytes,6,opt,name=inviterUserID,proto3" json:"inviterUserID"`
-	InviterUserNickname string                 `protobuf:"bytes,7,opt,name=inviterUserNickname,proto3" json:"inviterUserNickname"`
-	GroupID             string                 `protobuf:"bytes,8,opt,name=groupID,proto3" json:"groupID"`
-	GroupName           string                 `protobuf:"bytes,9,opt,name=groupName,proto3" json:"groupName"`
-	InviterUsers        []*SignalUser          `protobuf:"bytes,10,rep,name=inviterUsers,proto3" json:"inviterUsers"`
-	CreateTime          int64                  `protobuf:"varint,11,opt,name=createTime,proto3" json:"createTime"`
-	EndTime             int64                  `protobuf:"varint,12,opt,name=endTime,proto3" json:"endTime"`
-	Size                string                 `protobuf:"bytes,13,opt,name=size,proto3" json:"size"`
-	FileURL             string                 `protobuf:"bytes,14,opt,name=fileURL,proto3" json:"fileURL"`
+	RoomID              string                 `protobuf:"bytes,1,opt,name=roomID,proto3" json:"roomID,omitempty"`
+	SID                 string                 `protobuf:"bytes,2,opt,name=sID,proto3" json:"sID,omitempty"`
+	FileName            string                 `protobuf:"bytes,3,opt,name=fileName,proto3" json:"fileName,omitempty"`
+	MediaType           string                 `protobuf:"bytes,4,opt,name=mediaType,proto3" json:"mediaType,omitempty"`
+	SessionType         int32                  `protobuf:"varint,5,opt,name=sessionType,proto3" json:"sessionType,omitempty"`
+	InviterUserID       string                 `protobuf:"bytes,6,opt,name=inviterUserID,proto3" json:"inviterUserID,omitempty"`
+	InviterUserNickname string                 `protobuf:"bytes,7,opt,name=inviterUserNickname,proto3" json:"inviterUserNickname,omitempty"`
+	GroupID             string                 `protobuf:"bytes,8,opt,name=groupID,proto3" json:"groupID,omitempty"`
+	GroupName           string                 `protobuf:"bytes,9,opt,name=groupName,proto3" json:"groupName,omitempty"`
+	InviterUsers        []*SignalUser          `protobuf:"bytes,10,rep,name=inviterUsers,proto3" json:"inviterUsers,omitempty"`
+	CreateTime          int64                  `protobuf:"varint,11,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	EndTime             int64                  `protobuf:"varint,12,opt,name=endTime,proto3" json:"endTime,omitempty"`
+	Size                string                 `protobuf:"bytes,13,opt,name=size,proto3" json:"size,omitempty"`
+	FileURL             string                 `protobuf:"bytes,14,opt,name=fileURL,proto3" json:"fileURL,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -2424,8 +2424,8 @@ func (x *SignalRecord) GetFileURL() string {
 
 type FileRecord struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          string                 `protobuf:"bytes,1,opt,name=size,proto3" json:"size"`
-	FileURL       string                 `protobuf:"bytes,2,opt,name=fileURL,proto3" json:"fileURL"`
+	Size          string                 `protobuf:"bytes,1,opt,name=size,proto3" json:"size,omitempty"`
+	FileURL       string                 `protobuf:"bytes,2,opt,name=fileURL,proto3" json:"fileURL,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2476,13 +2476,13 @@ func (x *FileRecord) GetFileURL() string {
 
 type GetSignalInvitationRecordsReq struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Pagination    *sdkws.RequestPagination `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination"`
-	SessionType   int32                    `protobuf:"varint,2,opt,name=sessionType,proto3" json:"sessionType"`
-	SendID        string                   `protobuf:"bytes,3,opt,name=sendID,proto3" json:"sendID"`
-	RecvID        string                   `protobuf:"bytes,4,opt,name=recvID,proto3" json:"recvID"`
-	StartTime     int64                    `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime"`
-	EndTime       int64                    `protobuf:"varint,6,opt,name=endTime,proto3" json:"endTime"`
-	JoinedUsers   []*sdkws.UserInfo        `protobuf:"bytes,7,rep,name=JoinedUsers,proto3" json:"JoinedUsers"`
+	Pagination    *sdkws.RequestPagination `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	SessionType   int32                    `protobuf:"varint,2,opt,name=sessionType,proto3" json:"sessionType,omitempty"`
+	SendID        string                   `protobuf:"bytes,3,opt,name=sendID,proto3" json:"sendID,omitempty"`
+	RecvID        string                   `protobuf:"bytes,4,opt,name=recvID,proto3" json:"recvID,omitempty"`
+	StartTime     int64                    `protobuf:"varint,5,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	EndTime       int64                    `protobuf:"varint,6,opt,name=endTime,proto3" json:"endTime,omitempty"`
+	JoinedUsers   []*sdkws.UserInfo        `protobuf:"bytes,7,rep,name=JoinedUsers,proto3" json:"JoinedUsers,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2568,8 +2568,8 @@ func (x *GetSignalInvitationRecordsReq) GetJoinedUsers() []*sdkws.UserInfo {
 
 type GetSignalInvitationRecordsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Total         int32                  `protobuf:"varint,1,opt,name=total,proto3" json:"total"`
-	SignalRecords []*SignalRecord        `protobuf:"bytes,2,rep,name=signalRecords,proto3" json:"signalRecords"`
+	Total         int32                  `protobuf:"varint,1,opt,name=total,proto3" json:"total,omitempty"`
+	SignalRecords []*SignalRecord        `protobuf:"bytes,2,rep,name=signalRecords,proto3" json:"signalRecords,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2620,7 +2620,7 @@ func (x *GetSignalInvitationRecordsResp) GetSignalRecords() []*SignalRecord {
 
 type DeleteSignalRecordsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	SIDs          []string               `protobuf:"bytes,1,rep,name=sIDs,proto3" json:"sIDs"`
+	SIDs          []string               `protobuf:"bytes,1,rep,name=sIDs,proto3" json:"sIDs,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
