@@ -40,13 +40,13 @@ const (
 
 type ConversationMsg struct {
 	state         protoimpl.MessageState     `protogen:"open.v1"`
-	Conversation  *conversation.Conversation `protobuf:"bytes,1,opt,name=conversation,proto3" json:"conversation,omitempty"`
-	LastMsg       *sdkws.MsgData             `protobuf:"bytes,2,opt,name=lastMsg,proto3" json:"lastMsg,omitempty"`
-	User          *sdkws.UserInfo            `protobuf:"bytes,3,opt,name=user,proto3" json:"user,omitempty"`
-	Friend        *relation.FriendInfoOnly   `protobuf:"bytes,4,opt,name=friend,proto3" json:"friend,omitempty"`
-	Group         *sdkws.GroupInfo           `protobuf:"bytes,5,opt,name=group,proto3" json:"group,omitempty"`
-	MaxSeq        int64                      `protobuf:"varint,6,opt,name=maxSeq,proto3" json:"maxSeq,omitempty"`
-	ReadSeq       int64                      `protobuf:"varint,7,opt,name=readSeq,proto3" json:"readSeq,omitempty"`
+	Conversation  *conversation.Conversation `protobuf:"bytes,1,opt,name=conversation,proto3" json:"conversation"`
+	LastMsg       *sdkws.MsgData             `protobuf:"bytes,2,opt,name=lastMsg,proto3" json:"lastMsg"`
+	User          *sdkws.UserInfo            `protobuf:"bytes,3,opt,name=user,proto3" json:"user"`
+	Friend        *relation.FriendInfoOnly   `protobuf:"bytes,4,opt,name=friend,proto3" json:"friend"`
+	Group         *sdkws.GroupInfo           `protobuf:"bytes,5,opt,name=group,proto3" json:"group"`
+	MaxSeq        int64                      `protobuf:"varint,6,opt,name=maxSeq,proto3" json:"maxSeq"`
+	ReadSeq       int64                      `protobuf:"varint,7,opt,name=readSeq,proto3" json:"readSeq"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -132,8 +132,8 @@ func (x *ConversationMsg) GetReadSeq() int64 {
 
 type GetActiveConversationsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OwnerUserID   string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID,omitempty"`
-	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	OwnerUserID   string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
+	Count         int64                  `protobuf:"varint,2,opt,name=count,proto3" json:"count"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -184,8 +184,8 @@ func (x *GetActiveConversationsReq) GetCount() int64 {
 
 type GetActiveConversationsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UnreadCount   int64                  `protobuf:"varint,1,opt,name=unreadCount,proto3" json:"unreadCount,omitempty"`
-	Conversations []*ConversationMsg     `protobuf:"bytes,2,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	UnreadCount   int64                  `protobuf:"varint,1,opt,name=unreadCount,proto3" json:"unreadCount"`
+	Conversations []*ConversationMsg     `protobuf:"bytes,2,rep,name=conversations,proto3" json:"conversations"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -236,8 +236,8 @@ func (x *GetActiveConversationsResp) GetConversations() []*ConversationMsg {
 
 type GetConversationsReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	OwnerUserID     string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID,omitempty"`
-	ConversationIDs []string               `protobuf:"bytes,2,rep,name=conversationIDs,proto3" json:"conversationIDs,omitempty"`
+	OwnerUserID     string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
+	ConversationIDs []string               `protobuf:"bytes,2,rep,name=conversationIDs,proto3" json:"conversationIDs"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -288,8 +288,8 @@ func (x *GetConversationsReq) GetConversationIDs() []string {
 
 type GetConversationsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UnreadCount   int64                  `protobuf:"varint,1,opt,name=unreadCount,proto3" json:"unreadCount,omitempty"`
-	Conversations []*ConversationMsg     `protobuf:"bytes,2,rep,name=conversations,proto3" json:"conversations,omitempty"`
+	UnreadCount   int64                  `protobuf:"varint,1,opt,name=unreadCount,proto3" json:"unreadCount"`
+	Conversations []*ConversationMsg     `protobuf:"bytes,2,rep,name=conversations,proto3" json:"conversations"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
