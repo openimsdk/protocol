@@ -38,8 +38,8 @@ const (
 
 type KeyValues struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
-	Values        []string               `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
+	Key           string                 `protobuf:"bytes,1,opt,name=key,proto3" json:"key"`
+	Values        []string               `protobuf:"bytes,2,rep,name=values,proto3" json:"values"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -90,10 +90,10 @@ func (x *KeyValues) GetValues() []string {
 
 type SignPart struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PartNumber    int32                  `protobuf:"varint,1,opt,name=partNumber,proto3" json:"partNumber,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	Query         []*KeyValues           `protobuf:"bytes,3,rep,name=query,proto3" json:"query,omitempty"`
-	Header        []*KeyValues           `protobuf:"bytes,4,rep,name=header,proto3" json:"header,omitempty"`
+	PartNumber    int32                  `protobuf:"varint,1,opt,name=partNumber,proto3" json:"partNumber"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
+	Query         []*KeyValues           `protobuf:"bytes,3,rep,name=query,proto3" json:"query"`
+	Header        []*KeyValues           `protobuf:"bytes,4,rep,name=header,proto3" json:"header"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -158,10 +158,10 @@ func (x *SignPart) GetHeader() []*KeyValues {
 
 type AuthSignParts struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Query         []*KeyValues           `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty"`
-	Header        []*KeyValues           `protobuf:"bytes,3,rep,name=header,proto3" json:"header,omitempty"`
-	Parts         []*SignPart            `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Query         []*KeyValues           `protobuf:"bytes,2,rep,name=query,proto3" json:"query"`
+	Header        []*KeyValues           `protobuf:"bytes,3,rep,name=header,proto3" json:"header"`
+	Parts         []*SignPart            `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -262,9 +262,9 @@ func (*PartLimitReq) Descriptor() ([]byte, []int) {
 
 type PartLimitResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	MinPartSize   int64                  `protobuf:"varint,1,opt,name=minPartSize,proto3" json:"minPartSize,omitempty"`
-	MaxPartSize   int64                  `protobuf:"varint,2,opt,name=maxPartSize,proto3" json:"maxPartSize,omitempty"`
-	MaxNumSize    int32                  `protobuf:"varint,3,opt,name=maxNumSize,proto3" json:"maxNumSize,omitempty"`
+	MinPartSize   int64                  `protobuf:"varint,1,opt,name=minPartSize,proto3" json:"minPartSize"`
+	MaxPartSize   int64                  `protobuf:"varint,2,opt,name=maxPartSize,proto3" json:"maxPartSize"`
+	MaxNumSize    int32                  `protobuf:"varint,3,opt,name=maxNumSize,proto3" json:"maxNumSize"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -322,7 +322,7 @@ func (x *PartLimitResp) GetMaxNumSize() int32 {
 
 type PartSizeReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          int64                  `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	Size          int64                  `protobuf:"varint,1,opt,name=size,proto3" json:"size"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -366,7 +366,7 @@ func (x *PartSizeReq) GetSize() int64 {
 
 type PartSizeResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -410,14 +410,14 @@ func (x *PartSizeResp) GetSize() int64 {
 
 type InitiateMultipartUploadReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Hash          string                 `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash,omitempty"`
-	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
-	PartSize      int64                  `protobuf:"varint,3,opt,name=partSize,proto3" json:"partSize,omitempty"`
-	MaxParts      int32                  `protobuf:"varint,4,opt,name=maxParts,proto3" json:"maxParts,omitempty"`
-	Cause         string                 `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause,omitempty"`
-	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	ContentType   string                 `protobuf:"bytes,7,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	UrlPrefix     string                 `protobuf:"bytes,8,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	Hash          string                 `protobuf:"bytes,1,opt,name=hash,proto3" json:"hash"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
+	PartSize      int64                  `protobuf:"varint,3,opt,name=partSize,proto3" json:"partSize"`
+	MaxParts      int32                  `protobuf:"varint,4,opt,name=maxParts,proto3" json:"maxParts"`
+	Cause         string                 `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause"`
+	Name          string                 `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	ContentType   string                 `protobuf:"bytes,7,opt,name=contentType,proto3" json:"contentType"`
+	UrlPrefix     string                 `protobuf:"bytes,8,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -510,10 +510,10 @@ func (x *InitiateMultipartUploadReq) GetUrlPrefix() string {
 
 type UploadInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	PartSize      int64                  `protobuf:"varint,2,opt,name=partSize,proto3" json:"partSize,omitempty"`
-	Sign          *AuthSignParts         `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign,omitempty"`
-	ExpireTime    int64                  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	PartSize      int64                  `protobuf:"varint,2,opt,name=partSize,proto3" json:"partSize"`
+	Sign          *AuthSignParts         `protobuf:"bytes,3,opt,name=sign,proto3" json:"sign"`
+	ExpireTime    int64                  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -578,8 +578,8 @@ func (x *UploadInfo) GetExpireTime() int64 {
 
 type InitiateMultipartUploadResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Upload        *UploadInfo            `protobuf:"bytes,2,opt,name=upload,proto3" json:"upload,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Upload        *UploadInfo            `protobuf:"bytes,2,opt,name=upload,proto3" json:"upload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -630,8 +630,8 @@ func (x *InitiateMultipartUploadResp) GetUpload() *UploadInfo {
 
 type AuthSignReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	PartNumbers   []int32                `protobuf:"varint,2,rep,packed,name=partNumbers,proto3" json:"partNumbers,omitempty"`
+	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	PartNumbers   []int32                `protobuf:"varint,2,rep,packed,name=partNumbers,proto3" json:"partNumbers"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -682,10 +682,10 @@ func (x *AuthSignReq) GetPartNumbers() []int32 {
 
 type AuthSignResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	Query         []*KeyValues           `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty"`
-	Header        []*KeyValues           `protobuf:"bytes,3,rep,name=header,proto3" json:"header,omitempty"`
-	Parts         []*SignPart            `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	Query         []*KeyValues           `protobuf:"bytes,2,rep,name=query,proto3" json:"query"`
+	Header        []*KeyValues           `protobuf:"bytes,3,rep,name=header,proto3" json:"header"`
+	Parts         []*SignPart            `protobuf:"bytes,4,rep,name=parts,proto3" json:"parts"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -750,12 +750,12 @@ func (x *AuthSignResp) GetParts() []*SignPart {
 
 type CompleteMultipartUploadReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID,omitempty"`
-	Parts         []string               `protobuf:"bytes,2,rep,name=parts,proto3" json:"parts,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	ContentType   string                 `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	Cause         string                 `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause,omitempty"`
-	UrlPrefix     string                 `protobuf:"bytes,6,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	UploadID      string                 `protobuf:"bytes,1,opt,name=uploadID,proto3" json:"uploadID"`
+	Parts         []string               `protobuf:"bytes,2,rep,name=parts,proto3" json:"parts"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	ContentType   string                 `protobuf:"bytes,4,opt,name=contentType,proto3" json:"contentType"`
+	Cause         string                 `protobuf:"bytes,5,opt,name=cause,proto3" json:"cause"`
+	UrlPrefix     string                 `protobuf:"bytes,6,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -834,7 +834,7 @@ func (x *CompleteMultipartUploadReq) GetUrlPrefix() string {
 
 type CompleteMultipartUploadResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -878,8 +878,8 @@ func (x *CompleteMultipartUploadResp) GetUrl() string {
 
 type AccessURLReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Query         map[string]string      `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Query         map[string]string      `protobuf:"bytes,2,rep,name=query,proto3" json:"query" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -930,8 +930,8 @@ func (x *AccessURLReq) GetQuery() map[string]string {
 
 type AccessURLResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
-	ExpireTime    int64                  `protobuf:"varint,2,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
+	ExpireTime    int64                  `protobuf:"varint,2,opt,name=expireTime,proto3" json:"expireTime"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -982,12 +982,12 @@ func (x *AccessURLResp) GetExpireTime() int64 {
 
 type InitiateFormDataReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size,omitempty"`
-	ContentType   string                 `protobuf:"bytes,3,opt,name=contentType,proto3" json:"contentType,omitempty"`
-	Group         string                 `protobuf:"bytes,4,opt,name=group,proto3" json:"group,omitempty"`
-	Millisecond   int64                  `protobuf:"varint,5,opt,name=millisecond,proto3" json:"millisecond,omitempty"`
-	Absolute      bool                   `protobuf:"varint,6,opt,name=absolute,proto3" json:"absolute,omitempty"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
+	Size          int64                  `protobuf:"varint,2,opt,name=size,proto3" json:"size"`
+	ContentType   string                 `protobuf:"bytes,3,opt,name=contentType,proto3" json:"contentType"`
+	Group         string                 `protobuf:"bytes,4,opt,name=group,proto3" json:"group"`
+	Millisecond   int64                  `protobuf:"varint,5,opt,name=millisecond,proto3" json:"millisecond"`
+	Absolute      bool                   `protobuf:"varint,6,opt,name=absolute,proto3" json:"absolute"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1066,13 +1066,13 @@ func (x *InitiateFormDataReq) GetAbsolute() bool {
 
 type InitiateFormDataResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url,omitempty"`
-	File          string                 `protobuf:"bytes,3,opt,name=file,proto3" json:"file,omitempty"`
-	Header        []*KeyValues           `protobuf:"bytes,4,rep,name=header,proto3" json:"header,omitempty"`
-	FormData      map[string]string      `protobuf:"bytes,5,rep,name=formData,proto3" json:"formData,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	Expires       int64                  `protobuf:"varint,6,opt,name=expires,proto3" json:"expires,omitempty"`
-	SuccessCodes  []int32                `protobuf:"varint,7,rep,packed,name=successCodes,proto3" json:"successCodes,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
+	File          string                 `protobuf:"bytes,3,opt,name=file,proto3" json:"file"`
+	Header        []*KeyValues           `protobuf:"bytes,4,rep,name=header,proto3" json:"header"`
+	FormData      map[string]string      `protobuf:"bytes,5,rep,name=formData,proto3" json:"formData" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Expires       int64                  `protobuf:"varint,6,opt,name=expires,proto3" json:"expires"`
+	SuccessCodes  []int32                `protobuf:"varint,7,rep,packed,name=successCodes,proto3" json:"successCodes"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1158,8 +1158,8 @@ func (x *InitiateFormDataResp) GetSuccessCodes() []int32 {
 
 type CompleteFormDataReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	UrlPrefix     string                 `protobuf:"bytes,2,opt,name=urlPrefix,proto3" json:"urlPrefix,omitempty"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
+	UrlPrefix     string                 `protobuf:"bytes,2,opt,name=urlPrefix,proto3" json:"urlPrefix"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1210,7 +1210,7 @@ func (x *CompleteFormDataReq) GetUrlPrefix() string {
 
 type CompleteFormDataResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url,omitempty"`
+	Url           string                 `protobuf:"bytes,1,opt,name=url,proto3" json:"url"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1254,9 +1254,9 @@ func (x *CompleteFormDataResp) GetUrl() string {
 
 type DeleteOutdatedDataReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ExpireTime    int64                  `protobuf:"varint,1,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
-	ObjectGroup   []string               `protobuf:"bytes,2,rep,name=objectGroup,proto3" json:"objectGroup,omitempty"`
-	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit,omitempty"`
+	ExpireTime    int64                  `protobuf:"varint,1,opt,name=expireTime,proto3" json:"expireTime"`
+	ObjectGroup   []string               `protobuf:"bytes,2,rep,name=objectGroup,proto3" json:"objectGroup"`
+	Limit         int32                  `protobuf:"varint,3,opt,name=limit,proto3" json:"limit"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1314,7 +1314,7 @@ func (x *DeleteOutdatedDataReq) GetLimit() int32 {
 
 type DeleteOutdatedDataResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count,omitempty"`
+	Count         int32                  `protobuf:"varint,1,opt,name=count,proto3" json:"count"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1358,10 +1358,10 @@ func (x *DeleteOutdatedDataResp) GetCount() int32 {
 
 type FcmUpdateTokenReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	PlatformID    int32                  `protobuf:"varint,1,opt,name=platformID,proto3" json:"platformID,omitempty"`
-	FcmToken      string                 `protobuf:"bytes,2,opt,name=fcmToken,proto3" json:"fcmToken,omitempty"`
-	Account       string                 `protobuf:"bytes,3,opt,name=account,proto3" json:"account,omitempty"`
-	ExpireTime    int64                  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime,omitempty"`
+	PlatformID    int32                  `protobuf:"varint,1,opt,name=platformID,proto3" json:"platformID"`
+	FcmToken      string                 `protobuf:"bytes,2,opt,name=fcmToken,proto3" json:"fcmToken"`
+	Account       string                 `protobuf:"bytes,3,opt,name=account,proto3" json:"account"`
+	ExpireTime    int64                  `protobuf:"varint,4,opt,name=expireTime,proto3" json:"expireTime"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1462,8 +1462,8 @@ func (*FcmUpdateTokenResp) Descriptor() ([]byte, []int) {
 
 type SetAppBadgeReq struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
-	UserID         string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
-	AppUnreadCount int32                  `protobuf:"varint,2,opt,name=appUnreadCount,proto3" json:"appUnreadCount,omitempty"`
+	UserID         string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	AppUnreadCount int32                  `protobuf:"varint,2,opt,name=appUnreadCount,proto3" json:"appUnreadCount"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1550,8 +1550,8 @@ func (*SetAppBadgeResp) Descriptor() ([]byte, []int) {
 
 type FileURL struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename,omitempty"`
-	URL           string                 `protobuf:"bytes,2,opt,name=URL,proto3" json:"URL,omitempty"`
+	Filename      string                 `protobuf:"bytes,1,opt,name=filename,proto3" json:"filename"`
+	URL           string                 `protobuf:"bytes,2,opt,name=URL,proto3" json:"URL"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1602,11 +1602,11 @@ func (x *FileURL) GetURL() string {
 
 type UploadLogsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Platform      int32                  `protobuf:"varint,1,opt,name=platform,proto3" json:"platform,omitempty"`
-	FileURLs      []*FileURL             `protobuf:"bytes,2,rep,name=fileURLs,proto3" json:"fileURLs,omitempty"`
-	AppFramework  string                 `protobuf:"bytes,3,opt,name=appFramework,proto3" json:"appFramework,omitempty"`
-	Version       string                 `protobuf:"bytes,5,opt,name=version,proto3" json:"version,omitempty"`
-	Ex            string                 `protobuf:"bytes,4,opt,name=ex,proto3" json:"ex,omitempty"`
+	Platform      int32                  `protobuf:"varint,1,opt,name=platform,proto3" json:"platform"`
+	FileURLs      []*FileURL             `protobuf:"bytes,2,rep,name=fileURLs,proto3" json:"fileURLs"`
+	AppFramework  string                 `protobuf:"bytes,3,opt,name=appFramework,proto3" json:"appFramework"`
+	Version       string                 `protobuf:"bytes,5,opt,name=version,proto3" json:"version"`
+	Ex            string                 `protobuf:"bytes,4,opt,name=ex,proto3" json:"ex"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1714,7 +1714,7 @@ func (*UploadLogsResp) Descriptor() ([]byte, []int) {
 
 type DeleteLogsReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	LogIDs        []string               `protobuf:"bytes,1,rep,name=logIDs,proto3" json:"logIDs,omitempty"`
+	LogIDs        []string               `protobuf:"bytes,1,rep,name=logIDs,proto3" json:"logIDs"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1794,10 +1794,10 @@ func (*DeleteLogsResp) Descriptor() ([]byte, []int) {
 
 type SearchLogsReq struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Keyword       string                   `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
-	StartTime     int64                    `protobuf:"varint,2,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	EndTime       int64                    `protobuf:"varint,3,opt,name=endTime,proto3" json:"endTime,omitempty"`
-	Pagination    *sdkws.RequestPagination `protobuf:"bytes,4,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	Keyword       string                   `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword"`
+	StartTime     int64                    `protobuf:"varint,2,opt,name=startTime,proto3" json:"startTime"`
+	EndTime       int64                    `protobuf:"varint,3,opt,name=endTime,proto3" json:"endTime"`
+	Pagination    *sdkws.RequestPagination `protobuf:"bytes,4,opt,name=pagination,proto3" json:"pagination"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1862,16 +1862,16 @@ func (x *SearchLogsReq) GetPagination() *sdkws.RequestPagination {
 
 type LogInfo struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID,omitempty"`
-	Platform      string                 `protobuf:"bytes,2,opt,name=platform,proto3" json:"platform,omitempty"`
-	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url,omitempty"`
-	CreateTime    int64                  `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime,omitempty"`
-	Nickname      string                 `protobuf:"bytes,5,opt,name=nickname,proto3" json:"nickname,omitempty"`
-	LogID         string                 `protobuf:"bytes,6,opt,name=logID,proto3" json:"logID,omitempty"`
-	Filename      string                 `protobuf:"bytes,7,opt,name=filename,proto3" json:"filename,omitempty"`
-	SystemType    string                 `protobuf:"bytes,8,opt,name=systemType,proto3" json:"systemType,omitempty"`
-	Ex            string                 `protobuf:"bytes,9,opt,name=ex,proto3" json:"ex,omitempty"`
-	Version       string                 `protobuf:"bytes,10,opt,name=version,proto3" json:"version,omitempty"`
+	UserID        string                 `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
+	Platform      string                 `protobuf:"bytes,2,opt,name=platform,proto3" json:"platform"`
+	Url           string                 `protobuf:"bytes,3,opt,name=url,proto3" json:"url"`
+	CreateTime    int64                  `protobuf:"varint,4,opt,name=createTime,proto3" json:"createTime"`
+	Nickname      string                 `protobuf:"bytes,5,opt,name=nickname,proto3" json:"nickname"`
+	LogID         string                 `protobuf:"bytes,6,opt,name=logID,proto3" json:"logID"`
+	Filename      string                 `protobuf:"bytes,7,opt,name=filename,proto3" json:"filename"`
+	SystemType    string                 `protobuf:"bytes,8,opt,name=systemType,proto3" json:"systemType"`
+	Ex            string                 `protobuf:"bytes,9,opt,name=ex,proto3" json:"ex"`
+	Version       string                 `protobuf:"bytes,10,opt,name=version,proto3" json:"version"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1978,8 +1978,8 @@ func (x *LogInfo) GetVersion() string {
 
 type SearchLogsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	LogsInfos     []*LogInfo             `protobuf:"bytes,1,rep,name=logsInfos,proto3" json:"logsInfos,omitempty"`
-	Total         uint32                 `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	LogsInfos     []*LogInfo             `protobuf:"bytes,1,rep,name=logsInfos,proto3" json:"logsInfos"`
+	Total         uint32                 `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
