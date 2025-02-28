@@ -41,7 +41,7 @@ const (
 type DoubleValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The double value.
-	Value         float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value"`
+	Value         float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -89,7 +89,7 @@ func (x *DoubleValue) GetValue() float64 {
 type FloatValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The float value.
-	Value         float32 `protobuf:"fixed32,1,opt,name=value,proto3" json:"value"`
+	Value         float32 `protobuf:"fixed32,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -137,7 +137,7 @@ func (x *FloatValue) GetValue() float32 {
 type Int64Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The int64 value.
-	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
+	Value         int64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -185,7 +185,7 @@ func (x *Int64Value) GetValue() int64 {
 type UInt64Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The uint64 value.
-	Value         uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
+	Value         uint64 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -233,7 +233,7 @@ func (x *UInt64Value) GetValue() uint64 {
 type Int32Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The int32 value.
-	Value         int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
+	Value         int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -281,7 +281,7 @@ func (x *Int32Value) GetValue() int32 {
 type UInt32Value struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The uint32 value.
-	Value         uint32 `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
+	Value         uint32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -329,7 +329,7 @@ func (x *UInt32Value) GetValue() uint32 {
 type BoolValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The bool value.
-	Value         bool `protobuf:"varint,1,opt,name=value,proto3" json:"value"`
+	Value         bool `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -377,7 +377,7 @@ func (x *BoolValue) GetValue() bool {
 type StringValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The string value.
-	Value         string `protobuf:"bytes,1,opt,name=value,proto3" json:"value"`
+	Value         string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -425,7 +425,7 @@ func (x *StringValue) GetValue() string {
 type BytesValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The bytes value.
-	Value         []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value"`
+	Value         []byte `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
