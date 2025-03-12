@@ -57,6 +57,7 @@ const (
 	Conversation_GetNotNotifyConversationIDs_FullMethodName             = "/openim.conversation.conversation/GetNotNotifyConversationIDs"
 	Conversation_GetPinnedConversationIDs_FullMethodName                = "/openim.conversation.conversation/GetPinnedConversationIDs"
 	Conversation_ClearUserConversationMsg_FullMethodName                = "/openim.conversation.conversation/ClearUserConversationMsg"
+	Conversation_UpdateConversationsByUser_FullMethodName               = "/openim.conversation.conversation/UpdateConversationsByUser"
 )
 
 // ConversationClient is the client API for Conversation service.
@@ -87,6 +88,7 @@ type ConversationClient interface {
 	GetNotNotifyConversationIDs(ctx context.Context, in *GetNotNotifyConversationIDsReq, opts ...grpc.CallOption) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(ctx context.Context, in *GetPinnedConversationIDsReq, opts ...grpc.CallOption) (*GetPinnedConversationIDsResp, error)
 	ClearUserConversationMsg(ctx context.Context, in *ClearUserConversationMsgReq, opts ...grpc.CallOption) (*ClearUserConversationMsgResp, error)
+	UpdateConversationsByUser(ctx context.Context, in *UpdateConversationsByUserReq, opts ...grpc.CallOption) (*UpdateConversationsByUserResp, error)
 }
 
 type conversationClient struct {
@@ -337,6 +339,16 @@ func (c *conversationClient) ClearUserConversationMsg(ctx context.Context, in *C
 	return out, nil
 }
 
+func (c *conversationClient) UpdateConversationsByUser(ctx context.Context, in *UpdateConversationsByUserReq, opts ...grpc.CallOption) (*UpdateConversationsByUserResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateConversationsByUserResp)
+	err := c.cc.Invoke(ctx, Conversation_UpdateConversationsByUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ConversationServer is the server API for Conversation service.
 // All implementations must embed UnimplementedConversationServer
 // for forward compatibility.
@@ -365,6 +377,7 @@ type ConversationServer interface {
 	GetNotNotifyConversationIDs(context.Context, *GetNotNotifyConversationIDsReq) (*GetNotNotifyConversationIDsResp, error)
 	GetPinnedConversationIDs(context.Context, *GetPinnedConversationIDsReq) (*GetPinnedConversationIDsResp, error)
 	ClearUserConversationMsg(context.Context, *ClearUserConversationMsgReq) (*ClearUserConversationMsgResp, error)
+	UpdateConversationsByUser(context.Context, *UpdateConversationsByUserReq) (*UpdateConversationsByUserResp, error)
 	mustEmbedUnimplementedConversationServer()
 }
 
@@ -446,6 +459,9 @@ func (UnimplementedConversationServer) GetPinnedConversationIDs(context.Context,
 }
 func (UnimplementedConversationServer) ClearUserConversationMsg(context.Context, *ClearUserConversationMsgReq) (*ClearUserConversationMsgResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ClearUserConversationMsg not implemented")
+}
+func (UnimplementedConversationServer) UpdateConversationsByUser(context.Context, *UpdateConversationsByUserReq) (*UpdateConversationsByUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationsByUser not implemented")
 }
 func (UnimplementedConversationServer) mustEmbedUnimplementedConversationServer() {}
 func (UnimplementedConversationServer) testEmbeddedByValue()                      {}
@@ -900,6 +916,24 @@ func _Conversation_ClearUserConversationMsg_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Conversation_UpdateConversationsByUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateConversationsByUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ConversationServer).UpdateConversationsByUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Conversation_UpdateConversationsByUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ConversationServer).UpdateConversationsByUser(ctx, req.(*UpdateConversationsByUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Conversation_ServiceDesc is the grpc.ServiceDesc for Conversation service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1002,6 +1036,10 @@ var Conversation_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ClearUserConversationMsg",
 			Handler:    _Conversation_ClearUserConversationMsg_Handler,
+		},
+		{
+			MethodName: "UpdateConversationsByUser",
+			Handler:    _Conversation_UpdateConversationsByUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
