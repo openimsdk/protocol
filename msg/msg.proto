@@ -356,29 +356,6 @@ message GetActiveConversationResp {
   repeated ActiveConversation conversations = 1;
 }
 
-message AppendStreamMsgReq {
-  string clientMsgID = 1;
-  int64 startIndex = 2;
-  repeated string packets = 3;
-  bool end = 4;
-}
-
-message AppendStreamMsgResp {}
-
-message GetStreamMsgReq {
-  string clientMsgID = 1;
-}
-
-message GetStreamMsgResp {
-  string clientMsgID = 1;
-  string conversationID = 2;
-  string userID = 3;
-  repeated string packets = 4;
-  bool end = 5;
-  int64 createTime = 6;
-  int64 deadlineTime = 7;
-}
-
 message SetUserConversationMaxSeqReq {
   string conversationID = 1;
   repeated string ownerUserID = 2;
@@ -459,9 +436,7 @@ service msg {
   rpc DestructMsgs(DestructMsgsReq) returns (DestructMsgsResp);
 
   rpc GetActiveConversation(GetActiveConversationReq) returns (GetActiveConversationResp);
-
-  rpc AppendStreamMsg(AppendStreamMsgReq) returns (AppendStreamMsgResp);
-  rpc GetStreamMsg(GetStreamMsgReq) returns (GetStreamMsgResp);
+  
   rpc SetUserConversationMaxSeq(SetUserConversationMaxSeqReq) returns (SetUserConversationMaxSeqResp);
   rpc SetUserConversationMinSeq(SetUserConversationMinSeqReq) returns (SetUserConversationMinSeqResp);
   rpc GetLastMessageSeqByTime(GetLastMessageSeqByTimeReq) returns (GetLastMessageSeqByTimeResp);

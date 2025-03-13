@@ -62,8 +62,6 @@ const (
 	Msg_ClearMsg_FullMethodName                         = "/openim.msg.msg/ClearMsg"
 	Msg_DestructMsgs_FullMethodName                     = "/openim.msg.msg/DestructMsgs"
 	Msg_GetActiveConversation_FullMethodName            = "/openim.msg.msg/GetActiveConversation"
-	Msg_AppendStreamMsg_FullMethodName                  = "/openim.msg.msg/AppendStreamMsg"
-	Msg_GetStreamMsg_FullMethodName                     = "/openim.msg.msg/GetStreamMsg"
 	Msg_SetUserConversationMaxSeq_FullMethodName        = "/openim.msg.msg/SetUserConversationMaxSeq"
 	Msg_SetUserConversationMinSeq_FullMethodName        = "/openim.msg.msg/SetUserConversationMinSeq"
 	Msg_GetLastMessageSeqByTime_FullMethodName          = "/openim.msg.msg/GetLastMessageSeqByTime"
@@ -116,8 +114,6 @@ type MsgClient interface {
 	ClearMsg(ctx context.Context, in *ClearMsgReq, opts ...grpc.CallOption) (*ClearMsgResp, error)
 	DestructMsgs(ctx context.Context, in *DestructMsgsReq, opts ...grpc.CallOption) (*DestructMsgsResp, error)
 	GetActiveConversation(ctx context.Context, in *GetActiveConversationReq, opts ...grpc.CallOption) (*GetActiveConversationResp, error)
-	AppendStreamMsg(ctx context.Context, in *AppendStreamMsgReq, opts ...grpc.CallOption) (*AppendStreamMsgResp, error)
-	GetStreamMsg(ctx context.Context, in *GetStreamMsgReq, opts ...grpc.CallOption) (*GetStreamMsgResp, error)
 	SetUserConversationMaxSeq(ctx context.Context, in *SetUserConversationMaxSeqReq, opts ...grpc.CallOption) (*SetUserConversationMaxSeqResp, error)
 	SetUserConversationMinSeq(ctx context.Context, in *SetUserConversationMinSeqReq, opts ...grpc.CallOption) (*SetUserConversationMinSeqResp, error)
 	GetLastMessageSeqByTime(ctx context.Context, in *GetLastMessageSeqByTimeReq, opts ...grpc.CallOption) (*GetLastMessageSeqByTimeResp, error)
@@ -412,26 +408,6 @@ func (c *msgClient) GetActiveConversation(ctx context.Context, in *GetActiveConv
 	return out, nil
 }
 
-func (c *msgClient) AppendStreamMsg(ctx context.Context, in *AppendStreamMsgReq, opts ...grpc.CallOption) (*AppendStreamMsgResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AppendStreamMsgResp)
-	err := c.cc.Invoke(ctx, Msg_AppendStreamMsg_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) GetStreamMsg(ctx context.Context, in *GetStreamMsgReq, opts ...grpc.CallOption) (*GetStreamMsgResp, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetStreamMsgResp)
-	err := c.cc.Invoke(ctx, Msg_GetStreamMsg_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *msgClient) SetUserConversationMaxSeq(ctx context.Context, in *SetUserConversationMaxSeqReq, opts ...grpc.CallOption) (*SetUserConversationMaxSeqResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SetUserConversationMaxSeqResp)
@@ -518,8 +494,6 @@ type MsgServer interface {
 	ClearMsg(context.Context, *ClearMsgReq) (*ClearMsgResp, error)
 	DestructMsgs(context.Context, *DestructMsgsReq) (*DestructMsgsResp, error)
 	GetActiveConversation(context.Context, *GetActiveConversationReq) (*GetActiveConversationResp, error)
-	AppendStreamMsg(context.Context, *AppendStreamMsgReq) (*AppendStreamMsgResp, error)
-	GetStreamMsg(context.Context, *GetStreamMsgReq) (*GetStreamMsgResp, error)
 	SetUserConversationMaxSeq(context.Context, *SetUserConversationMaxSeqReq) (*SetUserConversationMaxSeqResp, error)
 	SetUserConversationMinSeq(context.Context, *SetUserConversationMinSeqReq) (*SetUserConversationMinSeqResp, error)
 	GetLastMessageSeqByTime(context.Context, *GetLastMessageSeqByTimeReq) (*GetLastMessageSeqByTimeResp, error)
@@ -617,12 +591,6 @@ func (UnimplementedMsgServer) DestructMsgs(context.Context, *DestructMsgsReq) (*
 }
 func (UnimplementedMsgServer) GetActiveConversation(context.Context, *GetActiveConversationReq) (*GetActiveConversationResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetActiveConversation not implemented")
-}
-func (UnimplementedMsgServer) AppendStreamMsg(context.Context, *AppendStreamMsgReq) (*AppendStreamMsgResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AppendStreamMsg not implemented")
-}
-func (UnimplementedMsgServer) GetStreamMsg(context.Context, *GetStreamMsgReq) (*GetStreamMsgResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetStreamMsg not implemented")
 }
 func (UnimplementedMsgServer) SetUserConversationMaxSeq(context.Context, *SetUserConversationMaxSeqReq) (*SetUserConversationMaxSeqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetUserConversationMaxSeq not implemented")
@@ -1161,42 +1129,6 @@ func _Msg_GetActiveConversation_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_AppendStreamMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AppendStreamMsgReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).AppendStreamMsg(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_AppendStreamMsg_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).AppendStreamMsg(ctx, req.(*AppendStreamMsgReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_GetStreamMsg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetStreamMsgReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).GetStreamMsg(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Msg_GetStreamMsg_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).GetStreamMsg(ctx, req.(*GetStreamMsgReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Msg_SetUserConversationMaxSeq_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SetUserConversationMaxSeqReq)
 	if err := dec(in); err != nil {
@@ -1387,14 +1319,6 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetActiveConversation",
 			Handler:    _Msg_GetActiveConversation_Handler,
-		},
-		{
-			MethodName: "AppendStreamMsg",
-			Handler:    _Msg_AppendStreamMsg_Handler,
-		},
-		{
-			MethodName: "GetStreamMsg",
-			Handler:    _Msg_GetStreamMsg_Handler,
 		},
 		{
 			MethodName: "SetUserConversationMaxSeq",
