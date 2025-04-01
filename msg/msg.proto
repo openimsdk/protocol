@@ -59,6 +59,18 @@ message SendMsgResp {
   sdkws.MsgData modify = 4;
 }
 
+message SendSimpleMsgReq {
+  sdkws.MsgData msgData = 3;
+}
+
+message SendSimpleMsgResp {
+  string serverMsgID = 1;
+  string clientMsgID = 2;
+  int64 sendTime = 3;
+  sdkws.MsgData modify = 4;
+}
+
+
 message SetSendMsgStatusReq {
   int32 status = 1;
 }
@@ -403,6 +415,8 @@ service msg {
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
   //发送消息
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
+  //简易发送消息
+  rpc SendSimpleMsg(SendSimpleMsgReq) returns (SendSimpleMsgResp);
 
   rpc SetUserConversationsMinSeq(SetUserConversationsMinSeqReq) returns (SetUserConversationsMinSeqResp);
 
