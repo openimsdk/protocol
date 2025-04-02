@@ -878,7 +878,7 @@ func (x *CompleteMultipartUploadResp) GetUrl() string {
 type AccessURLReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	Query         map[string]string      `protobuf:"bytes,2,rep,name=query,proto3" json:"query,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Query         map[string]string      `protobuf:"bytes,2,rep,name=query,proto3" json:"query" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1069,7 +1069,7 @@ type InitiateFormDataResp struct {
 	Url           string                 `protobuf:"bytes,2,opt,name=url,proto3" json:"url"`
 	File          string                 `protobuf:"bytes,3,opt,name=file,proto3" json:"file"`
 	Header        []*KeyValues           `protobuf:"bytes,4,rep,name=header,proto3" json:"header"`
-	FormData      map[string]string      `protobuf:"bytes,5,rep,name=formData,proto3" json:"formData,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	FormData      map[string]string      `protobuf:"bytes,5,rep,name=formData,proto3" json:"formData" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Expires       int64                  `protobuf:"varint,6,opt,name=expires,proto3" json:"expires"`
 	SuccessCodes  []int32                `protobuf:"varint,7,rep,packed,name=successCodes,proto3" json:"successCodes"`
 	unknownFields protoimpl.UnknownFields

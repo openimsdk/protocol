@@ -337,6 +337,48 @@ message getAllOnlineUsersResp {
   uint64 nextCursor = 2;
 }
 
+message getUserClientConfigReq {
+  string userID = 1;
+}
+
+message getUserClientConfigResp {
+  map<string,string> configs = 2;
+}
+
+message setUserClientConfigReq {
+  string userID = 1;
+  map<string,string> configs = 2;
+}
+
+message setUserClientConfigResp {
+}
+
+message delUserClientConfigReq {
+  string userID = 1;
+  repeated string keys = 2;
+}
+
+message delUserClientConfigResp {
+}
+
+
+message pageUserClientConfigReq {
+  string userID = 1;
+  string key = 2;
+  sdkws.RequestPagination pagination = 3;
+}
+
+message pageUserClientConfigResp {
+  int64 total = 1;
+  repeated clientConfig configs = 2;
+}
+
+message clientConfig {
+  string key = 1;
+  string userID = 2;
+  string value = 3;
+}
+
 service user {
   //Get the specified user information full field
   rpc getDesignateUsers(getDesignateUsersReq) returns (getDesignateUsersResp);
@@ -389,4 +431,13 @@ service user {
   rpc setUserOnlineStatus(setUserOnlineStatusReq) returns (setUserOnlineStatusResp);
   // get all online users
   rpc getAllOnlineUsers(getAllOnlineUsersReq) returns (getAllOnlineUsersResp);
+
+  rpc getUserClientConfig(getUserClientConfigReq) returns (getUserClientConfigResp);
+
+  rpc setUserClientConfig(setUserClientConfigReq) returns (setUserClientConfigResp);
+
+  rpc delUserClientConfig(delUserClientConfigReq) returns (delUserClientConfigResp);
+
+  rpc pageUserClientConfig(pageUserClientConfigReq) returns (pageUserClientConfigResp);
+
 }

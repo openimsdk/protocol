@@ -59,6 +59,10 @@ const (
 	User_SortQuery_FullMethodName                     = "/openim.user.user/sortQuery"
 	User_SetUserOnlineStatus_FullMethodName           = "/openim.user.user/setUserOnlineStatus"
 	User_GetAllOnlineUsers_FullMethodName             = "/openim.user.user/getAllOnlineUsers"
+	User_GetUserClientConfig_FullMethodName           = "/openim.user.user/getUserClientConfig"
+	User_SetUserClientConfig_FullMethodName           = "/openim.user.user/setUserClientConfig"
+	User_DelUserClientConfig_FullMethodName           = "/openim.user.user/delUserClientConfig"
+	User_PageUserClientConfig_FullMethodName          = "/openim.user.user/pageUserClientConfig"
 )
 
 // UserClient is the client API for User service.
@@ -114,6 +118,10 @@ type UserClient interface {
 	SetUserOnlineStatus(ctx context.Context, in *SetUserOnlineStatusReq, opts ...grpc.CallOption) (*SetUserOnlineStatusResp, error)
 	// get all online users
 	GetAllOnlineUsers(ctx context.Context, in *GetAllOnlineUsersReq, opts ...grpc.CallOption) (*GetAllOnlineUsersResp, error)
+	GetUserClientConfig(ctx context.Context, in *GetUserClientConfigReq, opts ...grpc.CallOption) (*GetUserClientConfigResp, error)
+	SetUserClientConfig(ctx context.Context, in *SetUserClientConfigReq, opts ...grpc.CallOption) (*SetUserClientConfigResp, error)
+	DelUserClientConfig(ctx context.Context, in *DelUserClientConfigReq, opts ...grpc.CallOption) (*DelUserClientConfigResp, error)
+	PageUserClientConfig(ctx context.Context, in *PageUserClientConfigReq, opts ...grpc.CallOption) (*PageUserClientConfigResp, error)
 }
 
 type userClient struct {
@@ -384,6 +392,46 @@ func (c *userClient) GetAllOnlineUsers(ctx context.Context, in *GetAllOnlineUser
 	return out, nil
 }
 
+func (c *userClient) GetUserClientConfig(ctx context.Context, in *GetUserClientConfigReq, opts ...grpc.CallOption) (*GetUserClientConfigResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserClientConfigResp)
+	err := c.cc.Invoke(ctx, User_GetUserClientConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) SetUserClientConfig(ctx context.Context, in *SetUserClientConfigReq, opts ...grpc.CallOption) (*SetUserClientConfigResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserClientConfigResp)
+	err := c.cc.Invoke(ctx, User_SetUserClientConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) DelUserClientConfig(ctx context.Context, in *DelUserClientConfigReq, opts ...grpc.CallOption) (*DelUserClientConfigResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DelUserClientConfigResp)
+	err := c.cc.Invoke(ctx, User_DelUserClientConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *userClient) PageUserClientConfig(ctx context.Context, in *PageUserClientConfigReq, opts ...grpc.CallOption) (*PageUserClientConfigResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PageUserClientConfigResp)
+	err := c.cc.Invoke(ctx, User_PageUserClientConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UserServer is the server API for User service.
 // All implementations must embed UnimplementedUserServer
 // for forward compatibility.
@@ -437,6 +485,10 @@ type UserServer interface {
 	SetUserOnlineStatus(context.Context, *SetUserOnlineStatusReq) (*SetUserOnlineStatusResp, error)
 	// get all online users
 	GetAllOnlineUsers(context.Context, *GetAllOnlineUsersReq) (*GetAllOnlineUsersResp, error)
+	GetUserClientConfig(context.Context, *GetUserClientConfigReq) (*GetUserClientConfigResp, error)
+	SetUserClientConfig(context.Context, *SetUserClientConfigReq) (*SetUserClientConfigResp, error)
+	DelUserClientConfig(context.Context, *DelUserClientConfigReq) (*DelUserClientConfigResp, error)
+	PageUserClientConfig(context.Context, *PageUserClientConfigReq) (*PageUserClientConfigResp, error)
 	mustEmbedUnimplementedUserServer()
 }
 
@@ -524,6 +576,18 @@ func (UnimplementedUserServer) SetUserOnlineStatus(context.Context, *SetUserOnli
 }
 func (UnimplementedUserServer) GetAllOnlineUsers(context.Context, *GetAllOnlineUsersReq) (*GetAllOnlineUsersResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllOnlineUsers not implemented")
+}
+func (UnimplementedUserServer) GetUserClientConfig(context.Context, *GetUserClientConfigReq) (*GetUserClientConfigResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserClientConfig not implemented")
+}
+func (UnimplementedUserServer) SetUserClientConfig(context.Context, *SetUserClientConfigReq) (*SetUserClientConfigResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserClientConfig not implemented")
+}
+func (UnimplementedUserServer) DelUserClientConfig(context.Context, *DelUserClientConfigReq) (*DelUserClientConfigResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DelUserClientConfig not implemented")
+}
+func (UnimplementedUserServer) PageUserClientConfig(context.Context, *PageUserClientConfigReq) (*PageUserClientConfigResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PageUserClientConfig not implemented")
 }
 func (UnimplementedUserServer) mustEmbedUnimplementedUserServer() {}
 func (UnimplementedUserServer) testEmbeddedByValue()              {}
@@ -1014,6 +1078,78 @@ func _User_GetAllOnlineUsers_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _User_GetUserClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserClientConfigReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).GetUserClientConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_GetUserClientConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).GetUserClientConfig(ctx, req.(*GetUserClientConfigReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_SetUserClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserClientConfigReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).SetUserClientConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_SetUserClientConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).SetUserClientConfig(ctx, req.(*SetUserClientConfigReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_DelUserClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DelUserClientConfigReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).DelUserClientConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_DelUserClientConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).DelUserClientConfig(ctx, req.(*DelUserClientConfigReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _User_PageUserClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PageUserClientConfigReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UserServer).PageUserClientConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: User_PageUserClientConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UserServer).PageUserClientConfig(ctx, req.(*PageUserClientConfigReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // User_ServiceDesc is the grpc.ServiceDesc for User service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1124,6 +1260,22 @@ var User_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getAllOnlineUsers",
 			Handler:    _User_GetAllOnlineUsers_Handler,
+		},
+		{
+			MethodName: "getUserClientConfig",
+			Handler:    _User_GetUserClientConfig_Handler,
+		},
+		{
+			MethodName: "setUserClientConfig",
+			Handler:    _User_SetUserClientConfig_Handler,
+		},
+		{
+			MethodName: "delUserClientConfig",
+			Handler:    _User_DelUserClientConfig_Handler,
+		},
+		{
+			MethodName: "pageUserClientConfig",
+			Handler:    _User_PageUserClientConfig_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
