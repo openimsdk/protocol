@@ -202,6 +202,7 @@ message GetConversationMaxSeqResp {
 message GetConversationsHasReadAndMaxSeqReq {
   string userID = 1;
   repeated string conversationIDs = 2;
+  bool returnPinned = 3;
 }
 
 message Seqs {
@@ -212,6 +213,7 @@ message Seqs {
 
 message GetConversationsHasReadAndMaxSeqResp {
   map<string, Seqs> seqs = 1;
+  repeated string pinnedConversationIDs = 2;
 }
 
 message GetActiveUserReq {
