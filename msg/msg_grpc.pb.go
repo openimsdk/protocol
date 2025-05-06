@@ -67,6 +67,8 @@ const (
 	Msg_SetUserConversationMinSeq_FullMethodName        = "/openim.msg.msg/SetUserConversationMinSeq"
 	Msg_GetLastMessageSeqByTime_FullMethodName          = "/openim.msg.msg/GetLastMessageSeqByTime"
 	Msg_GetLastMessage_FullMethodName                   = "/openim.msg.msg/GetLastMessage"
+	Msg_GetConversationsUnreadCount_FullMethodName      = "/openim.msg.msg/GetConversationsUnreadCount"
+	Msg_ClearConversationsUnreadCount_FullMethodName    = "/openim.msg.msg/ClearConversationsUnreadCount"
 )
 
 // MsgClient is the client API for Msg service.
@@ -121,6 +123,8 @@ type MsgClient interface {
 	SetUserConversationMinSeq(ctx context.Context, in *SetUserConversationMinSeqReq, opts ...grpc.CallOption) (*SetUserConversationMinSeqResp, error)
 	GetLastMessageSeqByTime(ctx context.Context, in *GetLastMessageSeqByTimeReq, opts ...grpc.CallOption) (*GetLastMessageSeqByTimeResp, error)
 	GetLastMessage(ctx context.Context, in *GetLastMessageReq, opts ...grpc.CallOption) (*GetLastMessageResp, error)
+	GetConversationsUnreadCount(ctx context.Context, in *GetConversationsUnreadCountReq, opts ...grpc.CallOption) (*GetConversationsUnreadCountResp, error)
+	ClearConversationsUnreadCount(ctx context.Context, in *ClearConversationsUnreadCountReq, opts ...grpc.CallOption) (*ClearConversationsUnreadCountResp, error)
 }
 
 type msgClient struct {
@@ -461,6 +465,26 @@ func (c *msgClient) GetLastMessage(ctx context.Context, in *GetLastMessageReq, o
 	return out, nil
 }
 
+func (c *msgClient) GetConversationsUnreadCount(ctx context.Context, in *GetConversationsUnreadCountReq, opts ...grpc.CallOption) (*GetConversationsUnreadCountResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConversationsUnreadCountResp)
+	err := c.cc.Invoke(ctx, Msg_GetConversationsUnreadCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *msgClient) ClearConversationsUnreadCount(ctx context.Context, in *ClearConversationsUnreadCountReq, opts ...grpc.CallOption) (*ClearConversationsUnreadCountResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ClearConversationsUnreadCountResp)
+	err := c.cc.Invoke(ctx, Msg_ClearConversationsUnreadCount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility.
@@ -513,6 +537,8 @@ type MsgServer interface {
 	SetUserConversationMinSeq(context.Context, *SetUserConversationMinSeqReq) (*SetUserConversationMinSeqResp, error)
 	GetLastMessageSeqByTime(context.Context, *GetLastMessageSeqByTimeReq) (*GetLastMessageSeqByTimeResp, error)
 	GetLastMessage(context.Context, *GetLastMessageReq) (*GetLastMessageResp, error)
+	GetConversationsUnreadCount(context.Context, *GetConversationsUnreadCountReq) (*GetConversationsUnreadCountResp, error)
+	ClearConversationsUnreadCount(context.Context, *ClearConversationsUnreadCountReq) (*ClearConversationsUnreadCountResp, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -621,6 +647,12 @@ func (UnimplementedMsgServer) GetLastMessageSeqByTime(context.Context, *GetLastM
 }
 func (UnimplementedMsgServer) GetLastMessage(context.Context, *GetLastMessageReq) (*GetLastMessageResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetLastMessage not implemented")
+}
+func (UnimplementedMsgServer) GetConversationsUnreadCount(context.Context, *GetConversationsUnreadCountReq) (*GetConversationsUnreadCountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConversationsUnreadCount not implemented")
+}
+func (UnimplementedMsgServer) ClearConversationsUnreadCount(context.Context, *ClearConversationsUnreadCountReq) (*ClearConversationsUnreadCountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClearConversationsUnreadCount not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 func (UnimplementedMsgServer) testEmbeddedByValue()             {}
@@ -1237,6 +1269,42 @@ func _Msg_GetLastMessage_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_GetConversationsUnreadCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationsUnreadCountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).GetConversationsUnreadCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_GetConversationsUnreadCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).GetConversationsUnreadCount(ctx, req.(*GetConversationsUnreadCountReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Msg_ClearConversationsUnreadCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ClearConversationsUnreadCountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ClearConversationsUnreadCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_ClearConversationsUnreadCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ClearConversationsUnreadCount(ctx, req.(*ClearConversationsUnreadCountReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1375,6 +1443,14 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetLastMessage",
 			Handler:    _Msg_GetLastMessage_Handler,
+		},
+		{
+			MethodName: "GetConversationsUnreadCount",
+			Handler:    _Msg_GetConversationsUnreadCount_Handler,
+		},
+		{
+			MethodName: "ClearConversationsUnreadCount",
+			Handler:    _Msg_ClearConversationsUnreadCount_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
