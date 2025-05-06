@@ -250,23 +250,3 @@ func (x *DestructMsgsReq) Check() error {
 	}
 	return nil
 }
-
-func (x *GetConversationsUnreadCountReq) Check() error {
-	if x.UserID == "" {
-		return errors.New("userID is empty")
-	}
-	if len(x.ConversationIDs) == 0 {
-		return errors.New("conversationIDs is empty")
-	}
-	return nil
-}
-
-func (x *ClearConversationsUnreadCountReq) Check() error {
-	if x.UserID == "" {
-		return errors.New("userID is empty")
-	}
-	if len(x.ConversationIDs) == 0 {
-		return errors.New("conversationIDs is empty")
-	}
-	return nil
-}
