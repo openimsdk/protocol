@@ -287,6 +287,16 @@ func (x *SearchNotificationAccountReq) Check() error {
 	return nil
 }
 
+func (x *UpdateUserInfoExReq) Check() error {
+	if x.UserInfo == nil {
+		return errors.New("userInfo is empty")
+	}
+	if x.UserInfo.UserID == "" {
+		return errors.New("userID is empty")
+	}
+	return nil
+}
+
 func (x *GetDesignateUsersResp) Format() any {
 	if len(x.UsersInfo) > 20 {
 		return fmt.Sprintf("len is %v", len(x.UsersInfo))
