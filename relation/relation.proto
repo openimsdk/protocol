@@ -70,7 +70,6 @@ message getPaginationFriendsApplyToResp {
 message getDesignatedFriendsApplyReq {
   string fromUserID = 1;
   string toUserID = 2;
-  repeated int32 handleResults = 3;
 }
 
 message getDesignatedFriendsApplyResp {
@@ -195,6 +194,7 @@ message setFriendRemarkResp {}
 message getPaginationFriendsApplyFromReq {
   string userID = 1;
   openim.sdkws.RequestPagination pagination = 2;
+  repeated int32 handleResults = 3;
 }
 message getPaginationFriendsApplyFromResp {
   repeated openim.sdkws.FriendRequest friendRequests = 1;

@@ -565,7 +565,6 @@ type GetDesignatedFriendsApplyReq struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	FromUserID    string                 `protobuf:"bytes,1,opt,name=fromUserID,proto3" json:"fromUserID"`
 	ToUserID      string                 `protobuf:"bytes,2,opt,name=toUserID,proto3" json:"toUserID"`
-	HandleResults []int32                `protobuf:"varint,3,rep,packed,name=handleResults,proto3" json:"handleResults"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -612,13 +611,6 @@ func (x *GetDesignatedFriendsApplyReq) GetToUserID() string {
 		return x.ToUserID
 	}
 	return ""
-}
-
-func (x *GetDesignatedFriendsApplyReq) GetHandleResults() []int32 {
-	if x != nil {
-		return x.HandleResults
-	}
-	return nil
 }
 
 type GetDesignatedFriendsApplyResp struct {
@@ -2030,6 +2022,7 @@ type GetPaginationFriendsApplyFromReq struct {
 	state         protoimpl.MessageState   `protogen:"open.v1"`
 	UserID        string                   `protobuf:"bytes,1,opt,name=userID,proto3" json:"userID"`
 	Pagination    *sdkws.RequestPagination `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination"`
+	HandleResults []int32                  `protobuf:"varint,3,rep,packed,name=handleResults,proto3" json:"handleResults"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2074,6 +2067,13 @@ func (x *GetPaginationFriendsApplyFromReq) GetUserID() string {
 func (x *GetPaginationFriendsApplyFromReq) GetPagination() *sdkws.RequestPagination {
 	if x != nil {
 		return x.Pagination
+	}
+	return nil
+}
+
+func (x *GetPaginationFriendsApplyFromReq) GetHandleResults() []int32 {
+	if x != nil {
+		return x.HandleResults
 	}
 	return nil
 }
@@ -3234,13 +3234,12 @@ const file_relation_relation_proto_rawDesc = "" +
 	"\rhandleResults\x18\x03 \x03(\x05R\rhandleResults\"|\n" +
 	"\x1fgetPaginationFriendsApplyToResp\x12C\n" +
 	"\x0eFriendRequests\x18\x01 \x03(\v2\x1b.openim.sdkws.FriendRequestR\x0eFriendRequests\x12\x14\n" +
-	"\x05total\x18\x02 \x01(\x05R\x05total\"\x80\x01\n" +
+	"\x05total\x18\x02 \x01(\x05R\x05total\"Z\n" +
 	"\x1cgetDesignatedFriendsApplyReq\x12\x1e\n" +
 	"\n" +
 	"fromUserID\x18\x01 \x01(\tR\n" +
 	"fromUserID\x12\x1a\n" +
-	"\btoUserID\x18\x02 \x01(\tR\btoUserID\x12$\n" +
-	"\rhandleResults\x18\x03 \x03(\x05R\rhandleResults\"d\n" +
+	"\btoUserID\x18\x02 \x01(\tR\btoUserID\"d\n" +
 	"\x1dgetDesignatedFriendsApplyResp\x12C\n" +
 	"\x0efriendRequests\x18\x01 \x03(\v2\x1b.openim.sdkws.FriendRequestR\x0efriendRequests\"K\n" +
 	"\x1dgetSelfUnhandledApplyCountReq\x12\x16\n" +
@@ -3326,12 +3325,13 @@ const file_relation_relation_proto_rawDesc = "" +
 	"\vownerUserID\x18\x01 \x01(\tR\vownerUserID\x12\"\n" +
 	"\ffriendUserID\x18\x02 \x01(\tR\ffriendUserID\x12\x16\n" +
 	"\x06remark\x18\x03 \x01(\tR\x06remark\"\x15\n" +
-	"\x13setFriendRemarkResp\"{\n" +
+	"\x13setFriendRemarkResp\"\xa1\x01\n" +
 	" getPaginationFriendsApplyFromReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12?\n" +
 	"\n" +
 	"pagination\x18\x02 \x01(\v2\x1f.openim.sdkws.RequestPaginationR\n" +
-	"pagination\"~\n" +
+	"pagination\x12$\n" +
+	"\rhandleResults\x18\x03 \x03(\x05R\rhandleResults\"~\n" +
 	"!getPaginationFriendsApplyFromResp\x12C\n" +
 	"\x0efriendRequests\x18\x01 \x03(\v2\x1b.openim.sdkws.FriendRequestR\x0efriendRequests\x12\x14\n" +
 	"\x05total\x18\x02 \x01(\x05R\x05total\")\n" +
