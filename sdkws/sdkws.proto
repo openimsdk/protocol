@@ -272,6 +272,7 @@ message JoinGroupApplicationTips {
   PublicUserInfo applicant = 2;
   string reqMsg = 3;
   string uuid = 4;
+  GroupRequest request = 5;
 }
 
 //	OnQuitGroup()
@@ -291,6 +292,7 @@ message GroupApplicationAcceptedTips {
   string handleMsg = 4;
   int32 receiverAs = 5; // admin(==1) or applicant(==0)
   string uuid = 6;
+  GroupRequest request = 7;
 }
 
 //	OnApplicationGroupRejected()
@@ -300,6 +302,7 @@ message GroupApplicationRejectedTips {
   string handleMsg = 4;
   int32 receiverAs = 5; // admin(==1) or applicant(==0)
   string uuid = 6;
+  GroupRequest request = 7;
 }
 
 //	OnTransferGroupOwner()
@@ -411,6 +414,7 @@ message FromToUserID {
 //FromUserID apply to add ToUserID
 message FriendApplicationTips {
   FromToUserID fromToUserID = 1; //from: initiator; to: receiver
+  FriendRequest request = 2;
 }
 
 //FromUserID accept or reject ToUserID
@@ -419,12 +423,14 @@ message FriendApplicationApprovedTips {
   string handleMsg = 2;
   uint64 friendVersion = 3;
   string friendVersionID = 4;
+  FriendRequest request = 5;
 }
 
 //FromUserID accept or reject ToUserID
 message FriendApplicationRejectedTips {
   FromToUserID fromToUserID = 1; //from: rejecter; to: request initiator
   string handleMsg = 2;
+  FriendRequest request = 3;
 }
 
 // FromUserID  Added a friend ToUserID
