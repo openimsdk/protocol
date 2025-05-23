@@ -4738,7 +4738,7 @@ const file_group_group_proto_rawDesc = "" +
 	"\brespList\x18\x01 \x03(\v2>.openim.group.BatchGetIncrementalGroupMemberResp.RespListEntryR\brespList\x1ah\n" +
 	"\rRespListEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12A\n" +
-	"\x05value\x18\x02 \x01(\v2+.openim.group.getIncrementalGroupMemberRespR\x05value:\x028\x012\xcc\x1e\n" +
+	"\x05value\x18\x02 \x01(\v2+.openim.group.getIncrementalGroupMemberRespR\x05value:\x028\x012\xcd\x1e\n" +
 	"\x05group\x12J\n" +
 	"\vcreateGroup\x12\x1c.openim.group.CreateGroupReq\x1a\x1d.openim.group.CreateGroupResp\x12D\n" +
 	"\tjoinGroup\x12\x1a.openim.group.JoinGroupReq\x1a\x1b.openim.group.JoinGroupResp\x12D\n" +
@@ -4746,8 +4746,8 @@ const file_group_group_proto_rawDesc = "" +
 	"\rgetGroupsInfo\x12\x1e.openim.group.GetGroupsInfoReq\x1a\x1f.openim.group.GetGroupsInfoResp\x12M\n" +
 	"\fsetGroupInfo\x12\x1d.openim.group.SetGroupInfoReq\x1a\x1e.openim.group.SetGroupInfoResp\x12S\n" +
 	"\x0esetGroupInfoEx\x12\x1f.openim.group.SetGroupInfoExReq\x1a .openim.group.SetGroupInfoExResp\x12n\n" +
-	"\x17getGroupApplicationList\x12(.openim.group.GetGroupApplicationListReq\x1a).openim.group.GetGroupApplicationListResp\x12\x8b\x01\n" +
-	" getGroupApplicationUnhandleCount\x122.openim.group.GetGroupApplicationUnhandledCountReq\x1a3.openim.group.GetGroupApplicationUnhandledCountResp\x12t\n" +
+	"\x17getGroupApplicationList\x12(.openim.group.GetGroupApplicationListReq\x1a).openim.group.GetGroupApplicationListResp\x12\x8c\x01\n" +
+	"!getGroupApplicationUnhandledCount\x122.openim.group.GetGroupApplicationUnhandledCountReq\x1a3.openim.group.GetGroupApplicationUnhandledCountResp\x12t\n" +
 	"\x19getUserReqApplicationList\x12*.openim.group.GetUserReqApplicationListReq\x1a+.openim.group.GetUserReqApplicationListResp\x12\x86\x01\n" +
 	"\x1fgetGroupUsersReqApplicationList\x120.openim.group.getGroupUsersReqApplicationListReq\x1a1.openim.group.getGroupUsersReqApplicationListResp\x12\x89\x01\n" +
 	" getSpecifiedUserGroupRequestInfo\x121.openim.group.GetSpecifiedUserGroupRequestInfoReq\x1a2.openim.group.GetSpecifiedUserGroupRequestInfoResp\x12_\n" +
@@ -4948,7 +4948,7 @@ var file_group_group_proto_depIdxs = []int32{
 	4,  // 55: openim.group.group.setGroupInfo:input_type -> openim.group.SetGroupInfoReq
 	6,  // 56: openim.group.group.setGroupInfoEx:input_type -> openim.group.SetGroupInfoExReq
 	8,  // 57: openim.group.group.getGroupApplicationList:input_type -> openim.group.GetGroupApplicationListReq
-	10, // 58: openim.group.group.getGroupApplicationUnhandleCount:input_type -> openim.group.GetGroupApplicationUnhandledCountReq
+	10, // 58: openim.group.group.getGroupApplicationUnhandledCount:input_type -> openim.group.GetGroupApplicationUnhandledCountReq
 	12, // 59: openim.group.group.getUserReqApplicationList:input_type -> openim.group.GetUserReqApplicationListReq
 	70, // 60: openim.group.group.getGroupUsersReqApplicationList:input_type -> openim.group.getGroupUsersReqApplicationListReq
 	14, // 61: openim.group.group.getSpecifiedUserGroupRequestInfo:input_type -> openim.group.GetSpecifiedUserGroupRequestInfoReq
@@ -4987,7 +4987,7 @@ var file_group_group_proto_depIdxs = []int32{
 	5,  // 94: openim.group.group.setGroupInfo:output_type -> openim.group.SetGroupInfoResp
 	7,  // 95: openim.group.group.setGroupInfoEx:output_type -> openim.group.SetGroupInfoExResp
 	9,  // 96: openim.group.group.getGroupApplicationList:output_type -> openim.group.GetGroupApplicationListResp
-	11, // 97: openim.group.group.getGroupApplicationUnhandleCount:output_type -> openim.group.GetGroupApplicationUnhandledCountResp
+	11, // 97: openim.group.group.getGroupApplicationUnhandledCount:output_type -> openim.group.GetGroupApplicationUnhandledCountResp
 	13, // 98: openim.group.group.getUserReqApplicationList:output_type -> openim.group.GetUserReqApplicationListResp
 	71, // 99: openim.group.group.getGroupUsersReqApplicationList:output_type -> openim.group.getGroupUsersReqApplicationListResp
 	15, // 100: openim.group.group.getSpecifiedUserGroupRequestInfo:output_type -> openim.group.GetSpecifiedUserGroupRequestInfoResp

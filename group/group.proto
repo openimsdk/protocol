@@ -433,7 +433,7 @@ service group {
   // Get group join applications (as admin or owner)
   rpc getGroupApplicationList(GetGroupApplicationListReq) returns (GetGroupApplicationListResp);
 
-  rpc getGroupApplicationUnhandleCount(GetGroupApplicationUnhandledCountReq) returns (GetGroupApplicationUnhandledCountResp);
+  rpc getGroupApplicationUnhandledCount(GetGroupApplicationUnhandledCountReq) returns (GetGroupApplicationUnhandledCountResp);
 
   // Get user's own join group applications
   rpc getUserReqApplicationList(GetUserReqApplicationListReq) returns (GetUserReqApplicationListResp);
