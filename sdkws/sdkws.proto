@@ -271,6 +271,7 @@ message JoinGroupApplicationTips {
   GroupInfo group = 1;
   PublicUserInfo applicant = 2;
   string reqMsg = 3;
+  string uuid = 4;
 }
 
 //	OnQuitGroup()
@@ -289,6 +290,7 @@ message GroupApplicationAcceptedTips {
   GroupMemberFullInfo opUser = 2;
   string handleMsg = 4;
   int32 receiverAs = 5; // admin(==1) or applicant(==0)
+  string uuid = 6;
 }
 
 //	OnApplicationGroupRejected()
@@ -297,6 +299,7 @@ message GroupApplicationRejectedTips {
   GroupMemberFullInfo opUser = 2;
   string handleMsg = 4;
   int32 receiverAs = 5; // admin(==1) or applicant(==0)
+  string uuid = 6;
 }
 
 //	OnTransferGroupOwner()
@@ -407,12 +410,12 @@ message FromToUserID {
 
 //FromUserID apply to add ToUserID
 message FriendApplicationTips {
-  FromToUserID fromToUserID = 1; //from：发起者； to：接收者
+  FromToUserID fromToUserID = 1; //from: initiator; to: receiver
 }
 
 //FromUserID accept or reject ToUserID
 message FriendApplicationApprovedTips {
-  FromToUserID fromToUserID = 1; //from：同意者；to：请求发起者
+  FromToUserID fromToUserID = 1; //from: the person who agrees; to: the person who initiates the request
   string handleMsg = 2;
   uint64 friendVersion = 3;
   string friendVersionID = 4;
@@ -420,7 +423,7 @@ message FriendApplicationApprovedTips {
 
 //FromUserID accept or reject ToUserID
 message FriendApplicationRejectedTips {
-  FromToUserID fromToUserID = 1; //from：拒绝者；to：请求发起者
+  FromToUserID fromToUserID = 1; //from: rejecter; to: request initiator
   string handleMsg = 2;
 }
 

@@ -60,6 +60,7 @@ message importFriendResp {}
 message getPaginationFriendsApplyToReq {
   string userID = 1;
   openim.sdkws.RequestPagination pagination = 2;
+  repeated int32 handleResults = 3;
 }
 message getPaginationFriendsApplyToResp {
   repeated openim.sdkws.FriendRequest FriendRequests = 1;
@@ -69,10 +70,20 @@ message getPaginationFriendsApplyToResp {
 message getDesignatedFriendsApplyReq {
   string fromUserID = 1;
   string toUserID = 2;
+  repeated int32 handleResults = 3;
 }
 
 message getDesignatedFriendsApplyResp {
   repeated openim.sdkws.FriendRequest friendRequests = 1;
+}
+
+message getSelfUnhandledApplyCountReq {
+  string userID = 1;
+  int64 time = 2;
+}
+
+message getSelfUnhandledApplyCountResp {
+  int64 count = 1;
 }
 
 message getIncrementalFriendsApplyToReq {
@@ -300,6 +311,8 @@ service friend {
   rpc getPaginationFriendsApplyTo(getPaginationFriendsApplyToReq) returns (getPaginationFriendsApplyToResp);
   // Get sent friend request list
   rpc getPaginationFriendsApplyFrom(getPaginationFriendsApplyFromReq) returns (getPaginationFriendsApplyFromResp);
+  // Get unhandled friend request count
+  rpc getSelfUnhandledApplyCount(getSelfUnhandledApplyCountReq) returns (getSelfUnhandledApplyCountResp);
   // Get specified friend request
   rpc getDesignatedFriendsApply(getDesignatedFriendsApplyReq) returns (getDesignatedFriendsApplyResp);
   // Get Incremental friends apply to list

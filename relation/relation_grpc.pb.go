@@ -36,6 +36,7 @@ const (
 	Friend_ApplyToAddFriend_FullMethodName               = "/openim.relation.friend/applyToAddFriend"
 	Friend_GetPaginationFriendsApplyTo_FullMethodName    = "/openim.relation.friend/getPaginationFriendsApplyTo"
 	Friend_GetPaginationFriendsApplyFrom_FullMethodName  = "/openim.relation.friend/getPaginationFriendsApplyFrom"
+	Friend_GetSelfUnhandledApplyCount_FullMethodName     = "/openim.relation.friend/getSelfUnhandledApplyCount"
 	Friend_GetDesignatedFriendsApply_FullMethodName      = "/openim.relation.friend/getDesignatedFriendsApply"
 	Friend_GetIncrementalFriendsApplyTo_FullMethodName   = "/openim.relation.friend/getIncrementalFriendsApplyTo"
 	Friend_GetIncrementalFriendsApplyFrom_FullMethodName = "/openim.relation.friend/getIncrementalFriendsApplyFrom"
@@ -71,6 +72,8 @@ type FriendClient interface {
 	GetPaginationFriendsApplyTo(ctx context.Context, in *GetPaginationFriendsApplyToReq, opts ...grpc.CallOption) (*GetPaginationFriendsApplyToResp, error)
 	// Get sent friend request list
 	GetPaginationFriendsApplyFrom(ctx context.Context, in *GetPaginationFriendsApplyFromReq, opts ...grpc.CallOption) (*GetPaginationFriendsApplyFromResp, error)
+	// Get unhandled friend request count
+	GetSelfUnhandledApplyCount(ctx context.Context, in *GetSelfUnhandledApplyCountReq, opts ...grpc.CallOption) (*GetSelfUnhandledApplyCountResp, error)
 	// Get specified friend request
 	GetDesignatedFriendsApply(ctx context.Context, in *GetDesignatedFriendsApplyReq, opts ...grpc.CallOption) (*GetDesignatedFriendsApplyResp, error)
 	// Get Incremental friends apply to list
@@ -148,6 +151,16 @@ func (c *friendClient) GetPaginationFriendsApplyFrom(ctx context.Context, in *Ge
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPaginationFriendsApplyFromResp)
 	err := c.cc.Invoke(ctx, Friend_GetPaginationFriendsApplyFrom_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *friendClient) GetSelfUnhandledApplyCount(ctx context.Context, in *GetSelfUnhandledApplyCountReq, opts ...grpc.CallOption) (*GetSelfUnhandledApplyCountResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSelfUnhandledApplyCountResp)
+	err := c.cc.Invoke(ctx, Friend_GetSelfUnhandledApplyCount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -394,6 +407,8 @@ type FriendServer interface {
 	GetPaginationFriendsApplyTo(context.Context, *GetPaginationFriendsApplyToReq) (*GetPaginationFriendsApplyToResp, error)
 	// Get sent friend request list
 	GetPaginationFriendsApplyFrom(context.Context, *GetPaginationFriendsApplyFromReq) (*GetPaginationFriendsApplyFromResp, error)
+	// Get unhandled friend request count
+	GetSelfUnhandledApplyCount(context.Context, *GetSelfUnhandledApplyCountReq) (*GetSelfUnhandledApplyCountResp, error)
 	// Get specified friend request
 	GetDesignatedFriendsApply(context.Context, *GetDesignatedFriendsApplyReq) (*GetDesignatedFriendsApplyResp, error)
 	// Get Incremental friends apply to list
@@ -455,6 +470,9 @@ func (UnimplementedFriendServer) GetPaginationFriendsApplyTo(context.Context, *G
 }
 func (UnimplementedFriendServer) GetPaginationFriendsApplyFrom(context.Context, *GetPaginationFriendsApplyFromReq) (*GetPaginationFriendsApplyFromResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPaginationFriendsApplyFrom not implemented")
+}
+func (UnimplementedFriendServer) GetSelfUnhandledApplyCount(context.Context, *GetSelfUnhandledApplyCountReq) (*GetSelfUnhandledApplyCountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSelfUnhandledApplyCount not implemented")
 }
 func (UnimplementedFriendServer) GetDesignatedFriendsApply(context.Context, *GetDesignatedFriendsApplyReq) (*GetDesignatedFriendsApplyResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDesignatedFriendsApply not implemented")
@@ -596,6 +614,24 @@ func _Friend_GetPaginationFriendsApplyFrom_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FriendServer).GetPaginationFriendsApplyFrom(ctx, req.(*GetPaginationFriendsApplyFromReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Friend_GetSelfUnhandledApplyCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSelfUnhandledApplyCountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FriendServer).GetSelfUnhandledApplyCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Friend_GetSelfUnhandledApplyCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FriendServer).GetSelfUnhandledApplyCount(ctx, req.(*GetSelfUnhandledApplyCountReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1032,6 +1068,10 @@ var Friend_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getPaginationFriendsApplyFrom",
 			Handler:    _Friend_GetPaginationFriendsApplyFrom_Handler,
+		},
+		{
+			MethodName: "getSelfUnhandledApplyCount",
+			Handler:    _Friend_GetSelfUnhandledApplyCount_Handler,
 		},
 		{
 			MethodName: "getDesignatedFriendsApply",

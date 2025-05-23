@@ -40,6 +40,7 @@ const (
 	Group_SetGroupInfo_FullMethodName                     = "/openim.group.group/setGroupInfo"
 	Group_SetGroupInfoEx_FullMethodName                   = "/openim.group.group/setGroupInfoEx"
 	Group_GetGroupApplicationList_FullMethodName          = "/openim.group.group/getGroupApplicationList"
+	Group_GetGroupApplicationUnhandleCount_FullMethodName = "/openim.group.group/getGroupApplicationUnhandleCount"
 	Group_GetUserReqApplicationList_FullMethodName        = "/openim.group.group/getUserReqApplicationList"
 	Group_GetGroupUsersReqApplicationList_FullMethodName  = "/openim.group.group/getGroupUsersReqApplicationList"
 	Group_GetSpecifiedUserGroupRequestInfo_FullMethodName = "/openim.group.group/getSpecifiedUserGroupRequestInfo"
@@ -77,59 +78,60 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GroupClient interface {
-	// 创建群
+	// Create group
 	CreateGroup(ctx context.Context, in *CreateGroupReq, opts ...grpc.CallOption) (*CreateGroupResp, error)
-	// 申请加群
+	// Apply to join group
 	JoinGroup(ctx context.Context, in *JoinGroupReq, opts ...grpc.CallOption) (*JoinGroupResp, error)
-	// 退出群
+	// Quit group
 	QuitGroup(ctx context.Context, in *QuitGroupReq, opts ...grpc.CallOption) (*QuitGroupResp, error)
-	// 获取指定群信息
+	// Get specific group info
 	GetGroupsInfo(ctx context.Context, in *GetGroupsInfoReq, opts ...grpc.CallOption) (*GetGroupsInfoResp, error)
-	// 设置群信息
+	// Set group info
 	SetGroupInfo(ctx context.Context, in *SetGroupInfoReq, opts ...grpc.CallOption) (*SetGroupInfoResp, error)
 	SetGroupInfoEx(ctx context.Context, in *SetGroupInfoExReq, opts ...grpc.CallOption) (*SetGroupInfoExResp, error)
-	// （以管理员或群主身份）获取群的加群申请
+	// Get group join applications (as admin or owner)
 	GetGroupApplicationList(ctx context.Context, in *GetGroupApplicationListReq, opts ...grpc.CallOption) (*GetGroupApplicationListResp, error)
-	// 获取用户自己的主动加群申请
+	GetGroupApplicationUnhandleCount(ctx context.Context, in *GetGroupApplicationUnhandledCountReq, opts ...grpc.CallOption) (*GetGroupApplicationUnhandledCountResp, error)
+	// Get user's own join group applications
 	GetUserReqApplicationList(ctx context.Context, in *GetUserReqApplicationListReq, opts ...grpc.CallOption) (*GetUserReqApplicationListResp, error)
-	// 获取该群用户的加群申请
+	// Get join applications for this group's users
 	GetGroupUsersReqApplicationList(ctx context.Context, in *GetGroupUsersReqApplicationListReq, opts ...grpc.CallOption) (*GetGroupUsersReqApplicationListResp, error)
 	GetSpecifiedUserGroupRequestInfo(ctx context.Context, in *GetSpecifiedUserGroupRequestInfoReq, opts ...grpc.CallOption) (*GetSpecifiedUserGroupRequestInfoResp, error)
-	// 转让群主
+	// Transfer group ownership
 	TransferGroupOwner(ctx context.Context, in *TransferGroupOwnerReq, opts ...grpc.CallOption) (*TransferGroupOwnerResp, error)
-	// 群主或管理员处理进群申请
+	// Process join group application as owner or admin
 	GroupApplicationResponse(ctx context.Context, in *GroupApplicationResponseReq, opts ...grpc.CallOption) (*GroupApplicationResponseResp, error)
-	// 获取某个群的群成员
+	// Get members of a specific group
 	GetGroupMemberList(ctx context.Context, in *GetGroupMemberListReq, opts ...grpc.CallOption) (*GetGroupMemberListResp, error)
-	// 获取某个群的指定群成员
+	// Get specific group members of a group
 	GetGroupMembersInfo(ctx context.Context, in *GetGroupMembersInfoReq, opts ...grpc.CallOption) (*GetGroupMembersInfoResp, error)
-	// 踢出群
+	// Kick member from group
 	KickGroupMember(ctx context.Context, in *KickGroupMemberReq, opts ...grpc.CallOption) (*KickGroupMemberResp, error)
-	// 获取某个人已加入群
+	// Get groups a user has joined
 	GetJoinedGroupList(ctx context.Context, in *GetJoinedGroupListReq, opts ...grpc.CallOption) (*GetJoinedGroupListResp, error)
-	// 邀请某些人进群
+	// Invite users to group
 	InviteUserToGroup(ctx context.Context, in *InviteUserToGroupReq, opts ...grpc.CallOption) (*InviteUserToGroupResp, error)
 	GetGroups(ctx context.Context, in *GetGroupsReq, opts ...grpc.CallOption) (*GetGroupsResp, error)
 	GetGroupMembersCMS(ctx context.Context, in *GetGroupMembersCMSReq, opts ...grpc.CallOption) (*GetGroupMembersCMSResp, error)
-	// 解散群
+	// Dismiss group
 	DismissGroup(ctx context.Context, in *DismissGroupReq, opts ...grpc.CallOption) (*DismissGroupResp, error)
-	// 对某个群成员禁言
+	// Mute a group member
 	MuteGroupMember(ctx context.Context, in *MuteGroupMemberReq, opts ...grpc.CallOption) (*MuteGroupMemberResp, error)
-	// 对某个群成员取消禁言
+	// Unmute a group member
 	CancelMuteGroupMember(ctx context.Context, in *CancelMuteGroupMemberReq, opts ...grpc.CallOption) (*CancelMuteGroupMemberResp, error)
-	// 对某个群禁言
+	// Mute a group
 	MuteGroup(ctx context.Context, in *MuteGroupReq, opts ...grpc.CallOption) (*MuteGroupResp, error)
-	// 对某个群取消禁言
+	// Unmute a group
 	CancelMuteGroup(ctx context.Context, in *CancelMuteGroupReq, opts ...grpc.CallOption) (*CancelMuteGroupResp, error)
-	// 设置群成员信息
+	// Set group member info
 	SetGroupMemberInfo(ctx context.Context, in *SetGroupMemberInfoReq, opts ...grpc.CallOption) (*SetGroupMemberInfoResp, error)
-	// 获取群信息hash值
+	// Get group abstract hash
 	GetGroupAbstractInfo(ctx context.Context, in *GetGroupAbstractInfoReq, opts ...grpc.CallOption) (*GetGroupAbstractInfoResp, error)
-	// 获取某个用户在指定群中的信息
+	// Get specific user's info in a group
 	GetUserInGroupMembers(ctx context.Context, in *GetUserInGroupMembersReq, opts ...grpc.CallOption) (*GetUserInGroupMembersResp, error)
-	// 获取群成员用户ID
+	// Get user IDs of group members
 	GetGroupMemberUserIDs(ctx context.Context, in *GetGroupMemberUserIDsReq, opts ...grpc.CallOption) (*GetGroupMemberUserIDsResp, error)
-	// 查询群组中对应级别的成员
+	// Query members of specific role level in a group
 	GetGroupMemberRoleLevel(ctx context.Context, in *GetGroupMemberRoleLevelReq, opts ...grpc.CallOption) (*GetGroupMemberRoleLevelResp, error)
 	GetGroupInfoCache(ctx context.Context, in *GetGroupInfoCacheReq, opts ...grpc.CallOption) (*GetGroupInfoCacheResp, error)
 	GetGroupMemberCache(ctx context.Context, in *GetGroupMemberCacheReq, opts ...grpc.CallOption) (*GetGroupMemberCacheResp, error)
@@ -214,6 +216,16 @@ func (c *groupClient) GetGroupApplicationList(ctx context.Context, in *GetGroupA
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGroupApplicationListResp)
 	err := c.cc.Invoke(ctx, Group_GetGroupApplicationList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *groupClient) GetGroupApplicationUnhandleCount(ctx context.Context, in *GetGroupApplicationUnhandledCountReq, opts ...grpc.CallOption) (*GetGroupApplicationUnhandledCountResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGroupApplicationUnhandledCountResp)
+	err := c.cc.Invoke(ctx, Group_GetGroupApplicationUnhandleCount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -534,59 +546,60 @@ func (c *groupClient) GetFullJoinGroupIDs(ctx context.Context, in *GetFullJoinGr
 // All implementations must embed UnimplementedGroupServer
 // for forward compatibility.
 type GroupServer interface {
-	// 创建群
+	// Create group
 	CreateGroup(context.Context, *CreateGroupReq) (*CreateGroupResp, error)
-	// 申请加群
+	// Apply to join group
 	JoinGroup(context.Context, *JoinGroupReq) (*JoinGroupResp, error)
-	// 退出群
+	// Quit group
 	QuitGroup(context.Context, *QuitGroupReq) (*QuitGroupResp, error)
-	// 获取指定群信息
+	// Get specific group info
 	GetGroupsInfo(context.Context, *GetGroupsInfoReq) (*GetGroupsInfoResp, error)
-	// 设置群信息
+	// Set group info
 	SetGroupInfo(context.Context, *SetGroupInfoReq) (*SetGroupInfoResp, error)
 	SetGroupInfoEx(context.Context, *SetGroupInfoExReq) (*SetGroupInfoExResp, error)
-	// （以管理员或群主身份）获取群的加群申请
+	// Get group join applications (as admin or owner)
 	GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error)
-	// 获取用户自己的主动加群申请
+	GetGroupApplicationUnhandleCount(context.Context, *GetGroupApplicationUnhandledCountReq) (*GetGroupApplicationUnhandledCountResp, error)
+	// Get user's own join group applications
 	GetUserReqApplicationList(context.Context, *GetUserReqApplicationListReq) (*GetUserReqApplicationListResp, error)
-	// 获取该群用户的加群申请
+	// Get join applications for this group's users
 	GetGroupUsersReqApplicationList(context.Context, *GetGroupUsersReqApplicationListReq) (*GetGroupUsersReqApplicationListResp, error)
 	GetSpecifiedUserGroupRequestInfo(context.Context, *GetSpecifiedUserGroupRequestInfoReq) (*GetSpecifiedUserGroupRequestInfoResp, error)
-	// 转让群主
+	// Transfer group ownership
 	TransferGroupOwner(context.Context, *TransferGroupOwnerReq) (*TransferGroupOwnerResp, error)
-	// 群主或管理员处理进群申请
+	// Process join group application as owner or admin
 	GroupApplicationResponse(context.Context, *GroupApplicationResponseReq) (*GroupApplicationResponseResp, error)
-	// 获取某个群的群成员
+	// Get members of a specific group
 	GetGroupMemberList(context.Context, *GetGroupMemberListReq) (*GetGroupMemberListResp, error)
-	// 获取某个群的指定群成员
+	// Get specific group members of a group
 	GetGroupMembersInfo(context.Context, *GetGroupMembersInfoReq) (*GetGroupMembersInfoResp, error)
-	// 踢出群
+	// Kick member from group
 	KickGroupMember(context.Context, *KickGroupMemberReq) (*KickGroupMemberResp, error)
-	// 获取某个人已加入群
+	// Get groups a user has joined
 	GetJoinedGroupList(context.Context, *GetJoinedGroupListReq) (*GetJoinedGroupListResp, error)
-	// 邀请某些人进群
+	// Invite users to group
 	InviteUserToGroup(context.Context, *InviteUserToGroupReq) (*InviteUserToGroupResp, error)
 	GetGroups(context.Context, *GetGroupsReq) (*GetGroupsResp, error)
 	GetGroupMembersCMS(context.Context, *GetGroupMembersCMSReq) (*GetGroupMembersCMSResp, error)
-	// 解散群
+	// Dismiss group
 	DismissGroup(context.Context, *DismissGroupReq) (*DismissGroupResp, error)
-	// 对某个群成员禁言
+	// Mute a group member
 	MuteGroupMember(context.Context, *MuteGroupMemberReq) (*MuteGroupMemberResp, error)
-	// 对某个群成员取消禁言
+	// Unmute a group member
 	CancelMuteGroupMember(context.Context, *CancelMuteGroupMemberReq) (*CancelMuteGroupMemberResp, error)
-	// 对某个群禁言
+	// Mute a group
 	MuteGroup(context.Context, *MuteGroupReq) (*MuteGroupResp, error)
-	// 对某个群取消禁言
+	// Unmute a group
 	CancelMuteGroup(context.Context, *CancelMuteGroupReq) (*CancelMuteGroupResp, error)
-	// 设置群成员信息
+	// Set group member info
 	SetGroupMemberInfo(context.Context, *SetGroupMemberInfoReq) (*SetGroupMemberInfoResp, error)
-	// 获取群信息hash值
+	// Get group abstract hash
 	GetGroupAbstractInfo(context.Context, *GetGroupAbstractInfoReq) (*GetGroupAbstractInfoResp, error)
-	// 获取某个用户在指定群中的信息
+	// Get specific user's info in a group
 	GetUserInGroupMembers(context.Context, *GetUserInGroupMembersReq) (*GetUserInGroupMembersResp, error)
-	// 获取群成员用户ID
+	// Get user IDs of group members
 	GetGroupMemberUserIDs(context.Context, *GetGroupMemberUserIDsReq) (*GetGroupMemberUserIDsResp, error)
-	// 查询群组中对应级别的成员
+	// Query members of specific role level in a group
 	GetGroupMemberRoleLevel(context.Context, *GetGroupMemberRoleLevelReq) (*GetGroupMemberRoleLevelResp, error)
 	GetGroupInfoCache(context.Context, *GetGroupInfoCacheReq) (*GetGroupInfoCacheResp, error)
 	GetGroupMemberCache(context.Context, *GetGroupMemberCacheReq) (*GetGroupMemberCacheResp, error)
@@ -627,6 +640,9 @@ func (UnimplementedGroupServer) SetGroupInfoEx(context.Context, *SetGroupInfoExR
 }
 func (UnimplementedGroupServer) GetGroupApplicationList(context.Context, *GetGroupApplicationListReq) (*GetGroupApplicationListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGroupApplicationList not implemented")
+}
+func (UnimplementedGroupServer) GetGroupApplicationUnhandleCount(context.Context, *GetGroupApplicationUnhandledCountReq) (*GetGroupApplicationUnhandledCountResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroupApplicationUnhandleCount not implemented")
 }
 func (UnimplementedGroupServer) GetUserReqApplicationList(context.Context, *GetUserReqApplicationListReq) (*GetUserReqApplicationListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserReqApplicationList not implemented")
@@ -864,6 +880,24 @@ func _Group_GetGroupApplicationList_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GroupServer).GetGroupApplicationList(ctx, req.(*GetGroupApplicationListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Group_GetGroupApplicationUnhandleCount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupApplicationUnhandledCountReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GroupServer).GetGroupApplicationUnhandleCount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Group_GetGroupApplicationUnhandleCount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GroupServer).GetGroupApplicationUnhandleCount(ctx, req.(*GetGroupApplicationUnhandledCountReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1460,6 +1494,10 @@ var Group_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "getGroupApplicationList",
 			Handler:    _Group_GetGroupApplicationList_Handler,
+		},
+		{
+			MethodName: "getGroupApplicationUnhandleCount",
+			Handler:    _Group_GetGroupApplicationUnhandleCount_Handler,
 		},
 		{
 			MethodName: "getUserReqApplicationList",

@@ -59,15 +59,29 @@ message SetGroupInfoExResp {}
 message GetGroupApplicationListReq {
   openim.sdkws.RequestPagination pagination = 1;
   string fromUserID = 2; //owner or admin
+  repeated string groupIDs = 3;
+  repeated int32 handleResults = 4;
 }
+
 message GetGroupApplicationListResp {
   uint32 total = 1;
   repeated openim.sdkws.GroupRequest groupRequests = 2;
 }
 
+message GetGroupApplicationUnhandledCountReq {
+  string userID = 1;
+  int64 time = 2;
+}
+
+message GetGroupApplicationUnhandledCountResp {
+  int64 count = 1;
+}
+
 message GetUserReqApplicationListReq {
   openim.sdkws.RequestPagination pagination = 1;
   string userID = 2;
+  repeated string groupIDs = 3;
+  repeated int32 handleResults = 4;
 }
 
 message GetUserReqApplicationListResp {
@@ -405,62 +419,65 @@ message BatchGetIncrementalGroupMemberResp {
 }
 
 service group {
-  //创建群
+  // Create group
   rpc createGroup(CreateGroupReq) returns (CreateGroupResp);
-  //申请加群
+  // Apply to join group
   rpc joinGroup(JoinGroupReq) returns (JoinGroupResp);
-  //退出群
+  // Quit group
   rpc quitGroup(QuitGroupReq) returns (QuitGroupResp);
-  //获取指定群信息
+  // Get specific group info
   rpc getGroupsInfo(GetGroupsInfoReq) returns (GetGroupsInfoResp);
-  //设置群信息
+  // Set group info
   rpc setGroupInfo(SetGroupInfoReq) returns (SetGroupInfoResp);
   rpc setGroupInfoEx(SetGroupInfoExReq) returns (SetGroupInfoExResp);
-  //（以管理员或群主身份）获取群的加群申请
+  // Get group join applications (as admin or owner)
   rpc getGroupApplicationList(GetGroupApplicationListReq) returns (GetGroupApplicationListResp);
-  //获取用户自己的主动加群申请
+
+  rpc getGroupApplicationUnhandleCount(GetGroupApplicationUnhandledCountReq) returns (GetGroupApplicationUnhandledCountResp);
+
+  // Get user's own join group applications
   rpc getUserReqApplicationList(GetUserReqApplicationListReq) returns (GetUserReqApplicationListResp);
-  // 获取该群用户的加群申请
+  // Get join applications for this group's users
   rpc getGroupUsersReqApplicationList(getGroupUsersReqApplicationListReq) returns (getGroupUsersReqApplicationListResp);
   rpc getSpecifiedUserGroupRequestInfo(GetSpecifiedUserGroupRequestInfoReq) returns (GetSpecifiedUserGroupRequestInfoResp);
-  //转让群主
+  // Transfer group ownership
   rpc transferGroupOwner(TransferGroupOwnerReq) returns (TransferGroupOwnerResp);
-  //群主或管理员处理进群申请
+  // Process join group application as owner or admin
   rpc groupApplicationResponse(GroupApplicationResponseReq) returns (GroupApplicationResponseResp);
-  //获取某个群的群成员
+  // Get members of a specific group
   rpc getGroupMemberList(GetGroupMemberListReq) returns (GetGroupMemberListResp);
-  //获取某个群的指定群成员
+  // Get specific group members of a group
   rpc getGroupMembersInfo(GetGroupMembersInfoReq) returns (GetGroupMembersInfoResp);
-  //踢出群
+  // Kick member from group
   rpc kickGroupMember(KickGroupMemberReq) returns (KickGroupMemberResp);
-  //获取某个人已加入群
+  // Get groups a user has joined
   rpc getJoinedGroupList(GetJoinedGroupListReq) returns (GetJoinedGroupListResp);
-  //邀请某些人进群
+  // Invite users to group
   rpc inviteUserToGroup(InviteUserToGroupReq) returns (InviteUserToGroupResp);
 
   rpc getGroups(GetGroupsReq) returns (GetGroupsResp);
   rpc getGroupMembersCMS(GetGroupMembersCMSReq) returns (GetGroupMembersCMSResp);
 
-  //解散群
+  // Dismiss group
   rpc dismissGroup(DismissGroupReq) returns (DismissGroupResp);
-  //对某个群成员禁言
+  // Mute a group member
   rpc muteGroupMember(MuteGroupMemberReq) returns (MuteGroupMemberResp);
-  //对某个群成员取消禁言
+  // Unmute a group member
   rpc cancelMuteGroupMember(CancelMuteGroupMemberReq) returns (CancelMuteGroupMemberResp);
-  //对某个群禁言
+  // Mute a group
   rpc muteGroup(MuteGroupReq) returns (MuteGroupResp);
-  //对某个群取消禁言
+  // Unmute a group
   rpc cancelMuteGroup(CancelMuteGroupReq) returns (CancelMuteGroupResp);
 
-  //设置群成员信息
+  // Set group member info
   rpc setGroupMemberInfo(SetGroupMemberInfoReq) returns (SetGroupMemberInfoResp);
-  //获取群信息hash值
+  // Get group abstract hash
   rpc getGroupAbstractInfo(GetGroupAbstractInfoReq) returns (GetGroupAbstractInfoResp);
-  //获取某个用户在指定群中的信息
+  // Get specific user's info in a group
   rpc getUserInGroupMembers(GetUserInGroupMembersReq) returns (GetUserInGroupMembersResp);
-  //获取群成员用户ID
+  // Get user IDs of group members
   rpc getGroupMemberUserIDs(GetGroupMemberUserIDsReq) returns (GetGroupMemberUserIDsResp);
-  //查询群组中对应级别的成员
+  // Query members of specific role level in a group
   rpc GetGroupMemberRoleLevel(GetGroupMemberRoleLevelReq) returns (GetGroupMemberRoleLevelResp);
 
   rpc GetGroupInfoCache(GetGroupInfoCacheReq) returns (GetGroupInfoCacheResp);
