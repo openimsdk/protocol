@@ -304,6 +304,14 @@ message getFriendInfoResp {
   repeated FriendInfoOnly friendInfos = 1;
 }
 
+message AddFriendCategoryReq{
+  string ownerUserId = 1;
+  string friendUserId = 2;
+  int32 category = 3;
+}
+message AddFriendCategoryResp {
+}
+
 service friend {
   // Friend request
   rpc applyToAddFriend(applyToAddFriendReq) returns (applyToAddFriendResp);
@@ -359,4 +367,5 @@ service friend {
   rpc NotificationUserInfoUpdate(notificationUserInfoUpdateReq) returns (notificationUserInfoUpdateResp);
 
   rpc getFriendInfo(getFriendInfoReq) returns (getFriendInfoResp);
+  rpc AddFriendCategory(AddFriendCategoryReq) returns (AddFriendCategoryResp);
 }
