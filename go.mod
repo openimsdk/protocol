@@ -1,4 +1,4 @@
-module github.com/openimsdk/protocol
+module github.com/lyndoooooo/protocol
 
 go 1.22.7
 
