@@ -63,6 +63,15 @@ message kickTokensReq {
 }
 message kickTokensResp {}
 
+message GetExistingTokenReq {
+  string userID = 1;
+  int32 platformID = 2;
+}
+
+message getExistingTokenResp {
+  string token = 1;
+  int32 state = 2;
+}
 
 service Auth {
   // Generate token
@@ -77,4 +86,6 @@ service Auth {
   rpc invalidateToken(invalidateTokenReq) returns (invalidateTokenResp);
   // kick tokens
   rpc kickTokens(kickTokensReq) returns (kickTokensResp);
+  // Get existing token
+  rpc getExistingToken(GetExistingTokenReq) returns (getExistingTokenResp);
 }
