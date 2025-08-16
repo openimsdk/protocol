@@ -665,8 +665,7 @@ func (x *GetExistingTokenReq) GetPlatformID() int32 {
 
 type GetExistingTokenResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token"`
-	State         int32                  `protobuf:"varint,2,opt,name=state,proto3" json:"state"`
+	TokenStates   map[string]int32       `protobuf:"bytes,1,rep,name=tokenStates,proto3" json:"tokenStates" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"varint,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -701,18 +700,11 @@ func (*GetExistingTokenResp) Descriptor() ([]byte, []int) {
 	return file_auth_auth_proto_rawDescGZIP(), []int{13}
 }
 
-func (x *GetExistingTokenResp) GetToken() string {
+func (x *GetExistingTokenResp) GetTokenStates() map[string]int32 {
 	if x != nil {
-		return x.Token
+		return x.TokenStates
 	}
-	return ""
-}
-
-func (x *GetExistingTokenResp) GetState() int32 {
-	if x != nil {
-		return x.State
-	}
-	return 0
+	return nil
 }
 
 var File_auth_auth_proto protoreflect.FileDescriptor
@@ -762,10 +754,12 @@ const file_auth_auth_proto_rawDesc = "" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12\x1e\n" +
 	"\n" +
 	"platformID\x18\x02 \x01(\x05R\n" +
-	"platformID\"B\n" +
-	"\x14getExistingTokenResp\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\x12\x14\n" +
-	"\x05state\x18\x02 \x01(\x05R\x05state2\xaa\x04\n" +
+	"platformID\"\xac\x01\n" +
+	"\x14getExistingTokenResp\x12T\n" +
+	"\vtokenStates\x18\x01 \x03(\v22.openim.auth.getExistingTokenResp.TokenStatesEntryR\vtokenStates\x1a>\n" +
+	"\x10TokenStatesEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
+	"\x05value\x18\x02 \x01(\x05R\x05value:\x028\x012\xaa\x04\n" +
 	"\x04Auth\x12N\n" +
 	"\rgetAdminToken\x12\x1d.openim.auth.getAdminTokenReq\x1a\x1e.openim.auth.getAdminTokenResp\x12K\n" +
 	"\fgetUserToken\x12\x1c.openim.auth.getUserTokenReq\x1a\x1d.openim.auth.getUserTokenResp\x12H\n" +
@@ -789,7 +783,7 @@ func file_auth_auth_proto_rawDescGZIP() []byte {
 	return file_auth_auth_proto_rawDescData
 }
 
-var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
+var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
 var file_auth_auth_proto_goTypes = []any{
 	(*GetAdminTokenReq)(nil),     // 0: openim.auth.getAdminTokenReq
 	(*GetAdminTokenResp)(nil),    // 1: openim.auth.getAdminTokenResp
@@ -805,27 +799,29 @@ var file_auth_auth_proto_goTypes = []any{
 	(*KickTokensResp)(nil),       // 11: openim.auth.kickTokensResp
 	(*GetExistingTokenReq)(nil),  // 12: openim.auth.GetExistingTokenReq
 	(*GetExistingTokenResp)(nil), // 13: openim.auth.getExistingTokenResp
+	nil,                          // 14: openim.auth.getExistingTokenResp.TokenStatesEntry
 }
 var file_auth_auth_proto_depIdxs = []int32{
-	0,  // 0: openim.auth.Auth.getAdminToken:input_type -> openim.auth.getAdminTokenReq
-	6,  // 1: openim.auth.Auth.getUserToken:input_type -> openim.auth.getUserTokenReq
-	2,  // 2: openim.auth.Auth.forceLogout:input_type -> openim.auth.forceLogoutReq
-	4,  // 3: openim.auth.Auth.parseToken:input_type -> openim.auth.parseTokenReq
-	8,  // 4: openim.auth.Auth.invalidateToken:input_type -> openim.auth.invalidateTokenReq
-	10, // 5: openim.auth.Auth.kickTokens:input_type -> openim.auth.kickTokensReq
-	12, // 6: openim.auth.Auth.getExistingToken:input_type -> openim.auth.GetExistingTokenReq
-	1,  // 7: openim.auth.Auth.getAdminToken:output_type -> openim.auth.getAdminTokenResp
-	7,  // 8: openim.auth.Auth.getUserToken:output_type -> openim.auth.getUserTokenResp
-	3,  // 9: openim.auth.Auth.forceLogout:output_type -> openim.auth.forceLogoutResp
-	5,  // 10: openim.auth.Auth.parseToken:output_type -> openim.auth.parseTokenResp
-	9,  // 11: openim.auth.Auth.invalidateToken:output_type -> openim.auth.invalidateTokenResp
-	11, // 12: openim.auth.Auth.kickTokens:output_type -> openim.auth.kickTokensResp
-	13, // 13: openim.auth.Auth.getExistingToken:output_type -> openim.auth.getExistingTokenResp
-	7,  // [7:14] is the sub-list for method output_type
-	0,  // [0:7] is the sub-list for method input_type
-	0,  // [0:0] is the sub-list for extension type_name
-	0,  // [0:0] is the sub-list for extension extendee
-	0,  // [0:0] is the sub-list for field type_name
+	14, // 0: openim.auth.getExistingTokenResp.tokenStates:type_name -> openim.auth.getExistingTokenResp.TokenStatesEntry
+	0,  // 1: openim.auth.Auth.getAdminToken:input_type -> openim.auth.getAdminTokenReq
+	6,  // 2: openim.auth.Auth.getUserToken:input_type -> openim.auth.getUserTokenReq
+	2,  // 3: openim.auth.Auth.forceLogout:input_type -> openim.auth.forceLogoutReq
+	4,  // 4: openim.auth.Auth.parseToken:input_type -> openim.auth.parseTokenReq
+	8,  // 5: openim.auth.Auth.invalidateToken:input_type -> openim.auth.invalidateTokenReq
+	10, // 6: openim.auth.Auth.kickTokens:input_type -> openim.auth.kickTokensReq
+	12, // 7: openim.auth.Auth.getExistingToken:input_type -> openim.auth.GetExistingTokenReq
+	1,  // 8: openim.auth.Auth.getAdminToken:output_type -> openim.auth.getAdminTokenResp
+	7,  // 9: openim.auth.Auth.getUserToken:output_type -> openim.auth.getUserTokenResp
+	3,  // 10: openim.auth.Auth.forceLogout:output_type -> openim.auth.forceLogoutResp
+	5,  // 11: openim.auth.Auth.parseToken:output_type -> openim.auth.parseTokenResp
+	9,  // 12: openim.auth.Auth.invalidateToken:output_type -> openim.auth.invalidateTokenResp
+	11, // 13: openim.auth.Auth.kickTokens:output_type -> openim.auth.kickTokensResp
+	13, // 14: openim.auth.Auth.getExistingToken:output_type -> openim.auth.getExistingTokenResp
+	8,  // [8:15] is the sub-list for method output_type
+	1,  // [1:8] is the sub-list for method input_type
+	1,  // [1:1] is the sub-list for extension type_name
+	1,  // [1:1] is the sub-list for extension extendee
+	0,  // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_auth_auth_proto_init() }
@@ -839,7 +835,7 @@ func file_auth_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_auth_proto_rawDesc), len(file_auth_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   14,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
