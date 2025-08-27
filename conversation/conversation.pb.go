@@ -3093,7 +3093,7 @@ func (*UpdateConversationsByUserResp) Descriptor() ([]byte, []int) {
 	return file_conversation_conversation_proto_rawDescGZIP(), []int{53}
 }
 
-type DelConversationReq struct {
+type DeleteConversationsReq struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	OwnerUserID     string                 `protobuf:"bytes,1,opt,name=ownerUserID,proto3" json:"ownerUserID"`
 	NeedDeleteTime  int64                  `protobuf:"varint,2,opt,name=needDeleteTime,proto3" json:"needDeleteTime"`
@@ -3102,20 +3102,20 @@ type DelConversationReq struct {
 	sizeCache       protoimpl.SizeCache
 }
 
-func (x *DelConversationReq) Reset() {
-	*x = DelConversationReq{}
+func (x *DeleteConversationsReq) Reset() {
+	*x = DeleteConversationsReq{}
 	mi := &file_conversation_conversation_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DelConversationReq) String() string {
+func (x *DeleteConversationsReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DelConversationReq) ProtoMessage() {}
+func (*DeleteConversationsReq) ProtoMessage() {}
 
-func (x *DelConversationReq) ProtoReflect() protoreflect.Message {
+func (x *DeleteConversationsReq) ProtoReflect() protoreflect.Message {
 	mi := &file_conversation_conversation_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3127,52 +3127,52 @@ func (x *DelConversationReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DelConversationReq.ProtoReflect.Descriptor instead.
-func (*DelConversationReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteConversationsReq.ProtoReflect.Descriptor instead.
+func (*DeleteConversationsReq) Descriptor() ([]byte, []int) {
 	return file_conversation_conversation_proto_rawDescGZIP(), []int{54}
 }
 
-func (x *DelConversationReq) GetOwnerUserID() string {
+func (x *DeleteConversationsReq) GetOwnerUserID() string {
 	if x != nil {
 		return x.OwnerUserID
 	}
 	return ""
 }
 
-func (x *DelConversationReq) GetNeedDeleteTime() int64 {
+func (x *DeleteConversationsReq) GetNeedDeleteTime() int64 {
 	if x != nil {
 		return x.NeedDeleteTime
 	}
 	return 0
 }
 
-func (x *DelConversationReq) GetConversationIDs() []string {
+func (x *DeleteConversationsReq) GetConversationIDs() []string {
 	if x != nil {
 		return x.ConversationIDs
 	}
 	return nil
 }
 
-type DelConversationResp struct {
+type DeleteConversationsResp struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DelConversationResp) Reset() {
-	*x = DelConversationResp{}
+func (x *DeleteConversationsResp) Reset() {
+	*x = DeleteConversationsResp{}
 	mi := &file_conversation_conversation_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DelConversationResp) String() string {
+func (x *DeleteConversationsResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DelConversationResp) ProtoMessage() {}
+func (*DeleteConversationsResp) ProtoMessage() {}
 
-func (x *DelConversationResp) ProtoReflect() protoreflect.Message {
+func (x *DeleteConversationsResp) ProtoReflect() protoreflect.Message {
 	mi := &file_conversation_conversation_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -3184,8 +3184,8 @@ func (x *DelConversationResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DelConversationResp.ProtoReflect.Descriptor instead.
-func (*DelConversationResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use DeleteConversationsResp.ProtoReflect.Descriptor instead.
+func (*DeleteConversationsResp) Descriptor() ([]byte, []int) {
 	return file_conversation_conversation_proto_rawDescGZIP(), []int{55}
 }
 
@@ -3404,12 +3404,12 @@ const file_conversation_conversation_proto_rawDesc = "" +
 	"\x1cUpdateConversationsByUserReq\x12\x16\n" +
 	"\x06userID\x18\x01 \x01(\tR\x06userID\x12,\n" +
 	"\x02ex\x18\x02 \x01(\v2\x1c.openim.protobuf.StringValueR\x02ex\"\x1f\n" +
-	"\x1dUpdateConversationsByUserResp\"\x88\x01\n" +
-	"\x12DelConversationReq\x12 \n" +
+	"\x1dUpdateConversationsByUserResp\"\x8c\x01\n" +
+	"\x16DeleteConversationsReq\x12 \n" +
 	"\vownerUserID\x18\x01 \x01(\tR\vownerUserID\x12&\n" +
 	"\x0eneedDeleteTime\x18\x02 \x01(\x03R\x0eneedDeleteTime\x12(\n" +
-	"\x0fconversationIDs\x18\x03 \x03(\tR\x0fconversationIDs\"\x15\n" +
-	"\x13DelConversationResp2\x94\x1a\n" +
+	"\x0fconversationIDs\x18\x03 \x03(\tR\x0fconversationIDs\"\x19\n" +
+	"\x17DeleteConversationsResp2\xa0\x1a\n" +
 	"\fconversation\x12d\n" +
 	"\x0fGetConversation\x12'.openim.conversation.GetConversationReq\x1a(.openim.conversation.GetConversationResp\x12\x82\x01\n" +
 	"\x19GetSortedConversationList\x121.openim.conversation.GetSortedConversationListReq\x1a2.openim.conversation.GetSortedConversationListResp\x12p\n" +
@@ -3435,8 +3435,8 @@ const file_conversation_conversation_proto_rawDesc = "" +
 	"\x1bGetNotNotifyConversationIDs\x123.openim.conversation.GetNotNotifyConversationIDsReq\x1a4.openim.conversation.GetNotNotifyConversationIDsResp\x12\x7f\n" +
 	"\x18GetPinnedConversationIDs\x120.openim.conversation.GetPinnedConversationIDsReq\x1a1.openim.conversation.GetPinnedConversationIDsResp\x12\x7f\n" +
 	"\x18ClearUserConversationMsg\x120.openim.conversation.ClearUserConversationMsgReq\x1a1.openim.conversation.ClearUserConversationMsgResp\x12\x82\x01\n" +
-	"\x19UpdateConversationsByUser\x121.openim.conversation.UpdateConversationsByUserReq\x1a2.openim.conversation.UpdateConversationsByUserResp\x12d\n" +
-	"\x0fDelConversation\x12'.openim.conversation.DelConversationReq\x1a(.openim.conversation.DelConversationRespB,Z*github.com/openimsdk/protocol/conversationb\x06proto3"
+	"\x19UpdateConversationsByUser\x121.openim.conversation.UpdateConversationsByUserReq\x1a2.openim.conversation.UpdateConversationsByUserResp\x12p\n" +
+	"\x13DeleteConversations\x12+.openim.conversation.DeleteConversationsReq\x1a,.openim.conversation.DeleteConversationsRespB,Z*github.com/openimsdk/protocol/conversationb\x06proto3"
 
 var (
 	file_conversation_conversation_proto_rawDescOnce sync.Once
@@ -3506,8 +3506,8 @@ var file_conversation_conversation_proto_goTypes = []any{
 	(*ClearUserConversationMsgResp)(nil),                // 51: openim.conversation.ClearUserConversationMsgResp
 	(*UpdateConversationsByUserReq)(nil),                // 52: openim.conversation.UpdateConversationsByUserReq
 	(*UpdateConversationsByUserResp)(nil),               // 53: openim.conversation.UpdateConversationsByUserResp
-	(*DelConversationReq)(nil),                          // 54: openim.conversation.DelConversationReq
-	(*DelConversationResp)(nil),                         // 55: openim.conversation.DelConversationResp
+	(*DeleteConversationsReq)(nil),                      // 54: openim.conversation.DeleteConversationsReq
+	(*DeleteConversationsResp)(nil),                     // 55: openim.conversation.DeleteConversationsResp
 	(*wrapperspb.Int32Value)(nil),                       // 56: openim.protobuf.Int32Value
 	(*wrapperspb.BoolValue)(nil),                        // 57: openim.protobuf.BoolValue
 	(*wrapperspb.StringValue)(nil),                      // 58: openim.protobuf.StringValue
@@ -3578,7 +3578,7 @@ var file_conversation_conversation_proto_depIdxs = []int32{
 	48, // 60: openim.conversation.conversation.GetPinnedConversationIDs:input_type -> openim.conversation.GetPinnedConversationIDsReq
 	50, // 61: openim.conversation.conversation.ClearUserConversationMsg:input_type -> openim.conversation.ClearUserConversationMsgReq
 	52, // 62: openim.conversation.conversation.UpdateConversationsByUser:input_type -> openim.conversation.UpdateConversationsByUserReq
-	54, // 63: openim.conversation.conversation.DelConversation:input_type -> openim.conversation.DelConversationReq
+	54, // 63: openim.conversation.conversation.DeleteConversations:input_type -> openim.conversation.DeleteConversationsReq
 	5,  // 64: openim.conversation.conversation.GetConversation:output_type -> openim.conversation.GetConversationResp
 	7,  // 65: openim.conversation.conversation.GetSortedConversationList:output_type -> openim.conversation.GetSortedConversationListResp
 	13, // 66: openim.conversation.conversation.GetAllConversations:output_type -> openim.conversation.GetAllConversationsResp
@@ -3604,7 +3604,7 @@ var file_conversation_conversation_proto_depIdxs = []int32{
 	49, // 86: openim.conversation.conversation.GetPinnedConversationIDs:output_type -> openim.conversation.GetPinnedConversationIDsResp
 	51, // 87: openim.conversation.conversation.ClearUserConversationMsg:output_type -> openim.conversation.ClearUserConversationMsgResp
 	53, // 88: openim.conversation.conversation.UpdateConversationsByUser:output_type -> openim.conversation.UpdateConversationsByUserResp
-	55, // 89: openim.conversation.conversation.DelConversation:output_type -> openim.conversation.DelConversationResp
+	55, // 89: openim.conversation.conversation.DeleteConversations:output_type -> openim.conversation.DeleteConversationsResp
 	64, // [64:90] is the sub-list for method output_type
 	38, // [38:64] is the sub-list for method input_type
 	38, // [38:38] is the sub-list for extension type_name

@@ -58,7 +58,7 @@ const (
 	Conversation_GetPinnedConversationIDs_FullMethodName                = "/openim.conversation.conversation/GetPinnedConversationIDs"
 	Conversation_ClearUserConversationMsg_FullMethodName                = "/openim.conversation.conversation/ClearUserConversationMsg"
 	Conversation_UpdateConversationsByUser_FullMethodName               = "/openim.conversation.conversation/UpdateConversationsByUser"
-	Conversation_DelConversation_FullMethodName                         = "/openim.conversation.conversation/DelConversation"
+	Conversation_DeleteConversations_FullMethodName                     = "/openim.conversation.conversation/DeleteConversations"
 )
 
 // ConversationClient is the client API for Conversation service.
@@ -90,7 +90,7 @@ type ConversationClient interface {
 	GetPinnedConversationIDs(ctx context.Context, in *GetPinnedConversationIDsReq, opts ...grpc.CallOption) (*GetPinnedConversationIDsResp, error)
 	ClearUserConversationMsg(ctx context.Context, in *ClearUserConversationMsgReq, opts ...grpc.CallOption) (*ClearUserConversationMsgResp, error)
 	UpdateConversationsByUser(ctx context.Context, in *UpdateConversationsByUserReq, opts ...grpc.CallOption) (*UpdateConversationsByUserResp, error)
-	DelConversation(ctx context.Context, in *DelConversationReq, opts ...grpc.CallOption) (*DelConversationResp, error)
+	DeleteConversations(ctx context.Context, in *DeleteConversationsReq, opts ...grpc.CallOption) (*DeleteConversationsResp, error)
 }
 
 type conversationClient struct {
@@ -351,10 +351,10 @@ func (c *conversationClient) UpdateConversationsByUser(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *conversationClient) DelConversation(ctx context.Context, in *DelConversationReq, opts ...grpc.CallOption) (*DelConversationResp, error) {
+func (c *conversationClient) DeleteConversations(ctx context.Context, in *DeleteConversationsReq, opts ...grpc.CallOption) (*DeleteConversationsResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DelConversationResp)
-	err := c.cc.Invoke(ctx, Conversation_DelConversation_FullMethodName, in, out, cOpts...)
+	out := new(DeleteConversationsResp)
+	err := c.cc.Invoke(ctx, Conversation_DeleteConversations_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -390,7 +390,7 @@ type ConversationServer interface {
 	GetPinnedConversationIDs(context.Context, *GetPinnedConversationIDsReq) (*GetPinnedConversationIDsResp, error)
 	ClearUserConversationMsg(context.Context, *ClearUserConversationMsgReq) (*ClearUserConversationMsgResp, error)
 	UpdateConversationsByUser(context.Context, *UpdateConversationsByUserReq) (*UpdateConversationsByUserResp, error)
-	DelConversation(context.Context, *DelConversationReq) (*DelConversationResp, error)
+	DeleteConversations(context.Context, *DeleteConversationsReq) (*DeleteConversationsResp, error)
 	mustEmbedUnimplementedConversationServer()
 }
 
@@ -476,8 +476,8 @@ func (UnimplementedConversationServer) ClearUserConversationMsg(context.Context,
 func (UnimplementedConversationServer) UpdateConversationsByUser(context.Context, *UpdateConversationsByUserReq) (*UpdateConversationsByUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateConversationsByUser not implemented")
 }
-func (UnimplementedConversationServer) DelConversation(context.Context, *DelConversationReq) (*DelConversationResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelConversation not implemented")
+func (UnimplementedConversationServer) DeleteConversations(context.Context, *DeleteConversationsReq) (*DeleteConversationsResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteConversations not implemented")
 }
 func (UnimplementedConversationServer) mustEmbedUnimplementedConversationServer() {}
 func (UnimplementedConversationServer) testEmbeddedByValue()                      {}
@@ -950,20 +950,20 @@ func _Conversation_UpdateConversationsByUser_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Conversation_DelConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DelConversationReq)
+func _Conversation_DeleteConversations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteConversationsReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ConversationServer).DelConversation(ctx, in)
+		return srv.(ConversationServer).DeleteConversations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Conversation_DelConversation_FullMethodName,
+		FullMethod: Conversation_DeleteConversations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ConversationServer).DelConversation(ctx, req.(*DelConversationReq))
+		return srv.(ConversationServer).DeleteConversations(ctx, req.(*DeleteConversationsReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1076,8 +1076,8 @@ var Conversation_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Conversation_UpdateConversationsByUser_Handler,
 		},
 		{
-			MethodName: "DelConversation",
-			Handler:    _Conversation_DelConversation_Handler,
+			MethodName: "DeleteConversations",
+			Handler:    _Conversation_DeleteConversations_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
