@@ -311,12 +311,12 @@ message UpdateConversationsByUserReq {
 
 message UpdateConversationsByUserResp {}
 
-message DelConversationReq {
+message DeleteConversationsReq {
   string ownerUserID = 1;
   int64 needDeleteTime = 2;
   repeated string conversationIDs = 3; // optional
 }
-message DelConversationResp {}
+message DeleteConversationsResp {}
 
 service conversation {
   rpc GetConversation(GetConversationReq) returns (GetConversationResp);
@@ -344,5 +344,5 @@ service conversation {
   rpc GetPinnedConversationIDs(GetPinnedConversationIDsReq) returns (GetPinnedConversationIDsResp);
   rpc ClearUserConversationMsg(ClearUserConversationMsgReq) returns (ClearUserConversationMsgResp);
   rpc UpdateConversationsByUser(UpdateConversationsByUserReq) returns (UpdateConversationsByUserResp);
-  rpc DelConversation(DelConversationReq) returns (DelConversationResp);
+  rpc DeleteConversations(DeleteConversationsReq) returns (DeleteConversationsResp);
 }
