@@ -304,12 +304,19 @@ message ClearUserConversationMsgResp {
   int32 count = 1;
 }
 
-message UpdateConversationsByUserReq{
+message UpdateConversationsByUserReq {
   string userID = 1;
   openim.protobuf.StringValue ex = 2;
 }
 
-message UpdateConversationsByUserResp{}
+message UpdateConversationsByUserResp {}
+
+message DelConversationReq {
+  string ownerUserID = 1;
+  int64 needDeleteTime = 2;
+  repeated string conversationIDs = 3; // optional
+}
+message DelConversationResp {}
 
 service conversation {
   rpc GetConversation(GetConversationReq) returns (GetConversationResp);
@@ -337,4 +344,5 @@ service conversation {
   rpc GetPinnedConversationIDs(GetPinnedConversationIDsReq) returns (GetPinnedConversationIDsResp);
   rpc ClearUserConversationMsg(ClearUserConversationMsgReq) returns (ClearUserConversationMsgResp);
   rpc UpdateConversationsByUser(UpdateConversationsByUserReq) returns (UpdateConversationsByUserResp);
+  rpc DelConversation(DelConversationReq) returns (DelConversationResp);
 }
