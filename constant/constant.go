@@ -107,6 +107,7 @@ const (
 	ConversationPrivateChatNotification = 1701
 	ConversationUnreadNotification      = 1702
 	ClearConversationNotification       = 1703
+	ConversationDeleteNotification      = 1704
 
 	BusinessNotificationBegin = 2000
 	BusinessNotification      = 2001
