@@ -611,3 +611,8 @@ message StreamMsgTips {
   repeated string packets = 4;
   bool end = 5;
 }
+
+message ConversationDeleteTips {
+  string userID = 1;
+  repeated string conversationIDs = 2;
+}
