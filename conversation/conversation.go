@@ -224,3 +224,10 @@ func (x *ClearUserConversationMsgReq) Check() error {
 	}
 	return nil
 }
+
+func (x *GetConversationReadCursorsReq) Check() error {
+	if len(x.ConversationIDs) == 0 {
+		return errors.New("conversationID is empty")
+	}
+	return nil
+}

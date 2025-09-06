@@ -318,6 +318,21 @@ message DeleteConversationsReq {
 }
 message DeleteConversationsResp {}
 
+message GetConversationReadCursorsReq { repeated string conversationIDs = 1; }
+
+message ConversationReadCursor {
+  string userID = 1;
+  int64 maxReadSeq = 2;
+}
+
+message ConversationReadCursorList {
+  repeated ConversationReadCursor cursors = 2;
+}
+
+message GetConversationReadCursorsResp {
+  map<string, ConversationReadCursorList> cursors = 1; // conversationID -> list
+}
+
 service conversation {
   rpc GetConversation(GetConversationReq) returns (GetConversationResp);
   rpc GetSortedConversationList(GetSortedConversationListReq) returns (GetSortedConversationListResp);
@@ -345,4 +360,5 @@ service conversation {
   rpc ClearUserConversationMsg(ClearUserConversationMsgReq) returns (ClearUserConversationMsgResp);
   rpc UpdateConversationsByUser(UpdateConversationsByUserReq) returns (UpdateConversationsByUserResp);
   rpc DeleteConversations(DeleteConversationsReq) returns (DeleteConversationsResp);
+  rpc GetConversationReadCursors(GetConversationReadCursorsReq) returns (GetConversationReadCursorsResp);
 }
