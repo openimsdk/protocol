@@ -87,4 +87,6 @@ service Auth {
   rpc kickTokens(kickTokensReq) returns (kickTokensResp);
   // Get existing token
   rpc getExistingToken(GetExistingTokenReq) returns (getExistingTokenResp);
+
+  rpc forceLogoutTest(forceLogoutReq) returns (forceLogoutResp);
 }
