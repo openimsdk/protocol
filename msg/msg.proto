@@ -1,17 +1,3 @@
-// Copyright © 2023 OpenIM. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 syntax = "proto3";
 package openim.msg;
 
@@ -256,8 +242,8 @@ message GetActiveGroupResp {
 }
 
 message SearchMessageReq {
-  string sendID = 1; //发送者ID
-  string recvID = 2; //接收者ID
+  string sendID = 1; // sender ID
+  string recvID = 2; // receiver ID
   int32 contentType = 3;
   string sendTime = 4;
   int32 sessionType = 5;
@@ -402,40 +388,40 @@ message GetLastMessageResp {
 }
 
 service msg {
-  //获取最小最大seq（包括用户的，以及指定群组的）
+  // Get min and max seq (including the user and specified groups)
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
-  //获取会话列表的最大seq
+  // Get the max seq for the conversation list
   rpc GetMaxSeqs(GetMaxSeqsReq) returns (SeqsInfoResp);
-  //获取会话列表已读的最大seq
+  // Get the max read seq for the conversation list
   rpc GetHasReadSeqs(GetHasReadSeqsReq) returns (SeqsInfoResp);
-  //获取最新消息
+  // Get the newest message
   rpc GetMsgByConversationIDs(GetMsgByConversationIDsReq) returns (GetMsgByConversationIDsResp);
   rpc GetConversationMaxSeq(GetConversationMaxSeqReq) returns (GetConversationMaxSeqResp);
-  //拉取历史消息（包括用户的，以及指定群组的）
+  // Pull historical messages (including the user and specified groups)
   rpc PullMessageBySeqs(sdkws.PullMessageBySeqsReq) returns (sdkws.PullMessageBySeqsResp);
   rpc GetSeqMessage(GetSeqMessageReq) returns (GetSeqMessageResp);
   rpc SearchMessage(SearchMessageReq) returns (SearchMessageResp);
-  //发送消息
+  // Send message
   rpc SendMsg(SendMsgReq) returns (SendMsgResp);
-  //简易发送消息
+  // Send message with simplified request
   rpc SendSimpleMsg(SendSimpleMsgReq) returns (SendSimpleMsgResp);
 
   rpc SetUserConversationsMinSeq(SetUserConversationsMinSeqReq) returns (SetUserConversationsMinSeqResp);
 
-  // 全量清空指定会话消息 重置min seq 比最大seq大1
+  // Clear all messages for the specified conversations and reset the min seq to max seq + 1
   rpc ClearConversationsMsg(ClearConversationsMsgReq) returns (ClearConversationsMsgResp);
-  // 删除用户全部消息 重置min seq 比最大seq大1
+  // Delete all messages for the user and reset the min seq to max seq + 1
   rpc UserClearAllMsg(UserClearAllMsgReq) returns (UserClearAllMsgResp);
-  // 用户标记删除部分消息by Seq
+  // Mark selective message deletion by seq for the user
   rpc DeleteMsgs(DeleteMsgsReq) returns (DeleteMsgsResp);
-  // seq物理删除消息
+  // Physically delete messages by seq
   rpc DeleteMsgPhysicalBySeq(DeleteMsgPhysicalBySeqReq) returns (DeleteMsgPhysicalBySeqResp);
-  // 物理删除消息by 时间
+  // Physically delete messages by timestamp
   rpc DeleteMsgPhysical(DeleteMsgPhysicalReq) returns (DeleteMsgPhysicalResp);
 
-  //设置消息是否发送成功-针对api发送的消息
+  // Set whether the API-sent message was delivered successfully
   rpc SetSendMsgStatus(SetSendMsgStatusReq) returns (SetSendMsgStatusResp);
-  //获取消息发送状态
+  // Get the message delivery status
   rpc GetSendMsgStatus(GetSendMsgStatusReq) returns (GetSendMsgStatusResp);
   rpc RevokeMsg(RevokeMsgReq) returns (RevokeMsgResp);
   // mark as read

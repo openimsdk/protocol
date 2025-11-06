@@ -491,7 +491,7 @@ func GenHarmonyTS() error {
 		}
 
 		originalContent := string(content)
-		modifiedContent := strings.Replace(originalContent, oldStr, newStr, 1) // 只替换一次
+		modifiedContent := strings.Replace(originalContent, oldStr, newStr, 1) // replace only once
 
 		if originalContent == modifiedContent {
 			return
