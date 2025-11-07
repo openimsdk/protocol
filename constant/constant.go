@@ -1,17 +1,3 @@
-// Copyright © 2023 OpenIM. All rights reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 package constant
 
 const (
@@ -319,21 +305,21 @@ const (
 	ConnID          = "connID"
 	OpUserPlatform  = "platform"
 	Token           = "token"
-	RpcCustomHeader = "customHeader" // rpc中间件自定义ctx参数
+	RpcCustomHeader = "customHeader" // custom ctx parameter used by RPC middleware
 	CheckKey        = "CheckKey"
 	TriggerID       = "triggerID"
 	RemoteAddr      = "remoteAddr"
 )
 
 const (
-	BecomeFriendByImport = 1 // 管理员导入
-	BecomeFriendByApply  = 2 // 申请添加
+	BecomeFriendByImport = 1 // imported by administrator
+	BecomeFriendByApply  = 2 // added via application
 )
 
 const (
-	ApplyNeedVerificationInviteDirectly = 0 // 申请需要同意 邀请直接进
-	AllNeedVerification                 = 1 // 所有人进群需要验证，除了群主管理员邀请进群
-	Directly                            = 2 // 直接进群
+	ApplyNeedVerificationInviteDirectly = 0 // requests require approval; invitations join directly
+	AllNeedVerification                 = 1 // everyone needs verification unless invited by the owner or admin
+	Directly                            = 2 // join directly without verification
 )
 
 const (
