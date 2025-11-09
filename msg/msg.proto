@@ -401,6 +401,146 @@ message GetLastMessageResp {
   map<string,sdkws.MsgData> msgs = 1;
 }
 
+// ========== Message Edit Feature ==========
+
+// 消息編輯客戶端信息
+message MessageEditClientInfo {
+  int32 platform = 1;        // 編輯平台 ID
+  string appVersion = 2;     // APP 版本
+  string ipAddress = 3;      // IP 地址
+}
+
+// 編輯消息請求
+message EditMessageReq {
+  string conversationID = 1;  // 會話 ID
+  int64 seq = 2;              // 消息序列號
+  string newContent = 3;      // 新的消息內容
+  string editReason = 4;      // 編輯原因（可選）
+  MessageEditClientInfo clientInfo = 5;  // 客戶端信息
+}
+
+// 編輯消息響應
+message EditMessageResp {
+  bool success = 1;                    // 是否成功
+  string message = 2;                  // 響應消息
+  EditedMessageInfo updatedMessage = 3; // 更新後的消息信息
+}
+
+// 編輯後的消息信息
+message EditedMessageInfo {
+  string conversationID = 1;  // 會話 ID
+  int64 seq = 2;              // 消息序列號
+  string userID = 3;         // 編輯用戶 ID
+  bool isEdited = 4;         // 是否已編輯
+  int32 editCount = 5;       // 編輯次數
+  int64 editTime = 6;        // 編輯時間（毫秒時間戳）
+  string lastEditUserID = 7; // 最後編輯者 ID
+}
+
+// 消息編輯記錄
+message MessageEditRecord {
+  string editID = 1;                    // 編輯記錄 ID
+  int64 editTime = 2;                   // 編輯時間
+  string editUserID = 3;               // 編輯者用戶 ID
+  string editUserName = 4;             // 編輯者用戶名
+  string oldContent = 5;                // 編輯前內容
+  string newContent = 6;                // 編輯後內容
+  string editReason = 7;                // 編輯原因
+  MessageEditClientInfo clientInfo = 8; // 客戶端信息
+}
+
+// 獲取編輯歷史請求
+message GetMessageEditHistoryReq {
+  string conversationID = 1; // 會話 ID
+  int64 seq = 2;              // 消息序列號
+}
+
+// 獲取編輯歷史響應
+message GetMessageEditHistoryResp {
+  bool success = 1;                          // 是否成功
+  string message = 2;                        // 響應消息
+  repeated MessageEditRecord editHistory = 3; // 編輯歷史記錄
+}
+
+// 驗證編輯權限請求
+message ValidateEditPermissionReq {
+  string conversationID = 1; // 會話 ID
+  int64 seq = 2;              // 消息序列號
+}
+
+// 驗證編輯權限響應
+message ValidateEditPermissionResp {
+  bool success = 1;           // 是否成功
+  string message = 2;         // 響應消息
+  PermissionResult data = 3;  // 權限驗證結果
+}
+
+// 權限驗證結果
+message PermissionResult {
+  bool canEdit = 1;           // 是否可以編輯
+  string reason = 2;           // 不能編輯的原因（如果 canEdit 為 false）
+  int64 timeRemaining = 3;    // 剩餘編輯時間（秒）
+  int32 editCountLeft = 4;   // 剩餘編輯次數
+}
+
+// 獲取可編輯消息請求
+message GetEditableMessagesReq {
+  string conversationID = 1; // 會話 ID
+  int32 pageNumber = 2;      // 頁碼
+  int32 showNumber = 3;      // 每頁數量
+}
+
+// 可編輯消息信息
+message EditableMessageInfo {
+  int64 seq = 1;                    // 消息序列號
+  string content = 2;               // 消息內容
+  int32 contentType = 3;           // 內容類型
+  int64 sendTime = 4;              // 發送時間
+  bool isEdited = 5;               // 是否已編輯
+  int32 editCount = 6;             // 編輯次數
+  int64 lastEditTime = 7;         // 最後編輯時間
+  string lastEditUserID = 8;     // 最後編輯者 ID
+  string originalContent = 9;      // 原始內容
+}
+
+// 分頁信息
+message PaginationInfo {
+  int32 pageNumber = 1;  // 當前頁碼
+  int32 showNumber = 2;  // 每頁數量
+  int64 total = 3;        // 總數量
+}
+
+// 獲取可編輯消息響應
+message GetEditableMessagesResp {
+  bool success = 1;                              // 是否成功
+  string message = 2;                            // 響應消息
+  string conversationID = 3;                    // 會話 ID
+  repeated EditableMessageInfo messages = 4;     // 可編輯消息列表
+  PaginationInfo pagination = 5;                 // 分頁信息
+}
+
+// 編輯通知數據
+message EditNotificationData {
+  string notificationType = 1;     // 通知類型（messageEdit）
+  string conversationID = 2;       // 會話 ID
+  int64 seq = 3;                   // 消息序列號
+  int64 editTime = 4;             // 編輯時間
+  string editorUserID = 5;       // 編輯者用戶 ID
+  string newContent = 6;          // 新內容
+  bool isEdited = 7;              // 是否已編輯
+  int32 editCount = 8;            // 編輯次數
+  string originalSender = 9;      // 原始發送者 ID
+  int32 msgType = 10;             // 消息類型
+  string clientMsgID = 11;       // 客戶端消息 ID
+  string serverMsgID = 12;       // 服務器消息 ID
+  int64 createTime = 13;          // 創建時間
+  int64 sendTime = 14;            // 發送時間
+  int32 sessionType = 15;         // 會話類型
+  EditedMessageInfo updatedMessage = 16; // 完整的更新後消息數據
+}
+
+// ========== End of Message Edit Feature ==========
+
 service msg {
   //获取最小最大seq（包括用户的，以及指定群组的）
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -457,4 +597,10 @@ service msg {
   rpc SetUserConversationMinSeq(SetUserConversationMinSeqReq) returns (SetUserConversationMinSeqResp);
   rpc GetLastMessageSeqByTime(GetLastMessageSeqByTimeReq) returns (GetLastMessageSeqByTimeResp);
   rpc GetLastMessage(GetLastMessageReq) returns (GetLastMessageResp);
+
+  // Message Edit功能
+  rpc EditMessage(EditMessageReq) returns (EditMessageResp);
+  rpc GetMessageEditHistory(GetMessageEditHistoryReq) returns (GetMessageEditHistoryResp);
+  rpc ValidateEditPermission(ValidateEditPermissionReq) returns (ValidateEditPermissionResp);
+  rpc GetEditableMessages(GetEditableMessagesReq) returns (GetEditableMessagesResp);
 }
