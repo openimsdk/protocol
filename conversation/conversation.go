@@ -122,7 +122,7 @@ func (x *SetConversationMaxSeqReq) Check() error {
 	if x.OwnerUserID == nil {
 		return errors.New("ownerUserID is empty")
 	}
-	if x.MaxSeq <= 0 {
+	if x.MaxSeq < 0 {
 		return errors.New("maxSeq is invalid")
 	}
 	return nil
