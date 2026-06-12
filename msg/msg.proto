@@ -387,6 +387,22 @@ message GetLastMessageResp {
   map<string,sdkws.MsgData> msgs = 1;
 }
 
+message GetConversationsFullSyncSeqsReq {
+  string userID = 1;
+  repeated string conversationIDs = 2;
+}
+
+message FullSyncSeqs {
+  int64 maxSeq = 1;
+  int64 hasReadSeq = 2;
+  int64 maxSeqTime = 3;
+  int64 userMinSeq = 4;
+}
+
+message GetConversationsFullSyncSeqsResp {
+  map<string, FullSyncSeqs> seqs = 1;
+}
+
 service msg {
   // Get min and max seq (including the user and specified groups)
   rpc GetMaxSeq(sdkws.GetMaxSeqReq) returns (sdkws.GetMaxSeqResp);
@@ -430,6 +446,7 @@ service msg {
   rpc SetConversationHasReadSeq(SetConversationHasReadSeqReq) returns (SetConversationHasReadSeqResp);
 
   rpc GetConversationsHasReadAndMaxSeq(GetConversationsHasReadAndMaxSeqReq) returns (GetConversationsHasReadAndMaxSeqResp);
+  rpc GetConversationsFullSyncSeqs(GetConversationsFullSyncSeqsReq) returns (GetConversationsFullSyncSeqsResp);
   rpc GetActiveUser(GetActiveUserReq) returns (GetActiveUserResp);
   rpc GetActiveGroup(GetActiveGroupReq) returns (GetActiveGroupResp);
   rpc GetServerTime(GetServerTimeReq) returns (GetServerTimeResp);

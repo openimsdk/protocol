@@ -226,6 +226,7 @@ message UpdateConversationResp {}
 message GetFullOwnerConversationIDsReq {
   uint64 idHash = 1;
   string userID = 2;
+  openim.sdkws.RequestPagination pagination = 3;
 }
 
 message GetFullOwnerConversationIDsResp {
@@ -233,6 +234,7 @@ message GetFullOwnerConversationIDsResp {
   string versionID = 2;
   bool equal = 3;
   repeated string conversationIDs = 4;
+  int64 total = 5;
 }
 
 message GetIncrementalConversationReq {
