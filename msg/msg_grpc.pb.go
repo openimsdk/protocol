@@ -43,6 +43,7 @@ const (
 	Msg_MarkConversationAsRead_FullMethodName           = "/openim.msg.msg/MarkConversationAsRead"
 	Msg_SetConversationHasReadSeq_FullMethodName        = "/openim.msg.msg/SetConversationHasReadSeq"
 	Msg_GetConversationsHasReadAndMaxSeq_FullMethodName = "/openim.msg.msg/GetConversationsHasReadAndMaxSeq"
+	Msg_GetConversationsFullSyncSeqs_FullMethodName     = "/openim.msg.msg/GetConversationsFullSyncSeqs"
 	Msg_GetActiveUser_FullMethodName                    = "/openim.msg.msg/GetActiveUser"
 	Msg_GetActiveGroup_FullMethodName                   = "/openim.msg.msg/GetActiveGroup"
 	Msg_GetServerTime_FullMethodName                    = "/openim.msg.msg/GetServerTime"
@@ -97,6 +98,7 @@ type MsgClient interface {
 	MarkConversationAsRead(ctx context.Context, in *MarkConversationAsReadReq, opts ...grpc.CallOption) (*MarkConversationAsReadResp, error)
 	SetConversationHasReadSeq(ctx context.Context, in *SetConversationHasReadSeqReq, opts ...grpc.CallOption) (*SetConversationHasReadSeqResp, error)
 	GetConversationsHasReadAndMaxSeq(ctx context.Context, in *GetConversationsHasReadAndMaxSeqReq, opts ...grpc.CallOption) (*GetConversationsHasReadAndMaxSeqResp, error)
+	GetConversationsFullSyncSeqs(ctx context.Context, in *GetConversationsFullSyncSeqsReq, opts ...grpc.CallOption) (*GetConversationsFullSyncSeqsResp, error)
 	GetActiveUser(ctx context.Context, in *GetActiveUserReq, opts ...grpc.CallOption) (*GetActiveUserResp, error)
 	GetActiveGroup(ctx context.Context, in *GetActiveGroupReq, opts ...grpc.CallOption) (*GetActiveGroupResp, error)
 	GetServerTime(ctx context.Context, in *GetServerTimeReq, opts ...grpc.CallOption) (*GetServerTimeResp, error)
@@ -347,6 +349,16 @@ func (c *msgClient) GetConversationsHasReadAndMaxSeq(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *msgClient) GetConversationsFullSyncSeqs(ctx context.Context, in *GetConversationsFullSyncSeqsReq, opts ...grpc.CallOption) (*GetConversationsFullSyncSeqsResp, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetConversationsFullSyncSeqsResp)
+	err := c.cc.Invoke(ctx, Msg_GetConversationsFullSyncSeqs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *msgClient) GetActiveUser(ctx context.Context, in *GetActiveUserReq, opts ...grpc.CallOption) (*GetActiveUserResp, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetActiveUserResp)
@@ -489,6 +501,7 @@ type MsgServer interface {
 	MarkConversationAsRead(context.Context, *MarkConversationAsReadReq) (*MarkConversationAsReadResp, error)
 	SetConversationHasReadSeq(context.Context, *SetConversationHasReadSeqReq) (*SetConversationHasReadSeqResp, error)
 	GetConversationsHasReadAndMaxSeq(context.Context, *GetConversationsHasReadAndMaxSeqReq) (*GetConversationsHasReadAndMaxSeqResp, error)
+	GetConversationsFullSyncSeqs(context.Context, *GetConversationsFullSyncSeqsReq) (*GetConversationsFullSyncSeqsResp, error)
 	GetActiveUser(context.Context, *GetActiveUserReq) (*GetActiveUserResp, error)
 	GetActiveGroup(context.Context, *GetActiveGroupReq) (*GetActiveGroupResp, error)
 	GetServerTime(context.Context, *GetServerTimeReq) (*GetServerTimeResp, error)
@@ -577,6 +590,9 @@ func (UnimplementedMsgServer) SetConversationHasReadSeq(context.Context, *SetCon
 }
 func (UnimplementedMsgServer) GetConversationsHasReadAndMaxSeq(context.Context, *GetConversationsHasReadAndMaxSeqReq) (*GetConversationsHasReadAndMaxSeqResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetConversationsHasReadAndMaxSeq not implemented")
+}
+func (UnimplementedMsgServer) GetConversationsFullSyncSeqs(context.Context, *GetConversationsFullSyncSeqsReq) (*GetConversationsFullSyncSeqsResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetConversationsFullSyncSeqs not implemented")
 }
 func (UnimplementedMsgServer) GetActiveUser(context.Context, *GetActiveUserReq) (*GetActiveUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetActiveUser not implemented")
@@ -1043,6 +1059,24 @@ func _Msg_GetConversationsHasReadAndMaxSeq_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_GetConversationsFullSyncSeqs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetConversationsFullSyncSeqsReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).GetConversationsFullSyncSeqs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_GetConversationsFullSyncSeqs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).GetConversationsFullSyncSeqs(ctx, req.(*GetConversationsFullSyncSeqsReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Msg_GetActiveUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetActiveUserReq)
 	if err := dec(in); err != nil {
@@ -1321,6 +1355,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetConversationsHasReadAndMaxSeq",
 			Handler:    _Msg_GetConversationsHasReadAndMaxSeq_Handler,
+		},
+		{
+			MethodName: "GetConversationsFullSyncSeqs",
+			Handler:    _Msg_GetConversationsFullSyncSeqs_Handler,
 		},
 		{
 			MethodName: "GetActiveUser",
